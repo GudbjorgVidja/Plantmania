@@ -1,0 +1,48 @@
+.root{
+-beef: #beefed;
+
+-fx-background-color: #ddffe7;
+fx-background-color: -beef;
+-fx-background-radius: 20;
+
+}
+.button{
+-fx-background-size: 18px;
+-fx-background-repeat: no-repeat;
+-fx-background-position: 10%;
+-fx-background-radius: 20;
+-fx-border-radius: 20;
+-fx-border-color: black;
+-fx-background-color: #c8f8e6;
+}
+
+.label{
+-fx-background-color: #c8f8e6;
+-fx-background-radius: 20;
+-fx-padding: 5;
+
+-fx-background-size: 18px;
+-fx-background-repeat: no-repeat;
+-fx-background-position: 10%;
+}
+.vokva-label{
+-fx-background-image: url("icon/water.png");
+}
+
+.vokva-takki{
+-fx-background-image: url("icon/water.png");
+}
+
+.sol-takki{
+-fx-background-image: url("icon/sol.png");
+}
+
+.plus-takki{
+-fx-background-image: url("icon/plus.png");
+}
+
+.mynd{
+-fx-image: url("plants/Picture1.png");
+}
+
+

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.Text?>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+         prefWidth="600.0" rotateGraphic="true" side="LEFT" stylesheets="@maniastyle.css" tabClosingPolicy="UNAVAILABLE"
+         xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="vidmot.plantmania.PlantController">
+    <tabs>
+        <Tab text="">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="29.0" prefWidth="255.0">
+                            <menus>
+                                <Menu mnemonicParsing="false" text="raða eftir">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Close"/>
+                                    </items>
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="flokkun">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Delete"/>
+                                    </items>
+                                </Menu>
+                                <Menu mnemonicParsing="false" text="sía">
+                                    <items>
+                                        <CheckMenuItem mnemonicParsing="false" text="svefnherbergi"/>
+                                        <CheckMenuItem mnemonicParsing="false" text="stofa"/>
+                                        <CheckMenuItem mnemonicParsing="false" text="eldhús"/>
+                                    </items>
+                                </Menu>
+                            </menus>
+                        </MenuBar>
+                        <ScrollPane layoutX="14.0" layoutY="43.0" prefHeight="332.0" prefWidth="476.0">
+                            <content>
+                                <FlowPane prefHeight="352.0" prefWidth="449.0" styleClass="flowpane">
+                                    <children>
+                                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
+                                                   stroke="BLACK" strokeType="INSIDE" width="126.0"/>
+                                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
+                                                   layoutX="16.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
+                                                   width="126.0"/>
+                                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
+                                                   layoutX="16.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
+                                                   width="126.0"/>
+                                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
+                                                   layoutX="142.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
+                                                   width="126.0"/>
+                                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
+                                                   layoutX="268.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
+                                                   width="126.0"/>
+                                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
+                                                   layoutX="394.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
+                                                   width="126.0"/>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                    </padding>
+                                </FlowPane>
+                            </content>
+                        </ScrollPane>
+                        <MenuButton layoutX="355.0" layoutY="14.0" mnemonicParsing="false" styleClass="menubutton"
+                                    text="notandi">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="minn aðgangur"/>
+                                <MenuItem mnemonicParsing="false" text="tungumál"/>
+                                <Menu mnemonicParsing="false" text="þema">
+                                    <MenuItem mnemonicParsing="false" text="dökkt"/>
+                                    <MenuItem mnemonicParsing="false" text="ljóst"/>
+                                    <MenuItem mnemonicParsing="false" text="regnbogi"/>
+                                </Menu>
+
+                                <MenuItem mnemonicParsing="false" text="stillingar"/>
+                                <MenuItem mnemonicParsing="false" text="útskráning"/>
+                            </items>
+                        </MenuButton>
+                    </children>
+                </AnchorPane>
+            </content>
+            <graphic>
+                <Label styleClass="tablabell" text="plöntur"/>
+            </graphic>
+        </Tab>
+        <Tab text="">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1f4f0" height="217.0" layoutX="101.0"
+                                   layoutY="96.0" stroke="BLACK" strokeType="INSIDE" width="398.0"/>
+                        <Text layoutX="250.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="Dagatal sérhæfður viðmótshlutur" wrappingWidth="100.4921875"/>
+                        <BorderPane layoutX="146.0" layoutY="43.0" prefHeight="43.0" prefWidth="289.0">
+                            <left>
+                                <Button mnemonicParsing="false" text="til baka" BorderPane.alignment="CENTER"/>
+                            </left>
+                            <right>
+                                <Button mnemonicParsing="false" text="áfram" BorderPane.alignment="CENTER"/>
+                            </right>
+                            <center>
+                                <Label prefHeight="45.0" prefWidth="70.0" text="ártal mánuður" textAlignment="CENTER"
+                                       wrapText="true" BorderPane.alignment="CENTER"/>
+                            </center>
+                        </BorderPane>
+                    </children>
+                </AnchorPane>
+            </content>
+            <graphic>
+                <Label styleClass="tablabell" text="dagatal"/>
+            </graphic>
+        </Tab>
+        <Tab text="">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <Text layoutX="157.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="allar plöntur úr gagnagrunninum, svipað og mínar plöntur"
+                              wrappingWidth="257.98822021484375"/>
+                    </children>
+                </AnchorPane>
+            </content>
+            <graphic>
+                <Label styleClass="tablabell" text="skoða"/>
+            </graphic>
+        </Tab>
+        <Tab text="">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dce5ed" height="130.0" layoutX="35.0"
+                                   layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="136.0"/>
+                    </children>
+                </AnchorPane>
+            </content>
+            <graphic>
+                <Label styleClass="tablabell" text="fræðsla"/>
+            </graphic>
+        </Tab>
+    </tabs>
+</TabPane>
