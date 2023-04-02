@@ -6,7 +6,8 @@
 <?import javafx.scene.text.Text?>
 <?import vidmot.plantmania.Plontuyfirlit?>
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-         prefWidth="600.0" rotateGraphic="true" side="LEFT" stylesheets="@maniastyle.css" tabClosingPolicy="UNAVAILABLE"
+         prefWidth="600.0" rotateGraphic="true" side="LEFT" stylesheets="@styling/maniastyle.css"
+         tabClosingPolicy="UNAVAILABLE"
          xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="vidmot.plantmania.PlantController">
     <tabs>

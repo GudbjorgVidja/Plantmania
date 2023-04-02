@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import vidmot.plantmania.Spjald?>
 <fx:root type="javafx.scene.layout.AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="500.0"
-         xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@maniastyle.css"
+         xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styling/maniastyle.css"
          styleClass="anchorpane">
     <children>
         <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="29.0" prefWidth="255.0">
