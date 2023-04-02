@@ -7,6 +7,10 @@
 
 
 .menu-button .label{
+
+}
+
+.menu-button{
     -fx-background-position: right;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
@@ -21,7 +25,17 @@
     -fx-alignment: center;
 }
 
-.yfirMenu .label{
+
+#menu{
+    fx-background-color: green;
+}
+
+#menu .label{
+    fx-background-color: green;
+}
+
+.yfirMenu .menu-button .label{
+    -fx-background-color: blue;
 }
 
 .menu-item{
@@ -34,25 +48,9 @@
 }
 
 
-.menu-button > .arrow-button {
-    -fx-padding: 0;
-}
 
-.menu-button > .arrow-button > .arrow {
-    -fx-padding: 0;
-}
 
-.menu-button{
-    -fx-background-radius: 20;
-}
 
-.menubutton .label {
-    -fx-padding: 1 17 1 20;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: right, 5%;
-    -fx-background-size: 16px, 20px;
-    -fx-background-image: url("icon/arrow270bill.png"), url("icon/sol.png");
-}
 
 
 .menu-bar{

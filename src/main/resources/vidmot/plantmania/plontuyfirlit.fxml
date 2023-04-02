@@ -11,17 +11,17 @@
     <children>
         <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="29.0" prefWidth="255.0">
             <menus>
-                <Menu mnemonicParsing="false" styleClass="yfirMenu" text="raða eftir">
+                <Menu mnemonicParsing="false" styleClass="yfirMenu" text="raða eftir" id="menu" fx:id="radaMenu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close"/>
+                        <MenuItem mnemonicParsing="false" text="Close" fx:id="closeMenuItem"/>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" styleClass="yfirMenu" text="flokkun">
+                <Menu mnemonicParsing="false" styleClass="yfirMenu" text="flokkun" id="menu">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Delete"/>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" styleClass="yfirMenu" text="sía">
+                <Menu mnemonicParsing="false" styleClass="yfirMenu" text="sía" id="menu">
                     <items>
                         <CheckMenuItem mnemonicParsing="false" text="svefnherbergi"/>
                         <CheckMenuItem mnemonicParsing="false" text="stofa"/>
@@ -58,20 +58,6 @@
                 </FlowPane>
             </content>
         </ScrollPane>
-        <MenuButton layoutX="355.0" layoutY="14.0" mnemonicParsing="false" styleClass="menubutton"
-                    text="notandi">
-            <items>
-                <MenuItem mnemonicParsing="false" text="minn aðgangur"/>
-                <MenuItem mnemonicParsing="false" text="tungumál"/>
-                <Menu mnemonicParsing="false" text="þema">
-                    <MenuItem mnemonicParsing="false" text="dökkt"/>
-                    <MenuItem mnemonicParsing="false" text="ljóst"/>
-                    <MenuItem mnemonicParsing="false" text="regnbogi"/>
-                </Menu>
 
-                <MenuItem mnemonicParsing="false" text="stillingar"/>
-                <MenuItem mnemonicParsing="false" text="útskráning"/>
-            </items>
-        </MenuButton>
     </children>
 </fx:root>
