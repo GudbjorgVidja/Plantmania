@@ -1,7 +1,8 @@
-.label{
-fx-background-radius: 20;
-fx-background-color: #c8f8e6;
-fx-alignment: center;
+.root{
+    -graenn1: #F2FFF6;
+    -graenn2: #DDFFE7;
+    -graenn3: #C8F8D6;
+
 }
 
 .menu-button .label{
@@ -82,6 +83,33 @@ fx-alignment: center;
     -fx-translate-y: 10;
 }
 
+.tab-content-area{
+    -fx-background-color: -graenn1;
+    -fx-padding: 10;
+}
 
+.tab-content-area .anchorPane{
+    -fx-background-color: black;
+}
 
+.tab-header-background{
+    -fx-background-color: -graenn2;
+}
 
+.tab{
+    -fx-background-color: -graenn3;
+}
+
+.tab:hover{
+    fx-background-color: blue;
+}
+
+.tab:pressed{
+    fx-background-color: blue;
+}
+
+.tab:selected{
+    fx-background-color: blue;
+    -fx-background-color: -graenn1;
+    -fx-border-color: -graenn3;
+}

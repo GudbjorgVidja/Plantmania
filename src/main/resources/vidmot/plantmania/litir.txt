@@ -1,0 +1,6 @@
+Litirnir sem við notum, kóði og lýsing/hvar hann er notaður?
+
+#F2FFF6 mjög ljós grænn, sá ljósasti sem við höfum á canva
+#DDFFE7 næstljósasti, örlítið dekkri
+#C8F8D6 bara örlítið dekkri
+
