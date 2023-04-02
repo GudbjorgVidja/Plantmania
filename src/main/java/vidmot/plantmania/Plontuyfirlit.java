@@ -27,8 +27,11 @@ public class Plontuyfirlit extends AnchorPane {
 
         //fjöldi barna sem flowpane hefur
         //System.out.println(fxFlowPane.getChildren().size());
+        fxFlowPane.getChildren().add(new Spjald());
+        fxFlowPane.getChildren().add(new Spjald());
+        fxFlowPane.getChildren().add(new Spjald());
 
- 
+
     }
 
     public FlowPane getFxFlowPane() {
