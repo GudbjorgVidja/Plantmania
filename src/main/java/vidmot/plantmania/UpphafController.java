@@ -31,34 +31,47 @@ public class UpphafController {
 
     private Notandi skradurNotandi;
 
+    /**
+     * kallar á aðferðir til að lesa úr skrá og setja binding á takka
+     */
     public void initialize() {
-        notendur.add(new Notandi("a", "a"));
-        skrifaISkra();
         lesaUrSkra();
         takkaVirkni();
-
-
     }
 
-    //innskráningarhnappur óvirkur ef reitir eru tómir
-    //láta svo líka vera óvirkan ef notandi og lykilorð eru ekki í skrá
+    /**
+     * Gerir binding til að óvirkja innskráningartakkann ef notendanafnsreitur eða lykilorðareitur er tómur
+     */
     private void takkaVirkni() {
         fxInnskraning.disableProperty().bind(fxNotendanafn.textProperty().isEmpty().or(fxLykilord.textProperty().isEmpty()));
     }
 
-    //if fxLYkilord og fxNotenanafn eru gild, fara í næstu senu
-    public void skraInn(ActionEvent actionEvent) {
-        if (giltInntak()) {
-            skrifaISkra();
-            ViewSwitcher.switchTo(View.ADALSIDA);
-        } else {
-            System.out.println("Notendanafn eða lykilorð rangt");
+    public Notandi getSkradurNotandi() {
+        return skradurNotandi;
+    }
+
+
+    /**
+     * setur skráðan notanda sem þann notanda í skránni sem hefur rétt notendanafn og lykilorð
+     * miðað við inntakið
+     */
+    private void setjaSkradanNotanda() {
+        for (Notandi n : notendur) {
+            if (n.notendanafnProperty().get().equals(fxNotendanafn.textProperty().get())) {
+                if (n.lykilordProperty().get().equals(fxLykilord.textProperty().get())) {
+                    skradurNotandi = n;
+                }
+            }
         }
     }
 
-    private boolean giltInntak() {
+    /**
+     * athugar hvort inntak er gilt, þ.e.hvort notendanafn sé til og hvort lykilorð passi við það
+     *
+     * @return true ef inntak er ogilt, annars false
+     */
+    private boolean ogiltInntak() {
         for (Notandi n : notendur) {
-            System.out.println("Athugað með notanda: " + n);
             if (n.notendanafnProperty().get().equals(fxNotendanafn.textProperty().get())) {
                 if (n.lykilordProperty().get().equals(fxLykilord.textProperty().get())) {
                     return true;
@@ -68,6 +81,9 @@ public class UpphafController {
         return false;
     }
 
+    /**
+     * Les hluti úr skrá og býr til java hluti
+     */
     private void lesaUrSkra() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -82,6 +98,9 @@ public class UpphafController {
         }
     }
 
+    /**
+     * Skrifar lista af hlutum í nýja skrá. Ef skráin er nú þegar til er bætt við hana
+     */
     private void skrifaISkra() {
         System.out.println("skrifa i skra");
         ObjectMapper objectMapper = new ObjectMapper();
@@ -92,7 +111,7 @@ public class UpphafController {
                 objectMapper.writeValue(file, notendur);
             else {
                 System.out.println("skráin er til og er núna uppfærð");
-                objectMapper.writeValue(file, notendur);
+                objectMapper.writeValue(file, notendur);//bætti við
             }
         } catch (IOException ex) {
             throw new RuntimeException(ex);
@@ -100,7 +119,29 @@ public class UpphafController {
 
     }
 
+    /**
+     * Atburðahandler til að skrá notanda inn. Ef notendanafn er til í skrá og lykilorð passar er
+     * notandi skráður inn og farið í næstu senu
+     *
+     * @param actionEvent atburðurinn
+     */
+    public void skraInn(ActionEvent actionEvent) {
+        if (ogiltInntak()) {
+            skrifaISkra();
+            setjaSkradanNotanda();
+            ViewSwitcher.switchTo(View.ADALSIDA);
+        } else {
+            System.out.println("Notendanafn eða lykilorð rangt");
+        }
+    }
 
+    /**
+     * Atburðahandler til að gera nýjan aðgang. Opnar dialog þar sem notandi þarf að skrá notendanafn og lykilorð
+     * fyrir nýja aðganginn, og endurtaka svo lykilorðið. Ef enginn reitur er tómur, notendanafnið er laust og
+     * lykilorðið er rétt endurtekið er hægt að gera aðganginn, notandi er skráður inn og farið á næstu senu
+     *
+     * @param actionEvent atburðurinn
+     */
     public void geraNyjanAdgang(ActionEvent actionEvent) {
         NyskraningDialog a = new NyskraningDialog(notendur);
         Optional<Notandi> aaa = a.showAndWait();
@@ -108,8 +149,9 @@ public class UpphafController {
             System.out.println("Nýr aðgangur búinn til " + aaa);
             notendur.add(aaa.get());
             skrifaISkra();
+            skradurNotandi = aaa.get();
+            ViewSwitcher.switchTo(View.ADALSIDA);
         }
         lesaUrSkra();
-        //skipta yfir í næstu senu
     }
 }
