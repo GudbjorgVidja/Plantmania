@@ -1,3 +1,6 @@
+/**
+ * Sérhæfður klasi fyrir yfirlit yfir mínar plöntur og allar plöntur. Á að vera tómt, en svo hlutum bætt í flowpane.
+ */
 package vidmot.plantmania;
 
 import javafx.fxml.FXMLLoader;
@@ -18,5 +21,5 @@ public class Plontuyfirlit extends AnchorPane {
         }
 
     }
-    
+
 }
