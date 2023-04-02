@@ -2,6 +2,6 @@
 
 <?import javafx.scene.shape.Rectangle?>
 <fx:root type="javafx.scene.shape.Rectangle" xmlns="http://javafx.com/javafx"
-         xmlns:fx="http://javafx.com/fxml" arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
-         stroke="BLACK" strokeType="INSIDE" width="126.0">
+         xmlns:fx="http://javafx.com/fxml" arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="185.0"
+         stroke="BLACK" strokeType="INSIDE" width="135.0">
 </fx:root>
