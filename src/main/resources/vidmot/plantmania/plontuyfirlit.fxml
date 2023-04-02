@@ -4,16 +4,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.shape.*?>
+<?import vidmot.plantmania.Spjald?>
 <fx:root type="javafx.scene.layout.AnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="500.0"
          xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@maniastyle.css"
          styleClass="anchorpane">
     <children>
         <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="29.0" prefWidth="255.0">
             <menus>
-                <Menu mnemonicParsing="false" styleClass="yfirMenu" text="raða eftir" id="menu" fx:id="radaMenu">
+                <Menu mnemonicParsing="false" styleClass="yfirMenu" text="raða eftir" id="menu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close" fx:id="closeMenuItem"/>
+                        <MenuItem mnemonicParsing="false" text="Close"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" styleClass="yfirMenu" text="flokkun" id="menu">
@@ -32,32 +32,13 @@
         </MenuBar>
         <ScrollPane layoutX="14.0" layoutY="43.0" prefHeight="332.0" prefWidth="467.0">
             <content>
-                <FlowPane prefHeight="352.0" prefWidth="449.0" styleClass="flowpane">
-                    <children>
-                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
-                                   stroke="BLACK" strokeType="INSIDE" width="126.0"/>
-                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
-                                   layoutX="16.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
-                                   width="126.0"/>
-                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
-                                   layoutX="16.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
-                                   width="126.0"/>
-                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
-                                   layoutX="142.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
-                                   width="126.0"/>
-                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
-                                   layoutX="268.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
-                                   width="126.0"/>
-                        <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#a8e0e4" height="160.0"
-                                   layoutX="394.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE"
-                                   width="126.0"/>
-                    </children>
+                <FlowPane prefHeight="352.0" prefWidth="449.0" styleClass="flowpane" fx:id="fxFlowPane">
+                    <Spjald/>
                     <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                     </padding>
                 </FlowPane>
             </content>
         </ScrollPane>
-
     </children>
 </fx:root>

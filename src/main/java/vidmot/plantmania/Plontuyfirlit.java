@@ -5,18 +5,14 @@ package vidmot.plantmania;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 
 import java.io.IOException;
 
 public class Plontuyfirlit extends AnchorPane {
     @FXML
-    private Menu radaMenu;
-    @FXML
-    private MenuItem closeMenuItem;
-
+    private FlowPane fxFlowPane; //aðgangur í flowpane sem inniheldur spjöldin
 
     public Plontuyfirlit() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plontuyfirlit.fxml"));
@@ -29,15 +25,14 @@ public class Plontuyfirlit extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        System.out.println("radaMenu.getTypeSelector(): " + radaMenu.getTypeSelector());
-        System.out.println("closeMenuItem.getTypeSelector(): " + closeMenuItem.getTypeSelector());
+        //fjöldi barna sem flowpane hefur
+        //System.out.println(fxFlowPane.getChildren().size());
 
-        System.out.println("radaMenu.getClass(): " + radaMenu.getClass());
-        System.out.println("closeMenuItem.getClass(): " + closeMenuItem.getClass());
+ 
+    }
 
-        System.out.println("radaMenu.getId(): " + radaMenu.getId());
-        System.out.println("closeMenuItem.getId(): " + closeMenuItem.getId());
-
+    public FlowPane getFxFlowPane() {
+        return fxFlowPane;
     }
 
 }

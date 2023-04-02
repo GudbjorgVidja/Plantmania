@@ -12,7 +12,7 @@
     <tabs>
         <Tab>
             <content>
-                <Plontuyfirlit/>
+                <Plontuyfirlit fx:id="fxPlonturYfirlit" onMouseClicked="#fxBaetaVidHandler"/>
             </content>
             <graphic>
                 <Label styleClass="tablabell" text="plöntur"/>
