@@ -33,9 +33,9 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <ScrollPane layoutX="17.0" layoutY="57.0" prefHeight="414.0" prefWidth="613.0">
+        <ScrollPane layoutX="8.0" layoutY="57.0" prefHeight="414.0" prefWidth="622.0">
             <content>
-                <FlowPane fx:id="fxFlowPane" prefHeight="409.0" prefWidth="593.0" styleClass="flowpane">
+                <FlowPane fx:id="fxFlowPane" prefHeight="409.0" prefWidth="611.0" styleClass="flowpane">
                     <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
