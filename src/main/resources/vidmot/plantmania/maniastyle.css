@@ -5,6 +5,7 @@
 
 }
 
+
 .menu-button .label{
     -fx-background-position: right;
     -fx-background-radius: 20;
@@ -18,6 +19,18 @@
 
     -fx-background-color: #c8f8e6;
     -fx-alignment: center;
+}
+
+.yfirMenu .label{
+}
+
+.menu-item{
+    fx-background-color: blue;
+}
+
+.menu-item .label{
+    fx-background-color: pink;
+    -fx-clear: true;
 }
 
 
@@ -84,12 +97,12 @@
 }
 
 .tab-content-area{
-    -fx-background-color: -graenn1;
-    -fx-padding: 10;
+    -fx-background-color: -graenn2;
+    -fx-padding: 10 10 10 0;
 }
 
-.tab-content-area .anchorPane{
-    -fx-background-color: black;
+.anchorpane{
+    -fx-background-color: -graenn1;
 }
 
 .tab-header-background{
@@ -98,6 +111,8 @@
 
 .tab{
     -fx-background-color: -graenn3;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
 }
 
 .tab:hover{
@@ -109,7 +124,6 @@
 }
 
 .tab:selected{
-    fx-background-color: blue;
     -fx-background-color: -graenn1;
     -fx-border-color: -graenn3;
 }
