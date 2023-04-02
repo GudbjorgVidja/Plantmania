@@ -117,6 +117,7 @@
 
 .anchorpane{
     -fx-background-color: -graenn1;
+    -fx-border-color: green;
 }
 
 .tab-header-background{

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<fx:root minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="500.0" styleClass="anchorpane" stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="650.0" styleClass="anchorpane" stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="29.0" prefWidth="255.0">
             <menus>
@@ -33,9 +33,9 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <ScrollPane layoutX="14.0" layoutY="43.0" prefHeight="332.0" prefWidth="467.0">
+        <ScrollPane layoutX="17.0" layoutY="57.0" prefHeight="414.0" prefWidth="613.0">
             <content>
-                <FlowPane fx:id="fxFlowPane" prefHeight="352.0" prefWidth="449.0" styleClass="flowpane">
+                <FlowPane fx:id="fxFlowPane" prefHeight="409.0" prefWidth="593.0" styleClass="flowpane">
                     <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
