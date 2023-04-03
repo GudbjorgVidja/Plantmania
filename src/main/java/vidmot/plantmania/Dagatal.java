@@ -1,9 +1,13 @@
 package vidmot.plantmania;
 
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -29,6 +33,7 @@ public class Dagatal extends AnchorPane {
     private String[] manudir;
     private LocalDate dagurinnIDag;
     private LocalDate syndurDagur;
+    private LocalDate valinnDagur;
 
     public Dagatal() {
         vikudagar = new String[]{"mán", "þri", "mið", "fim", "fös", "lau", "sun"};
@@ -37,17 +42,49 @@ public class Dagatal extends AnchorPane {
         syndurDagur = dagurinnIDag;
 
         lesaFXML();
+
+        setjaDaga();
         geraDagatal(dagurinnIDag);
+        geraEventFilter();
     }
 
+    private void geraEventFilter() {
+        fxTilBaka.addEventFilter(ActionEvent.ACTION, (Event event) -> {
+            syndurDagur = syndurDagur.minusMonths(1);
+            geraDagatal(syndurDagur);
+            System.out.println("Til baka");
+        });
+        fxAfram.addEventFilter(ActionEvent.ACTION, (Event event) -> {
+            syndurDagur = syndurDagur.plusMonths(1);
+            geraDagatal(syndurDagur);
+            System.out.println("Áfram");
+        });
+
+        fxGrid.setOnMouseClicked((MouseEvent event) -> {
+            Node node = event.getPickResult().getIntersectedNode();
+            Dagur dagur = null;
+
+            if (node instanceof Dagur) {
+                dagur = (Dagur) node;
+            } else if (node.getParent() instanceof Dagur) {
+                dagur = (Dagur) node.getParent();
+            } else if (node.getParent().getParent() instanceof Dagur) {
+                dagur = (Dagur) node.getParent().getParent();
+            }
+
+            if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
+                System.out.println(dagur.getFxManadardagur().getText());
+                setValinnDagur(LocalDate.of(syndurDagur.getYear(), syndurDagur.getMonthValue(), Integer.parseInt(dagur.getFxManadardagur().getText())));
+                //opna glugga með því sem er á þessum degi
+            }
+        });
+    }
+
+
     private void geraDagatal(LocalDate dagur) {
-        fxGrid.getChildren().clear();
+        hreinsaDaga();
         int fjoldiDaga = dagur.getMonth().length(dagur.isLeapYear());
         DayOfWeek fyrstiDagurManadar = LocalDate.of(dagur.getYear(), dagur.getMonthValue(), 1).getDayOfWeek();
-
-        for (int i = 0; i < 7; i++) {
-            fxGrid.add(new Label(vikudagar[i]), i, 0);
-        }
         fxDagsetning.setText(manudir[dagur.getMonthValue() - 1] + " - " + dagur.getYear());
 
         List<Integer> dagalisti = new ArrayList<>();
@@ -55,16 +92,29 @@ public class Dagatal extends AnchorPane {
             dagalisti.add(i + 1);
         }
 
-        for (int i = 1; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (!dagalisti.isEmpty() && !(i == 1 && j < fyrstiDagurManadar.ordinal())) {
-                    //Dagur naesti = new Dagur();
-                    //naesti.setFxManadardagur(dagalisti.get(0));
-                    //fxGrid.add(naesti, j, i);
-                    fxGrid.add(new Label(dagalisti.get(0) + ""), j, i);//
-                    dagalisti.remove(0);
-                }
+        for (int i = 7; i < 49; i++) {
+            if (fxGrid.getChildren().get(i) instanceof Dagur && !dagalisti.isEmpty() && !((i - 7) < fyrstiDagurManadar.ordinal())) {
+                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().setVisible(true);
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().setText(0 + "");
+                ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText(dagalisti.get(0) + "");
+                dagalisti.remove(0);
             }
+        }
+    }
+
+    private void hreinsaDaga() {
+        for (int i = 7; i < 49; i++) {
+            if (fxGrid.getChildren().get(i) instanceof Dagur) {
+                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().setVisible(false);
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().setText("");
+                ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText("");
+            }
+        }
+    }
+
+    private void setjaDaga() {
+        for (int i = 0; i < 7; i++) {
+            fxGrid.add(new Label(vikudagar[i]), i, 0);
         }
     }
 
@@ -82,18 +132,9 @@ public class Dagatal extends AnchorPane {
     }
 
 
-    //hafa eventhandlera í staðin?
-    @FXML
-    private void tilBakaUmManudHandler() {
-        System.out.println("Til baka");
-        syndurDagur = syndurDagur.minusMonths(1);
-        geraDagatal(syndurDagur);
+    public void setValinnDagur(LocalDate valinnDagur) {
+        this.valinnDagur = valinnDagur;
     }
 
-    @FXML
-    private void aframUmManudHandler() {
-        System.out.println("Afram");
-        syndurDagur = syndurDagur.plusMonths(1);
-        geraDagatal(syndurDagur);
-    }
+
 }

@@ -3,6 +3,7 @@ package vidmot.plantmania;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -13,6 +14,8 @@ public class Dagur extends Pane {
     private Label fxManadardagur;
     @FXML
     private Label fxFjoldiVokvana;
+    @FXML
+    private ImageView fxDropi;
 
     public Dagur() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("dagur-view.fxml"));
@@ -26,6 +29,14 @@ public class Dagur extends Pane {
         }
     }
 
+    public Label getFxManadardagur() {
+        return fxManadardagur;
+    }
+
+    public Label getFxFjoldiVokvana() {
+        return fxFjoldiVokvana;
+    }
+
     public void setFxFjoldiVokvana(int fjoldiVokvana) {
         fxFjoldiVokvana.setText(fjoldiVokvana + "");
     }
@@ -34,9 +45,7 @@ public class Dagur extends Pane {
         fxManadardagur.setText(manadardagur + "");
     }
 
-    @FXML
-    private void opnaDag() {
-        //opna daginn
-        System.out.println("Blúbb");
+    public ImageView getFxDropi() {
+        return fxDropi;
     }
 }
