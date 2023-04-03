@@ -19,6 +19,6 @@
                 <Label fx:id="almenntHeiti" alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="73.0" text="Jelly babe" />
             </children>
         </VBox>
-        <AnchorPane layoutX="15.0" layoutY="131.0" prefHeight="51.0" prefWidth="107.0" style="-fx-border-color: lightgreen;" />
+        <AnchorPane layoutX="14.0" layoutY="122.0" prefHeight="51.0" prefWidth="107.0" style="-fx-border-color: lightgreen;" />
     </children>
 </fx:root>
