@@ -45,6 +45,9 @@ public class AllarPlontur {
         //bæta við hér
         plontur.add(new Planta());
 
+        LesaPlontur innlestur = new LesaPlontur();
+        plontur.addAll(innlestur.getPlontur());
+
         //List<String> listi = new ArrayList<>()
         //Planta m = new Planta("monstera deliciosa", "Monstera", new ArrayList<String>(), "mynd.png", "Texti með upplýsingum um plöntuna. Þarf ekki að vera langt, en getur til dæmis innihaldið eitthvað um menningarlegt gildi eða annað", )
 

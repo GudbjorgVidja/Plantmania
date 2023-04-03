@@ -11,6 +11,7 @@ public class PlantController {
     public void initialize() {
         skradurNotandi = ((UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA)).getSkradurNotandi();
         System.out.println(skradurNotandi);
+
     }
 
 
