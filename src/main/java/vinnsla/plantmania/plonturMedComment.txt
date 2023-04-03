@@ -1,0 +1,55 @@
+//fjöldi planta
+2
+
+//String latnesktNafn
+monstera deliciosa
+Ficus lyrata
+
+
+//String almenntNafn
+Monstera
+Fiddle Leaf Fig
+
+//List<String> ollHeiti
+monstera deliciosa, Monstera, swiss cheese plant
+Ficus lyrata, Fiddle Leaf Fig, fiðlufíkus
+
+//String myndaslod
+monstera.png
+fiddleLeafFig.png
+
+//String texti
+Monsteran er vinsæl planta, falleg, götótt. Hún tekur sig vel út í stærri plássum, og getur orðið vel stór.
+Fiðlufíkusinn er fallegur, en getur verið nokkuð krefjandi. Ekki endilega mælt með fyrir byrjendur.
+
+//Uppruni uppruni
+Uppruni.REGNSKOGUR
+Uppruni.REGNSKOGUR
+
+//Ljosstyrkur ljosstyrkur
+Ljosstyrkur.HALFBEINT
+Ljosstyrkur.HALFBEINT
+
+//Eitrun eitrun
+Eitrun.NIDURGANGUR_ISH
+Eitrun.MADUR_VERDUR_SKAKKUR
+
+//int kjorhitastig
+18
+15
+
+//Vatnsthorf vatnsthorf
+Vatnsthorf.LITIL
+Vatnsthorf.MEDAL
+
+//int almennurTimiMilliVokvanna
+15
+10
+
+//int ljosStundir
+8
+6
+
+//List<String> einkenniPlontu
+stór, græn, götótt, stofustjáss, falleg
+krefjandi, falleg, tré, díva
