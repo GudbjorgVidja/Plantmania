@@ -2,6 +2,7 @@ module vidmot.plantmania {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
+    requires algs4;
 
 
     opens vidmot.plantmania to javafx.fxml;
