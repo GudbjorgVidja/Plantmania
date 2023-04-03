@@ -41,18 +41,6 @@
 }
 
 
-#menu{
-    fx-background-color: green;
-}
-
-#menu .label{
-    fx-background-color: green;
-}
-
-.yfirMenu .menu-button .label{
-    -fx-background-color: blue;
-}
-
 .menu-item{
     fx-background-color: blue;
 }
