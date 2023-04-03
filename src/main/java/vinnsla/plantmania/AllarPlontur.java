@@ -41,8 +41,12 @@ public class AllarPlontur {
         //hér eru viðfangsbreyturnar í réttri röð
         //String latnesktNafn, String almenntNafn, List<String> ollHeiti, String myndaslod, String texti, Uppruni uppruni, Ljosstyrkur ljosstyrkur, Eitrun eitrun, int kjorhitastig, Vatnsthorf vatnsthorf, int almennurTimiMilliVokvana, int ljosStundir, List<String> einkenniPlontu
 
+
         //bæta við hér
         plontur.add(new Planta());
+
+        //List<String> listi = new ArrayList<>()
+        //Planta m = new Planta("monstera deliciosa", "Monstera", new ArrayList<String>(), "mynd.png", "Texti með upplýsingum um plöntuna. Þarf ekki að vera langt, en getur til dæmis innihaldið eitthvað um menningarlegt gildi eða annað", )
 
         try {
             File file = new File(filename);
