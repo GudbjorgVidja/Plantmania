@@ -1,11 +1,15 @@
 /**
  * Sérhæfður klasi fyrir yfirlit yfir mínar plöntur og allar plöntur. Á að vera tómt, en svo hlutum bætt í flowpane.
+ * <p>
+ * setja takka hreinsa snið? Enginn rammi, kannski bara undirstrikaður texti?
+ * Hafa menuItems undir sía default flokkana, svo kki þurfi að breyta til að birta almenna yfirlitið
  */
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
@@ -18,6 +22,9 @@ public class Plontuyfirlit extends AnchorPane {
     @FXML
     private Label notandiLabel;//label í efra hægra horni með notendanafni og icon
 
+    @FXML
+    private MenuBar fxMenuBar; //til að fá aðgang að menu fyrir snið, nota getChildren();
+
     public Plontuyfirlit() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plontuyfirlit.fxml"));
         loader.setRoot(this);
@@ -28,15 +35,10 @@ public class Plontuyfirlit extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
-        //fjöldi barna sem flowpane hefur
-        //System.out.println(fxFlowPane.getChildren().size());
+        
         fxFlowPane.getChildren().add(new Spjald());
         fxFlowPane.getChildren().add(new Spjald());
         fxFlowPane.getChildren().add(new Spjald());
-
-        //setNotandiLabel("Lengra nafn");
-
     }
 
 
@@ -53,6 +55,10 @@ public class Plontuyfirlit extends AnchorPane {
 
     public void setNotandiLabel(String nafn) {
         notandiLabel.setText(nafn);
+    }
+
+    public MenuBar getFxMenuBar() {
+        return fxMenuBar;
     }
 
 }
