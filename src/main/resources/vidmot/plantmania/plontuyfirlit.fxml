@@ -24,7 +24,7 @@
                         <MenuItem mnemonicParsing="false" text="tegund"/>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="sía">
+                <Menu mnemonicParsing="false" text="sía" fx:id="fxSiaMenu">
                     <items>
                         <CheckMenuItem mnemonicParsing="false" text="velja allt"/>
                         <SeparatorMenuItem mnemonicParsing="false"/>

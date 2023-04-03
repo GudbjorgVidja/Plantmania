@@ -1,5 +1,7 @@
 /**
  * ojj en virkar
+ * <p>
+ * gæti verið sniðugt að halda utan um skrána með excel skjali
  */
 package vinnsla.plantmania;
 
