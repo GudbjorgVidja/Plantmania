@@ -3,15 +3,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-
-<fx:root onMouseClicked="#opnaDag" prefHeight="90.0" prefWidth="107.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.Pane?>
+<fx:root onMouseClicked="#opnaDag" prefHeight="55.0" prefWidth="73.0" style="-fx-border-color: black;"
+         type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="fxManadardagur" layoutX="14.0" layoutY="6.0" prefHeight="24.0" prefWidth="17.0" />
-        <Label fx:id="fxFjoldiVokvana" layoutX="65.0" layoutY="59.0" />
-        <ImageView fitHeight="47.0" fitWidth="40.0" layoutX="12.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+        <Label fx:id="fxManadardagur" layoutX="5.0" layoutY="5.0" prefHeight="24.0" prefWidth="17.0"/>
+        <Label fx:id="fxFjoldiVokvana" layoutX="38.0" layoutY="32.0" prefHeight="18.0" prefWidth="30.0"/>
+        <ImageView fitHeight="30.0" fitWidth="33.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true"
+                   preserveRatio="true">
             <image>
-                <Image url="@styling/icon/water.png" />
+                <Image url="@styling/icon/water.png"/>
             </image>
         </ImageView>
     </children>
