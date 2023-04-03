@@ -27,11 +27,12 @@ public class Planta {
     private Ljosstyrkur ljosstyrkur;
     private Eitrun eitrun;
     private int kjorhitastig;
+    private Vatnsthorf vatnsthorf;
     private int almennurTimiMilliVokvana;
     private int ljosStundir;//fjöldi klukkustunda af sólarljósi á dag
     private List<String> einkenniPlontu;//t.d. ákveðin lauf... má sleppa
 
-    public Planta(String latnesktNafn, String almenntNafn, List<String> ollHeiti, String myndaslod, String texti, Uppruni uppruni, Ljosstyrkur ljosstyrkur, Eitrun eitrun, int kjorhitastig, int almennurTimiMilliVokvana, int ljosStundir, List<String> einkenniPlontu) {
+    public Planta(String latnesktNafn, String almenntNafn, List<String> ollHeiti, String myndaslod, String texti, Uppruni uppruni, Ljosstyrkur ljosstyrkur, Eitrun eitrun, int kjorhitastig, Vatnsthorf vatnsthorf, int almennurTimiMilliVokvana, int ljosStundir, List<String> einkenniPlontu) {
         this.latnesktNafn = latnesktNafn;
         this.almenntNafn = almenntNafn;
         this.ollHeiti = ollHeiti;
@@ -41,6 +42,7 @@ public class Planta {
         this.ljosstyrkur = ljosstyrkur;
         this.eitrun = eitrun;
         this.kjorhitastig = kjorhitastig;
+        this.vatnsthorf = vatnsthorf;
         this.almennurTimiMilliVokvana = almennurTimiMilliVokvana;
         this.ljosStundir = ljosStundir;
         this.einkenniPlontu = einkenniPlontu;
@@ -120,6 +122,14 @@ public class Planta {
 
     public void setKjorhitastig(int kjorhitastig) {
         this.kjorhitastig = kjorhitastig;
+    }
+
+    public Vatnsthorf getVatnsthorf() {
+        return vatnsthorf;
+    }
+
+    public void setVatnsthorf(Vatnsthorf vatnsthorf) {
+        this.vatnsthorf = vatnsthorf;
     }
 
     public int getAlmennurTimiMilliVokvana() {
