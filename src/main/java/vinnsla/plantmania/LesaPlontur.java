@@ -1,3 +1,6 @@
+/**
+ * ojj en virkar
+ */
 package vinnsla.plantmania;
 
 import edu.princeton.cs.algs4.In;
