@@ -4,13 +4,13 @@
 package vidmot.plantmania;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class Spjald extends Rectangle {
+public class Spjald extends AnchorPane {
     public Spjald() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("spjald-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("planta-view.fxml"));
         loader.setRoot(this);
         loader.setController(this);
 
