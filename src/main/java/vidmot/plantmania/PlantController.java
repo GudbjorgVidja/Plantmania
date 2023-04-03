@@ -1,8 +1,6 @@
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import vinnsla.plantmania.Notandi;
 
 public class PlantController {
