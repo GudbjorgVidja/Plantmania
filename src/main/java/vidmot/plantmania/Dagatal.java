@@ -28,7 +28,7 @@ public class Dagatal extends AnchorPane {
     private String[] vikudagar;
     private String[] manudir;
     private LocalDate dagurinnIDag;
-    private LocalDate syndurDagur;//ath þetta
+    private LocalDate syndurDagur;
 
     public Dagatal() {
         vikudagar = new String[]{"mán", "þri", "mið", "fim", "fös", "lau", "sun"};
@@ -55,9 +55,12 @@ public class Dagatal extends AnchorPane {
             dagalisti.add(i + 1);
         }
 
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 if (!dagalisti.isEmpty() && !(i == 1 && j < fyrstiDagurManadar.ordinal())) {
+                    //Dagur naesti = new Dagur();
+                    //naesti.setFxManadardagur(dagalisti.get(0));
+                    //fxGrid.add(naesti, j, i);
                     fxGrid.add(new Label(dagalisti.get(0) + ""), j, i);//
                     dagalisti.remove(0);
                 }
@@ -79,6 +82,7 @@ public class Dagatal extends AnchorPane {
     }
 
 
+    //hafa eventhandlera í staðin?
     @FXML
     private void tilBakaUmManudHandler() {
         System.out.println("Til baka");

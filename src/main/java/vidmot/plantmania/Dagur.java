@@ -3,12 +3,12 @@ package vidmot.plantmania;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
 //bregðast við þegar það er ýtt á daginn
-public class Dagur extends AnchorPane {
+public class Dagur extends Pane {
     @FXML
     private Label fxManadardagur;
     @FXML
