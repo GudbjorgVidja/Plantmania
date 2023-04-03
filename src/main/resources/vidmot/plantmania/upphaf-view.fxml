@@ -18,8 +18,8 @@
         </Label>
         <Label layoutX="150.0" layoutY="135.0" text="Notendanafn:"/>
         <Label layoutX="152.0" layoutY="162.0" text="Lykilorð:"/>
-        <PasswordField fx:id="fxLykilord" layoutX="274.0" layoutY="167.0"/>
         <TextField fx:id="fxNotendanafn" layoutX="275.0" layoutY="131.0"/>
+        <PasswordField fx:id="fxLykilord" layoutX="274.0" layoutY="167.0"/>
         <Label layoutX="254.0" layoutY="279.0" text="Enginn aðgangur?"/>
         <Button fx:id="fxInnskraning" layoutX="249.0" layoutY="200.0" mnemonicParsing="false" onAction="#skraInn"
                 text="Skrá inn"/>
