@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.Planta;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class PlantaSpjald extends AnchorPane {
     @FXML
@@ -65,13 +66,15 @@ public class PlantaSpjald extends AnchorPane {
 
         //Image image = new Image("styling/plants/" + planta.getMyndaslod());
         //System.out.println("image var gert");
-        
+
         fxPlontuMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + planta.getMyndaslod())));//mynd á spjaldinu rétt?
         //fxPlontuMynd.setImage(image);//mynd á spjaldinu rétt?
 
         fxAlmenntNafn.setText(planta.getAlmenntNafn());
 
-        fxFlokkur.setText(" " + planta.getUppruni() + " ");
+        fxFlokkur.setText(" " + planta.getUppruni().toString().toLowerCase(Locale.ROOT) + " ");
+        String s = planta.getUppruni() + "";
+        s = s.toLowerCase(Locale.ROOT);
     }
 
 }
