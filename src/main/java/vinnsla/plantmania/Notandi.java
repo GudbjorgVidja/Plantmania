@@ -1,3 +1,11 @@
+/**
+ * Upplýsingar um notandann:
+ * notendanafn
+ * lykilorð
+ * MinPlanta hlutir
+ * Breytingar á stillingum (eða kannski frekar staða stillinga)
+ * flokkar (ef hægt er að bæta við flokk)
+ */
 package vinnsla.plantmania;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -6,7 +14,7 @@ import javafx.beans.property.StringProperty;
 public class Notandi {
     private StringProperty notendanafn = new SimpleStringProperty();
     private StringProperty lykilord = new SimpleStringProperty();
-    
+
     public Notandi(String notendanafn, String lykilord) {
         this.notendanafn.set(notendanafn);
         this.lykilord.set(lykilord);
