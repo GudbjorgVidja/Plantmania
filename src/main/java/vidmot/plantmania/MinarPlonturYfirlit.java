@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import vinnsla.plantmania.MinPlanta;
 
 public class MinarPlonturYfirlit extends Plontuyfirlit {
     private MenuBar fxMenuBar;
@@ -16,23 +17,32 @@ public class MinarPlonturYfirlit extends Plontuyfirlit {
 
     private ObservableList<CheckMenuItem> menuItemsObsListi = FXCollections.observableArrayList();
 
+    private ObservableList<MinPlanta> allarMinarPlontur = FXCollections.observableArrayList();//allar plöntur notanda
+
+    private ObservableList<MinPlanta> birtarPlontur = FXCollections.observableArrayList();//plöntur sýndar í yfirliti
+
+
     public MinarPlonturYfirlit() {
         fxMenuBar = getFxMenuBar();
         ObservableList<Menu> menuListi = FXCollections.observableArrayList(fxMenuBar.getMenus());
-        //test();
-        //menuItemsObsListi = getSiaItemsList();
 
         for (int i = 0; i < menuListi.size(); i++) { //nær í sía menu
             if (menuListi.get(i).getText().equals("sía")) siaMenu = menuListi.get(i);
         }
 
         //setSiaMenuItems();
-
-        //System.out.println(siaMenu.getItems());
-
-
     }
 
+
+    /**
+     * Mismunandi leiðir til að raða:
+     * sjálfgefið er tími í næstu vökvun
+     * fræðiheiti A-Ö
+     * nickname A-Ö
+     */
+    private void radaSpjoldum() {
+        
+    }
 
     /**
      * setur gefna flokka undir Sia menu.
@@ -66,8 +76,6 @@ public class MinarPlonturYfirlit extends Plontuyfirlit {
             System.out.println(menuListi.get(i).getText());
         }
         //prentar texta á menus í menubar
-
-
     }
 
 }
