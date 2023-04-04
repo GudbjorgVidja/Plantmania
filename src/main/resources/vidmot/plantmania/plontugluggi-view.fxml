@@ -1,98 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styling/gluggi-style.css"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="vidmot.plantmania.Plontugluggi">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styling/gluggi-style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.plantmania.Plontugluggi">
     <children>
-        <Pane layoutX="23.0" layoutY="31.0" prefHeight="344.0" prefWidth="205.0"
-              style="-fx-border-color: lightsteelblue;">
+        <Pane layoutX="23.0" layoutY="31.0" prefHeight="344.0" prefWidth="205.0" style="-fx-border-color: lightsteelblue;">
             <children>
-                <Pane layoutX="32.0" layoutY="14.0" prefHeight="121.0" prefWidth="142.0"
-                      style="-fx-border-color: lightsteelblue;">
+                <Pane layoutX="32.0" layoutY="14.0" prefHeight="121.0" prefWidth="142.0" style="-fx-border-color: lightsteelblue;">
                     <children>
-                        <ImageView fitHeight="114.0" fitWidth="126.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true"
-                                   preserveRatio="true"/>
+                        <ImageView fitHeight="114.0" fitWidth="126.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
                     </children>
                 </Pane>
                 <Label layoutX="20.0" layoutY="150.0" prefHeight="17.0" prefWidth="149.0" text="Gælunafn plöntunnar">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                 </Label>
-                <Label fx:id="fxBreyta" layoutX="158.0" layoutY="143.0" prefHeight="25.0" prefWidth="27.0"/>
-                <Label layoutX="20.0" layoutY="170.0" text="fræðiheiti skáletrað"/>
-                <AnchorPane layoutX="16.0" layoutY="233.0" prefHeight="97.0" prefWidth="175.0"
-                            style="-fx-border-color: lightgray;">
+                <Label fx:id="fxBreyta" layoutX="158.0" layoutY="143.0" prefHeight="25.0" prefWidth="27.0" />
+                <Label layoutX="20.0" layoutY="170.0" text="fræðiheiti skáletrað" />
+                <AnchorPane layoutX="16.0" layoutY="233.0" prefHeight="97.0" prefWidth="175.0" style="-fx-border-color: lightgray;">
                     <children>
-                        <Label layoutX="14.0" layoutY="31.0" text="stats eins og á plöntuspjaldi?"/>
+                        <Label layoutX="14.0" layoutY="31.0" text="stats eins og á plöntuspjaldi?" />
                     </children>
                 </AnchorPane>
             </children>
         </Pane>
-        <Separator layoutX="241.0" layoutY="14.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="3.0"/>
+        <Separator layoutX="241.0" layoutY="14.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="3.0" />
         <ScrollPane hbarPolicy="NEVER" layoutX="253.0" layoutY="14.0" prefHeight="375.0" prefWidth="341.0">
             <content>
-                <FlowPane alignment="CENTER" prefHeight="372.0" prefWidth="322.0">
+                <FlowPane alignment="TOP_CENTER" prefHeight="372.0" prefWidth="322.0" vgap="5.0">
                     <children>
                         <FlowPane hgap="5.0" prefHeight="34.0" prefWidth="296.0" vgap="3.0">
                             <children>
-                                <Label styleClass="rammi-label" text="frumskógur"/>
-                                <Label layoutX="10.0" layoutY="10.0" styleClass="rammi-label" text="svefnherbergi"/>
-                                <Label layoutX="59.0" layoutY="10.0" styleClass="rammi-label" text="í skammarkróknum"/>
+                                <Label styleClass="rammi-label" text="frumskógur" />
+                                <Label layoutX="10.0" layoutY="10.0" styleClass="rammi-label" text="svefnherbergi" />
+                                <Label layoutX="59.0" layoutY="10.0" styleClass="rammi-label" text="í skammarkróknum" />
                             </children>
                             <padding>
-                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                             </padding>
                         </FlowPane>
                         <HBox styleClass="titilbox">
                             <children>
-                                <Label styleClass="titill-label" text="Vökvun"/>
-                                <Label text="næst eftir 2 daga"/>
+                                <Label styleClass="titill-label" text="Vökvun" />
+                                <Label text="næst eftir 2 daga" />
                             </children>
+                     <FlowPane.margin>
+                        <Insets top="5.0" />
+                     </FlowPane.margin>
                         </HBox>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Þegar plantan er vökvuð skal gegnbleyta moldina. Sumir velja að setja pottin á kaf þar til engar loftbólur stíga upp.  Almennt er gert ráð fyrir að vökva þurfi á 12-16 daga fresti yfir sumarið, og sjaldnar á veturna."
-                              wrappingWidth="295.0"/>
-                        <Button mnemonicParsing="false" text="vökvunarsaga"/>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Þegar plantan er vökvuð skal gegnbleyta moldina. Sumir velja að setja pottin á kaf þar til engar loftbólur stíga upp.  Almennt er gert ráð fyrir að vökva þurfi á 12-16 daga fresti yfir sumarið, og sjaldnar á veturna." wrappingWidth="295.0" />
+                        <Button mnemonicParsing="false" text="vökvunarsaga" />
                         <HBox layoutX="25.0" layoutY="49.0" styleClass="titilbox">
                             <children>
-                                <Label styleClass="titill-label" text="Ljósþörf"/>
-                                <Label text="sterkt sólarljós yfir lengri tíma"/>
+                                <Label styleClass="titill-label" text="Ljósþörf" />
+                                <Label text="sterkt sólarljós yfir lengri tíma" />
                             </children>
                         </HBox>
-                        <Text layoutX="25.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Plantan þarf mikið sólarljós, en varast skal mikið beint sólarljós. "
-                              wrappingWidth="295.0"/>
+                        <Text layoutX="25.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plantan þarf mikið sólarljós, en varast skal mikið beint sólarljós. " wrappingWidth="295.0" />
                         <HBox layoutX="25.0" layoutY="189.0" styleClass="titilbox">
                             <children>
-                                <Label styleClass="titill-label" text="Hitastig"/>
-                                <Label/>
+                                <Label styleClass="titill-label" text="Hitastig" />
+                                <Label />
                             </children>
                         </HBox>
-                        <Text layoutX="25.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="Kjörhitastig er 16°C, en plantan þolir allt á milli 4° og 30°."
-                              wrappingWidth="295.0"/>
+                        <Text layoutX="25.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kjörhitastig er 16°C, en plantan þolir allt á milli 4° og 30°." wrappingWidth="295.0" />
                         <HBox layoutX="25.0" layoutY="253.0" styleClass="titilbox">
                             <children>
-                                <Label styleClass="titill-label" text="Uppruni"/>
-                                <Label/>
+                                <Label styleClass="titill-label" text="Uppruni" />
+                                <Label />
                             </children>
                         </HBox>
                         <HBox layoutX="25.0" layoutY="317.0" styleClass="titilbox">
                             <children>
-                                <Label styleClass="titill-label" text="Eitruð"/>
-                                <Label/>
+                                <Label styleClass="titill-label" text="Eitruð" />
+                                <Label />
                             </children>
                         </HBox>
                     </children>
                     <padding>
-                        <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
+                        <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                     </padding>
                 </FlowPane>
             </content>

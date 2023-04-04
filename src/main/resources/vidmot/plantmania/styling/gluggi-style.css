@@ -23,5 +23,6 @@
     -fx-pref-width: 300;
     -fx-spacing: 5;
     -fx-fill-height: false;
+    -fx-padding: 10 0 0 0;
 }
 
