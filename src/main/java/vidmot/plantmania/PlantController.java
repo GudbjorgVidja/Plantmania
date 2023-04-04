@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PlantController {
     @FXML
-    private Plontuyfirlit fxPlonturYfirlit; //mínar plöntur yfirlitið
+    private Plontuyfirlit fxPlonturYfirlit; //mínar plöntur yfirlitið. Er eiginlega meira eins og allar plöntur yfirlit
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
