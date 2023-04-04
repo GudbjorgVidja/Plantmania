@@ -49,8 +49,7 @@ public class Planta {
     }
 
     public Planta() {
-        //setja kannski útlit hér? eða kannski frekar hafa sér klasa í viðmótinu
-        //fxPlontuMynd.setImage(new Image("src/resources/vidmot/plantmania/styling/plants/"+myndaslod));
+
     }
 
     public String getLatnesktNafn() {

@@ -46,9 +46,9 @@ public class Plontuyfirlit extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        fxFlowPane.getChildren().add(new Spjald());
-        fxFlowPane.getChildren().add(new Spjald());
-        fxFlowPane.getChildren().add(new Spjald());
+        //fxFlowPane.getChildren().add(new Spjald());
+        //fxFlowPane.getChildren().add(new Spjald());
+        //fxFlowPane.getChildren().add(new Spjald());
 
         checkMenuItems.setAll(fxSiaMenu.getItems()); //checkMenuItems er uppfærð útgáfa
         //checkMenuItems.remove(0, 1); //inniheldur bara breytanlegu stökin

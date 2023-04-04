@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;

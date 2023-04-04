@@ -3,17 +3,16 @@ package vidmot.plantmania;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import vinnsla.plantmania.LesaPlontur;
 import vinnsla.plantmania.Notandi;
-import vinnsla.plantmania.Planta;
-
-import java.util.List;
 
 public class PlantController {
     @FXML
     private Plontuyfirlit fxPlonturYfirlit; //mínar plöntur yfirlitið. Er eiginlega meira eins og allar plöntur yfirlit
+    @FXML
+    private Plontuyfirlit fxAllarPlonturYfirlit; //yfirlit yfir allar plöntur
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
@@ -35,6 +34,10 @@ public class PlantController {
      */
     @FXML
     protected void fxBaetaVidHandler() {
+
+
+        //allt hér fyrir neðan virkaði, en þetta er bara plöntuyfirlit, ekki MinarPlonturYfirlit
+        /*
         Spjald spjald = new Spjald();
         fxPlonturYfirlit.getFxFlowPane().getChildren().add(spjald);
 
@@ -47,6 +50,20 @@ public class PlantController {
 
         spj = new PlantaSpjald(plontur.get(1));
         fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);
+
+         */
+    }
+
+    @FXML
+    private void hladaOllumPlontum() {
+        AllarPlonturYfirlit a = new AllarPlonturYfirlit();
+        System.out.println("hladaOllumPlontum handler");
+        a.getBirtarAPlontur().addListener((ListChangeListener<? super PlantaSpjald>) change -> {
+            change.next();
+            fxAllarPlonturYfirlit.getFxFlowPane().getChildren().clear();
+            fxAllarPlonturYfirlit.getFxFlowPane().getChildren().addAll(a.getBirtarAPlontur());
+        });
+
     }
 
     public void skraUt(ActionEvent actionEvent) {

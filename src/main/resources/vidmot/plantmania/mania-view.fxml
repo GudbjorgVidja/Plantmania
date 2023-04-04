@@ -33,7 +33,7 @@
         </Tab>
         <Tab>
             <content>
-                <Plontuyfirlit fx:id="fxAllarPlonturYfirlit" onMouseClicked="#fxBaetaVidHandler" prefHeight="458.0"
+                <Plontuyfirlit fx:id="fxAllarPlonturYfirlit" onMouseClicked="#hladaOllumPlontum" prefHeight="458.0"
                                prefWidth="604.0"/>
             </content>
             <graphic>
