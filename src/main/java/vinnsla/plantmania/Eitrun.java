@@ -3,7 +3,7 @@ package vinnsla.plantmania;
 public enum Eitrun {
     TIL_MANNELDIS("Til manneldis"),
     SAKLAUS("Alveg skaðlaus"),
-    BARA_SMA("eitruð í miklu magni"),
+    BARA_SMA("Eitruð í miklu magni"),
     ERTING("Ertir húð"),
     ERTING_MIKIL("Ertir húð verulega"),
     NIDURGANGUR_ISH("Getur valdið niðurgangi og óþægindum eftir neyslu"),
