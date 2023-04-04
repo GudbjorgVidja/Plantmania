@@ -54,17 +54,9 @@ public class Plontuyfirlit extends AnchorPane {
         //checkMenuItems.remove(0, 1); //inniheldur bara breytanlegu stökin
 
         checkMenuItems.addListener((ListChangeListener<? super MenuItem>) change -> {
-            //tekur allt nema fyrstu tvo, sem eru velja allt og seperator
             change.next();
-
             if (change.wasRemoved()) fxSiaMenu.getItems().removeAll(change.getRemoved());
-
             if (change.wasAdded()) fxSiaMenu.getItems().addAll(change.getAddedSubList());
-
-
-            //fxSiaMenu.getItems().remove(2, (fxSiaMenu.getItems()).size()-1);
-            //fxSiaMenu.getItems().addAll(checkMenuItems);
-            //fxSiaMenu.getItems().setAll(checkMenuItems);
         });
 
         checkMenuItems.add(new CheckMenuItem("nýtt item"));

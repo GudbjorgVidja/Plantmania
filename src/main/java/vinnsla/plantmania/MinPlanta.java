@@ -4,6 +4,8 @@
  * <p>
  * MinPlanta ætti að vera controller fyrir fxml skrá fyrir plöntuspjald af plöntu sem við eigum.
  * Hefur þá handlera fyrir þegar ýtt er á takka á spjaldinu (vökva og fresta), og þegar ýtt er á spjaldið(upplýsingadíalogur).
+ * <p>
+ * á kannski að vera með observable list planaðarVökvanir, sem er listi af dagsetningum vökvana næstu þrjá mánuði?
  */
 
 package vinnsla.plantmania;
@@ -30,7 +32,7 @@ public class MinPlanta extends Planta {
 
     //passa hvernig smiðurinn lítur út hér!
     public MinPlanta(Planta planta) {
-        this.nickName = getOllHeiti().get(0);
+        this.nickName = getOllHeiti().get(0);//ég sagði að latínan væri fyrst, svo almennt heiti, svo önnur
         this.thinnTimiMilliVokvana = getAlmennurTimiMilliVokvana();
         this.planta = planta;
     }
