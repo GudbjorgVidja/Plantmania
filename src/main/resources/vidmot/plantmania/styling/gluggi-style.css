@@ -10,3 +10,18 @@
     -fx-font-size: 16px;
 }
 
+#fxBreyta{
+    -fx-background-image: url("icon/edit.png");
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.titilbox{
+    -fx-alignment: center-left;
+    -fx-pref-height: 25;
+    -fx-pref-width: 300;
+    -fx-spacing: 5;
+    -fx-fill-height: false;
+}
+
