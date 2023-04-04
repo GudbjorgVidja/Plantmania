@@ -25,8 +25,6 @@ public class PlantController {
     @FXML
     protected void fxBaetaVidHandler() {
         Spjald spjald = new Spjald();
-        //Rectangle spjald = new Rectangle(100, 150);
-        //spjald.setFill(Color.BLUEVIOLET);
         fxPlonturYfirlit.getFxFlowPane().getChildren().add(spjald);
 
 
