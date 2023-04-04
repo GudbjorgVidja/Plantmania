@@ -33,8 +33,8 @@ public class Planta {
     private List<String> einkenniPlontu;//t.d. ákveðin lauf... má sleppa
 
     public Planta(String latnesktNafn, String almenntNafn, List<String> ollHeiti, String myndaslod, String texti, Uppruni uppruni, Ljosstyrkur ljosstyrkur, Eitrun eitrun, int kjorhitastig, Vatnsthorf vatnsthorf, int almennurTimiMilliVokvana, int ljosStundir, List<String> einkenniPlontu) {
-        this.latnesktNafn = latnesktNafn;
-        this.almenntNafn = almenntNafn;
+        this.latnesktNafn = latnesktNafn; //eða hafa bara latnesktNafn=ollHeiti.get(0)
+        this.almenntNafn = almenntNafn; // eða almenntNafn=ollHeiti.get(1)
         this.ollHeiti = ollHeiti;
         this.myndaslod = myndaslod;
         this.texti = texti;
@@ -49,7 +49,8 @@ public class Planta {
     }
 
     public Planta() {
-
+        //setja kannski útlit hér? eða kannski frekar hafa sér klasa í viðmótinu
+        //fxPlontuMynd.setImage(new Image("src/resources/vidmot/plantmania/styling/plants/"+myndaslod));
     }
 
     public String getLatnesktNafn() {

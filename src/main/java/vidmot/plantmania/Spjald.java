@@ -1,5 +1,6 @@
 /**
  * Sérhæfði klasinn spjald, grunnur fyrir plöntuspjöldin
+ * Þetta er kannski meira bara test
  */
 package vidmot.plantmania;
 
