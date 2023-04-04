@@ -89,6 +89,7 @@ public class LesaPlontur {
         System.out.println();
 
 
+        inn.close();
         //gera plönturnar
         plontulisti = new ArrayList<>(fjoldi);
         for (int i = 0; i < fjoldi; i++) {

@@ -1,6 +1,9 @@
 /**
  * MinPlanta erfir frá Planta, sem er almenn útgáfa (planta sem við eigum ekki).
  * inniheldur lista af dagsetningum þegar plantan var vökvuð
+ * <p>
+ * MinPlanta ætti að vera controller fyrir fxml skrá fyrir plöntuspjald af plöntu sem við eigum.
+ * Hefur þá handlera fyrir þegar ýtt er á takka á spjaldinu (vökva og fresta), og þegar ýtt er á spjaldið(upplýsingadíalogur).
  */
 
 package vinnsla.plantmania;
@@ -20,7 +23,10 @@ public class MinPlanta extends Planta {
     private List<String> flokkar; //ath þetta aðeins
     private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();
     private int thinnTimiMilliVokvana;
-    private Planta planta;
+    private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
+    //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
+    //en það væri kannski bara meira vesen
+
 
     //passa hvernig smiðurinn lítur út hér!
     public MinPlanta(Planta planta) {

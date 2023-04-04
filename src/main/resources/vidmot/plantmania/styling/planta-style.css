@@ -16,6 +16,18 @@ fx-background-color: -beef;
 -fx-padding: 3 1 1 1;
 }
 
+.progress-bar{
+-fx-rotate: 270;
+}
+
+.progress-bar .track{
+    -fx-background-color: darkseagreen;
+}
+
+.progress-bar .bar{
+    -fx-background-color: lightsteelblue;
+}
+
 
 
 .button{
@@ -60,7 +72,7 @@ fx-background-color: -beef;
 }
 
 .mynd{
--fx-image: url("plants/Picture1.png");
+fx-image: url("plants/Picture1.png");
 }
 
 #almenntHeiti{
