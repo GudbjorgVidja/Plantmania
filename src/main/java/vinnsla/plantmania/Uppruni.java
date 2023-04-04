@@ -1,5 +1,6 @@
 package vinnsla.plantmania;
 
+//hafa kannski líka staðinn sem streng? t.d. EYDIMORK("mynd.png", "eyðimörk")
 public enum Uppruni {
     EYDIMORK("mynd"),
     REGNSKOGUR(""),
