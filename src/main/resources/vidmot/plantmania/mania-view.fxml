@@ -65,6 +65,7 @@
                     <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dce5ed" height="130.0" layoutX="35.0"
                                    layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="136.0"/>
+                        <Button layoutX="144.0" layoutY="233.0" onAction="#skraUt" text="Skrá út"/>
                     </children>
                 </AnchorPane>
             </content>
