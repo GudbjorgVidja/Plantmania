@@ -1,0 +1,12 @@
+
+
+.rammi-label{
+    -fx-border-radius: 20;
+    -fx-border-color: darkgreen;
+    -fx-padding: 1 5 1 5;
+}
+
+.titill-label{
+    -fx-font-size: 16px;
+}
+
