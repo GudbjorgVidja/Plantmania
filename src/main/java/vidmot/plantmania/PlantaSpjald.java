@@ -52,7 +52,7 @@ public class PlantaSpjald extends AnchorPane {
 
         //planta = p;
 
-        System.out.println("Slodin: " + planta.getMyndaslod());
+        //System.out.println("Slodin: " + planta.getMyndaslod());
         //fxPlontuMynd.setImage(new Image("src/resources/vidmot/plantmania/styling/plants/" + planta.getMyndaslod()));//mynd á spjaldinu rétt?
 
         //Image image = new Image("styling/plants/" + planta.getMyndaslod(), true);
@@ -65,8 +65,7 @@ public class PlantaSpjald extends AnchorPane {
 
         //Image image = new Image("styling/plants/" + planta.getMyndaslod());
         //System.out.println("image var gert");
-
-
+        
         fxPlontuMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + planta.getMyndaslod())));//mynd á spjaldinu rétt?
         //fxPlontuMynd.setImage(image);//mynd á spjaldinu rétt?
 
