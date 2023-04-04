@@ -10,14 +10,10 @@ package vinnsla.plantmania;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class Notandi {
     private StringProperty notendanafn = new SimpleStringProperty();
     private StringProperty lykilord = new SimpleStringProperty();
-
-    private ObservableList<MinPlanta> minPlantasNotanda = FXCollections.observableArrayList();
 
     public Notandi(String notendanafn, String lykilord) {
         this.notendanafn.set(notendanafn);
@@ -50,15 +46,7 @@ public class Notandi {
     public void setLykilord(String lykilord) {
         this.lykilord.set(lykilord);
     }
-
-    public void baetaVidMinPlantasNotanda(MinPlanta mp) {
-        minPlantasNotanda.add(mp);
-    }
-
-    public ObservableList<MinPlanta> getMinPlantasNotanda() {
-        return minPlantasNotanda;
-    }
-
+    
     public String toString() {
         return "Notandi{" +
                 "notendanafn=" + notendanafn.get() +
