@@ -2,6 +2,8 @@ package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,7 +31,8 @@ public class UpphafController {
 
     private List<Notandi> notendur = new ArrayList<>();
 
-    private Notandi skradurNotandi;
+    private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
+
 
     /**
      * kallar á aðferðir til að lesa úr skrá og setja binding á takka
@@ -47,9 +50,12 @@ public class UpphafController {
     }
 
     public Notandi getSkradurNotandi() {
-        return skradurNotandi;
+        return skradurNotandi.get();
     }
 
+    public ObjectProperty<Notandi> skradurNotandiProperty() {
+        return skradurNotandi;
+    }
 
     /**
      * setur skráðan notanda sem þann notanda í skránni sem hefur rétt notendanafn og lykilorð
@@ -59,7 +65,7 @@ public class UpphafController {
         for (Notandi n : notendur) {
             if (n.notendanafnProperty().get().equals(fxNotendanafn.textProperty().get())) {
                 if (n.lykilordProperty().get().equals(fxLykilord.textProperty().get())) {
-                    skradurNotandi = n;
+                    skradurNotandi.set(n);
                 }
             }
         }
@@ -129,6 +135,7 @@ public class UpphafController {
         if (ogiltInntak()) {
             skrifaISkra();
             setjaSkradanNotanda();
+            nullStilla();
             ViewSwitcher.switchTo(View.ADALSIDA);
         } else {
             System.out.println("Notendanafn eða lykilorð rangt");
@@ -144,14 +151,21 @@ public class UpphafController {
      */
     public void geraNyjanAdgang(ActionEvent actionEvent) {
         NyskraningDialog a = new NyskraningDialog(notendur);
-        Optional<Notandi> aaa = a.showAndWait();
-        if (aaa.isPresent()) {
-            System.out.println("Nýr aðgangur búinn til " + aaa);
-            notendur.add(aaa.get());
+        Optional<Notandi> utkoma = a.showAndWait();
+        if (utkoma.isPresent()) {
+            System.out.println("Nýr aðgangur búinn til " + utkoma.get());
+            notendur.add(utkoma.get());
             skrifaISkra();
-            skradurNotandi = aaa.get();
+            skradurNotandi.set(utkoma.get());
+            nullStilla();
             ViewSwitcher.switchTo(View.ADALSIDA);
         }
         lesaUrSkra();
+    }
+
+    public void nullStilla() {
+        fxNotendanafn.textProperty().set("");
+        fxLykilord.textProperty().set("");
+        //notendur.clear();
     }
 }
