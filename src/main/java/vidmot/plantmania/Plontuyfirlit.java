@@ -45,6 +45,7 @@ public class Plontuyfirlit extends AnchorPane {
     //er í þeirri röð sem stökin eru lesin inn, allavega til að byrja með.
     private final ObservableList<Node> ollStok = FXCollections.observableArrayList();//allir hlutir sem settir eru inn, óháð því hvort þeir eru sýndir eða ekki
 
+    private final ObservableList<Object> allirObjectar = FXCollections.observableArrayList();
     private ObservableList<Node> syndSpjold = FXCollections.observableArrayList();//Hlutirnir í þessu yfirliti
 
     private Uppruni[] upprunar;
@@ -269,4 +270,16 @@ public class Plontuyfirlit extends AnchorPane {
         }
     };
 
+    public ObservableList<Node> getMinarPlonturYfirlit() {
+        return ollStok;
+
+    }
+
+    /*
+    public ObservableList<MinPlanta> getMinarPlontur(){
+        return (ObservableList<MinPlanta>) ollStok;
+
+    }
+
+     */
 }

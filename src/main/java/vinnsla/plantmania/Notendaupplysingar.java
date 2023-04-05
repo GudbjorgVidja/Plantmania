@@ -83,10 +83,11 @@ public class Notendaupplysingar {
     }
 
     public void baetaVidPlontu(Planta planta) {
+
         minarPlontur.add(new MinPlanta(planta));
-        MinPlanta ny = new MinPlanta();
-        ny.setAlmenntNafn(planta.getAlmenntNafn());
-        minarPlontur.add(ny);
+        //MinPlanta ny = new MinPlanta();
+        //ny.setAlmenntNafn(planta.getAlmenntNafn());
+        //minarPlontur.add(ny);
     }
 
     public String toString() {

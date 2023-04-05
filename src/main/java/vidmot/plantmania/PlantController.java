@@ -12,6 +12,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +45,7 @@ public class PlantController {
         System.out.println(skradurNotandi.get());
         geraBindings();
 
-        allarPlontur.addAll((new LesaPlontur()).getPlontur());
+        lesaInnAllarPlontur();
         //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
 
 
@@ -52,6 +53,45 @@ public class PlantController {
         // Væri gott að hafa í Plontuyfirlit klasanum, en viewSwitcher er leiðinlegur við mig rn
         fxMinarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
         fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
+
+        birtaNotendaPlontur();
+    }
+
+    private void lesaInnAllarPlontur() {
+        //lesa inn af skrá, og setja í yfirlitið  fxAllarPlonturYfirlit
+        allarPlontur.addAll((new LesaPlontur()).getPlontur());
+        for (Planta planta : allarPlontur) {
+            fxAllarPlonturYfirlit.baetaVidYfirlit(planta);
+        }
+    }
+
+    /*
+    private void bindaNotendaPlontur(){
+        fxMinarPlonturYfirlit.getMinarPlonturYfirlit().addListener((ListChangeListener<? super Node>) change -> {
+            change.next();
+            if(change.wasAdded()){
+
+                List<Node> listi = (List<Node>) change.getAddedSubList();
+                for(Node node: listi){
+                    if(node instanceof MinPlanta)
+                }
+            }
+        });
+
+    }
+
+     */
+
+    private void birtaNotendaPlontur() {
+        skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
+            change.next();
+            if (change.wasAdded()) {
+                for (MinPlanta mp : change.getAddedSubList()) {
+                    fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
+                }
+
+            }
+        });
     }
 
 
@@ -128,10 +168,42 @@ public class PlantController {
     }
 
     @FXML
-    private void hladaOllumPlontum() {//eina notkunin er í fxml skránni, handlerinn settur á hlut
+    private void hladaOllumPlontum(MouseEvent event) {//eina notkunin er í fxml skránni, handlerinn settur á hlut
 
-        for (Planta p : allarPlontur) {
-            fxAllarPlonturYfirlit.baetaVidYfirlit(p);
+
+        Node node = event.getPickResult().getIntersectedNode();
+        while (node != null && !(node instanceof PlantaSpjald)) {
+            node = node.getParent();
+        }
+        if (node != null) {
+            Planta p = ((PlantaSpjald) node).getPlanta();
+            skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            SimpleModule module = new SimpleModule();
+            module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+            objectMapper.registerModule(module);
+            try {
+                List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
+                });
+
+                for (Notandi n : notendur) {
+                    if (n.getNotendanafn().equals(skradurNotandi.get().getNotendanafn())) {
+                        n = skradurNotandi.get();
+                        System.out.println(n);
+                    }
+                }
+                File file = new File("target/classes/vidmot/plantmania/notendur.json");
+                if (file.createNewFile()) {
+                    System.out.println("Ný skrá búin til");
+                    objectMapper.writeValue(file, notendur);
+                } else {
+                    System.out.println("skráin er til og er núna uppfærð");
+                    objectMapper.writeValue(file, notendur);//bætti við
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
