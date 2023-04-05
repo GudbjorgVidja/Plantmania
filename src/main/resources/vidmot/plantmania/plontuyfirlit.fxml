@@ -12,9 +12,13 @@
             <menus>
                 <Menu mnemonicParsing="false" text="röðun" fx:id="rodunMenu">
                     <items>
-                        <!-- <MenuItem mnemonicParsing="false" text="næsta vökvun"/> -->
+                        <MenuItem mnemonicParsing="false" text="almennt heiti A-Ö"/>
+                        <MenuItem mnemonicParsing="false" text="almennt heiti Ö-A"/>
+                        <MenuItem mnemonicParsing="false" text="fræðiheiti A-Ö"/>
+                        <!-- <MenuItem mnemonicParsing="false" text="fræðiheiti Ö-A"/> -->
+                        <!-- <MenuItem mnemonicParsing="false" text="næsta vökvun"/>
                         <MenuItem mnemonicParsing="false" text="stafrófsröð"/>
-                        <!-- <MenuItem mnemonicParsing="false" text="afmæli"/> -->
+                        <MenuItem mnemonicParsing="false" text="afmæli"/> -->
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="flokkun" fx:id="flokkunMenu">

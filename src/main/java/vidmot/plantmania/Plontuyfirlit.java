@@ -554,6 +554,42 @@
  * <p>
  * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
  * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
  */
 /**
  * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
@@ -583,6 +619,7 @@ import vinnsla.plantmania.Planta;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class Plontuyfirlit extends AnchorPane {
     @FXML
@@ -774,11 +811,18 @@ public class Plontuyfirlit extends AnchorPane {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
 
+
+        if (uppruni.getText().equals("almennt heiti A-Ö")) almenntStafrofsrod();
+        else if (uppruni.getText().equals("almennt heiti Ö-A")) almenntOfugStafrofsrod();
+        else if (uppruni.getText().equals("fræðiheiti A-Ö")) fraediStafrofsrod();
+        //else if(uppruni.getText().equals("fræðiheiti Ö-A"))
+
+
         //taka hér til obsLista af sýndum hlutum og senda inn í "vinnsluna" (á að vera alvöru vinnsla samt).
 
         //radaRett();
 
-        radaNodes();
+        //almenntStafrofsrod();
         /*
         //gera ný tilvik af plöntuspjöldunum til að testa endurtekningu sem notar ekki sama tilvik
         Planta ny = ((PlantaSpjald) syndSpjold.get(0)).getPlanta();
@@ -844,8 +888,16 @@ public class Plontuyfirlit extends AnchorPane {
         Collections.sort(syndPlontuSpjold, (a, b) -> compare(a.getPlanta(), b.getPlanta()));
     }
 
-    private void radaNodes() {
+    private void almenntStafrofsrod() {
         Collections.sort(syndSpjold, this::compare);
+    }
+
+    private void almenntOfugStafrofsrod() {
+        Collections.sort(syndSpjold, (a, b) -> compare(b, a));
+    }
+
+    private void fraediStafrofsrod() {
+        Collections.sort(syndSpjold, fraediheitiComparator);
     }
 
     public int compare(Planta s1, Planta s2) {
@@ -862,6 +914,16 @@ public class Plontuyfirlit extends AnchorPane {
         }
         return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
     }
+
+    private Comparator<Node> fraediheitiComparator = new Comparator<Node>() {
+        public int compare(Node n1, Node n2) {
+            if (n1 instanceof PlantaSpjald) {
+                return ((PlantaSpjald) n1).getPlanta().getLatnesktNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
+            }
+            return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getLatnesktNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
+
+        }
+    };
 
 /*
     private void compareStafrof() {
