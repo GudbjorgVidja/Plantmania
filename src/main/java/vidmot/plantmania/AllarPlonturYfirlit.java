@@ -21,6 +21,7 @@ public class AllarPlonturYfirlit extends Plontuyfirlit {
         for (Planta planta : p) {
             allarPlontur.add(new PlantaSpjald(planta));
         }
+        birtarAPlontur.addAll(allarPlontur);
 
         //getFxFlowPane().getChildren().clear();
         //getFxFlowPane().getChildren().addAll(allarPlontur);

@@ -11,7 +11,7 @@
  * Stuttur texti með upplýsingum um plöntuna
  * <p>
  * <p>
- * plöntuspjald er Anchorpane, sem inniheldur fleiri hluti á við
+ * Planta er allar grunnupplýsingarnar um plöntu.
  */
 package vinnsla.plantmania;
 

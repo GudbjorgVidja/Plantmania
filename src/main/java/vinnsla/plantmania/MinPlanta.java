@@ -32,9 +32,14 @@ public class MinPlanta extends Planta {
 
     //passa hvernig smiðurinn lítur út hér!
     public MinPlanta(Planta planta) {
-        this.nickName = getOllHeiti().get(0);//ég sagði að latínan væri fyrst, svo almennt heiti, svo önnur
-        this.thinnTimiMilliVokvana = getAlmennurTimiMilliVokvana();
         this.planta = planta;
+        this.thinnTimiMilliVokvana = getAlmennurTimiMilliVokvana();
+        this.nickName = "Barney";
+        //this.nickName = getOllHeiti().get(1);
+
+        //SIGURBJARGAR this.nickName = getOllHeiti().get(0);//ég sagði að latínan væri fyrst, svo almennt heiti, svo önnur
+        //SIGURBJARGAR this.thinnTimiMilliVokvana = getAlmennurTimiMilliVokvana();
+        //this.planta = planta; SIGURBJARGAR
     }
 
     public void breytaNickname(String nyttNafn) {//setNickname!

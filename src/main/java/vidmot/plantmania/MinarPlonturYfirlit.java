@@ -1,5 +1,12 @@
 /**
  * sorry
+ * <p>
+ * <p>
+ * Þegar Mínar plöntur flipinn er opinn og smellt er á eitthvað á menuBar, þá fer það hér inn að vinna úr því. Ætti
+ * kannski að vera í vinnslunni?
+ * Ræður því hvað er birt.
+ * <p>
+ * Ef í vinnslu þá væri PlontuYfirlit hluturinn bara tilviksbreyta, með listener eða eitthvað
  */
 package vidmot.plantmania;
 
@@ -41,7 +48,7 @@ public class MinarPlonturYfirlit extends Plontuyfirlit {
      * nickname A-Ö
      */
     private void radaSpjoldum() {
-        
+
     }
 
     /**

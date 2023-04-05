@@ -1,12 +1,19 @@
+/**
+ * hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma
+ */
 package vidmot.plantmania;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ListChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import vinnsla.plantmania.LesaPlontur;
+import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Notandi;
+import vinnsla.plantmania.Planta;
 
 public class PlantController {
     @FXML
@@ -16,12 +23,18 @@ public class PlantController {
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
+    private ObservableList<Planta> allarPlontur = FXCollections.observableArrayList();//er í vesi, geymi hér
+
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
         skradurNotandi.setValue(upphafController.getSkradurNotandi());
 
         System.out.println(skradurNotandi.get());
         geraBindings();
+
+
+        allarPlontur.addAll((new LesaPlontur()).getPlontur());
+        //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
     }
 
     private void geraBindings() {
@@ -32,9 +45,20 @@ public class PlantController {
     /**
      * þegar smellt er, þá bætast við eitt spjald og plönturnar úr plontur.txt
      */
+
+//import javafx.fxml.FXML;
     @FXML
     protected void fxBaetaVidHandler() {
+        MinPlanta mp = new MinPlanta(allarPlontur.get(0));
+        MinPlantaSpjald mps = new MinPlantaSpjald(mp);
+        //Spjald mps = new Spjald(mp);
+        fxPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
 
+        //Spjald spj = new Spjald(mp);
+        Spjald spj = new Spjald(mp.getPlanta());
+        fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);
+
+        //fxPlonturYfirlit.baetaVidYfirlit();
 
         //allt hér fyrir neðan virkaði, en þetta er bara plöntuyfirlit, ekki MinarPlonturYfirlit
         /*
@@ -51,11 +75,19 @@ public class PlantController {
         spj = new PlantaSpjald(plontur.get(1));
         fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);
 
+
          */
+
     }
 
     @FXML
     private void hladaOllumPlontum() {
+        for (Planta p : allarPlontur) {
+            fxAllarPlonturYfirlit.baetaVidYfirlit(p);
+        }
+
+
+        /*
         AllarPlonturYfirlit a = new AllarPlonturYfirlit();
         System.out.println("hladaOllumPlontum handler");
         a.getBirtarAPlontur().addListener((ListChangeListener<? super PlantaSpjald>) change -> {
@@ -63,6 +95,8 @@ public class PlantController {
             fxAllarPlonturYfirlit.getFxFlowPane().getChildren().clear();
             fxAllarPlonturYfirlit.getFxFlowPane().getChildren().addAll(a.getBirtarAPlontur());
         });
+
+         */
 
     }
 
