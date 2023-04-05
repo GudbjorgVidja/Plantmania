@@ -9,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.MinPlanta;
 
 import java.io.IOException;
-import java.util.Locale;
 
 public class MinPlantaSpjald extends AnchorPane {
     //hafa tilviksbreytur fyrir label og takkana tvo
@@ -29,7 +28,7 @@ public class MinPlantaSpjald extends AnchorPane {
     }
 
     public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("minplanta-view.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -45,8 +44,9 @@ public class MinPlantaSpjald extends AnchorPane {
         if (fxSpjald != null) {
             fxSpjald.setFxAlmenntNafn("nafnið");
             fxSpjald.setFxAlmenntNafn(minPlanta.getPlanta().getAlmenntNafn());
-            fxSpjald.setFxFlokkur(minPlanta.getUppruni().toString().toLowerCase(Locale.ROOT));
-            fxSpjald.setFxPlontuMynd(minPlanta.getMyndaslod());
+            fxSpjald.setFxFlokkur(minPlanta.getPlanta().getUppruni().toString());
+            //fxSpjald.setFxFlokkur(minPlanta.getUppruni().toString().toLowerCase(Locale.ROOT));
+            fxSpjald.setFxPlontuMynd(minPlanta.getPlanta().getMyndaslod());
         } else {
             System.out.println("fxSpjald is null");
             //fxSpjald = new Spjald(minPlanta);
