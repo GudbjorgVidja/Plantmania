@@ -12,17 +12,18 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class MinPlanta extends Planta {
-    private String nickName;
-    private List<LocalDate> vokvanir;
+    private StringProperty nickName = new SimpleStringProperty();
+    private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
     private StringProperty notesFraNotanda = new SimpleStringProperty();//hafa listener fyrir notes!
-    private List<String> flokkar; //ath þetta aðeins
+    private ObservableList<String> flokkar = FXCollections.observableArrayList(); //ath þetta aðeins
     private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();
-    private int thinnTimiMilliVokvana;
+    private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();
     private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
     //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
     //en það væri kannski bara meira vesen
@@ -30,13 +31,13 @@ public class MinPlanta extends Planta {
 
     //passa hvernig smiðurinn lítur út hér!
     public MinPlanta(Planta planta) {
-        this.nickName = getOllHeiti().get(0);
-        this.thinnTimiMilliVokvana = getAlmennurTimiMilliVokvana();
+        this.nickName.set(planta.getOllHeiti().get(0));
+        this.thinnTimiMilliVokvana.set(planta.getAlmennurTimiMilliVokvana());
         this.planta = planta;
     }
 
     public void breytaNickname(String nyttNafn) {//setNickname!
-        nickName = nyttNafn;
+        nickName.set(nyttNafn);
     }
 
     public void baetaVidVokvun(LocalDate vokvun) {
@@ -52,7 +53,7 @@ public class MinPlanta extends Planta {
     }
 
     public void breytaTimaMilliVokvana(int timi) {
-        thinnTimiMilliVokvana = timi;
+        thinnTimiMilliVokvana.set(timi);
     }
 
 
@@ -63,18 +64,22 @@ public class MinPlanta extends Planta {
     }
 
     public String getNickName() {
+        return nickName.get();
+    }
+
+    public StringProperty nickNameProperty() {
         return nickName;
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName;
+        this.nickName.set(nickName);
     }
 
-    public List<LocalDate> getVokvanir() {
+    public ObservableList<LocalDate> getVokvanir() {
         return vokvanir;
     }
 
-    public void setVokvanir(List<LocalDate> vokvanir) {
+    public void setVokvanir(ObservableList<LocalDate> vokvanir) {
         this.vokvanir = vokvanir;
     }
 
@@ -90,11 +95,11 @@ public class MinPlanta extends Planta {
         this.notesFraNotanda.set(notesFraNotanda);
     }
 
-    public List<String> getFlokkar() {
+    public ObservableList<String> getFlokkar() {
         return flokkar;
     }
 
-    public void setFlokkar(List<String> flokkar) {
+    public void setFlokkar(ObservableList<String> flokkar) {
         this.flokkar = flokkar;
     }
 
@@ -111,11 +116,15 @@ public class MinPlanta extends Planta {
     }
 
     public int getThinnTimiMilliVokvana() {
+        return thinnTimiMilliVokvana.get();
+    }
+
+    public IntegerProperty thinnTimiMilliVokvanaProperty() {
         return thinnTimiMilliVokvana;
     }
 
     public void setThinnTimiMilliVokvana(int thinnTimiMilliVokvana) {
-        this.thinnTimiMilliVokvana = thinnTimiMilliVokvana;
+        this.thinnTimiMilliVokvana.set(thinnTimiMilliVokvana);
     }
 
     public Planta getPlanta() {
@@ -124,5 +133,17 @@ public class MinPlanta extends Planta {
 
     public void setPlanta(Planta planta) {
         this.planta = planta;
+    }
+
+    public String toString() {
+        return "MinPlanta{" +
+                "nickName=" + nickName.get() +
+                ", vokvanir=" + vokvanir.toString() +
+                ", notesFraNotanda=" + notesFraNotanda.get() +
+                ", flokkar=" + flokkar.toString() +
+                ", medaltimiMilliVokvana=" + medaltimiMilliVokvana.get() +
+                ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
+                ", planta=" + planta +
+                '}';
     }
 }
