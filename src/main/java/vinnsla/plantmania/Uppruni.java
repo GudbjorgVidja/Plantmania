@@ -6,23 +6,30 @@
 package vinnsla.plantmania;
 
 public enum Uppruni {
-    EYDIMORK("mynd"),
-    REGNSKOGUR(""),
-    SLETTUR(""),
-    SALTVATN(""),
-    FERSKVATN(""),
-    FJALLLENDI(""),
-    GRASLENDI(""),
-    SKOGLENDI(""),
-    HITABELTI("");
+    EYDIMORK("mynd", "eyðimörk"),
+    REGNSKOGUR("", "regnskógur"),
+    SLETTUR("", "sléttur"),
+    SALTVATN("", "saltvatn"),
+    FERSKVATN("", "ferskvatn"),
+    FJALLLENDI("", "fjalllendi"),
+    GRASLENDI("", "graslendi"),
+    SKOGLENDI("", "skóglendi"),
+    HITABELTI("", "hitabelti");
 
     private String mynd;
 
-    Uppruni(String mynd) {
+    private String stadur;
+
+    Uppruni(String mynd, String stadur) {
         this.mynd = mynd;
+        this.stadur = stadur;
     }
 
     public String getMynd() {
         return mynd;
+    }
+
+    public String getStadur() {
+        return stadur;
     }
 }
