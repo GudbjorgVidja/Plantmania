@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.MinPlanta;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Locale;
 
 public class MinPlantaSpjald extends AnchorPane {
@@ -86,6 +87,9 @@ public class MinPlantaSpjald extends AnchorPane {
 
     private void vokvaHandler(ActionEvent event) {
         System.out.println("vokva");
+        minPlantan.baetaVidVokvun(LocalDate.now());
+
+        System.out.println(minPlantan.getVokvanir().toString());
     }
 
     private void frestaHandler(ActionEvent event) {
