@@ -1,10 +1,14 @@
 /**
- * minPlantaSpjald les inn fxml skrána minplanta-view.fxml
+ * minPlantaSpjald les inn fxml skrána minplanta-view.fxml. Þessi klasi er controllerinn
+ * MinPlantaSpjald inniheldur Spjald hlut með sömu plöntu
  */
 package vidmot.plantmania;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.MinPlanta;
 
@@ -12,12 +16,15 @@ import java.io.IOException;
 import java.util.Locale;
 
 public class MinPlantaSpjald extends AnchorPane {
-    //hafa tilviksbreytur fyrir label og takkana tvo
-    //tilviksbreyta og setter? fyrir spjald.
+    @FXML
+    private Label fxLabel;
+    @FXML
+    private Button fxVokva, fxFresta;
     @FXML
     private Spjald fxSpjald;
 
-    public MinPlantaSpjald() {//smiðurinn
+    public MinPlantaSpjald() {//tómur smiður. Athuga hvort hann sé óþarfi
+        /*
         FXMLLoader loader = new FXMLLoader(getClass().getResource("minplanta-view.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -26,9 +33,11 @@ public class MinPlantaSpjald extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+         */
     }
 
-    public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn
+    public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn sem er notaður
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("minplanta-view.fxml"));
         loader.setRoot(this);
@@ -47,9 +56,21 @@ public class MinPlantaSpjald extends AnchorPane {
         } else {
             System.out.println("fxSpjald is null");
         }
+
+        //setja handlera á takkana
+        fxVokva.setOnAction(this::vokvaHandler);
+        fxFresta.setOnAction(this::frestaHandler);
     }
 
     public Spjald getFxSpjald() {
         return fxSpjald;
+    }
+
+    private void vokvaHandler(ActionEvent event) {
+        System.out.println("vokva");
+    }
+
+    private void frestaHandler(ActionEvent event) {
+        System.out.println("frestar um dag");
     }
 }

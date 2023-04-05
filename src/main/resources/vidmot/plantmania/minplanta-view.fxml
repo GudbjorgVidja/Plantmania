@@ -13,8 +13,8 @@
             <!-- <Spjald fx:id="fxSpjald"/> -->
             <Spjald fx:id="fxSpjald"/>
         </Pane>
-        <Button layoutX="7.0" layoutY="158.0" mnemonicParsing="false" text="Button"/>
-        <Button layoutX="68.0" layoutY="158.0" mnemonicParsing="false" text="Button"/>
-        <Label layoutX="54.0" layoutY="133.0" text="Label"/>
+        <Button layoutX="7.0" layoutY="158.0" mnemonicParsing="false" text="vökva" fx:id="fxVokva"/>
+        <Button layoutX="68.0" layoutY="158.0" mnemonicParsing="false" text="fresta" fx:id="fxFresta"/>
+        <Label layoutX="54.0" layoutY="133.0" text="2 dagar" fx:id="fxLabel"/>
     </children>
 </fx:root>
