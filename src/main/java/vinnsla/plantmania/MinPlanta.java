@@ -20,6 +20,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 
 public class MinPlanta extends Planta {
@@ -63,9 +64,12 @@ public class MinPlanta extends Planta {
             if (!vokvanir.isEmpty() && vokvanir.size() != 1) {
                 int dagar = 0;
                 for (int i = 0; i < vokvanir.size() - 1; i++) {
-                    dagar += vokvanir.get(i).until(vokvanir.get(i + 1)).getDays();
+                    //dagar += vokvanir.get(i).until(vokvanir.get(i + 1)).getDays();
+                    dagar += ChronoUnit.DAYS.between(vokvanir.get(i), vokvanir.get(i + 1));
                 }
                 medaltimiMilliVokvana.set(dagar / (vokvanir.size() - 1));
+            } else {
+                medaltimiMilliVokvana.set(0);
             }
         });
     }
@@ -74,7 +78,7 @@ public class MinPlanta extends Planta {
     public void naestaVokvunRegla() {
         sidastaVokvun.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                naestaVokvun.bind(thinnTimiMilliVokvana.negate().subtract(-(newValue.until(LocalDate.now()).getDays())));
+                naestaVokvun.bind(thinnTimiMilliVokvana.subtract((newValue.until(LocalDate.now()).getDays())));
             } else {
                 naestaVokvun.unbind();
                 naestaVokvun.set(0);
@@ -98,6 +102,7 @@ public class MinPlanta extends Planta {
         for (LocalDate l : vokvanir) {
             if (l.equals(vokvun)) {
                 vokvanir.remove(vokvun);
+                return;
             }
         }
     }
@@ -209,6 +214,15 @@ public class MinPlanta extends Planta {
 
     public String toString() {
         return "MinPlanta{" +
+                "vokvanir=" + vokvanir +
+                ", medaltimiMilliVokvana=" + medaltimiMilliVokvana +
+                ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana +
+                ", planta=" + planta +
+                '}';
+    }
+
+    /*public String toString() {
+        return "MinPlanta{" +
                 "nickName=" + nickName.get() +
                 ", vokvanir=" + vokvanir.toString() +
                 ", notesFraNotanda=" + notesFraNotanda.get() +
@@ -217,11 +231,11 @@ public class MinPlanta extends Planta {
                 ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
                 ", planta=" + planta +
                 '}';
-    }
+    }*/
 
     public static void main(String[] args) {
         MinPlanta planta = new MinPlanta();
-        planta.baetaVidVokvun(LocalDate.of(2023, 3, 18));
+        planta.baetaVidVokvun(LocalDate.of(2022, 3, 18));
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 14));
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 22));
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 10));
@@ -234,6 +248,8 @@ public class MinPlanta extends Planta {
         for (LocalDate v : planta.getVokvanir()) {
             System.out.println(v);
         }
+        System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
+
 
         System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
         System.out.println("Sidasta vokvun: " + planta.getSidastaVokvun());
@@ -258,11 +274,5 @@ public class MinPlanta extends Planta {
 
         System.out.println(planta.getNaestaVokvun().get());
 
-
-        /*int dagarINaestuVokvun = (planta.sidastaVokvun.get().until(LocalDate.now()).getDays()) - planta.thinnTimiMilliVokvana.get();
-        System.out.println(dagarINaestuVokvun);*/
-
-        //IntegerBinding dagarINaestuVokvun = (planta.thinnTimiMilliVokvana).negate().subtract(-(planta.sidastaVokvun.get().until(LocalDate.now()).getDays()));
-        //System.out.println(dagarINaestuVokvun.get());
     }
 }
