@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <fx:root minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="650.0" styleClass="anchorpane"
-         stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19"
+         stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/11"
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="29.0" prefWidth="255.0" fx:id="fxMenuBar">

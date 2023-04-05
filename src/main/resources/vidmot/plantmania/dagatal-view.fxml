@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import vidmot.plantmania.*?>
 <fx:root prefHeight="443.0" prefWidth="600.0" style="-fx-background-color: #a9f5c2;"
-         type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+         type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane fx:id="fxGrid" alignment="CENTER" gridLinesVisible="true" layoutX="19.0" layoutY="82.0"
                   prefHeight="340.0" prefWidth="560.0" style="-fx-background-color: #c8fad8;">
