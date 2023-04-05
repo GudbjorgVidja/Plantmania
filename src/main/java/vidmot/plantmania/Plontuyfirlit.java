@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import vinnsla.plantmania.LesaPlontur;
+import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Planta;
 
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class Plontuyfirlit extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        
+
         fxFlowPane.getChildren().add(new PlantaSpjald());
 
         LesaPlontur l = new LesaPlontur();
@@ -64,17 +65,9 @@ public class Plontuyfirlit extends AnchorPane {
         //checkMenuItems.remove(0, 1); //inniheldur bara breytanlegu stökin
 
         checkMenuItems.addListener((ListChangeListener<? super MenuItem>) change -> {
-            //tekur allt nema fyrstu tvo, sem eru velja allt og seperator
             change.next();
-
             if (change.wasRemoved()) fxSiaMenu.getItems().removeAll(change.getRemoved());
-
             if (change.wasAdded()) fxSiaMenu.getItems().addAll(change.getAddedSubList());
-
-
-            //fxSiaMenu.getItems().remove(2, (fxSiaMenu.getItems()).size()-1);
-            //fxSiaMenu.getItems().addAll(checkMenuItems);
-            //fxSiaMenu.getItems().setAll(checkMenuItems);
         });
 
         checkMenuItems.add(new CheckMenuItem("nýtt item"));
@@ -84,6 +77,16 @@ public class Plontuyfirlit extends AnchorPane {
 
         //setja binder eða listener þ.a. ef barnalisti sia breytist þá uppfærist viðmótið.
 
+    }
+
+    public void baetaVidYfirlit(Planta planta) {
+        PlantaSpjald spjald = new PlantaSpjald(planta);
+        fxFlowPane.getChildren().add(spjald);
+    }
+
+    public void baetaVidYfirlit(MinPlanta planta) {
+        PlantaSpjald spjald = new PlantaSpjald(planta);
+        fxFlowPane.getChildren().add(spjald);
     }
 
     //stilla upphafsstöðu síu, og binda saman fyrsta og öll hin stök síunnar

@@ -4,6 +4,11 @@
  * <p>
  * MinPlanta ætti að vera controller fyrir fxml skrá fyrir plöntuspjald af plöntu sem við eigum.
  * Hefur þá handlera fyrir þegar ýtt er á takka á spjaldinu (vökva og fresta), og þegar ýtt er á spjaldið(upplýsingadíalogur).
+ * <p>
+ * á kannski að vera með observable list planaðarVökvanir, sem er listi af dagsetningum vökvana næstu þrjá mánuði?
+ * <p>
+ * bæta við integerProperty hlut nidurtalning, sem telur niður að næstu vökvun og uppfærist bara ef hún breytist. Held það
+ * sé betra en að reikna það út í hvert skipti.
  */
 
 package vinnsla.plantmania;
@@ -27,6 +32,8 @@ public class MinPlanta extends Planta {
     private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
     //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
     //en það væri kannski bara meira vesen
+
+    private IntegerProperty naestaVokvun = new SimpleIntegerProperty(2);//setja hér niðurtalningu
 
 
     //passa hvernig smiðurinn lítur út hér!
@@ -173,6 +180,14 @@ public class MinPlanta extends Planta {
 
     public void setSidastaVokvun(LocalDate sidastaVokvun) {
         this.sidastaVokvun.set(sidastaVokvun);
+    }
+
+    public IntegerProperty getNaestaVokvun() {
+        return naestaVokvun;
+    }
+
+    public void setNaestaVokvun(int i) {
+        naestaVokvun.set(i);
     }
 
     public String toString() {

@@ -1,3 +1,11 @@
+/**
+ * Upplýsingar um notandann:
+ * notendanafn
+ * lykilorð
+ * MinPlanta hlutir
+ * Breytingar á stillingum (eða kannski frekar staða stillinga)
+ * flokkar (ef hægt er að bæta við flokk)
+ */
 package vinnsla.plantmania;
 
 import javafx.beans.property.SimpleStringProperty;

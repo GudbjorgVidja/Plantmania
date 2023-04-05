@@ -11,7 +11,7 @@
  * Stuttur texti með upplýsingum um plöntuna
  * <p>
  * <p>
- * plöntuspjald er Anchorpane, sem inniheldur fleiri hluti á við
+ * Planta er allar grunnupplýsingarnar um plöntu.
  */
 package vinnsla.plantmania;
 
@@ -49,8 +49,7 @@ public class Planta {
     }
 
     public Planta() {
-        //setja kannski útlit hér? eða kannski frekar hafa sér klasa í viðmótinu
-        //fxPlontuMynd.setImage(new Image("src/resources/vidmot/plantmania/styling/plants/"+myndaslod));
+
     }
 
     public String getLatnesktNafn() {

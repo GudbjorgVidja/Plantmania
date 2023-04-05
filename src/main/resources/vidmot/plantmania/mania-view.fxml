@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Text?>
 <?import vidmot.plantmania.Dagatal?>
 <?import vidmot.plantmania.Plontuyfirlit?>
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
@@ -34,13 +33,8 @@
         </Tab>
         <Tab>
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorpane">
-                    <children>
-                        <Text layoutX="157.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="allar plöntur úr gagnagrunninum, svipað og mínar plöntur"
-                              wrappingWidth="257.98822021484375"/>
-                    </children>
-                </AnchorPane>
+                <Plontuyfirlit fx:id="fxAllarPlonturYfirlit" onMouseClicked="#hladaOllumPlontum" prefHeight="458.0"
+                               prefWidth="604.0"/>
             </content>
             <graphic>
                 <Label styleClass="tablabell" text="skoða"/>

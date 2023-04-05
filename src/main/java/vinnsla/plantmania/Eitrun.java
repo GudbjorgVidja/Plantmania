@@ -1,9 +1,14 @@
+/**
+ * enum fyrir það hvort plantan er eitruð eður ei.
+ * mjög gott, en væri kannski hægt að lengja einhver skilaboðanna og birta beint í plöntuglugganum?
+ * TIL_MANNELDIS gæti verið eitthvað eins og "*plantan* er æt, og er víða notuð til manneldis"
+ */
 package vinnsla.plantmania;
 
 public enum Eitrun {
     TIL_MANNELDIS("Til manneldis"),
     SAKLAUS("Alveg skaðlaus"),
-    BARA_SMA("eitruð í miklu magni"),
+    BARA_SMA("Eitruð í miklu magni"),
     ERTING("Ertir húð"),
     ERTING_MIKIL("Ertir húð verulega"),
     NIDURGANGUR_ISH("Getur valdið niðurgangi og óþægindum eftir neyslu"),

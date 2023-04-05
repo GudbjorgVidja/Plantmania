@@ -1,3 +1,6 @@
+/**
+ * hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma
+ */
 package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -6,11 +9,14 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import vinnsla.plantmania.LesaPlontur;
+import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Notandi;
 import vinnsla.plantmania.Planta;
 
@@ -20,9 +26,13 @@ import java.util.List;
 
 public class PlantController {
     @FXML
-    private Plontuyfirlit fxPlonturYfirlit; //mínar plöntur yfirlitið
+    private Plontuyfirlit fxPlonturYfirlit; //mínar plöntur yfirlitið. Er eiginlega meira eins og allar plöntur yfirlit
+    @FXML
+    private Plontuyfirlit fxAllarPlonturYfirlit; //yfirlit yfir allar plöntur
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
+
+    private ObservableList<Planta> allarPlontur = FXCollections.observableArrayList();//er í vesi, geymi hér
 
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
@@ -30,6 +40,10 @@ public class PlantController {
 
         System.out.println(skradurNotandi.get());
         geraBindings();
+
+
+        allarPlontur.addAll((new LesaPlontur()).getPlontur());
+        //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
     }
 
 
@@ -39,14 +53,20 @@ public class PlantController {
 
 
     /**
-     * þegar smellt er, þá bætast við eitt spjald og plönturnar úr plontur.txt
+     * þegar smellt er, plönturnar úr plontur.txt sem MinPlantaSpjald hlutir
      */
     @FXML
     protected void fxBaetaVidHandler(MouseEvent event) {
-        /*Spjald spjald = new Spjald();
-        fxPlonturYfirlit.getFxFlowPane().getChildren().add(spjald);
+
+        for (int i = 0; i < allarPlontur.size(); i++) {
+            MinPlanta mp = new MinPlanta(allarPlontur.get(i));
+            MinPlantaSpjald mps = new MinPlantaSpjald(mp);
+            fxPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
+        }
 
 
+
+        /*
         LesaPlontur l = new LesaPlontur();
         List<Planta> plontur = l.getPlontur();
 
@@ -55,6 +75,7 @@ public class PlantController {
 
         spj = new PlantaSpjald(plontur.get(1));
         fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);*/
+
 
         //System.out.println(event.getTarget().getClass());
         Node node = event.getPickResult().getIntersectedNode();
@@ -91,6 +112,28 @@ public class PlantController {
                 throw new RuntimeException(e);
             }
         }
+
+
+    }
+
+    @FXML
+    private void hladaOllumPlontum() {
+        for (Planta p : allarPlontur) {
+            fxAllarPlonturYfirlit.baetaVidYfirlit(p);
+        }
+
+
+        /*
+        AllarPlonturYfirlit a = new AllarPlonturYfirlit();
+        System.out.println("hladaOllumPlontum handler");
+        a.getBirtarAPlontur().addListener((ListChangeListener<? super PlantaSpjald>) change -> {
+            change.next();
+            fxAllarPlonturYfirlit.getFxFlowPane().getChildren().clear();
+            fxAllarPlonturYfirlit.getFxFlowPane().getChildren().addAll(a.getBirtarAPlontur());
+        });
+
+         */
+
     }
 
     public void skraUt(ActionEvent actionEvent) {

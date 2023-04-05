@@ -1,3 +1,6 @@
+/**
+ * klasi til að setja plöntur í skrá (json skrá)
+ */
 package vinnsla.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;

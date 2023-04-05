@@ -1,3 +1,8 @@
+/**
+ * enum fyrir uppruna plöntu.
+ * sniðugt væri að hafa hér staðinn sem streng auk myndarinnar, t.d. EYDIMORK("mynd.png", "eyðimörk").
+ * Gæti líka verið stuttur texti sem birtist í plöntuglugganum.
+ */
 package vinnsla.plantmania;
 
 public enum Uppruni {
