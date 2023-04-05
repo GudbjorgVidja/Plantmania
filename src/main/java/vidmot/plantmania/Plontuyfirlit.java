@@ -56,9 +56,6 @@ public class Plontuyfirlit extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        //Node node = syndSpjold.get(0);
-        //if (node instanceof PlantaSpjald) syndSpjold = ObservableList < Planta >
-
         syndSpjold.addListener((ListChangeListener<? super Node>) change -> {
             fxFlowPane.getChildren().clear();
             fxFlowPane.getChildren().addAll(syndSpjold);
@@ -105,7 +102,6 @@ public class Plontuyfirlit extends AnchorPane {
     }
 
     /**
-     *
      * @param planta Planta hlutur, almennt
      */
     public void baetaVidYfirlit(Planta planta) {
@@ -117,6 +113,7 @@ public class Plontuyfirlit extends AnchorPane {
 
     /**
      * Ef inntakið er MinPlanta þá er þetta tilvik af Plontuyfirlit MinPlantaYfirlit í þeim flipa
+     *
      * @param planta MinPlanta hlutur
      */
     public void baetaVidYfirlit(MinPlanta planta) {
