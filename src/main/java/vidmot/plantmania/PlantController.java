@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,6 +53,11 @@ public class PlantController {
         //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
 
         dagatalsEventFilterar();
+
+        //binda nafn notanda við label i báðum yfirlitum.
+        // Væri gott að hafa í Plontuyfirlit klasanum, en viewSwitcher er leiðinlegur við mig rn
+        fxMinarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
+        fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
     }
 
 
@@ -112,8 +119,10 @@ public class PlantController {
         //bætir við plöntum þegar ýtt er á yfirlitið
         for (int i = 0; i < allarPlontur.size(); i++) {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
-            MinPlantaSpjald mps = new MinPlantaSpjald(mp);
-            fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
+            //MinPlantaSpjald mps = new MinPlantaSpjald(mp);
+            fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
+
+            //fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
         }
 
 
@@ -181,5 +190,9 @@ public class PlantController {
         skradurNotandi = null;
         System.out.println("skra ut");
         ViewSwitcher.switchTo(View.UPPHAFSSIDA);
+    }
+
+    public StringProperty getNotendanafn() {
+        return new SimpleStringProperty(skradurNotandi.get().getNotendanafn());
     }
 }

@@ -5,9 +5,6 @@ package vidmot.plantmania;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.Planta;
 
@@ -18,13 +15,19 @@ public class PlantaSpjald extends AnchorPane {
     @FXML
     private AnchorPane fxBreytilegtSvaedi;//laga nafn, en er anchorPane sem inniheldur stats, til að geta breytt því og sýnt takka
 
+    /*
     @FXML
     private ImageView fxPlontuMynd;
 
     @FXML
     private Label fxAlmenntNafn, fxFlokkur;
 
-    private Planta planta;//Planta vinnsluhluturinn
+     */
+
+    @FXML
+    private Spjald fxSpjald;
+
+    private Planta planta;//Planta vinnsluhluturinn, plantan sem spjaldið er fyrir.
 
     public PlantaSpjald() {
 
@@ -41,11 +44,22 @@ public class PlantaSpjald extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+        if (fxSpjald != null) {
+            fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
+            fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));
+            fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
+        } else {
+            System.out.println("fxSpjald is null");
+        }
+
+        /*
         fxPlontuMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + planta.getMyndaslod())));//mynd á spjaldinu rétt?
 
         fxAlmenntNafn.setText(planta.getAlmenntNafn());
 
         fxFlokkur.setText(" " + planta.getUppruni() + " ");
+
+         */
     }
 
     public Planta getPlanta() {
