@@ -37,7 +37,7 @@ public class Spjald extends VBox {
         }
     }
 
-    public Spjald(Planta p) {//virkar allavega fyrir stakt spjald (ekki á öðru spjaldi)
+    public Spjald(Planta p) {//virkar fyrir stakt spjald og MinPlantaSpjald
         FXMLLoader loader = new FXMLLoader(getClass().getResource("spjald-view.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -47,8 +47,6 @@ public class Spjald extends VBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
-        //TODO gera spjald með p
 
         fxFlokkur.setText(p.getUppruni().toString());
         fxAlmenntNafn.setText(p.getAlmenntNafn());
