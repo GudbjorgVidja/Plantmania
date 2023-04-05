@@ -78,7 +78,7 @@ public class MinPlanta extends Planta {
     public void naestaVokvunRegla() {
         sidastaVokvun.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                naestaVokvun.bind(thinnTimiMilliVokvana.subtract((newValue.until(LocalDate.now()).getDays())));
+                naestaVokvun.bind(thinnTimiMilliVokvana.subtract(ChronoUnit.DAYS.between(newValue, LocalDate.now())));
             } else {
                 naestaVokvun.unbind();
                 naestaVokvun.set(0);
@@ -235,6 +235,7 @@ public class MinPlanta extends Planta {
 
     public static void main(String[] args) {
         MinPlanta planta = new MinPlanta();
+        planta.thinnTimiMilliVokvana.set(18);
         planta.baetaVidVokvun(LocalDate.of(2022, 3, 18));
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 14));
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 22));
@@ -242,18 +243,34 @@ public class MinPlanta extends Planta {
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 26));
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 30));
         planta.baetaVidVokvun(LocalDate.of(2023, 4, 3));
-
+        planta.baetaVidVokvun(LocalDate.of(2023, 2, 2));
+        planta.baetaVidVokvun(LocalDate.of(2023, 2, 14));
 
         System.out.println("Vokvnanir i timarod:");
         for (LocalDate v : planta.getVokvanir()) {
             System.out.println(v);
         }
-        System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
+        LocalDate testDagur = LocalDate.now().minusMonths(1);
 
+        ObservableList<LocalDate> testList = planta.getVokvanir().filtered(p -> p.getMonth() == testDagur.getMonth() && p.getYear() == testDagur.getYear());
 
+        System.out.println("Vokvnanir i timarod f. testlist:");
+        for (LocalDate v : testList) {
+            System.out.println(v);
+        }
+
+        planta.baetaVidVokvun(LocalDate.of(2023, 3, 11));
+
+        System.out.println("Vokvnanir i timarod f. testlist:");
+        for (LocalDate v : testList) {
+            System.out.println(v);
+        }
         System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
+        System.out.println("Dagar i naestu vokvun: " + planta.getNaestaVokvun().get());
+
+       /* System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
         System.out.println("Sidasta vokvun: " + planta.getSidastaVokvun());
-        planta.baetaVidVokvun(LocalDate.of(2023, 3, 6));
+        planta.baetaVidVokvun(LocalDate.of(2023, 3, 6));*/
 
         System.out.println("Vokvnanir i timarod:");
         for (LocalDate v : planta.getVokvanir()) {
