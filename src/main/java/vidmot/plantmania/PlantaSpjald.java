@@ -5,8 +5,6 @@ package vidmot.plantmania;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.Planta;
 
@@ -17,16 +15,19 @@ public class PlantaSpjald extends AnchorPane {
     @FXML
     private AnchorPane fxBreytilegtSvaedi;//laga nafn, en er anchorPane sem inniheldur stats, til að geta breytt því og sýnt takka
 
+    /*
     @FXML
     private ImageView fxPlontuMynd;
 
     @FXML
     private Label fxAlmenntNafn, fxFlokkur;
 
+     */
+
     @FXML
     private Spjald fxSpjald;
 
-    private Planta planta;//Planta vinnsluhluturinn
+    private Planta planta;//Planta vinnsluhluturinn, plantan sem spjaldið er fyrir.
 
     public PlantaSpjald() {
 
