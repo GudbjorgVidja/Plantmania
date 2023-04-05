@@ -4,6 +4,7 @@
  */
 package vidmot.plantmania;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,8 @@ public class MinPlantaSpjald extends AnchorPane {
     private Button fxVokva, fxFresta;
     @FXML
     private Spjald fxSpjald;
+
+    private MinPlanta minPlantan;
 
     public MinPlantaSpjald() {//tómur smiður. Athuga hvort hann sé óþarfi
         /*
@@ -48,18 +51,29 @@ public class MinPlantaSpjald extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+        //minPlanta vistuð í tilviksbreytu
+        minPlantan = minPlanta;
+
         //System.out.println("AlmenntNafn: " + minPlanta.getPlanta().getAlmenntNafn());
         if (fxSpjald != null) {
-            fxSpjald.setFxAlmenntNafn(minPlanta.getPlanta().getAlmenntNafn());
-            fxSpjald.setFxFlokkur(minPlanta.getPlanta().getUppruni().toString().toLowerCase(Locale.ROOT));
-            fxSpjald.setFxPlontuMynd(minPlanta.getPlanta().getMyndaslod());
+            fxSpjald.setFxAlmenntNafn(minPlantan.getPlanta().getAlmenntNafn());
+            fxSpjald.setFxFlokkur(minPlantan.getPlanta().getUppruni().toString().toLowerCase(Locale.ROOT));
+            fxSpjald.setFxPlontuMynd(minPlantan.getPlanta().getMyndaslod());
         } else {
             System.out.println("fxSpjald is null");
         }
 
+
         //setja handlera á takkana
         fxVokva.setOnAction(this::vokvaHandler);
         fxFresta.setOnAction(this::frestaHandler);
+
+        //setja dagsetningu á label
+        //fxLabel.setText(fxLabel.getText().replace("-0", minPlanta.getNaestaVokvun().get() + ""));
+        //StringProperty labelTexti = new SimpleStringProperty()
+        //fxLabel.textProperty().bind(new SimpleStringProperty(minPlantan.getNaestaVokvun().asString() + " dagar"));
+        fxLabel.textProperty().bind(minPlantan.getNaestaVokvun().asString().concat(new SimpleStringProperty(" dagar")));
+
     }
 
     public Spjald getFxSpjald() {
@@ -72,5 +86,7 @@ public class MinPlantaSpjald extends AnchorPane {
 
     private void frestaHandler(ActionEvent event) {
         System.out.println("frestar um dag");
+        minPlantan.setNaestaVokvun(minPlantan.getNaestaVokvun().get() + 1);
+        System.out.println("naestaVokvun: " + minPlantan.getNaestaVokvun().get());
     }
 }

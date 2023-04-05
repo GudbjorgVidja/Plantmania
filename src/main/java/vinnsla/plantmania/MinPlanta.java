@@ -33,6 +33,8 @@ public class MinPlanta extends Planta {
     //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
     //en það væri kannski bara meira vesen
 
+    private IntegerProperty naestaVokvun = new SimpleIntegerProperty(2);//setja hér niðurtalningu
+
 
     //passa hvernig smiðurinn lítur út hér!
     public MinPlanta(Planta planta) {
@@ -138,6 +140,14 @@ public class MinPlanta extends Planta {
 
     public void setPlanta(Planta planta) {
         this.planta = planta;
+    }
+
+    public IntegerProperty getNaestaVokvun() {
+        return naestaVokvun;
+    }
+
+    public void setNaestaVokvun(int i) {
+        naestaVokvun.set(i);
     }
 
     public String toString() {
