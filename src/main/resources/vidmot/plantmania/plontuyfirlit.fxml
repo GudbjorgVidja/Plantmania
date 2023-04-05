@@ -10,14 +10,14 @@
     <children>
         <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="29.0" prefWidth="255.0" fx:id="fxMenuBar">
             <menus>
-                <Menu mnemonicParsing="false" text="raða eftir">
+                <Menu mnemonicParsing="false" text="röðun" fx:id="rodunMenu">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="næsta vökvun"/>
+                        <!-- <MenuItem mnemonicParsing="false" text="næsta vökvun"/> -->
                         <MenuItem mnemonicParsing="false" text="stafrófsröð"/>
-                        <MenuItem mnemonicParsing="false" text="afmæli"/>
+                        <!-- <MenuItem mnemonicParsing="false" text="afmæli"/> -->
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="flokkun">
+                <Menu mnemonicParsing="false" text="flokkun" fx:id="flokkunMenu">
                     <items>
                         <MenuItem mnemonicParsing="false" text="sjálfgefið"/>
                         <MenuItem mnemonicParsing="false" text="flokkur"/>
