@@ -39,7 +39,7 @@ public class MinPlantaSpjald extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        System.out.println("AlmenntNafn: " + minPlanta.getPlanta().getAlmenntNafn());
+        //System.out.println("AlmenntNafn: " + minPlanta.getPlanta().getAlmenntNafn());
         if (fxSpjald != null) {
             fxSpjald.setFxAlmenntNafn(minPlanta.getPlanta().getAlmenntNafn());
             fxSpjald.setFxFlokkur(minPlanta.getPlanta().getUppruni().toString().toLowerCase(Locale.ROOT));
