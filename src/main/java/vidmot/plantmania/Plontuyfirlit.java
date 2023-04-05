@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Planta;
+import vinnsla.plantmania.Uppruni;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -39,11 +40,14 @@ public class Plontuyfirlit extends AnchorPane {
     private ObservableList<MenuItem> checkMenuItems = FXCollections.observableArrayList();
     //ætti kannski bara að innihalda stök 2 og lengra, þau eru þau einu sem geta breyst.
 
+    private ObservableList<CheckMenuItem> upprunaItemar = FXCollections.observableArrayList();
+
+    //er í þeirri röð sem stökin eru lesin inn, allavega til að byrja með.
+    private final ObservableList<Node> ollStok = FXCollections.observableArrayList();//allir hlutir sem settir eru inn, óháð því hvort þeir eru sýndir eða ekki
+
     private ObservableList<Node> syndSpjold = FXCollections.observableArrayList();//Hlutirnir í þessu yfirliti
 
-    private ObservableList<PlantaSpjald> syndPlontuSpjold = FXCollections.observableArrayList(); //henda
-
-    private ObservableList<MinPlantaSpjald> syndMinPlontuSpjold = FXCollections.observableArrayList();//henda
+    private Uppruni[] upprunar;
 
     public Plontuyfirlit() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plontuyfirlit.fxml"));
@@ -85,7 +89,18 @@ public class Plontuyfirlit extends AnchorPane {
 
     private void siaMenuBreytingar() {
         checkMenuItems.setAll(fxSiaMenu.getItems()); //checkMenuItems er uppfærð útgáfa
+        System.out.println("checkmenuitems.size: " + checkMenuItems.size());
         //checkMenuItems.remove(0, 1); //inniheldur bara breytanlegu stökin
+
+        //upprunaItemar.addAll(checkMenuItems instanceof CheckMenuItem);
+        //upprunaItemar.remove(0);
+
+        /*
+        for (CheckMenuItem item : upprunaItemar) {
+            System.out.println(item.getText());
+        }
+
+         */
 
         checkMenuItems.addListener((ListChangeListener<? super MenuItem>) change -> {
             change.next();
@@ -122,8 +137,19 @@ public class Plontuyfirlit extends AnchorPane {
         //fxFlowPane.getChildren().add(spjald);
     }
 
+    private void setSiaMenuItems() {
+
+
+    }
+
     //stilla upphafsstöðu síu, og binda saman fyrsta og öll hin stök síunnar
     private void stillaSia() {
+        //setja fyrsta sem valið
+        ((CheckMenuItem) fxSiaMenu.getItems().get(0)).setSelected(true);
+
+        //gera bindingu þ.a. ef fyrsta er valið þá eru öll það
+        //((CheckMenuItem)fxSiaMenu.getItems().get(0)).selectedProperty().bind(((CheckMenuItem) fxSiaMenu.getItems().));
+
         //ef allir flokkar valdir: efsta valið.
         //annars: efsta ekki valið.
 
@@ -167,10 +193,14 @@ public class Plontuyfirlit extends AnchorPane {
         System.out.println("Smellt á " + uppruni.getText());
 
 
-        if (uppruni.getText().equals("almennt heiti A-Ö")) almenntStafrofsrod();
-        else if (uppruni.getText().equals("almennt heiti Ö-A")) almenntOfugStafrofsrod();
-        else if (uppruni.getText().equals("fræðiheiti A-Ö")) fraediStafrofsrod();
-        //else if(uppruni.getText().equals("fræðiheiti Ö-A"))
+        if (uppruni.getText().equals("almennt heiti A-Ö"))
+            Collections.sort(syndSpjold, almenntHeitiComparator);//almenntStafrofsrod();
+        else if (uppruni.getText().equals("almennt heiti Ö-A"))
+            Collections.sort(syndSpjold, almenntHeitiComparator.reversed());//almenntOfugStafrofsrod();
+        else if (uppruni.getText().equals("fræðiheiti A-Ö"))//sleppa kannski fræðiheiti?
+            Collections.sort(syndSpjold, fraediheitiComparator);//fraediStafrofsrod();
+            //else if(uppruni.getText().equals("fræðiheiti Ö-A"))
+        else if (uppruni.getText().equals("næsta vökvun")) Collections.sort(syndSpjold, naestaVokvunComparator);
     }
 
     private void siaItemHandler(ActionEvent event) {
@@ -186,6 +216,13 @@ public class Plontuyfirlit extends AnchorPane {
 
     //TODO: allt hér fyrir neðan er í raun vinnsla!!! Passa að gera viðeigandi vinnsluklasa og færa yfir!!!!
 
+    /* fyrir comparator
+            String stafrof = "A a Á á B b D d Ð ð E e É é F f G g H h I i Í í J j K k L l M m N n O o Ó ó P p R r S s T t U u Ú ú V v X x Y y Ý ý Þ þ Æ æ Ö ö";
+        String[] srof = stafrof.split(" ");
+
+     */
+
+
     private void almenntStafrofsrod() {
         Collections.sort(syndSpjold, this::compare);
     }
@@ -198,13 +235,6 @@ public class Plontuyfirlit extends AnchorPane {
         Collections.sort(syndSpjold, fraediheitiComparator);
     }
 
-    public int compare(Planta s1, Planta s2) {
-        //if (s1.getAlmenntNafn().toLowerCase() < s1.getAlmenntNafn().toLowerCase())
-        return s1.getAlmenntNafn().toLowerCase().compareTo(s2.getAlmenntNafn().toLowerCase());
-    }
-
-
-    //eða raða Node hlutum, og athuga gerð bara í compare aðferðinni
 
     public int compare(Node n1, Node n2) {
         if (n1 instanceof PlantaSpjald) {
@@ -213,6 +243,16 @@ public class Plontuyfirlit extends AnchorPane {
         return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
     }
 
+    private Comparator<Node> almenntHeitiComparator = new Comparator<Node>() {
+        public int compare(Node n1, Node n2) {
+            if (n1 instanceof PlantaSpjald) {
+                return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
+            }
+            return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
+
+        }
+    };
+
     private Comparator<Node> fraediheitiComparator = new Comparator<Node>() {
         public int compare(Node n1, Node n2) {
             if (n1 instanceof PlantaSpjald) {
@@ -220,6 +260,12 @@ public class Plontuyfirlit extends AnchorPane {
             }
             return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getLatnesktNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
 
+        }
+    };
+
+    private Comparator<Node> naestaVokvunComparator = new Comparator<Node>() {
+        public int compare(Node n1, Node n2) {
+            return Integer.compare(((MinPlantaSpjald) n1).getMinPlanta().getNaestaVokvun().get(), ((MinPlantaSpjald) n2).getMinPlanta().getNaestaVokvun().get());
         }
     };
 
