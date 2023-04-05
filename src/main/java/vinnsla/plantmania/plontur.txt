@@ -1,81 +1,94 @@
-5
+6
 
 monstera deliciosa
 Ficus lyrata
 Curio rowleyanus
 aloe vera
 Dracaena trifasciata
+sveppur barabeppur
 
 Monstera
 Fiddle Leaf Fig
 String of Pearls
 aloe vera
 snákaplanta
+Sveppur
 
 monstera deliciosa, Monstera, swiss cheese plant
 Ficus lyrata, Fiddle Leaf Fig, fiðlufíkus
 Curio rowleyanus, String of Pearls, String of Beads
 Aloe Vera
 Dracaena trifasciata, snákaplanta, snake plant, indjánafjöður, Saint George's sword, mother-in-law's tongue, viper's bowstring hemp
+sveppur barabeppur, Sveppur, rauðhetta, mushy
 
 monstera.png
 fiddleLeafFig.png
 perlur.png
 aloe.png
 snek.png
+sveppi.png
 
 Monsteran er vinsæl planta, falleg, götótt. Hún tekur sig vel út í stærri plássum, og getur orðið vel stór.
 Fiðlufíkusinn er fallegur, en getur verið nokkuð krefjandi. Ekki endilega mælt með fyrir byrjendur.
 String of pearls er hengiplanta, á henni vaxa grænar baunir sem gott er að borða
 Aloe Vera er vinsæl pottaplanta. Hún er oft notuð í snyrtivörur og smyrsl og er harðgerð. Aloe vera drekkur djúpt, svo vökva almennilega og láta moldina þorna alveg á milli
 Indjánafjöður lítur út eins og plöntur sem vaxa á hafsbotni í teiknimyndum. Hún hreinsar loftið. Er helst viðkvæm fyrir ofvökvun og frosti. Hún þolir óbeint eða beint ljós
+Sveppurinn dafnar í litlu ljósi, en hann finnst oft á skógarbotni, sérlega þar sem trjákrónan er þétt.
 
 REGNSKOGUR
 REGNSKOGUR
 EYDIMORK
 HITABELTI
 HITABELTI
+SKOGLENDI
 
 HALFBEINT
 HALFBEINT
 HALFBEINT
 HALFBEINT
 BEINT
+OBEINT
 
 NIDURGANGUR_ISH
 MADUR_VERDUR_SKAKKUR
 NIDURGANGUR_ISH
 SAKLAUS
 ERTING
+MADUR_VERDUR_SKAKKUR
 
 18
 15
 23
 20
 18
+12
 
 LITIL
 MEDAL
 LITIL
 MIKIL
 MEDAL
+MIKIL
 
 15
 10
 20
 7
 14
+9
 
 8
 6
 6
 6
 8
+1
 
 stór, græn, götótt, stofustjáss, falleg
 krefjandi, falleg, tré, díva
 hengiplanta, grænar baunir, auðveld
 þykkblöðungur, lækningajurt
 Kúl planta bruh
+viltu ekki bara sleikja körtu
 
 
