@@ -5,6 +5,25 @@
  * Hafa menuItems undir sía default flokkana, svo kki þurfi að breyta til að birta almenna yfirlitið
  * <p>
  * Uppruni flokkarnir eru upphaflegu möguleikarnir í sía
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ */
+/**
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ *
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ *
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
  */
 package vidmot.plantmania;
 
@@ -13,6 +32,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -29,6 +49,7 @@ public class Plontuyfirlit extends AnchorPane {
 
     @FXML
     private Label notandiLabel;//label í efra hægra horni með notendanafni og icon
+    //binda textann við nafn skráðs notanda, kannski best að gera það í PlantController
 
     @FXML
     private MenuBar fxMenuBar; //til að fá aðgang að menu fyrir snið, nota getChildren();
@@ -38,6 +59,9 @@ public class Plontuyfirlit extends AnchorPane {
 
     private ObservableList<MenuItem> checkMenuItems = FXCollections.observableArrayList();
     //ætti kannski bara að innihalda stök 2 og lengra, þau eru þau einu sem geta breyst.
+
+    //
+    private ObservableList<Node> syndSpjold = FXCollections.observableArrayList();
 
     public Plontuyfirlit() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plontuyfirlit.fxml"));
@@ -79,13 +103,18 @@ public class Plontuyfirlit extends AnchorPane {
 
     }
 
+    private void siaMenuBreytingar() {
+
+    }
+
     public void baetaVidYfirlit(Planta planta) {
         PlantaSpjald spjald = new PlantaSpjald(planta);
         fxFlowPane.getChildren().add(spjald);
     }
 
+
     public void baetaVidYfirlit(MinPlanta planta) {
-        PlantaSpjald spjald = new PlantaSpjald(planta);
+        MinPlantaSpjald spjald = new MinPlantaSpjald(planta);
         fxFlowPane.getChildren().add(spjald);
     }
 

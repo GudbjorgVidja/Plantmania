@@ -1,5 +1,6 @@
 /**
  * Plöntuyfirlitið í flipanum skoða, eða allar plöntur
+ * Nota þennan klasa í *staðinn fyrir* Plontuyfirlit. Er bara fyrir Planta hluti, er ekki að pæla í MinPlanta strax
  */
 package vidmot.plantmania;
 
@@ -10,7 +11,7 @@ import vinnsla.plantmania.Planta;
 
 import java.util.List;
 
-public class AllarPlonturYfirlit extends Plontuyfirlit {
+public class AllarPlonturYfirlit {//extends Plontuyfirlit
     private ObservableList<PlantaSpjald> allarPlontur = FXCollections.observableArrayList();
 
     private ObservableList<PlantaSpjald> birtarAPlontur = FXCollections.observableArrayList();
