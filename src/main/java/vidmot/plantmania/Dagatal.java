@@ -65,12 +65,11 @@ public class Dagatal extends AnchorPane {
             Node node = event.getPickResult().getIntersectedNode();
             Dagur dagur = null;
 
-            if (node instanceof Dagur) {
+            while (node != null && !(node instanceof Dagur)) {
+                node = node.getParent();
+            }
+            if (node != null) {
                 dagur = (Dagur) node;
-            } else if (node.getParent() instanceof Dagur) {
-                dagur = (Dagur) node.getParent();
-            } else if (node.getParent().getParent() instanceof Dagur) {
-                dagur = (Dagur) node.getParent().getParent();
             }
 
             if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
