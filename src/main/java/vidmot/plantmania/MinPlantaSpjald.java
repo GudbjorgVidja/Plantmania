@@ -80,6 +80,10 @@ public class MinPlantaSpjald extends AnchorPane {
         return fxSpjald;
     }
 
+    public MinPlanta getMinPlanta() {
+        return minPlantan;
+    }
+
     private void vokvaHandler(ActionEvent event) {
         System.out.println("vokva");
     }

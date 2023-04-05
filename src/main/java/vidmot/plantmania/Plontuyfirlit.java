@@ -383,6 +383,177 @@
  * <p>
  * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
  * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
+ * <p>
+ * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
+ * Plontuyfirlit tekur inn Planta hluti.
+ * <p>
+ * Hafa svo annan klasa, MinarPlonturYfirlit, sem erfir frá PlontuYfirlit. (MinarPlonturYfirlit extends PlontuYfirlit).
+ * Þar eru nokkur atriði aukalega sem raða má eftir.
+ * <p>
+ * Plontuyfirlit gæti jafnvel unnið bara útfrá Spjald hlutum, allar mikilvægustu upplýsingarnar eru þar. Og svo gefur
+ * Spjald náttúrulega aðgang að Planta hlutnum (minnir mig)
  */
 /**
  * Hafa þennan klasa, PlontuYfirlit, með fullt af virkni bara sjálfur og gefa honum tilheyrandi vinnsluklasa.
@@ -412,7 +583,6 @@ import vinnsla.plantmania.Planta;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class Plontuyfirlit extends AnchorPane {
     @FXML
@@ -435,6 +605,8 @@ public class Plontuyfirlit extends AnchorPane {
 
     private ObservableList<PlantaSpjald> syndPlontuSpjold = FXCollections.observableArrayList();
 
+    private ObservableList<MinPlantaSpjald> syndMinPlontuSpjold = FXCollections.observableArrayList();
+
     public Plontuyfirlit() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plontuyfirlit.fxml"));
         loader.setRoot(this);
@@ -446,11 +618,29 @@ public class Plontuyfirlit extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+        //Node node = syndSpjold.get(0);
+        //if (node instanceof PlantaSpjald) syndSpjold = ObservableList < Planta >
+
+        syndSpjold.addListener((ListChangeListener<? super Node>) change -> {
+            fxFlowPane.getChildren().clear();
+            fxFlowPane.getChildren().addAll(syndSpjold);
+            //fxFlowPane.getChildren()=syndSpjold;
+        });
+
+        /* var að taka
         fxFlowPane.getChildren().addListener((ListChangeListener<? super Node>) change -> {
             syndSpjold = fxFlowPane.getChildren();
             System.out.println("fjoldi i syndSpjold: " + syndSpjold.size());
             System.out.println("fxFlowPane.getChildren().get(0).getClass()" + fxFlowPane.getChildren().get(0).getClass());
         });
+
+
+        syndPlontuSpjold.addListener((ListChangeListener<? super PlantaSpjald>) change -> {
+            fxFlowPane.getChildren().clear();
+            fxFlowPane.getChildren().addAll(syndPlontuSpjold);
+        });
+
+         */
 
 
 
@@ -525,7 +715,8 @@ public class Plontuyfirlit extends AnchorPane {
      */
     public void baetaVidYfirlit(Planta planta) {
         PlantaSpjald spjald = new PlantaSpjald(planta);
-        fxFlowPane.getChildren().add(spjald);
+        syndSpjold.add(spjald);
+        //fxFlowPane.getChildren().add(spjald); var að taka
     }
 
 
@@ -535,7 +726,8 @@ public class Plontuyfirlit extends AnchorPane {
      */
     public void baetaVidYfirlit(MinPlanta planta) {
         MinPlantaSpjald spjald = new MinPlantaSpjald(planta);
-        fxFlowPane.getChildren().add(spjald);
+        syndSpjold.add(spjald);
+        //fxFlowPane.getChildren().add(spjald);
     }
 
     //stilla upphafsstöðu síu, og binda saman fyrsta og öll hin stök síunnar
@@ -584,7 +776,17 @@ public class Plontuyfirlit extends AnchorPane {
 
         //taka hér til obsLista af sýndum hlutum og senda inn í "vinnsluna" (á að vera alvöru vinnsla samt).
 
+        //radaRett();
+
+        radaNodes();
+        /*
+        //gera ný tilvik af plöntuspjöldunum til að testa endurtekningu sem notar ekki sama tilvik
+        Planta ny = ((PlantaSpjald) syndSpjold.get(0)).getPlanta();
+        PlantaSpjald nytt = new PlantaSpjald(ny);
+        syndSpjold.add(nytt);
         radaRett();
+
+         */
     }
 
     private void siaItemHandler(ActionEvent event) {
@@ -595,32 +797,73 @@ public class Plontuyfirlit extends AnchorPane {
     private void flokkunItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
+
+        //radaRettPlanta();
     }
 
 
     //TODO: allt hér fyrir neðan er í raun vinnsla!!! Passa að gera viðeigandi vinnsluklasa og færa yfir!!!!
 
 
-    private void radaRett() {//bara fyrir PlantaSpjald hluti
+    //raðar rétt, líka fyrir endurtekna strengi, en kastar villu ef reynt er að raða sama tilviki oftar
+    private void radaRett() {
         if (syndSpjold.get(0) instanceof MinPlantaSpjald) {//öll spjöldin eru MinPlantaSpjald
+            for (Node node : syndSpjold) {
+                if (node instanceof MinPlantaSpjald) syndMinPlontuSpjold.add((MinPlantaSpjald) node);
+            }
+            Collections.sort(syndMinPlontuSpjold, (a, b) -> compare(a.getMinPlanta().getPlanta(), b.getMinPlanta().getPlanta()));
+            //syndSpjold.setAll()
+
+            fxFlowPane.getChildren().clear();
+            fxFlowPane.getChildren().addAll(syndMinPlontuSpjold);
+
 
         } else {//öll spjöldin eru PlantaSpjald
             for (Node node : syndSpjold) {
                 if (node instanceof PlantaSpjald) syndPlontuSpjold.add((PlantaSpjald) node);
             }
+            //Collections.sort(syndPlontuSpjold, (a, b) -> compare(a.getPlanta().getAlmenntNafn(), b.getPlanta().getAlmenntNafn()));
+            //syndPlontuSpjold.sort((a, b) -> compare(a.getPlanta().getAlmenntNafn(), b.getPlanta().getAlmenntNafn()));
 
-            Collections.sort(syndPlontuSpjold, Comparator.comparing(a -> a.getPlanta().getAlmenntNafn().toLowerCase()));
+            //syndPlontuSpjold.sort((a, b) -> compare(a.getPlanta(), b.getPlanta()));
+            Collections.sort(syndPlontuSpjold, (a, b) -> compare(a.getPlanta(), b.getPlanta()));
+
+
+            //Collections.sort(syndPlontuSpjold, Comparator.comparing(a -> a.getPlanta().getAlmenntNafn().toLowerCase()));
             //fxFlowPane.getChildren().clear();
+
             fxFlowPane.getChildren().setAll(syndPlontuSpjold);
             //Collections.sort(syndPlontuSpjold, (a, b) -> a.getPlanta().getAlmenntNafn().compareTo(b.getPlanta().getAlmenntNafn()));
 
         }
-        //if(syndSpjold.get(0).ge)
-        //Collections.sort(syndSpjold.);
+
 
     }
 
+    private void radaRettPlanta() {
+        Collections.sort(syndPlontuSpjold, (a, b) -> compare(a.getPlanta(), b.getPlanta()));
+    }
 
+    private void radaNodes() {
+        Collections.sort(syndSpjold, this::compare);
+    }
+
+    public int compare(Planta s1, Planta s2) {
+        //if (s1.getAlmenntNafn().toLowerCase() < s1.getAlmenntNafn().toLowerCase())
+        return s1.getAlmenntNafn().toLowerCase().compareTo(s2.getAlmenntNafn().toLowerCase());
+    }
+
+
+    //eða raða Node hlutum, og athuga gerð bara í compare aðferðinni
+
+    public int compare(Node n1, Node n2) {
+        if (n1 instanceof PlantaSpjald) {
+            return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
+        }
+        return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
+    }
+
+/*
     private void compareStafrof() {
         Comparator stafrof = new Comparator() {
             public int compare(Object o1, Object o2) {
@@ -628,6 +871,8 @@ public class Plontuyfirlit extends AnchorPane {
             }
         };
     }
+
+ */
 
 }
 /*

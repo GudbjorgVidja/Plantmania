@@ -69,8 +69,10 @@ public class PlantController {
         //bætir við plöntum þegar ýtt er á yfirlitið
         for (int i = 0; i < allarPlontur.size(); i++) {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
-            MinPlantaSpjald mps = new MinPlantaSpjald(mp);
-            fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
+            //MinPlantaSpjald mps = new MinPlantaSpjald(mp);
+            fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
+
+            //fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
         }
 
 
