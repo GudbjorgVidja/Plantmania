@@ -6,6 +6,9 @@
  * Hefur þá handlera fyrir þegar ýtt er á takka á spjaldinu (vökva og fresta), og þegar ýtt er á spjaldið(upplýsingadíalogur).
  * <p>
  * á kannski að vera með observable list planaðarVökvanir, sem er listi af dagsetningum vökvana næstu þrjá mánuði?
+ * <p>
+ * bæta við integerProperty hlut nidurtalning, sem telur niður að næstu vökvun og uppfærist bara ef hún breytist. Held það
+ * sé betra en að reikna það út í hvert skipti.
  */
 
 package vinnsla.plantmania;
