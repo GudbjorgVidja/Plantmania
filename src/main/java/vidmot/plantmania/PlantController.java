@@ -3,6 +3,9 @@
  */
 package vidmot.plantmania;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -10,10 +13,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import vinnsla.plantmania.LesaPlontur;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Notandi;
 import vinnsla.plantmania.Planta;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 public class PlantController {
     @FXML
@@ -37,6 +46,7 @@ public class PlantController {
         //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
     }
 
+
     private void geraBindings() {
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
     }
@@ -46,19 +56,17 @@ public class PlantController {
      * þegar smellt er, plönturnar úr plontur.txt sem MinPlantaSpjald hlutir
      */
     @FXML
-    protected void fxBaetaVidHandler() {
+    protected void fxBaetaVidHandler(MouseEvent event) {
+
         for (int i = 0; i < allarPlontur.size(); i++) {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
             MinPlantaSpjald mps = new MinPlantaSpjald(mp);
             fxPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
         }
 
-        //allt hér fyrir neðan virkaði, en þetta er bara plöntuyfirlit, ekki MinarPlonturYfirlit
+
+
         /*
-        Spjald spjald = new Spjald();
-        fxPlonturYfirlit.getFxFlowPane().getChildren().add(spjald);
-
-
         LesaPlontur l = new LesaPlontur();
         List<Planta> plontur = l.getPlontur();
 
@@ -66,10 +74,45 @@ public class PlantController {
         fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);
 
         spj = new PlantaSpjald(plontur.get(1));
-        fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);
+        fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);*/
 
 
-         */
+        //System.out.println(event.getTarget().getClass());
+        Node node = event.getPickResult().getIntersectedNode();
+        while (node != null && !(node instanceof PlantaSpjald)) {
+            node = node.getParent();
+        }
+        if (node != null) {
+            Planta p = ((PlantaSpjald) node).getPlanta();
+            skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            SimpleModule module = new SimpleModule();
+            module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+            objectMapper.registerModule(module);
+            try {
+                List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
+                });
+
+                for (Notandi n : notendur) {
+                    if (n.getNotendanafn().equals(skradurNotandi.get().getNotendanafn())) {
+                        n = skradurNotandi.get();
+                        System.out.println(n);
+                    }
+                }
+                File file = new File("target/classes/vidmot/plantmania/notendur.json");
+                if (file.createNewFile()) {
+                    System.out.println("Ný skrá búin til");
+                    objectMapper.writeValue(file, notendur);
+                } else {
+                    System.out.println("skráin er til og er núna uppfærð");
+                    objectMapper.writeValue(file, notendur);//bætti við
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
 
     }
 

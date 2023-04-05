@@ -13,7 +13,8 @@ public enum Uppruni {
     FERSKVATN(""),
     FJALLLENDI(""),
     GRASLENDI(""),
-    SKOGLENDI("");
+    SKOGLENDI(""),
+    HITABELTI("");
 
     private String mynd;
 

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -64,12 +65,11 @@ public class Dagatal extends AnchorPane {
             Node node = event.getPickResult().getIntersectedNode();
             Dagur dagur = null;
 
-            if (node instanceof Dagur) {
+            while (node != null && !(node instanceof Dagur)) {
+                node = node.getParent();
+            }
+            if (node != null) {
                 dagur = (Dagur) node;
-            } else if (node.getParent() instanceof Dagur) {
-                dagur = (Dagur) node.getParent();
-            } else if (node.getParent().getParent() instanceof Dagur) {
-                dagur = (Dagur) node.getParent().getParent();
             }
 
             if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
@@ -114,7 +114,13 @@ public class Dagatal extends AnchorPane {
 
     private void setjaDaga() {
         for (int i = 0; i < 7; i++) {
-            fxGrid.add(new Label(vikudagar[i]), i, 0);
+            if (fxGrid.getChildren().get(i) instanceof Pane) {
+                Pane p = (Pane) fxGrid.getChildren().get(i);
+                if (p.getChildren().get(0) instanceof Label) {
+                    Label l = (Label) p.getChildren().get(0);
+                    l.textProperty().set(vikudagar[i]);
+                }
+            }
         }
     }
 

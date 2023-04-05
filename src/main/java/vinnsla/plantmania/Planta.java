@@ -156,5 +156,21 @@ public class Planta {
         this.einkenniPlontu = einkenniPlontu;
     }
 
-
+    public String toString() {
+        return "Planta{" +
+                "latnesktNafn='" + latnesktNafn + '\'' +
+                ", almenntNafn='" + almenntNafn + '\'' +
+                ", ollHeiti=" + ollHeiti +
+                ", myndaslod='" + myndaslod + '\'' +
+                ", texti='" + texti + '\'' +
+                ", uppruni=" + uppruni +
+                ", ljosstyrkur=" + ljosstyrkur +
+                ", eitrun=" + eitrun +
+                ", kjorhitastig=" + kjorhitastig +
+                ", vatnsthorf=" + vatnsthorf +
+                ", almennurTimiMilliVokvana=" + almennurTimiMilliVokvana +
+                ", ljosStundir=" + ljosStundir +
+                ", einkenniPlontu=" + einkenniPlontu +
+                '}';
+    }
 }

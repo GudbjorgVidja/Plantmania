@@ -27,7 +27,7 @@ public class PlantaSpjald extends AnchorPane {
     private Planta planta;//Planta vinnsluhluturinn
 
     public PlantaSpjald() {
-        
+
     }
 
     public PlantaSpjald(Planta p) {
@@ -45,8 +45,10 @@ public class PlantaSpjald extends AnchorPane {
 
         fxAlmenntNafn.setText(planta.getAlmenntNafn());
 
-        fxFlokkur.setText(" " + planta.getUppruni().toString().toLowerCase(Locale.ROOT) + " ");
-        //String s = planta.getUppruni() + "";
-        //s = s.toLowerCase(Locale.ROOT);
+        fxFlokkur.setText(" " + planta.getUppruni() + " ");
+    }
+
+    public Planta getPlanta() {
+        return planta;
     }
 }

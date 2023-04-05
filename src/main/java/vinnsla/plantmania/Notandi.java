@@ -14,6 +14,7 @@ import javafx.beans.property.StringProperty;
 public class Notandi {
     private StringProperty notendanafn = new SimpleStringProperty();
     private StringProperty lykilord = new SimpleStringProperty();
+    private Notendaupplysingar notendaupplysingar = new Notendaupplysingar();//setja listener fyrir þetta/hafa sem ObjectProperty?
 
     public Notandi(String notendanafn, String lykilord) {
         this.notendanafn.set(notendanafn);
@@ -46,11 +47,20 @@ public class Notandi {
     public void setLykilord(String lykilord) {
         this.lykilord.set(lykilord);
     }
-    
+
+    public Notendaupplysingar getNotendaupplysingar() {
+        return notendaupplysingar;
+    }
+
+    public void setNotendaupplysingar(Notendaupplysingar notendaupplysingar) {
+        this.notendaupplysingar = notendaupplysingar;
+    }
+
     public String toString() {
         return "Notandi{" +
                 "notendanafn=" + notendanafn.get() +
                 ", lykilord=" + lykilord.get() +
+                ", notendaupplysingar=" + notendaupplysingar.toString() +
                 '}';
     }
 }

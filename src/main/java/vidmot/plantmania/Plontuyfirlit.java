@@ -16,10 +16,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import vinnsla.plantmania.LesaPlontur;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Planta;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Plontuyfirlit extends AnchorPane {
     @FXML
@@ -48,6 +50,16 @@ public class Plontuyfirlit extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+
+        fxFlowPane.getChildren().add(new PlantaSpjald());
+
+        LesaPlontur l = new LesaPlontur();
+        List<Planta> plontur = l.getPlontur();
+
+        for (int i = 0; i < plontur.size(); i++) {
+            PlantaSpjald spj = new PlantaSpjald(plontur.get(i));
+            fxFlowPane.getChildren().add(spj);
+        }
 
         checkMenuItems.setAll(fxSiaMenu.getItems()); //checkMenuItems er uppfærð útgáfa
         //checkMenuItems.remove(0, 1); //inniheldur bara breytanlegu stökin

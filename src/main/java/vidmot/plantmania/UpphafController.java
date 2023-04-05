@@ -2,8 +2,10 @@ package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,9 +29,9 @@ public class UpphafController {
     @FXML
     private Button fxInnskraning;
 
-    private static final String filename = "target/classes/vidmot/plantmania/notendur.json";
+    private final String filename = "target/classes/vidmot/plantmania/notendur.json";
 
-    private List<Notandi> notendur = new ArrayList<>();
+    //private List<Notandi> notendur = new ArrayList<>();
 
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
@@ -62,13 +64,25 @@ public class UpphafController {
      * miðað við inntakið
      */
     private void setjaSkradanNotanda() {
-        for (Notandi n : notendur) {
-            if (n.notendanafnProperty().get().equals(fxNotendanafn.textProperty().get())) {
-                if (n.lykilordProperty().get().equals(fxLykilord.textProperty().get())) {
-                    skradurNotandi.set(n);
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        objectMapper.registerModule(module);
+        try {
+            //sækir alla notendur og leitar að þeim sem er reynt að skrá inn, setur hann sem skráðan notanda
+            List<Notandi> notendur = objectMapper.readValue(new File(filename), new TypeReference<>() {
+            });
+            for (Notandi n : notendur) {
+                if (n.notendanafnProperty().get().equals(fxNotendanafn.textProperty().get())) {
+                    if (n.lykilordProperty().get().equals(fxLykilord.textProperty().get())) {
+                        skradurNotandi.set(n);
+                    }
                 }
             }
+        } catch (IOException e) {
+            System.out.println("Eitthvað fór í rugl við innskráningu (aðferðin setjaSkradanNotanda())");
         }
+
     }
 
     /**
@@ -77,12 +91,23 @@ public class UpphafController {
      * @return true ef inntak er ogilt, annars false
      */
     private boolean ogiltInntak() {
-        for (Notandi n : notendur) {
-            if (n.notendanafnProperty().get().equals(fxNotendanafn.textProperty().get())) {
-                if (n.lykilordProperty().get().equals(fxLykilord.textProperty().get())) {
-                    return true;
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        objectMapper.registerModule(module);
+        try {
+            List<Notandi> notendur = objectMapper.readValue(new File(filename), new TypeReference<>() {
+            });
+            for (Notandi n : notendur) {
+                if (n.notendanafnProperty().get().equals(fxNotendanafn.textProperty().get())) {
+                    if (n.lykilordProperty().get().equals(fxLykilord.textProperty().get())) {
+                        return true;
+                    }
                 }
             }
+
+        } catch (IOException e) {
+            System.out.println("Eitthvað fór í rugl við athugun á inntaki (aðferðin ogiltInntak())");
         }
         return false;
     }
@@ -92,12 +117,13 @@ public class UpphafController {
      */
     private void lesaUrSkra() {
         ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        objectMapper.registerModule(module);
         try {
             // Gögnin sem mætti breyta t.d.
-            notendur = objectMapper.readValue(
-                    new File(filename),
-                    new TypeReference<>() {
-                    });
+            List<Notandi> notendur = objectMapper.readValue(new File(filename), new TypeReference<>() {
+            });
             System.out.println(notendur);
         } catch (IOException e) {
             System.out.println("skrá er ekki til " + e.getMessage());
@@ -107,15 +133,18 @@ public class UpphafController {
     /**
      * Skrifar lista af hlutum í nýja skrá. Ef skráin er nú þegar til er bætt við hana
      */
-    private void skrifaISkra() {
+    private void skrifaISkra(List<Notandi> notendur) {
         System.out.println("skrifa i skra");
         ObjectMapper objectMapper = new ObjectMapper();
-
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        objectMapper.registerModule(module);
         try {
             File file = new File(filename);
-            if (file.createNewFile())
+            if (file.createNewFile()) {
+                System.out.println("Ný skrá búin til");
                 objectMapper.writeValue(file, notendur);
-            else {
+            } else {
                 System.out.println("skráin er til og er núna uppfærð");
                 objectMapper.writeValue(file, notendur);//bætti við
             }
@@ -133,7 +162,7 @@ public class UpphafController {
      */
     public void skraInn(ActionEvent actionEvent) {
         if (ogiltInntak()) {
-            skrifaISkra();
+            //skrifaISkra();
             setjaSkradanNotanda();
             nullStilla();
             ViewSwitcher.switchTo(View.ADALSIDA);
@@ -150,12 +179,25 @@ public class UpphafController {
      * @param actionEvent atburðurinn
      */
     public void geraNyjanAdgang(ActionEvent actionEvent) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        objectMapper.registerModule(module);
+        List<Notandi> notendur = new ArrayList<>();
+        try {
+            notendur = objectMapper.readValue(new File(filename), new TypeReference<>() {
+            });
+        } catch (IOException e) {
+            System.out.println("skrá er ekki til " + e.getMessage());
+        }
+
         NyskraningDialog a = new NyskraningDialog(notendur);
         Optional<Notandi> utkoma = a.showAndWait();
         if (utkoma.isPresent()) {
             System.out.println("Nýr aðgangur búinn til " + utkoma.get());
+            System.out.println(utkoma.get());
             notendur.add(utkoma.get());
-            skrifaISkra();
+            skrifaISkra(notendur);
             skradurNotandi.set(utkoma.get());
             nullStilla();
             ViewSwitcher.switchTo(View.ADALSIDA);
