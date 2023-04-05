@@ -9,6 +9,7 @@
  * <p>
  * bæta við integerProperty hlut nidurtalning, sem telur niður að næstu vökvun og uppfærist bara ef hún breytist. Held það
  * sé betra en að reikna það út í hvert skipti.
+ * Það þarf líka að uppfærast þegar það líður dagur!
  */
 
 package vinnsla.plantmania;
@@ -43,12 +44,15 @@ public class MinPlanta extends Planta {
         this.planta = planta;
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
+        naestaVokvunRegla();
     }
 
     public void sidastaVokvunListener() {
         vokvanir.addListener((ListChangeListener<LocalDate>) (observable) -> {
             if (!vokvanir.isEmpty()) {
                 sidastaVokvun.set(vokvanir.get(vokvanir.size() - 1));
+            } else {
+                sidastaVokvun.set(null);
             }
         });
     }
@@ -62,6 +66,18 @@ public class MinPlanta extends Planta {
                     dagar += vokvanir.get(i).until(vokvanir.get(i + 1)).getDays();
                 }
                 medaltimiMilliVokvana.set(dagar / (vokvanir.size() - 1));
+            }
+        });
+    }
+
+    //ath hvað gerist milli daga (localDate.now() breytist!)
+    public void naestaVokvunRegla() {
+        sidastaVokvun.addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                naestaVokvun.bind(thinnTimiMilliVokvana.negate().subtract(-(newValue.until(LocalDate.now()).getDays())));
+            } else {
+                naestaVokvun.unbind();
+                naestaVokvun.set(0);
             }
         });
     }
@@ -96,6 +112,7 @@ public class MinPlanta extends Planta {
     public MinPlanta() {
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
+        naestaVokvunRegla();
     }
 
     public String getNickName() {
@@ -208,6 +225,10 @@ public class MinPlanta extends Planta {
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 14));
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 22));
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 10));
+        planta.baetaVidVokvun(LocalDate.of(2023, 3, 26));
+        planta.baetaVidVokvun(LocalDate.of(2023, 3, 30));
+        planta.baetaVidVokvun(LocalDate.of(2023, 4, 3));
+
 
         System.out.println("Vokvnanir i timarod:");
         for (LocalDate v : planta.getVokvanir()) {
@@ -225,5 +246,23 @@ public class MinPlanta extends Planta {
         System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
         System.out.println("Sidasta vokvun: " + planta.getSidastaVokvun());
 
+        System.out.println(planta.getNaestaVokvun().get());
+
+        planta.getVokvanir().clear();
+
+        System.out.println("Sidasta vokvun: " + planta.getSidastaVokvun());
+
+        System.out.println(planta.getNaestaVokvun().get());
+        planta.baetaVidVokvun(LocalDate.of(2023, 4, 3));
+        System.out.println("Sidasta vokvun: " + planta.getSidastaVokvun());
+
+        System.out.println(planta.getNaestaVokvun().get());
+
+
+        /*int dagarINaestuVokvun = (planta.sidastaVokvun.get().until(LocalDate.now()).getDays()) - planta.thinnTimiMilliVokvana.get();
+        System.out.println(dagarINaestuVokvun);*/
+
+        //IntegerBinding dagarINaestuVokvun = (planta.thinnTimiMilliVokvana).negate().subtract(-(planta.sidastaVokvun.get().until(LocalDate.now()).getDays()));
+        //System.out.println(dagarINaestuVokvun.get());
     }
 }
