@@ -26,13 +26,14 @@ import java.util.List;
 
 public class PlantController {
     @FXML
-    private Plontuyfirlit fxPlonturYfirlit; //mínar plöntur yfirlitið. Er eiginlega meira eins og allar plöntur yfirlit
+    private Plontuyfirlit fxMinarPlonturYfirlit; //mínar plöntur yfirlitið. Er eiginlega meira eins og allar plöntur yfirlit
     @FXML
     private Plontuyfirlit fxAllarPlonturYfirlit; //yfirlit yfir allar plöntur
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
     private ObservableList<Planta> allarPlontur = FXCollections.observableArrayList();//er í vesi, geymi hér
+    //ætti frekar kannski að geyma í öðrum klasa, t.d. vinnsluklasa fyrir allarPlonturYfirlit
 
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
@@ -41,9 +42,9 @@ public class PlantController {
         System.out.println(skradurNotandi.get());
         geraBindings();
 
-
         allarPlontur.addAll((new LesaPlontur()).getPlontur());
         //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
+
     }
 
 
@@ -58,10 +59,11 @@ public class PlantController {
     @FXML
     protected void fxBaetaVidHandler(MouseEvent event) {
 
+        //bætir við plöntum þegar ýtt er á yfirlitið
         for (int i = 0; i < allarPlontur.size(); i++) {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
             MinPlantaSpjald mps = new MinPlantaSpjald(mp);
-            fxPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
+            fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
         }
 
 
@@ -71,10 +73,10 @@ public class PlantController {
         List<Planta> plontur = l.getPlontur();
 
         PlantaSpjald spj = new PlantaSpjald(plontur.get(0));
-        fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);
+        fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(spj);
 
         spj = new PlantaSpjald(plontur.get(1));
-        fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);*/
+        fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(spj);*/
 
 
         //System.out.println(event.getTarget().getClass());
@@ -117,22 +119,11 @@ public class PlantController {
     }
 
     @FXML
-    private void hladaOllumPlontum() {
+    private void hladaOllumPlontum() {//eina notkunin er í fxml skránni, handlerinn settur á hlut
+
         for (Planta p : allarPlontur) {
             fxAllarPlonturYfirlit.baetaVidYfirlit(p);
         }
-
-
-        /*
-        AllarPlonturYfirlit a = new AllarPlonturYfirlit();
-        System.out.println("hladaOllumPlontum handler");
-        a.getBirtarAPlontur().addListener((ListChangeListener<? super PlantaSpjald>) change -> {
-            change.next();
-            fxAllarPlonturYfirlit.getFxFlowPane().getChildren().clear();
-            fxAllarPlonturYfirlit.getFxFlowPane().getChildren().addAll(a.getBirtarAPlontur());
-        });
-
-         */
 
     }
 
