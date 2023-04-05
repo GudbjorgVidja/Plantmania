@@ -74,4 +74,7 @@ public class PlantaSpjald extends AnchorPane {
         fxFlokkur.setText(" " + planta.getUppruni() + " ");
     }
 
+    public Planta getPlanta() {
+        return planta;
+    }
 }
