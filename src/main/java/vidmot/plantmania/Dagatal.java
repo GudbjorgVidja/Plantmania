@@ -1,16 +1,18 @@
 package vidmot.plantmania;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
+import vinnsla.plantmania.MinPlanta;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dagatal extends AnchorPane {
+
     @FXML
     private Button fxTilBaka;
     @FXML
@@ -35,6 +38,7 @@ public class Dagatal extends AnchorPane {
     private LocalDate dagurinnIDag;
     private LocalDate syndurDagur;
     private LocalDate valinnDagur;
+    private ObservableList<Pair<MinPlanta, LocalDate>> plonturOgVokvanir = FXCollections.observableArrayList();
 
     public Dagatal() {
         vikudagar = new String[]{"mán", "þri", "mið", "fim", "fös", "lau", "sun"};
@@ -46,42 +50,12 @@ public class Dagatal extends AnchorPane {
 
         setjaDaga();
         geraDagatal(dagurinnIDag);
-        geraEventFilter();
     }
 
-    private void geraEventFilter() {
-        fxTilBaka.addEventFilter(ActionEvent.ACTION, (Event event) -> {
-            syndurDagur = syndurDagur.minusMonths(1);
-            geraDagatal(syndurDagur);
-            System.out.println("Til baka");
-        });
-        fxAfram.addEventFilter(ActionEvent.ACTION, (Event event) -> {
-            syndurDagur = syndurDagur.plusMonths(1);
-            geraDagatal(syndurDagur);
-            System.out.println("Áfram");
-        });
+    //hér gæti eitthvað valdið vandræðum (mögulega vegna bindings)
+    public void geraDagatal(LocalDate dagur) {
+        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarins = plonturOgVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth() && p.getValue().getYear() == syndurDagur.getYear());
 
-        fxGrid.setOnMouseClicked((MouseEvent event) -> {
-            Node node = event.getPickResult().getIntersectedNode();
-            Dagur dagur = null;
-
-            while (node != null && !(node instanceof Dagur)) {
-                node = node.getParent();
-            }
-            if (node != null) {
-                dagur = (Dagur) node;
-            }
-
-            if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
-                System.out.println(dagur.getFxManadardagur().getText());
-                setValinnDagur(LocalDate.of(syndurDagur.getYear(), syndurDagur.getMonthValue(), Integer.parseInt(dagur.getFxManadardagur().getText())));
-                //opna glugga með því sem er á þessum degi
-            }
-        });
-    }
-
-
-    private void geraDagatal(LocalDate dagur) {
         hreinsaDaga();
         int fjoldiDaga = dagur.getMonth().length(dagur.isLeapYear());
         DayOfWeek fyrstiDagurManadar = LocalDate.of(dagur.getYear(), dagur.getMonthValue(), 1).getDayOfWeek();
@@ -94,10 +68,26 @@ public class Dagatal extends AnchorPane {
 
         for (int i = 7; i < 49; i++) {
             if (fxGrid.getChildren().get(i) instanceof Dagur && !dagalisti.isEmpty() && !((i - 7) < fyrstiDagurManadar.ordinal())) {
-                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().setVisible(true);
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().setText(0 + "");
+
+                LocalDate dagurinn = LocalDate.of(syndurDagur.getYear(), syndurDagur.getMonthValue(), dagalisti.get(0));
+                IntegerBinding count = Bindings.size(vokvanirManadarins.filtered(p -> p.getValue().isEqual(dagurinn)));
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().bind(count.asString());
+
+                //ath hvort þetta breytist sjálfkrafa. örugglega hægt að útfæra til að það séu ekki dropar ef það er ekki mánaðardagur
+                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().bind(count.greaterThan(0));
+
                 ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText(dagalisti.get(0) + "");
+
                 dagalisti.remove(0);
+            } else {
+                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().unbind();
+                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().setVisible(false);
+
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().unbind();
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().setText("");
+
+                ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().textProperty().unbind();
+                ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText("");
             }
         }
     }
@@ -105,9 +95,9 @@ public class Dagatal extends AnchorPane {
     private void hreinsaDaga() {
         for (int i = 7; i < 49; i++) {
             if (fxGrid.getChildren().get(i) instanceof Dagur) {
-                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().setVisible(false);
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().setText("");
-                ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText("");
+                //((Dagur) fxGrid.getChildren().get(i)).getFxDropi().setVisible(false);
+                //((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().setText("");
+                //((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText("");
             }
         }
     }
@@ -140,6 +130,59 @@ public class Dagatal extends AnchorPane {
 
     public void setValinnDagur(LocalDate valinnDagur) {
         this.valinnDagur = valinnDagur;
+    }
+
+    public LocalDate getSyndurDagur() {
+        return syndurDagur;
+    }
+
+    public void setSyndurDagur(LocalDate syndurDagur) {
+        this.syndurDagur = syndurDagur;
+    }
+
+    public Button getFxTilBaka() {
+        return fxTilBaka;
+    }
+
+    public void setFxTilBaka(Button fxTilBaka) {
+        this.fxTilBaka = fxTilBaka;
+    }
+
+    public Button getFxAfram() {
+        return fxAfram;
+    }
+
+    public void setFxAfram(Button fxAfram) {
+        this.fxAfram = fxAfram;
+    }
+
+    public Label getFxDagsetning() {
+        return fxDagsetning;
+    }
+
+    public void setFxDagsetning(Label fxDagsetning) {
+        this.fxDagsetning = fxDagsetning;
+    }
+
+    public GridPane getFxGrid() {
+        return fxGrid;
+    }
+
+    public void setFxGrid(GridPane fxGrid) {
+        this.fxGrid = fxGrid;
+    }
+
+    public LocalDate getValinnDagur() {
+        return valinnDagur;
+    }
+
+
+    public ObservableList<Pair<MinPlanta, LocalDate>> getPlonturOgVokvanir() {
+        return plonturOgVokvanir;
+    }
+
+    public void setPlonturOgVokvanir(ObservableList<Pair<MinPlanta, LocalDate>> plonturOgVokvanir) {
+        this.plonturOgVokvanir = plonturOgVokvanir;
     }
 
 

@@ -243,6 +243,28 @@ public class MinPlanta extends Planta {
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 26));
         planta.baetaVidVokvun(LocalDate.of(2023, 3, 30));
         planta.baetaVidVokvun(LocalDate.of(2023, 4, 3));
+        planta.baetaVidVokvun(LocalDate.of(2023, 2, 2));
+        planta.baetaVidVokvun(LocalDate.of(2023, 2, 14));
+
+        System.out.println("Vokvnanir i timarod:");
+        for (LocalDate v : planta.getVokvanir()) {
+            System.out.println(v);
+        }
+        LocalDate testDagur = LocalDate.now().minusMonths(1);
+
+        ObservableList<LocalDate> testList = planta.getVokvanir().filtered(p -> p.getMonth() == testDagur.getMonth() && p.getYear() == testDagur.getYear());
+
+        System.out.println("Vokvnanir i timarod f. testlist:");
+        for (LocalDate v : testList) {
+            System.out.println(v);
+        }
+
+        planta.baetaVidVokvun(LocalDate.of(2023, 3, 11));
+
+        System.out.println("Vokvnanir i timarod f. testlist:");
+        for (LocalDate v : testList) {
+            System.out.println(v);
+        }
         System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
         System.out.println("Dagar i naestu vokvun: " + planta.getNaestaVokvun().get());
 

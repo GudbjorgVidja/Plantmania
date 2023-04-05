@@ -12,9 +12,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Pair;
 import vinnsla.plantmania.LesaPlontur;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Notandi;
@@ -22,6 +24,7 @@ import vinnsla.plantmania.Planta;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PlantController {
@@ -29,6 +32,8 @@ public class PlantController {
     private Plontuyfirlit fxMinarPlonturYfirlit; //mínar plöntur yfirlitið. Er eiginlega meira eins og allar plöntur yfirlit
     @FXML
     private Plontuyfirlit fxAllarPlonturYfirlit; //yfirlit yfir allar plöntur
+    @FXML
+    private Dagatal fxDagatal;
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
@@ -45,11 +50,56 @@ public class PlantController {
         allarPlontur.addAll((new LesaPlontur()).getPlontur());
         //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
 
+        dagatalsEventFilterar();
     }
 
 
     private void geraBindings() {
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
+    }
+
+    public void dagatalsEventFilterar() {
+        //senda inn lista af dagsetningum pg plöntum og tengja saman
+        //gæti líka haft aðferð í Dagatal bindaLista(ObservableList<Pair<MinPlanta,LocalDate>> listi) sem er svo bundið við breytuna í Dagatal
+        Bindings.bindContentBidirectional(skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir(), fxDagatal.getPlonturOgVokvanir());
+
+        //fyrir áfram og til baka takka, og svo þegar það er smellt á dag. var með þetta í Dagatal, hægt að færa til baka?
+        fxDagatal.getFxTilBaka().addEventFilter(ActionEvent.ACTION, (Event event) -> {
+            fxDagatal.setSyndurDagur(fxDagatal.getSyndurDagur().minusMonths(1));
+            fxDagatal.geraDagatal(fxDagatal.getSyndurDagur());
+        });
+        fxDagatal.getFxAfram().addEventFilter(ActionEvent.ACTION, (Event event) -> {
+            fxDagatal.setSyndurDagur(fxDagatal.getSyndurDagur().plusMonths(1));
+            fxDagatal.geraDagatal(fxDagatal.getSyndurDagur());
+        });
+
+        fxDagatal.getFxGrid().setOnMouseClicked((MouseEvent event) -> {
+            Node node = event.getPickResult().getIntersectedNode();
+            Dagur dagur = null;
+
+            while (node != null && !(node instanceof Dagur)) {
+                node = node.getParent();
+            }
+            if (node != null) {
+                dagur = (Dagur) node;
+            }
+
+            if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
+                int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
+                fxDagatal.setValinnDagur(LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur));
+                if (fxDagatal.getValinnDagur().isBefore(LocalDate.now())) {
+                    System.out.println("<" + fxDagatal.getValinnDagur());
+                } else if (fxDagatal.getValinnDagur().isAfter(LocalDate.now())) {
+                    System.out.println(">" + fxDagatal.getValinnDagur());
+                } else System.out.println("=" + fxDagatal.getValinnDagur());
+
+                dagur.getFxDropi().visibleProperty().unbind();
+                dagur.getFxDropi().setVisible(true);
+
+                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsins = skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir().filtered(p -> p.getValue().getMonth() == fxDagatal.getValinnDagur().getMonth());
+                //opna glugga með plontum dagsins
+            }
+        });
     }
 
 

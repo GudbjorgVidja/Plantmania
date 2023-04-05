@@ -23,7 +23,7 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorpane">
                     <children>
-                        <Dagatal layoutX="18" layoutY="25"/>
+                        <Dagatal fx:id="fxDagatal" layoutX="18" layoutY="25"/>
                     </children>
                 </AnchorPane>
             </content>
