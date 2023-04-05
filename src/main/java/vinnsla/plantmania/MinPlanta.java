@@ -86,9 +86,9 @@ public class MinPlanta extends Planta {
         nickName.set(nyttNafn);
     }
 
-    //ekki hægt að bæta við vövkun fram í tímann!
+    //ekki hægt að bæta við vövkun fram í tímann! og ekki hægt að bæta við fyrir 2022?
     public void baetaVidVokvun(LocalDate vokvun) {
-        if (!(vokvun.isAfter(LocalDate.now()))) {
+        if (!(vokvun.isAfter(LocalDate.now())) && !(vokvun.isBefore(LocalDate.of(2022, 1, 1)))) {
             vokvanir.add(vokvun);
             Collections.sort(vokvanir);
         }
