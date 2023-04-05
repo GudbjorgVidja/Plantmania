@@ -43,22 +43,15 @@ public class PlantController {
 
 
     /**
-     * þegar smellt er, þá bætast við eitt spjald og plönturnar úr plontur.txt
+     * þegar smellt er, plönturnar úr plontur.txt sem MinPlantaSpjald hlutir
      */
-
-//import javafx.fxml.FXML;
     @FXML
     protected void fxBaetaVidHandler() {
-        MinPlanta mp = new MinPlanta(allarPlontur.get(0));
-        MinPlantaSpjald mps = new MinPlantaSpjald(mp);
-        //Spjald mps = new Spjald(mp);
-        fxPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
-
-        //Spjald spj = new Spjald(mp);
-        Spjald spj = new Spjald(mp.getPlanta());
-        fxPlonturYfirlit.getFxFlowPane().getChildren().add(spj);
-
-        //fxPlonturYfirlit.baetaVidYfirlit();
+        for (int i = 0; i < allarPlontur.size(); i++) {
+            MinPlanta mp = new MinPlanta(allarPlontur.get(i));
+            MinPlantaSpjald mps = new MinPlantaSpjald(mp);
+            fxPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
+        }
 
         //allt hér fyrir neðan virkaði, en þetta er bara plöntuyfirlit, ekki MinarPlonturYfirlit
         /*

@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.MinPlanta;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class MinPlantaSpjald extends AnchorPane {
     //hafa tilviksbreytur fyrir label og takkana tvo
@@ -38,27 +39,17 @@ public class MinPlantaSpjald extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-
-        //fxSpjald.setPlontuproperty(minPlanta.getPlanta());
         System.out.println("AlmenntNafn: " + minPlanta.getPlanta().getAlmenntNafn());
         if (fxSpjald != null) {
-            fxSpjald.setFxAlmenntNafn("nafnið");
             fxSpjald.setFxAlmenntNafn(minPlanta.getPlanta().getAlmenntNafn());
-            fxSpjald.setFxFlokkur(minPlanta.getPlanta().getUppruni().toString());
-            //fxSpjald.setFxFlokkur(minPlanta.getUppruni().toString().toLowerCase(Locale.ROOT));
+            fxSpjald.setFxFlokkur(minPlanta.getPlanta().getUppruni().toString().toLowerCase(Locale.ROOT));
             fxSpjald.setFxPlontuMynd(minPlanta.getPlanta().getMyndaslod());
         } else {
             System.out.println("fxSpjald is null");
-            //fxSpjald = new Spjald(minPlanta);
         }
     }
 
     public Spjald getFxSpjald() {
         return fxSpjald;
-    }
-
-    public void erSpjaldNull() {
-        if (fxSpjald == null) System.out.println("fxSpjald er null");
-        else System.out.println("fxSpjald er ekki null");
     }
 }
