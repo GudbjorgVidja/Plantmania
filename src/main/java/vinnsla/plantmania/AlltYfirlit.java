@@ -3,6 +3,7 @@
  * Heldur utan um observable lista (eða kannski bara lista?) af öllum plöntum. (Planta, ekki MinPlanta)
  * Raðar þeim og flokkar eftir því sem við á
  */
+/*
 package vinnsla.plantmania;
 
 import javafx.collections.FXCollections;
@@ -37,3 +38,5 @@ public class AlltYfirlit {
 
 
 }
+
+ */

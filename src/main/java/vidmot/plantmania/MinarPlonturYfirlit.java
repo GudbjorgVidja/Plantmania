@@ -8,6 +8,7 @@
  * <p>
  * Ef í vinnslu þá væri PlontuYfirlit hluturinn bara tilviksbreyta, með listener eða eitthvað
  */
+/*
 package vidmot.plantmania;
 
 import javafx.collections.FXCollections;
@@ -41,20 +42,17 @@ public class MinarPlonturYfirlit extends Plontuyfirlit {
     }
 
 
-    /**
+    *
      * Mismunandi leiðir til að raða:
      * sjálfgefið er tími í næstu vökvun
      * fræðiheiti A-Ö
      * nickname A-Ö
-     */
-    private void radaSpjoldum() {
 
-    }
 
-    /**
+    **
      * setur gefna flokka undir Sia menu.
      * Les inn hvaða flokkar eru skráðir á notandann, setur þá alla á listann
-     */
+     *
     private void setSiaMenuItems() {
         //ekki víst að allir upprunalegu flokkarnir séu notaðir
         //siaMenu.getItems().clear(); //kannski ekki taka nr 0 og 1? allt og seperator?
@@ -86,3 +84,4 @@ public class MinarPlonturYfirlit extends Plontuyfirlit {
     }
 
 }
+*/

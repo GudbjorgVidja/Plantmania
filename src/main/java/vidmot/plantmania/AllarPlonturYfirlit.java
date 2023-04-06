@@ -2,6 +2,7 @@
  * Plöntuyfirlitið í flipanum skoða, eða allar plöntur
  * Nota þennan klasa í *staðinn fyrir* Plontuyfirlit. Er bara fyrir Planta hluti, er ekki að pæla í MinPlanta strax
  */
+/*
 package vidmot.plantmania;
 
 import javafx.collections.FXCollections;
@@ -36,3 +37,5 @@ public class AllarPlonturYfirlit {//extends Plontuyfirlit
 
     }
 }
+
+ */

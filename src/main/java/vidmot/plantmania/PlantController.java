@@ -154,28 +154,10 @@ public class PlantController {
      */
     @FXML
     protected void fxBaetaVidHandler(MouseEvent event) {
-
-        //bætir við plöntum þegar ýtt er á yfirlitið
         for (int i = 0; i < allarPlontur.size(); i++) {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
-            //MinPlantaSpjald mps = new MinPlantaSpjald(mp);
             fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
-
-            //fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(mps);
         }
-
-
-
-        /*
-        LesaPlontur l = new LesaPlontur();
-        List<Planta> plontur = l.getPlontur();
-
-        PlantaSpjald spj = new PlantaSpjald(plontur.get(0));
-        fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(spj);
-
-        spj = new PlantaSpjald(plontur.get(1));
-        fxMinarPlonturYfirlit.getFxFlowPane().getChildren().add(spj);*/
-
 
         //System.out.println(event.getTarget().getClass());
         Node node = event.getPickResult().getIntersectedNode();
