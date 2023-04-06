@@ -230,7 +230,7 @@ public class MinPlanta extends Planta {
                 ", flokkar=" + flokkar.toString() +
                 ", medaltimiMilliVokvana=" + medaltimiMilliVokvana.get() +
                 ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
-                ", toString()=" + super.toString() +
+                ", planta=" + planta +
                 '}';
     }
 }
