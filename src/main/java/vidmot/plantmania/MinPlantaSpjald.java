@@ -86,6 +86,10 @@ public class MinPlantaSpjald extends AnchorPane {
         System.out.println(minPlantan.getVokvanir().toString());
     }
 
+    public String toString() {
+        return minPlantan.getPlanta().getAlmenntNafn();
+    }
+
     private void frestaHandler(ActionEvent event) {
         System.out.println("frestar um dag");
         minPlantan.getNaestaVokvun().unbind(); //ný viðbót

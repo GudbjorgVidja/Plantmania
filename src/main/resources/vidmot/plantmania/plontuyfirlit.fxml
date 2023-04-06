@@ -33,9 +33,10 @@
                     <items>
                         <CheckMenuItem mnemonicParsing="false" text="velja allt"/>
                         <SeparatorMenuItem mnemonicParsing="false"/>
-                        <CheckMenuItem mnemonicParsing="false" text="thirsty bees"/>
-                        <CheckMenuItem mnemonicParsing="false" text="tropical"/>
-                        <CheckMenuItem mnemonicParsing="false" text="soaked"/>
+
+                        <!--  <CheckMenuItem mnemonicParsing="false" text="thirsty bees"/>
+                          <CheckMenuItem mnemonicParsing="false" text="tropical"/>
+                          <CheckMenuItem mnemonicParsing="false" text="soaked"/> -->
                     </items>
                 </Menu>
             </menus>

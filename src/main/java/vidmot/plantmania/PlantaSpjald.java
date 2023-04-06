@@ -45,6 +45,10 @@ public class PlantaSpjald extends AnchorPane {
 
     }
 
+    public String toString() {
+        return planta.getAlmenntNafn();
+    }
+
     public Planta getPlanta() {
         return planta;
     }

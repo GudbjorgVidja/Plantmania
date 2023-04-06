@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +22,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Planta;
+import vinnsla.plantmania.Uppruni;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class Plontuyfirlit extends AnchorPane {
     @FXML
@@ -39,6 +42,10 @@ public class Plontuyfirlit extends AnchorPane {
     private ObservableList<MenuItem> checkMenuItems = FXCollections.observableArrayList();
     //ætti kannski bara að innihalda stök 2 og lengra, þau eru þau einu sem geta breyst.
 
+    private ObservableList<CheckMenuItem> siaMenuItems = FXCollections.observableArrayList();
+
+    private ObservableList<MenuItem> siaItems = FXCollections.observableArrayList();
+
     //private ObservableList<CheckMenuItem> upprunaItemar = FXCollections.observableArrayList();
 
     //er í þeirri röð sem stökin eru lesin inn, allavega til að byrja með.
@@ -46,6 +53,16 @@ public class Plontuyfirlit extends AnchorPane {
 
     //private final ObservableList<Object> allirObjectar = FXCollections.observableArrayList();
     private ObservableList<Node> syndSpjold = FXCollections.observableArrayList();//Hlutirnir í þessu yfirliti
+
+
+    private ObservableList<Node> ollSpjold = FXCollections.observableArrayList(); //baseListinn
+    private FilteredList<Node> filteredSpjold = new FilteredList<>(ollSpjold); //filtered listinn
+
+    /*
+    private ObservableList<Uppruni> allirUpprunar = FXCollections.observableArrayList();
+    private FilteredList<Uppruni> filteredUpprunar = new FilteredList<>(allirUpprunar);
+
+     */
 
     public Plontuyfirlit() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plontuyfirlit.fxml"));
@@ -58,15 +75,45 @@ public class Plontuyfirlit extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+        /*
+        fxFlowPane.getChildren().addListener((ListChangeListener<? super Node>) change -> {
+            //while (change.next()) {
+            change.next();
+            System.out.println("ollSpjold: " + ollSpjold);
+            System.out.println("filteredSpjold: " + filteredSpjold);
+            if (change.wasAdded()) ollSpjold.addAll(change.getAddedSubList());
+            System.out.println("ollSpjold: " + ollSpjold);
+            System.out.println("filteredSpjold: " + filteredSpjold);
+            //}
+
+        });
+
+         */
+
+        Predicate<Node> pred = node -> {
+            return node.toString().startsWith("S");
+        };
+        filteredSpjold.setPredicate(pred);
+
         syndSpjold.addListener((ListChangeListener<? super Node>) change -> {
             fxFlowPane.getChildren().clear();
             fxFlowPane.getChildren().addAll(syndSpjold);
         });
 
 
-        siaMenuBreytingar();
+        //siaMenuBreytingar();
+        siaMenuReglur();
 
-        //handlerar settir á menus.
+
+        setjaMenuItemHandlera();
+
+
+    }
+
+    /**
+     * setur handlera á menuItems
+     */
+    private void setjaMenuItemHandlera() {
         for (MenuItem item : rodunMenu.getItems()) {
             item.setOnAction(this::rodunItemHandler);
         }
@@ -78,16 +125,47 @@ public class Plontuyfirlit extends AnchorPane {
         for (MenuItem item : fxSiaMenu.getItems()) {
             item.setOnAction(this::siaItemHandler);
         }
+    }
 
-
-        //System.out.println("fxFlowPane.getChildren().getClass();" + fxFlowPane.getChildren().getClass());
-        //System.out.println("fxFlowPane.getChildren().get(0).getClass()" + fxFlowPane.getChildren().get(0).getClass());
-
+    private void siaMenuReglur() {
+        Uppruni[] upprunar = Uppruni.values();
+        for (Uppruni upp : upprunar) {
+            CheckMenuItem item = new CheckMenuItem(upp.getStadur());
+            item.setSelected(true);
+            siaMenuItems.add(item);
+        }
+        fxSiaMenu.getItems().addAll(siaMenuItems);
     }
 
     private void siaMenuBreytingar() {
         checkMenuItems.setAll(fxSiaMenu.getItems()); //checkMenuItems er uppfærð útgáfa
         System.out.println("checkmenuitems.size: " + checkMenuItems.size());
+
+        //siaMenuItems.add((CheckMenuItem) fxSiaMenu.getItems().get(0));
+        //siaItems.add(fxSiaMenu.getItems().get(0));
+        //siaMenuItems.add((CheckMenuItem) fxSiaMenu.getItems().get(0));
+        Uppruni[] upprunar = Uppruni.values();
+        for (Uppruni upp : upprunar) {
+            CheckMenuItem item = new CheckMenuItem(upp.getStadur());
+            item.setSelected(true);
+            //siaItems.add();
+            siaMenuItems.add(item);
+        }
+        fxSiaMenu.getItems().addAll(siaMenuItems);
+
+
+
+
+        /*
+        siaMenuItems.addListener((ListChangeListener<? super CheckMenuItem>) change -> {
+            //Bæta við nýjum viðbótum
+        });
+
+         */
+        //Bindings.bindContentBidirectional(siaMenuItems, (List<CheckMenuItem>)fxSiaMenu.getItems());
+        //Bindings.bindContent(siaMenuItems, fxSiaMenu.getItems().iterator() instanceof CheckMenuItem);
+
+
         //checkMenuItems.remove(0, 1); //inniheldur bara breytanlegu stökin
 
         //upprunaItemar.addAll(checkMenuItems instanceof CheckMenuItem);
@@ -129,6 +207,14 @@ public class Plontuyfirlit extends AnchorPane {
     public void baetaVidYfirlit(MinPlanta minPlanta) {
         MinPlantaSpjald spjald = new MinPlantaSpjald(minPlanta);
         syndSpjold.add(spjald);
+
+
+        System.out.println("ollSpjold: " + ollSpjold);
+        System.out.println("filteredSpjold: " + filteredSpjold);
+        ollSpjold.add(spjald);
+        System.out.println("ollSpjold: " + ollSpjold);
+        System.out.println("filteredSpjold: " + filteredSpjold);
+
     }
 
 
