@@ -61,6 +61,7 @@ public class PlantController {
         fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
 
         birtaNotendaPlontur();
+        skradurNotandi.get().getNotendaupplysingar().finnaFyrriVokvanir();
     }
 
     private void lesaInnAllarPlontur() {
