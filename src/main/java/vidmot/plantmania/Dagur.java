@@ -8,7 +8,9 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-//bregðast við þegar það er ýtt á daginn
+/**
+ * Sérhæfður klasi fyrir hvern dag í dagatali
+ */
 public class Dagur extends Pane {
     @FXML
     private Label fxManadardagur;
@@ -17,6 +19,9 @@ public class Dagur extends Pane {
     @FXML
     private ImageView fxDropi;
 
+    /**
+     * Les inn fxml skrá, setur controller og rót og hleður fxmlLoadernum
+     */
     public Dagur() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("dagur-view.fxml"));
         loader.setRoot(this);

@@ -108,7 +108,7 @@ public class PlantController {
     public void dagatalsEventFilterar() {
         //senda inn lista af dagsetningum pg plöntum og tengja saman
         //gæti líka haft aðferð í Dagatal bindaLista(ObservableList<Pair<MinPlanta,LocalDate>> listi) sem er svo bundið við breytuna í Dagatal
-        Bindings.bindContentBidirectional(skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir(), fxDagatal.getPlonturOgVokvanir());
+        Bindings.bindContentBidirectional(skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir(), fxDagatal.getAllarPlonturOgFyrriVokvanir());
 
         //fyrir áfram og til baka takka, og svo þegar það er smellt á dag. var með þetta í Dagatal, hægt að færa til baka?
         fxDagatal.getFxTilBaka().addEventFilter(ActionEvent.ACTION, (Event event) -> {
@@ -133,17 +133,18 @@ public class PlantController {
 
             if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
                 int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
-                fxDagatal.setValinnDagur(LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur));
-                if (fxDagatal.getValinnDagur().isBefore(LocalDate.now())) {
-                    System.out.println("<" + fxDagatal.getValinnDagur());
-                } else if (fxDagatal.getValinnDagur().isAfter(LocalDate.now())) {
-                    System.out.println(">" + fxDagatal.getValinnDagur());
-                } else System.out.println("=" + fxDagatal.getValinnDagur());
+                LocalDate valinnDagur = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
+
+                if (valinnDagur.isBefore(LocalDate.now())) {
+                    System.out.println("<" + valinnDagur);
+                } else if (valinnDagur.isAfter(LocalDate.now())) {
+                    System.out.println(">" + valinnDagur);
+                } else System.out.println("=" + valinnDagur);
 
                 dagur.getFxDropi().visibleProperty().unbind();
                 dagur.getFxDropi().setVisible(true);
 
-                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsins = skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir().filtered(p -> p.getValue().getMonth() == fxDagatal.getValinnDagur().getMonth());
+                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsins = skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir().filtered(p -> p.getValue().getMonth() == valinnDagur.getMonth());
                 //opna glugga með plontum dagsins
             }
         });
