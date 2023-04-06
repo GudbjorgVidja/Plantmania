@@ -52,9 +52,14 @@ public class Notendaupplysingar {
     }
 
     //skoða þetta. Mér finnst að það ætti að reikna einn mánuð í einu eða svo
+    //Mér finnst að kannski væru þrír mánuðir betri, passar t.d. betur fyrir plöntu sem er vökvuð mánaðarlega
     public void finnaNaestuVokvanir() {
         //hafa binding/listener hér
         // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
+
+        //Þegar nýrri plöntu er bætt við:
+        //setja vökvun í dag
+
     }
 
     public ObservableList<MinPlanta> getMinarPlontur() {
