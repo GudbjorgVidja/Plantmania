@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 import vinnsla.plantmania.MinPlanta;
 
@@ -25,7 +24,6 @@ import java.util.List;
  * til að það sé frekar hægt að endurnýta dagatalið
  */
 public class Dagatal extends AnchorPane {
-
     @FXML
     private Button fxTilBaka;
     @FXML
@@ -34,10 +32,7 @@ public class Dagatal extends AnchorPane {
     private Label fxDagsetning;
     @FXML
     private GridPane fxGrid;
-    @FXML
-    private AnchorPane fxRoot;
 
-    private String[] vikudagar;
     private String[] manudir;
     private LocalDate syndurDagur;//dagurinn sem dagatalið sýnir. Notað til að vita hvaða mánuður er sýndur í augnablikinu
     //listi af pörum sem gefa dagsetningu og plöntu sem var vökvuð þá. inniheldur öll skipti sem einhver planta hefur verið vökvuð

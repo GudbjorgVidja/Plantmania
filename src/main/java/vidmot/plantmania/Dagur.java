@@ -42,14 +42,6 @@ public class Dagur extends Pane {
         return fxFjoldiVokvana;
     }
 
-    public void setFxFjoldiVokvana(int fjoldiVokvana) {
-        fxFjoldiVokvana.setText(fjoldiVokvana + "");
-    }
-
-    public void setFxManadardagur(int manadardagur) {
-        fxManadardagur.setText(manadardagur + "");
-    }
-
     public ImageView getFxDropi() {
         return fxDropi;
     }
