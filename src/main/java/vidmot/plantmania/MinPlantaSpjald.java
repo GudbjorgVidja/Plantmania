@@ -56,9 +56,9 @@ public class MinPlantaSpjald extends AnchorPane {
         minPlantan = minPlanta;
 
         if (fxSpjald != null) {
-            fxSpjald.setFxAlmenntNafn(minPlantan.getAlmenntNafn());
-            fxSpjald.setFxFlokkur(minPlantan.getUppruni().toString().toLowerCase(Locale.ROOT));
-            fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
+            fxSpjald.setFxAlmenntNafn(minPlantan.getPlanta().getAlmenntNafn());
+            fxSpjald.setFxFlokkur(minPlantan.getPlanta().getUppruni().toString().toLowerCase(Locale.ROOT));
+            fxSpjald.setFxPlontuMynd(minPlantan.getPlanta().getMyndaslod());
         } else {
             System.out.println("fxSpjald is null");
         }

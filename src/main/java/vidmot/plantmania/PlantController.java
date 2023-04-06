@@ -274,9 +274,29 @@ public class PlantController {
     }
 
     public void skraUt(ActionEvent actionEvent) {
+        vistaNotendaupplysingar();
         skradurNotandi = null;
         System.out.println("skra ut");
         ViewSwitcher.switchTo(View.UPPHAFSSIDA);
+    }
+
+    private void vistaNotendaupplysingar() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        objectMapper.registerModule(module);
+        try {
+            List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
+            });
+            for (Notandi n : notendur) {
+                if (n.notendanafnProperty().get().equals(skradurNotandi.get().getNotendanafn())) {
+                    n.setNotendaupplysingar(skradurNotandi.get().getNotendaupplysingar());
+                    objectMapper.writeValue(new File("target/classes/vidmot/plantmania/notendur.json"), notendur);//bætti við
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getCause());
+        }
     }
 
     public StringProperty getNotendanafn() {

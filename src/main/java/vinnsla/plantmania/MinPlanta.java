@@ -31,7 +31,7 @@ public class MinPlanta extends Planta {
     private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();
     private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();
     private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();
-    //private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
+    private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
     //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
     //en það væri kannski bara meira vesen
 
@@ -42,6 +42,7 @@ public class MinPlanta extends Planta {
     public MinPlanta(Planta planta) {
         this.nickName.set(planta.getOllHeiti().get(0));
         this.thinnTimiMilliVokvana.set(planta.getAlmennurTimiMilliVokvana());
+        this.planta = planta;
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
         naestaVokvunRegla();
@@ -210,6 +211,15 @@ public class MinPlanta extends Planta {
      */
     public void setNaestaVokvun(int i) {
         naestaVokvun.set(i);
+    }
+
+
+    public Planta getPlanta() {
+        return planta;
+    }
+
+    public void setPlanta(Planta planta) {
+        this.planta = planta;
     }
 
     public String toString() {
