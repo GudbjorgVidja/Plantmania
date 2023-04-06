@@ -15,15 +15,6 @@ public class PlantaSpjald extends AnchorPane {
     @FXML
     private AnchorPane fxBreytilegtSvaedi;//laga nafn, en er anchorPane sem inniheldur stats, til að geta breytt því og sýnt takka
 
-    /*
-    @FXML
-    private ImageView fxPlontuMynd;
-
-    @FXML
-    private Label fxAlmenntNafn, fxFlokkur;
-
-     */
-
     @FXML
     private Spjald fxSpjald;
 
@@ -49,17 +40,9 @@ public class PlantaSpjald extends AnchorPane {
             fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));
             fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
         } else {
-            System.out.println("fxSpjald is null");
+            System.out.println("fxSpjald er null");
         }
 
-        /*
-        fxPlontuMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + planta.getMyndaslod())));//mynd á spjaldinu rétt?
-
-        fxAlmenntNafn.setText(planta.getAlmenntNafn());
-
-        fxFlokkur.setText(" " + planta.getUppruni() + " ");
-
-         */
     }
 
     public Planta getPlanta() {

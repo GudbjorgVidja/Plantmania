@@ -23,7 +23,7 @@ public class Spjald extends VBox {
     @FXML
     private ImageView fxPlontuMynd;
 
-    private Planta plant;
+    private Planta plant;//Spjald inniheldur í raun Planta hlut en aldrei MinPlanta hlut
 
     public Spjald() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("spjald-view.fxml"));
@@ -37,7 +37,12 @@ public class Spjald extends VBox {
         }
     }
 
-    public Spjald(Planta p) {//virkar fyrir stakt spjald og MinPlantaSpjald
+    /**
+     * Smiður, smíðar spjald með upplýsingum frá plöntu p.
+     *
+     * @param p Planta, getur verið Planta hlutur innan MinPlanta
+     */
+    public Spjald(Planta p) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("spjald-view.fxml"));
         loader.setRoot(this);
         loader.setController(this);

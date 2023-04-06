@@ -160,6 +160,7 @@ public class PlantController {
             fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
         }
 
+        /* held að þetta sé óþarfi, nákvæmlega sama í hladaOllumPlontum handlernum fyrir neðan
         //System.out.println(event.getTarget().getClass());
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
@@ -196,12 +197,13 @@ public class PlantController {
             }
         }
 
+         */
+
 
     }
 
     @FXML
-    private void hladaOllumPlontum(MouseEvent event) {//eina notkunin er í fxml skránni, handlerinn settur á hlut
-
+    private void hladaOllumPlontum(MouseEvent event) {
 
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {

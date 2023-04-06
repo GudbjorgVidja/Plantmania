@@ -28,17 +28,7 @@ public class MinPlantaSpjald extends AnchorPane {
     private MinPlanta minPlantan;
 
     public MinPlantaSpjald() {//tómur smiður. Athuga hvort hann sé óþarfi
-        /*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("minplanta-view.fxml"));
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
 
-         */
     }
 
     public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn sem er notaður
@@ -79,9 +69,12 @@ public class MinPlantaSpjald extends AnchorPane {
         return minPlantan;
     }
 
+    /**
+     * kannski passa að ekki sé hægt að vökva þegar tími í næstu vökvun er meira en thinnTimiMilliVokvanna?
+     *
+     * @param event smellt á vökva takkann á MinPlantaSpjald hlut
+     */
     private void vokvaHandler(ActionEvent event) {
-        //System.out.println("vokva");
-        //kannski passa að ekki sé hægt að vökva þegar tími í næstu vökvun er meira en thinnTimiMilliVokvanna?
         if (minPlantan.getNaestaVokvun().get() >= minPlantan.getThinnTimiMilliVokvana()) {
             System.out.println("kannski ekki vokva");
         } else {
@@ -89,7 +82,7 @@ public class MinPlantaSpjald extends AnchorPane {
             System.out.println("vokva");
         }
 
-        System.out.println("thinnTimiMilliVokvanna: " + minPlantan.getThinnTimiMilliVokvana());
+        //System.out.println("thinnTimiMilliVokvanna: " + minPlantan.getThinnTimiMilliVokvana());
         System.out.println(minPlantan.getVokvanir().toString());
     }
 
