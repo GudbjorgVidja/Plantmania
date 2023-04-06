@@ -18,37 +18,46 @@ public class Notendaupplysingar {
 
     public Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) {
         this.minarPlontur = minarPlontur;
-        finnaFyrriVokvanir();
         finnaNaestuVokvanir();
     }
 
     public Notendaupplysingar() {
-        finnaFyrriVokvanir();
         finnaNaestuVokvanir();
     }
 
 
     //athuga hvar það er brugðist við þegar plantan er einfaldlega tekin af listanum!
     //er þetta sett á plöntu um leið og henni er bætt við í mínarPlöntur? gera kannski sér aðferð sem hægt er að kalla á oftar?
+    //það þarf að refactora þetta, en þetta virkar!
     public void finnaFyrriVokvanir() {
-        for (MinPlanta m : minarPlontur) {
-            m.getVokvanir().addListener((ListChangeListener<LocalDate>) (observable) -> {
-                while (observable.next()) {
-                    if (observable.wasAdded()) {
-                        for (int i = 0; i < observable.getAddedSize(); i++) {
-                            fyrriVokvanir.add(new Pair<>(m, observable.getAddedSubList().get(i)));
-                        }
-                    } else if (observable.wasRemoved()) {
-                        List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
-                        for (int i = 0; i < observable.getRemovedSize(); i++) {
-                            eytt.add(new Pair<>(m, observable.getRemoved().get(i)));
-                        }
-                        fyrriVokvanir.removeAll(eytt);
+        minarPlontur.addListener((ListChangeListener<MinPlanta>) (obs) -> {
+            while (obs.next()) {
+                if (obs.wasAdded()) {
+                    for (int i = 0; i < obs.getAddedSize(); i++) {
+                        int finalI = i;
+                        obs.getAddedSubList().get(i).getVokvanir().addListener((ListChangeListener<LocalDate>) (observable) -> {
+                            while (observable.next()) {
+                                if (observable.wasAdded()) {
+                                    for (int j = 0; j < observable.getAddedSize(); j++) {
+                                        fyrriVokvanir.add(new Pair<>(obs.getAddedSubList().get(finalI), observable.getAddedSubList().get(j)));
+                                    }
+                                } else if (observable.wasRemoved()) {
+                                    List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
+                                    for (int j = 0; j < observable.getRemovedSize(); j++) {
+                                        eytt.add(new Pair<>(obs.getAddedSubList().get(finalI), observable.getRemoved().get(j)));
+                                    }
+                                    fyrriVokvanir.removeAll(eytt);
+                                }
+                            }
+                        });
                     }
                 }
-            });
-        }
-        fyrriVokvanir.sort(Comparator.comparing((Pair::getValue)));
+            }
+
+
+            fyrriVokvanir.sort(Comparator.comparing((Pair::getValue)));
+
+        });
     }
 
     //skoða þetta. Mér finnst að það ætti að reikna einn mánuð í einu eða svo
