@@ -55,7 +55,6 @@ public class MinPlantaSpjald extends AnchorPane {
         //minPlanta vistuð í tilviksbreytu
         minPlantan = minPlanta;
 
-        //System.out.println("AlmenntNafn: " + minPlanta.getPlanta().getAlmenntNafn());
         if (fxSpjald != null) {
             fxSpjald.setFxAlmenntNafn(minPlantan.getPlanta().getAlmenntNafn());
             fxSpjald.setFxFlokkur(minPlantan.getPlanta().getUppruni().toString().toLowerCase(Locale.ROOT));
@@ -64,15 +63,10 @@ public class MinPlantaSpjald extends AnchorPane {
             System.out.println("fxSpjald is null");
         }
 
-
         //setja handlera á takkana
         fxVokva.setOnAction(this::vokvaHandler);
         fxFresta.setOnAction(this::frestaHandler);
 
-        //setja dagsetningu á label
-        //fxLabel.setText(fxLabel.getText().replace("-0", minPlanta.getNaestaVokvun().get() + ""));
-        //StringProperty labelTexti = new SimpleStringProperty()
-        //fxLabel.textProperty().bind(new SimpleStringProperty(minPlantan.getNaestaVokvun().asString() + " dagar"));
         fxLabel.textProperty().bind(minPlantan.getNaestaVokvun().asString().concat(new SimpleStringProperty(" dagar")));
 
     }
@@ -86,15 +80,24 @@ public class MinPlantaSpjald extends AnchorPane {
     }
 
     private void vokvaHandler(ActionEvent event) {
-        System.out.println("vokva");
-        minPlantan.baetaVidVokvun(LocalDate.now());
+        //System.out.println("vokva");
+        //kannski passa að ekki sé hægt að vökva þegar tími í næstu vökvun er meira en thinnTimiMilliVokvanna?
+        if (minPlantan.getNaestaVokvun().get() >= minPlantan.getThinnTimiMilliVokvana()) {
+            System.out.println("kannski ekki vokva");
+        } else {
+            minPlantan.baetaVidVokvun(LocalDate.now());
+            System.out.println("vokva");
+        }
 
+        System.out.println("thinnTimiMilliVokvanna: " + minPlantan.getThinnTimiMilliVokvana());
         System.out.println(minPlantan.getVokvanir().toString());
     }
 
     private void frestaHandler(ActionEvent event) {
         System.out.println("frestar um dag");
+        minPlantan.getNaestaVokvun().unbind(); //ný viðbót
         minPlantan.setNaestaVokvun(minPlantan.getNaestaVokvun().get() + 1);
+        minPlantan.naestaVokvunRegla(); //ný viðbót
         System.out.println("naestaVokvun: " + minPlantan.getNaestaVokvun().get());
     }
 }

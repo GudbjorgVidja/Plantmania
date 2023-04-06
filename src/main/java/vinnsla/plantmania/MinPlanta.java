@@ -74,7 +74,11 @@ public class MinPlanta extends Planta {
         });
     }
 
-    //ath hvað gerist milli daga (localDate.now() breytist!)
+
+    /**
+     * ath hvað gerist milli daga (localDate.now() breytist!)
+     * setur listener á sidastaVokvun, ef hún breytist þá er sett binding á naestaVokvun
+     */
     public void naestaVokvunRegla() {
         sidastaVokvun.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -208,6 +212,11 @@ public class MinPlanta extends Planta {
         return naestaVokvun;
     }
 
+    /**
+     * passa að naestaVokvun sé ekki bundið, a bound value cannot be set
+     *
+     * @param i nýtt gildi
+     */
     public void setNaestaVokvun(int i) {
         naestaVokvun.set(i);
     }
