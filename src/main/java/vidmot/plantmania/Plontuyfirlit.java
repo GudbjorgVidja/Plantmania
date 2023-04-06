@@ -42,30 +42,17 @@ public class Plontuyfirlit extends AnchorPane {
     private Menu fxSiaMenu, flokkunMenu, rodunMenu;
 
     private ObservableList<MenuItem> checkMenuItems = FXCollections.observableArrayList();
-    //ætti kannski bara að innihalda stök 2 og lengra, þau eru þau einu sem geta breyst.
 
     private ObservableList<CheckMenuItem> siaMenuItems = FXCollections.observableArrayList();
 
     private ObservableList<MenuItem> siaItems = FXCollections.observableArrayList();
     private FilteredList<MenuItem> filteredSiaItems;
 
-    //private ObservableList<CheckMenuItem> upprunaItemar = FXCollections.observableArrayList();
+    private HashMap<Uppruni, MenuItem> upprunaMap = new HashMap<>();//tengir saman flokkinn og checkMenuItem fyrir flokkinn
 
-    //er í þeirri röð sem stökin eru lesin inn, allavega til að byrja með.
-    private final ObservableList<Node> ollStok = FXCollections.observableArrayList();//allir hlutir sem settir eru inn, óháð því hvort þeir eru sýndir eða ekki
+    private ObservableList<Node> syndSpjold = FXCollections.observableArrayList();//Hlutirnir í þessu yfirliti, baselistinn
 
-    //private final ObservableList<Object> allirObjectar = FXCollections.observableArrayList();
-    private ObservableList<Node> syndSpjold = FXCollections.observableArrayList();//Hlutirnir í þessu yfirliti
-
-
-    private ObservableList<Node> ollSpjold = FXCollections.observableArrayList(); //baseListinn
     private FilteredList<Node> filteredSpjold = new FilteredList<>(syndSpjold); //filtered listinn
-
-    /*
-    private ObservableList<Uppruni> allirUpprunar = FXCollections.observableArrayList();
-    private FilteredList<Uppruni> filteredUpprunar = new FilteredList<>(allirUpprunar);
-
-     */
 
     public Plontuyfirlit() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plontuyfirlit.fxml"));
@@ -79,24 +66,12 @@ public class Plontuyfirlit extends AnchorPane {
         }
 
         /*
-        fxFlowPane.getChildren().addListener((ListChangeListener<? super Node>) change -> {
-            //while (change.next()) {
-            change.next();
-            System.out.println("ollSpjold: " + ollSpjold);
-            System.out.println("filteredSpjold: " + filteredSpjold);
-            if (change.wasAdded()) ollSpjold.addAll(change.getAddedSubList());
-            System.out.println("ollSpjold: " + ollSpjold);
-            System.out.println("filteredSpjold: " + filteredSpjold);
-            //}
-
-        });
-
-         */
-
         Predicate<Node> pred = node -> {
             return node.toString().startsWith("S");
         };
         filteredSpjold.setPredicate(pred);
+
+         */
 
         filteredSpjold.addListener((ListChangeListener<? super Node>) change -> {//syndspjold
             fxFlowPane.getChildren().clear();
@@ -109,8 +84,7 @@ public class Plontuyfirlit extends AnchorPane {
 
 
         setjaMenuItemHandlera();
-
-
+        
     }
 
 
@@ -131,7 +105,6 @@ public class Plontuyfirlit extends AnchorPane {
         }
     }
 
-    private HashMap<Uppruni, MenuItem> upprunaMap = new HashMap<>();
 
     /**
      * --Flokkar settir á MenuItemið
@@ -281,29 +254,12 @@ public class Plontuyfirlit extends AnchorPane {
         MinPlantaSpjald spjald = new MinPlantaSpjald(minPlanta);
         syndSpjold.add(spjald);
 
-
-        /*
-        System.out.println("ollSpjold: " + ollSpjold);
-        System.out.println("filteredSpjold: " + filteredSpjold);
-        ollSpjold.add(spjald);
-        System.out.println("ollSpjold: " + ollSpjold);
-        System.out.println("filteredSpjold: " + filteredSpjold);
-
-         */
+        //hafa syndirFlokkar eða það bara flokkarnir sem eru á plöntum í syndSpjold, sem eru öll möguleg spjöld (base listinn)
 
     }
 
 
     //      ** getterar og setterar **
-
-    public FlowPane getFxFlowPane() {
-        return fxFlowPane;
-    }
-
-    //nær í notendanafn af label
-    public String getNotandiLabel() {
-        return notandiLabel.getText();
-    }
 
     public void setNotandiLabel(String nafn) {
         notandiLabel.setText(nafn);
@@ -410,9 +366,12 @@ public class Plontuyfirlit extends AnchorPane {
         }
     };
 
+    /*
     public ObservableList<Node> getMinarPlonturYfirlit() {
         return ollStok;
     }
+
+     */
 
     /*
     public ObservableList<MinPlanta> getMinarPlontur(){
