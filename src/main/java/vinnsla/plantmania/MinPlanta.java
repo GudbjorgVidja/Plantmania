@@ -31,7 +31,7 @@ public class MinPlanta extends Planta {
     private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();
     private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();
     private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();
-    private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
+    //private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
     //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
     //en það væri kannski bara meira vesen
 
@@ -42,7 +42,6 @@ public class MinPlanta extends Planta {
     public MinPlanta(Planta planta) {
         this.nickName.set(planta.getOllHeiti().get(0));
         this.thinnTimiMilliVokvana.set(planta.getAlmennurTimiMilliVokvana());
-        this.planta = planta;
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
         naestaVokvunRegla();
@@ -188,14 +187,6 @@ public class MinPlanta extends Planta {
         this.thinnTimiMilliVokvana.set(thinnTimiMilliVokvana);
     }
 
-    public Planta getPlanta() {
-        return planta;
-    }
-
-    public void setPlanta(Planta planta) {
-        this.planta = planta;
-    }
-
     public LocalDate getSidastaVokvun() {
         return sidastaVokvun.get();
     }
@@ -223,82 +214,13 @@ public class MinPlanta extends Planta {
 
     public String toString() {
         return "MinPlanta{" +
-                "vokvanir=" + vokvanir +
-                ", medaltimiMilliVokvana=" + medaltimiMilliVokvana +
-                ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana +
-                ", planta=" + planta +
-                '}';
-    }
-
-    /*public String toString() {
-        return "MinPlanta{" +
                 "nickName=" + nickName.get() +
                 ", vokvanir=" + vokvanir.toString() +
                 ", notesFraNotanda=" + notesFraNotanda.get() +
                 ", flokkar=" + flokkar.toString() +
                 ", medaltimiMilliVokvana=" + medaltimiMilliVokvana.get() +
                 ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
-                ", planta=" + planta +
+                ", toString()=" + super.toString() +
                 '}';
-    }*/
-
-    public static void main(String[] args) {
-        MinPlanta planta = new MinPlanta();
-        planta.thinnTimiMilliVokvana.set(18);
-        planta.baetaVidVokvun(LocalDate.of(2022, 3, 18));
-        planta.baetaVidVokvun(LocalDate.of(2023, 3, 14));
-        planta.baetaVidVokvun(LocalDate.of(2023, 3, 22));
-        planta.baetaVidVokvun(LocalDate.of(2023, 3, 10));
-        planta.baetaVidVokvun(LocalDate.of(2023, 3, 26));
-        planta.baetaVidVokvun(LocalDate.of(2023, 3, 30));
-        planta.baetaVidVokvun(LocalDate.of(2023, 4, 3));
-        planta.baetaVidVokvun(LocalDate.of(2023, 2, 2));
-        planta.baetaVidVokvun(LocalDate.of(2023, 2, 14));
-
-        System.out.println("Vokvnanir i timarod:");
-        for (LocalDate v : planta.getVokvanir()) {
-            System.out.println(v);
-        }
-        LocalDate testDagur = LocalDate.now().minusMonths(1);
-
-        ObservableList<LocalDate> testList = planta.getVokvanir().filtered(p -> p.getMonth() == testDagur.getMonth() && p.getYear() == testDagur.getYear());
-
-        System.out.println("Vokvnanir i timarod f. testlist:");
-        for (LocalDate v : testList) {
-            System.out.println(v);
-        }
-
-        planta.baetaVidVokvun(LocalDate.of(2023, 3, 11));
-
-        System.out.println("Vokvnanir i timarod f. testlist:");
-        for (LocalDate v : testList) {
-            System.out.println(v);
-        }
-        System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
-        System.out.println("Dagar i naestu vokvun: " + planta.getNaestaVokvun().get());
-
-       /* System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
-        System.out.println("Sidasta vokvun: " + planta.getSidastaVokvun());
-        planta.baetaVidVokvun(LocalDate.of(2023, 3, 6));*/
-
-        System.out.println("Vokvnanir i timarod:");
-        for (LocalDate v : planta.getVokvanir()) {
-            System.out.println(v);
-        }
-        System.out.println("Medaltimi: " + planta.getMedaltimiMilliVokvana());
-        System.out.println("Sidasta vokvun: " + planta.getSidastaVokvun());
-
-        System.out.println(planta.getNaestaVokvun().get());
-
-        planta.getVokvanir().clear();
-
-        System.out.println("Sidasta vokvun: " + planta.getSidastaVokvun());
-
-        System.out.println(planta.getNaestaVokvun().get());
-        planta.baetaVidVokvun(LocalDate.of(2023, 4, 3));
-        System.out.println("Sidasta vokvun: " + planta.getSidastaVokvun());
-
-        System.out.println(planta.getNaestaVokvun().get());
-
     }
 }

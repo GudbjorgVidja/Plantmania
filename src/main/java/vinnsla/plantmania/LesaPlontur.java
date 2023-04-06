@@ -3,8 +3,6 @@
  * <p>
  * gæti verið sniðugt að halda utan um skrána með excel skjali
  * <p>
- * Klasinn les inn plöntur úr skránni plontur.txt og gerir lista af Planta hlutum. Er með getter á listann. Þannig er
- * hægt að fá þessar plöntur í öðrum klösum: gera tilvik af LesaPlontur og svo kalla á getterinn (getPlontur()) á það tilvik.
  */
 package vinnsla.plantmania;
 
@@ -13,6 +11,10 @@ import edu.princeton.cs.algs4.In;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasinn les inn plöntur úr skránni plontur.txt og gerir lista af Planta hlutum. Er með getter á listann. Þannig er
+ * hægt að fá þessar plöntur í öðrum klösum: gera tilvik af LesaPlontur og svo kalla á getterinn (getPlontur()) á það tilvik.
+ */
 public class LesaPlontur {
     private List<Planta> plontulisti;
 

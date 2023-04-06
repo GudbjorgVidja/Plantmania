@@ -241,7 +241,7 @@ public class Plontuyfirlit extends AnchorPane {
         if (n1 instanceof PlantaSpjald) {
             return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
         }
-        return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
+        return ((MinPlantaSpjald) n1).getMinPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getAlmenntNafn().toLowerCase());
     }
 
     private Comparator<Node> almenntHeitiComparator = new Comparator<Node>() {
@@ -249,7 +249,7 @@ public class Plontuyfirlit extends AnchorPane {
             if (n1 instanceof PlantaSpjald) {
                 return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
             }
-            return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
+            return ((MinPlantaSpjald) n1).getMinPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getAlmenntNafn().toLowerCase());
 
         }
     };
@@ -259,7 +259,7 @@ public class Plontuyfirlit extends AnchorPane {
             if (n1 instanceof PlantaSpjald) {
                 return ((PlantaSpjald) n1).getPlanta().getLatnesktNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
             }
-            return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getLatnesktNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
+            return ((MinPlantaSpjald) n1).getMinPlanta().getLatnesktNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getAlmenntNafn().toLowerCase());
 
         }
     };

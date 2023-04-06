@@ -158,12 +158,6 @@ public class Planta {
 
     public String toString() {
         return "Planta{" +
-                "almenntNafn='" + almenntNafn + '\'' +
-                '}';
-    }
-
-    /*public String toString() {
-        return "Planta{" +
                 "latnesktNafn='" + latnesktNafn + '\'' +
                 ", almenntNafn='" + almenntNafn + '\'' +
                 ", ollHeiti=" + ollHeiti +
@@ -178,5 +172,5 @@ public class Planta {
                 ", ljosStundir=" + ljosStundir +
                 ", einkenniPlontu=" + einkenniPlontu +
                 '}';
-    }*/
+    }
 }

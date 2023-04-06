@@ -187,6 +187,7 @@ public class PlantController {
      */
     @FXML
     protected void fxBaetaVidHandler(MouseEvent event) {
+        //eintaki af öllum plöntum (gerðum) bætt við plöntur notanda
         for (int i = 0; i < allarPlontur.size(); i++) {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
             fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
