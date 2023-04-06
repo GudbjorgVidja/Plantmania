@@ -5,6 +5,7 @@
  */
 package vidmot.plantmania;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -27,6 +28,7 @@ import vinnsla.plantmania.Uppruni;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 public class Plontuyfirlit extends AnchorPane {
@@ -45,6 +47,7 @@ public class Plontuyfirlit extends AnchorPane {
     private ObservableList<CheckMenuItem> siaMenuItems = FXCollections.observableArrayList();
 
     private ObservableList<MenuItem> siaItems = FXCollections.observableArrayList();
+    private FilteredList<MenuItem> filteredSiaItems;
 
     //private ObservableList<CheckMenuItem> upprunaItemar = FXCollections.observableArrayList();
 
@@ -56,7 +59,7 @@ public class Plontuyfirlit extends AnchorPane {
 
 
     private ObservableList<Node> ollSpjold = FXCollections.observableArrayList(); //baseListinn
-    private FilteredList<Node> filteredSpjold = new FilteredList<>(ollSpjold); //filtered listinn
+    private FilteredList<Node> filteredSpjold = new FilteredList<>(syndSpjold); //filtered listinn
 
     /*
     private ObservableList<Uppruni> allirUpprunar = FXCollections.observableArrayList();
@@ -95,9 +98,9 @@ public class Plontuyfirlit extends AnchorPane {
         };
         filteredSpjold.setPredicate(pred);
 
-        syndSpjold.addListener((ListChangeListener<? super Node>) change -> {
+        filteredSpjold.addListener((ListChangeListener<? super Node>) change -> {//syndspjold
             fxFlowPane.getChildren().clear();
-            fxFlowPane.getChildren().addAll(syndSpjold);
+            fxFlowPane.getChildren().addAll(filteredSpjold);//syndspjold
         });
 
 
@@ -109,6 +112,7 @@ public class Plontuyfirlit extends AnchorPane {
 
 
     }
+
 
     /**
      * setur handlera á menuItems
@@ -127,14 +131,82 @@ public class Plontuyfirlit extends AnchorPane {
         }
     }
 
+    private HashMap<Uppruni, MenuItem> upprunaMap = new HashMap<>();
+
+    /**
+     * --Flokkar settir á MenuItemið
+     * --Flokkar og fyrsta allt sett sem merkt
+     * --menuItems í viðmóti og observable Listinn siaItems bundin saman bidirectionally
+     * ef allt er merkt og smellt á fyrsta: ekkert merkt
+     * ef allt nema eitt er merkt og það svo merkt líka: fyrsta merkist
+     * ef ekkert er merkt og smellt á fyrsta: allt merkist
+     * ef allt er merkt en fyrsta ekki, og smellt á fyrsta:
+     */
     private void siaMenuReglur() {
+        ((CheckMenuItem) fxSiaMenu.getItems().get(0)).setSelected(true);
         Uppruni[] upprunar = Uppruni.values();
         for (Uppruni upp : upprunar) {
-            CheckMenuItem item = new CheckMenuItem(upp.getStadur());
+            //CheckMenuItem item = new CheckMenuItem(upp.getStadur());
+            CheckMenuItem item = new CheckMenuItem(upp.toString().toLowerCase());
             item.setSelected(true);
-            siaMenuItems.add(item);
+            siaItems.add(item);
+            upprunaMap.put(upp, item);
         }
-        fxSiaMenu.getItems().addAll(siaMenuItems);
+        //fxSiaMenu.getItems().addAll(siaItems);
+        Bindings.bindContentBidirectional(fxSiaMenu.getItems(), siaItems);
+
+        filteredSiaItems = new FilteredList<>(siaItems);//inniheldur valda siaItems
+
+        setjaPredicateFilter();
+
+
+        siaItems.addListener((ListChangeListener<? super MenuItem>) change -> {
+            //uppfæra síureglur
+            //filteredSpjold.setPredicate();
+            setjaPredicateFilter();
+            System.out.println("filteredSiaItems: " + filteredSiaItems);
+        });
+
+
+
+
+        /*
+        siaItems.addListener((ListChangeListener<? super MenuItem>) change -> {
+            if (allirFlokkarValdir() && !((CheckMenuItem) siaItems.get(0)).isSelected()) {
+                ((CheckMenuItem) siaItems.get(0)).setSelected(true);
+            }
+            //else if(!allirFlokkarValdir())
+        });
+
+         */
+
+    }
+
+    private void setjaPredicateFilter() {
+        //filteredSiaItems inniheldur valda flokka
+
+        Predicate<MenuItem> itemPred = mi -> {
+            return ((CheckMenuItem) mi).isSelected();
+        };
+        filteredSiaItems.setPredicate(itemPred);//valdir hlutir
+
+        //ath hvort filteredSiaItems innihaldi flokkinn fyrir uppruna plöntuspjaldsins
+        Predicate<Node> pred = it -> {
+            if (it instanceof PlantaSpjald) {
+                return filteredSiaItems.contains(upprunaMap.get(((PlantaSpjald) it).getPlanta().getUppruni()));
+            }
+            return filteredSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getPlanta().getUppruni()));
+        };
+        filteredSpjold.setPredicate(pred);
+    }
+
+    private boolean allirFlokkarValdir() {
+        for (MenuItem item : fxSiaMenu.getItems()) {
+            if (!((CheckMenuItem) item).isSelected() && !item.equals(fxSiaMenu.getItems().get(0))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void siaMenuBreytingar() {
@@ -196,6 +268,7 @@ public class Plontuyfirlit extends AnchorPane {
     public void baetaVidYfirlit(Planta planta) {
         PlantaSpjald spjald = new PlantaSpjald(planta);
         syndSpjold.add(spjald);
+
     }
 
 
@@ -209,30 +282,14 @@ public class Plontuyfirlit extends AnchorPane {
         syndSpjold.add(spjald);
 
 
+        /*
         System.out.println("ollSpjold: " + ollSpjold);
         System.out.println("filteredSpjold: " + filteredSpjold);
         ollSpjold.add(spjald);
         System.out.println("ollSpjold: " + ollSpjold);
         System.out.println("filteredSpjold: " + filteredSpjold);
 
-    }
-
-
-    private void stillaSia() {
-        //setja fyrsta sem valið
-        ((CheckMenuItem) fxSiaMenu.getItems().get(0)).setSelected(true);
-
-        //gera bindingu þ.a. ef fyrsta er valið þá eru öll það
-        //((CheckMenuItem)fxSiaMenu.getItems().get(0)).selectedProperty().bind(((CheckMenuItem) fxSiaMenu.getItems().));
-
-        //ef allir flokkar valdir: efsta valið.
-        //annars: efsta ekki valið.
-
-        //Ef smellt á efsta og hak tekið af: setur allt sem óvalið.
-        //ef smellt a efsta og hak sett á: allir flokkar valdir
-
-
-        CheckMenuItem fyrstaItem = (CheckMenuItem) fxSiaMenu.getItems().get(0);
+         */
 
     }
 
@@ -276,6 +333,25 @@ public class Plontuyfirlit extends AnchorPane {
     private void siaItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
+        setjaPredicateFilter();
+        Predicate<MenuItem> itemPred = mi -> {
+            return ((CheckMenuItem) mi).isSelected();
+        };
+        filteredSiaItems.setPredicate(itemPred);//valdir hlutir
+        System.out.println("filteredSiaItems: " + filteredSiaItems);
+        System.out.println("filteredSiaItems fjoldi: " + filteredSiaItems.size());
+
+        Predicate<Node> pred = it -> {
+            if (it instanceof PlantaSpjald) {
+                return filteredSiaItems.contains(upprunaMap.get(((PlantaSpjald) it).getPlanta().getUppruni()));
+            }
+            return filteredSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getPlanta().getUppruni()));
+        };
+        filteredSpjold.setPredicate(pred);
+
+        System.out.println("filteredSpjold: " + filteredSpjold);
+
+
     }
 
     private void flokkunItemHandler(ActionEvent event) {
