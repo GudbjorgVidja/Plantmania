@@ -95,7 +95,6 @@ public class PlantController {
                 for (MinPlanta mp : change.getAddedSubList()) {
                     fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
                 }
-
             }
         });
     }
