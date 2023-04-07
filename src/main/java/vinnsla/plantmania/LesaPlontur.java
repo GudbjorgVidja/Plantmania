@@ -25,10 +25,6 @@ public class LesaPlontur {
         inn.readLine();
         inn.readLine();
 
-        String[] latneskNofn = lesaInnStreng(fjoldi, inn);
-
-        String[] almennNofn = lesaInnStreng(fjoldi, inn);
-
         String[] ollHeiti = lesaInnStreng(fjoldi, inn);
         List<String>[] heitiFylki = new List[fjoldi];
         for (int i = 0; i < fjoldi; i++) {
@@ -57,7 +53,18 @@ public class LesaPlontur {
             eitruns[i] = Eitrun.valueOf(eitrunValue[i]);
         }
 
-        int[] hitastig = lesaInnInt(fjoldi, inn);
+        List<Integer>[] hitastig = new List[fjoldi];
+
+        for (int i = 0; i < fjoldi; i++) {
+            List<Integer> o = new ArrayList<>();
+            o.add(inn.readInt());
+            o.add(inn.readInt());
+            o.add(inn.readInt());
+
+            hitastig[i] = o;
+        }
+        inn.readLine();
+        inn.readLine();
 
         String[] vatnValue = lesaInnStreng(fjoldi, inn);
         Vatnsthorf[] vatns = new Vatnsthorf[fjoldi];
@@ -80,7 +87,7 @@ public class LesaPlontur {
         //gera plönturnar
         plontulisti = new ArrayList<>(fjoldi);
         for (int i = 0; i < fjoldi; i++) {
-            Planta planta = new Planta(latneskNofn[i], almennNofn[i], heitiFylki[i], myndaslodir[i], textar[i], upprunis[i], ljoses[i], eitruns[i], hitastig[i], vatns[i], millibil[i], ljosStundir[i], einkennafylki[i]);
+            Planta planta = new Planta(heitiFylki[i], myndaslodir[i], textar[i], upprunis[i], ljoses[i], eitruns[i], hitastig[i], vatns[i], millibil[i], ljosStundir[i], einkennafylki[i]);
             plontulisti.add(planta);
         }
 

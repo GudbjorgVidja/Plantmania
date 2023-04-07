@@ -1,23 +1,9 @@
 6
 
-monstera deliciosa
-Ficus lyrata
-Curio rowleyanus
-aloe vera
-Dracaena trifasciata
-sveppur barabeppur
-
-Monstera
-Fiddle Leaf Fig
-String of Pearls
-aloe vera
-snákaplanta
-Sveppur
-
 monstera deliciosa, Monstera, swiss cheese plant
 Ficus lyrata, Fiddle Leaf Fig, fiðlufíkus
 Curio rowleyanus, String of Pearls, String of Beads
-Aloe Vera
+Aloe Vera, aloe vera
 Dracaena trifasciata, snákaplanta, snake plant, indjánafjöður, Saint George's sword, mother-in-law's tongue, viper's bowstring hemp
 sveppur barabeppur, Sveppur, rauðhetta, mushy
 
@@ -56,12 +42,12 @@ SAKLAUS
 ERTING
 MADUR_VERDUR_SKAKKUR
 
-18
-15
-23
-20
-18
-12
+7 18 21
+7 15 21
+7 23 24
+7 20 21
+7 18 21
+7 12 21
 
 LITIL
 MEDAL

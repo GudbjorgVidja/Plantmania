@@ -68,7 +68,7 @@ public class MinPlanta extends Planta {
     }
 
     public void reiknaPlanadarVokvanir() {
-        planadarVokvanirTestListener();
+        //planadarVokvanirTestListener();
         LocalDate date = LocalDate.now();
         LocalDate eftirThrjaManudi = date.plusMonths(3);
         for (LocalDate dagur = date; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {
