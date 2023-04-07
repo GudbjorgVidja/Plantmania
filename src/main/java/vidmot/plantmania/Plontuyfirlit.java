@@ -1,8 +1,3 @@
-/**
- * Sérhæfður klasi fyrir yfirlit yfir hluti, bæði fyrir MinPlantaSpjald og PlantaSpjald hluti. Býður upp á að stjórna
- * sniði, með röðun og síu sem segir til um hvaða hlutir eru sýndir.
- * Það ætti kannksi að hafa líka vinnsluklasa fyrir þetta
- */
 package vidmot.plantmania;
 
 import javafx.beans.binding.Bindings;
@@ -31,6 +26,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.function.Predicate;
 
+/**
+ * Sérhæfður klasi fyrir yfirlit yfir hluti, bæði fyrir MinPlantaSpjald og PlantaSpjald hluti. Býður upp á að stjórna
+ * sniði, með röðun og síu sem segir til um hvaða hlutir eru sýndir.
+ * Það ætti kannksi að hafa líka vinnsluklasa fyrir þetta
+ */
 public class Plontuyfirlit extends AnchorPane {
     @FXML
     private FlowPane fxFlowPane; //aðgangur í flowpane sem inniheldur spjöldin
@@ -168,7 +168,7 @@ public class Plontuyfirlit extends AnchorPane {
             if (it instanceof PlantaSpjald) {
                 return filteredSiaItems.contains(upprunaMap.get(((PlantaSpjald) it).getPlanta().getUppruni()));
             }
-            return filteredSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getPlanta().getUppruni()));
+            return filteredSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getUppruni()));
         };
         filteredSpjold.setPredicate(pred);
     }
@@ -301,7 +301,7 @@ public class Plontuyfirlit extends AnchorPane {
             if (it instanceof PlantaSpjald) {
                 return filteredSiaItems.contains(upprunaMap.get(((PlantaSpjald) it).getPlanta().getUppruni()));
             }
-            return filteredSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getPlanta().getUppruni()));
+            return filteredSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getUppruni()));
         };
         filteredSpjold.setPredicate(pred);
 
@@ -336,7 +336,7 @@ public class Plontuyfirlit extends AnchorPane {
         if (n1 instanceof PlantaSpjald) {
             return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
         }
-        return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
+        return ((MinPlantaSpjald) n1).getMinPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getAlmenntNafn().toLowerCase());
     }
 
     /*
@@ -354,7 +354,7 @@ public class Plontuyfirlit extends AnchorPane {
         if (n1 instanceof PlantaSpjald) {
             return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
         }
-        return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
+        return ((MinPlantaSpjald) n1).getMinPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getAlmenntNafn().toLowerCase());
     };
 
     private Comparator<Node> fraediheitiComparator = new Comparator<Node>() {

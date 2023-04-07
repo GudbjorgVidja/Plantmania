@@ -1,6 +1,3 @@
-/**
- * hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma
- */
 package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -29,6 +26,9 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+
+
+//TODO: hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma
 
 /**
  * Controller fyrir aðalsenuna. Þar sem við notum TabPane er það sem væri annars í 5 senum eða svo í einni
