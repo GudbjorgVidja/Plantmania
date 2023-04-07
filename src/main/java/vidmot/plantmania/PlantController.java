@@ -66,6 +66,7 @@ public class PlantController {
 
         birtaNotendaPlontur();
         skradurNotandi.get().getNotendaupplysingar().finnaFyrriVokvanir();
+        skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
     }
 
     /**
@@ -152,6 +153,7 @@ public class PlantController {
      */
     public void dagatalsEventFilterar() {
         Bindings.bindContentBidirectional(skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir(), fxDagatal.getAllarPlonturOgFyrriVokvanir());
+        Bindings.bindContentBidirectional(skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir(), fxDagatal.getAllarPlonturOgAaetladarVokvanir());
         dagatalTilBakaRegla();
         dagatalAframRegla();
 
@@ -161,6 +163,10 @@ public class PlantController {
             if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
                 int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
+
+                System.out.println("fyrri vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir());
+                System.out.println("naestu vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir());
+
 
                 if (valinDagsetning.isBefore(LocalDate.now())) {
                     //TODO: Hér á að opnast listi yfir plöntur sem voru vökvaðar þennan dag
@@ -192,47 +198,6 @@ public class PlantController {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
             fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
         }
-
-        /* held að þetta sé óþarfi, nákvæmlega sama í hladaOllumPlontum handlernum fyrir neðan
-        //System.out.println(event.getTarget().getClass());
-        Node node = event.getPickResult().getIntersectedNode();
-        while (node != null && !(node instanceof PlantaSpjald)) {
-            node = node.getParent();
-        }
-        if (node != null) {
-            Planta p = ((PlantaSpjald) node).getPlanta();
-            skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            SimpleModule module = new SimpleModule();
-            module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-            objectMapper.registerModule(module);
-            try {
-                List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
-                });
-
-                for (Notandi n : notendur) {
-                    if (n.getNotendanafn().equals(skradurNotandi.get().getNotendanafn())) {
-                        n = skradurNotandi.get();
-                        System.out.println(n);
-                    }
-                }
-                File file = new File("target/classes/vidmot/plantmania/notendur.json");
-                if (file.createNewFile()) {
-                    System.out.println("Ný skrá búin til");
-                    objectMapper.writeValue(file, notendur);
-                } else {
-                    System.out.println("skráin er til og er núna uppfærð");
-                    objectMapper.writeValue(file, notendur);//bætti við
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-         */
-
-
     }
 
     @FXML

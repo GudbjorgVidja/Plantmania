@@ -53,23 +53,29 @@ public class Notendaupplysingar {
                     }
                 }
             }
-
-
             fyrriVokvanir.sort(Comparator.comparing((Pair::getValue)));
-
         });
     }
 
     //skoða þetta. Mér finnst að það ætti að reikna einn mánuð í einu eða svo
     //Mér finnst að kannski væru þrír mánuðir betri, passar t.d. betur fyrir plöntu sem er vökvuð mánaðarlega
     public void finnaNaestuVokvanir() {
+        minarPlontur.addListener((ListChangeListener<MinPlanta>) (obs) -> {
+            while (obs.next()) {
+                if (obs.wasAdded()) {
+                    for (MinPlanta m : obs.getAddedSubList()) {
+                        m.reiknaPlanadarVokvanir();
+                    }
+                }
+            }
+            naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
+        });
+
         //hafa binding/listener hér
         // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
 
         //Þegar nýrri plöntu er bætt við:
         //setja vökvun í dag
-
-
     }
 
     public ObservableList<MinPlanta> getMinarPlontur() {
@@ -105,11 +111,21 @@ public class Notendaupplysingar {
     }
 
     public String toString() {
-        return minarPlontur.toString();
+        return minarPlontur.toString() + ", fyrri vokvanir: " + fyrriVokvanir.toString() + ", naestu vokvanir: " + naestuVokvanir.toString();
     }
 
     public static void main(String[] args) {
-        Notendaupplysingar uppl = new Notendaupplysingar();
+        Notendaupplysingar notendaupplysingar = new Notendaupplysingar();
+        List<Planta> plontur = new LesaPlontur().getPlontur();
+        MinPlanta minPlanta = new MinPlanta(plontur.get(0));
+        System.out.println(minPlanta);
+        //minPlanta.reiknaPlanadarVokvanir();
+        System.out.println(minPlanta.getPlanadarVokvanir());
+
+
+
+        /*Notendaupplysingar uppl = new Notendaupplysingar();
+        uppl.finnaNaestuVokvanir();
         List<Planta> plontur = new LesaPlontur().getPlontur();
 
         for (Planta p : plontur) {
@@ -117,10 +133,12 @@ public class Notendaupplysingar {
             uppl.minarPlontur.add(new MinPlanta(p));
         }
 
-        /*for (MinPlanta m : uppl.minarPlontur) {
-            System.out.println(m);
-        }*/
+
         System.out.println(uppl.minarPlontur.get(0));
+        System.out.println("Naestu vokvanir: " + uppl.naestuVokvanir);
+
+        System.out.println("fyrri vokvanir: " + uppl.fyrriVokvanir);*/
+/*
         uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2022, 3, 18));
         uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2023, 3, 14));
         uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2023, 3, 22));
@@ -137,5 +155,8 @@ public class Notendaupplysingar {
 
         System.out.println(uppl.minarPlontur.get(0));
 
+        //uppl.finnaFyrriVokvanir();
+        System.out.println("fyrri vokvanir: " + uppl.fyrriVokvanir);
+        System.out.println("Naestu vokvanir: " + uppl.naestuVokvanir);*/
     }
 }

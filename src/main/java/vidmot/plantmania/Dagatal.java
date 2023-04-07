@@ -37,6 +37,7 @@ public class Dagatal extends AnchorPane {
     private LocalDate syndurDagur;//dagurinn sem dagatalið sýnir. Notað til að vita hvaða mánuður er sýndur í augnablikinu
     //listi af pörum sem gefa dagsetningu og plöntu sem var vökvuð þá. inniheldur öll skipti sem einhver planta hefur verið vökvuð
     private ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgFyrriVokvanir = FXCollections.observableArrayList();
+    private ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgAaetladarVokvanir = FXCollections.observableArrayList();
 
     public Dagatal() {
         lesaFXML();
@@ -56,7 +57,12 @@ public class Dagatal extends AnchorPane {
      */
     //TODO: Skipta þessu upp í fleiri aðferðir
     public void geraDagatal(LocalDate dagur) {
-        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarins = allarPlonturOgFyrriVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth() && p.getValue().getYear() == syndurDagur.getYear());
+        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsLokid = allarPlonturOgFyrriVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth() && p.getValue().getYear() == syndurDagur.getYear());
+        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsOlokid = allarPlonturOgAaetladarVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth() && p.getValue().getYear() == syndurDagur.getYear());
+        System.out.println("vokvanir manadarins lokid: " + vokvanirManadarinsLokid);
+        System.out.println("allar vokvanir, lokid: " + allarPlonturOgFyrriVokvanir);
+        System.out.println("vokvanir manadarins olokid: " + vokvanirManadarinsOlokid);
+        System.out.println("allar aaetladar vokvanir: " + allarPlonturOgAaetladarVokvanir);
 
         int fjoldiDaga = dagur.getMonth().length(dagur.isLeapYear());
         DayOfWeek fyrstiDagurManadar = LocalDate.of(dagur.getYear(), dagur.getMonthValue(), 1).getDayOfWeek();
@@ -70,14 +76,18 @@ public class Dagatal extends AnchorPane {
         for (int i = 7; i < 49; i++) {
             if (fxGrid.getChildren().get(i) instanceof Dagur && !dagalisti.isEmpty() && !((i - 7) < fyrstiDagurManadar.ordinal())) {
                 LocalDate dagurinn = LocalDate.of(syndurDagur.getYear(), syndurDagur.getMonthValue(), dagalisti.get(0));
-                IntegerBinding fjoldiVokvana = Bindings.size(vokvanirManadarins.filtered(p -> p.getValue().isEqual(dagurinn)));
+                IntegerBinding fjoldiVokvanaLokid = Bindings.size(vokvanirManadarinsLokid.filtered(p -> p.getValue().isEqual(dagurinn)));
+                IntegerBinding fjoldiVokvanaOlokid = Bindings.size(vokvanirManadarinsOlokid.filtered(p -> p.getValue().isEqual(dagurinn)));
 
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().bind(fjoldiVokvana.asString());//ath að breyta þessu svo ef það er 0 sé labelinn tómur
-                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().bind(fjoldiVokvana.greaterThan(0));
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().textProperty().bind(fjoldiVokvanaOlokid.asString());
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().bind(fjoldiVokvanaLokid.asString());//ath að breyta þessu svo ef það er 0 sé labelinn tómur
+                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().bind(fjoldiVokvanaLokid.greaterThan(0));
                 ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText(dagalisti.get(0) + "");
 
                 dagalisti.remove(0);
             } else {
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().textProperty().unbind();
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().setText("");
                 ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().unbind();
                 ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().setVisible(false);
                 ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().unbind();
@@ -128,5 +138,9 @@ public class Dagatal extends AnchorPane {
 
     public ObservableList<Pair<MinPlanta, LocalDate>> getAllarPlonturOgFyrriVokvanir() {
         return allarPlonturOgFyrriVokvanir;
+    }
+
+    public ObservableList<Pair<MinPlanta, LocalDate>> getAllarPlonturOgAaetladarVokvanir() {
+        return allarPlonturOgAaetladarVokvanir;
     }
 }
