@@ -104,7 +104,6 @@ public class MinPlantaSpjald extends AnchorPane {
     }
 
     private void opnaPlontuglugga(MouseEvent event) {
-        //Plontugluggi gluggi = new Plontugluggi();
         System.out.println("Plantan sem ytt var a: " + minPlantan);
         Plontugluggi gluggi = new Plontugluggi(minPlantan);//tekur inn hlutinn sem spjaldið er fyrir
 
