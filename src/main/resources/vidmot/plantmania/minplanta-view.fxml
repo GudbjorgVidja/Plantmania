@@ -11,7 +11,7 @@
          xmlns="http://javafx.com/javafx/19"
          xmlns:fx="http://javafx.com/fxml/1" style="-fx-border-color: green;">
     <children>
-        <Pane layoutX="18.0" prefHeight="125.0" prefWidth="100.0" style="-fx-background-color: powderblue;">
+        <Pane layoutX="18.0" prefHeight="125.0" prefWidth="100.0">
             <!-- <Spjald fx:id="fxSpjald"/> -->
             <Spjald fx:id="fxSpjald"/>
         </Pane>

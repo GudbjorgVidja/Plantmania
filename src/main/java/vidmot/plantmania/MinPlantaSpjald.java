@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.MinPlanta;
 
@@ -24,6 +25,9 @@ public class MinPlantaSpjald extends AnchorPane {
     private Button fxVokva, fxFresta;
     @FXML
     private Spjald fxSpjald;
+
+    @FXML
+    private AnchorPane rot;
 
     private MinPlanta minPlantan;
 
@@ -56,6 +60,7 @@ public class MinPlantaSpjald extends AnchorPane {
         //setja handlera á takkana
         fxVokva.setOnAction(this::vokvaHandler);
         fxFresta.setOnAction(this::frestaHandler);
+        rot.setOnMouseClicked(this::opnaPlontuglugga);
 
         fxLabel.textProperty().bind(minPlantan.getNaestaVokvun().asString().concat(new SimpleStringProperty(" dagar")));
 
@@ -96,5 +101,13 @@ public class MinPlantaSpjald extends AnchorPane {
         minPlantan.setNaestaVokvun(minPlantan.getNaestaVokvun().get() + 1);
         minPlantan.naestaVokvunRegla(); //ný viðbót
         System.out.println("naestaVokvun: " + minPlantan.getNaestaVokvun().get());
+    }
+
+    private void opnaPlontuglugga(MouseEvent event) {
+        //Plontugluggi gluggi = new Plontugluggi();
+        System.out.println("Plantan sem ytt var a: " + minPlantan);
+        Plontugluggi gluggi = new Plontugluggi(minPlantan);//tekur inn hlutinn sem spjaldið er fyrir
+
+        gluggi.showAndWait();
     }
 }

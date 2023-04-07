@@ -214,9 +214,9 @@ public class PlantController {
         }
          */
 
-        Plontugluggi gluggi = new Plontugluggi();
-        gluggi.showAndWait();
+
     }
+
 
     @FXML
     private void hladaOllumPlontum(MouseEvent event) {

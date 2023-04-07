@@ -9,8 +9,7 @@
          stylesheets="@styling/planta-style.css" type="javafx.scene.layout.AnchorPane"
          xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Pane layoutX="18.0" prefHeight="125.0" prefWidth="100.0" style="-fx-background-color: powderblue;">
-            <!-- <Spjald fx:id="fxSpjald"/> -->
+        <Pane layoutX="18.0" prefHeight="125.0" prefWidth="100.0">
             <Spjald fx:id="fxSpjald"/>
         </Pane>
         <AnchorPane fx:id="fxBreytilegtSvaedi" layoutX="14.0" layoutY="128.0" prefHeight="51.0" prefWidth="107.0"
@@ -19,8 +18,7 @@
                 <HBox alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="107.0"
                       style="-fx-border-color: lightgreen;">
                     <children>
-                        <VBox alignment="BOTTOM_CENTER" fillWidth="false" prefHeight="27.0" prefWidth="36.0"
-                              spacing="5.0">
+                        <VBox fx:id="vatnBox" styleClass="vboxStats">
                             <children>
                                 <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66"/>
                                 <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -33,8 +31,7 @@
                                 </ImageView>
                             </children>
                         </VBox>
-                        <VBox alignment="BOTTOM_CENTER" fillWidth="false" layoutX="46.0" layoutY="11.0"
-                              prefHeight="27.0" prefWidth="36.0" spacing="5.0">
+                        <VBox layoutX="46.0" layoutY="11.0" fx:id="ljosBox" styleClass="vboxStats">
                             <children>
                                 <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66"/>
                                 <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -47,8 +44,7 @@
                                 </ImageView>
                             </children>
                         </VBox>
-                        <VBox alignment="BOTTOM_CENTER" fillWidth="false" layoutX="28.0" layoutY="11.0"
-                              prefHeight="27.0" prefWidth="36.0" spacing="5.0">
+                        <VBox layoutX="28.0" layoutY="11.0" fx:id="hitiBox" styleClass="vboxStats">
                             <children>
                                 <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66"/>
                                 <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

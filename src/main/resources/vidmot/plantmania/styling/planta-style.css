@@ -28,6 +28,14 @@ fx-background-color: -beef;
     -fx-background-color: lightsteelblue;
 }
 
+.vboxStats{
+    -fx-pref-height: 27;
+    -fx-pref-width: 36;
+    -fx-spacing: 5;
+    -fx-alignment: bottom-center;
+    -fx-fill-width: false;
+}
+
 
 
 .button{
@@ -75,7 +83,7 @@ fx-background-color: -beef;
 fx-image: url("plants/Picture1.png");
 }
 
-#almenntHeiti{
+#fxAlmenntNafn{
     -fx-background-color: transparent;
     -fx-font-size: 14px;
     -fx-padding: 0;
