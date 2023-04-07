@@ -1,8 +1,5 @@
 /**
- * Sérhæfði klasinn spjald, grunnur fyrir plöntuspjöldin
- * Þetta er kannski meira bara test
- * <p>
- * eða, spjald gæti verið grunnurinn með tómt anchorPane neðst.
+ * TODO: væri kannski betra að gera Spjald með MinPlanta hlut, frekar en bara Planta?
  */
 package vidmot.plantmania;
 
@@ -16,6 +13,10 @@ import vinnsla.plantmania.Planta;
 
 import java.io.IOException;
 
+/**
+ * Sérhæfður klasi, hlutur sem inniheldur mynd af plöntu, almennt heiti hennar, og uppruna. Spjald hlutur er á bæði
+ * PlantaSpjald og MinPlantaSpjald.
+ */
 public class Spjald extends VBox {
     @FXML
     private Label fxFlokkur, fxAlmenntNafn;
@@ -67,7 +68,12 @@ public class Spjald extends VBox {
         fxAlmenntNafn.setText(nafn);
     }
 
+    public Label getFxAlmenntNafn() {
+        return fxAlmenntNafn;
+    }
+
     public void setFxPlontuMynd(String hlekkur) {
         fxPlontuMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + hlekkur)));
     }
+
 }

@@ -45,9 +45,10 @@ public class Plontugluggi extends Dialog<Void> {
         ButtonType lokaTakki = new ButtonType("Loka glugga", ButtonBar.ButtonData.CANCEL_CLOSE);
         getDialogPane().getButtonTypes().add(lokaTakki);
 
-        fxLatnesktNafn.setText(minPlantan.getPlanta().getLatnesktNafn());
-        fxAlmenntNafn.setText(minPlantan.getPlanta().getAlmenntNafn());
-        fxMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + minPlantan.getPlanta().getMyndaslod())));
+        fxLatnesktNafn.setText(minPlantan.getLatnesktNafn());
+        fxAlmenntNafn.setText(minPlantan.getNickName());
+        fxAlmenntNafn.textProperty().bind(minPlantan.nickNameProperty());
+        fxMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + minPlantan.getMyndaslod())));
 
         fxBreytaNafni.setOnMouseClicked(this::breytaNafniHandler);
         fxAthugasemdir.setOnAction(this::athugasemdirHandler);
@@ -79,6 +80,7 @@ public class Plontugluggi extends Dialog<Void> {
         Optional<String> inntak = nafnDialog.showAndWait();
         if (inntak.isPresent()) {
             minPlantan.setNickName(inntak.get());
+            System.out.println(inntak);
             /* skoða betur, kastar villu
             if (!minPlantan.getOllHeiti().contains(inntak.get())) {
             List<String> nyrListi = minPlantan.getOllHeiti();

@@ -41,7 +41,7 @@ public class MinPlanta extends Planta {
     //passa hvernig smiðurinn lítur út hér!
     public MinPlanta(Planta planta) {
         super(planta);
-        this.nickName.set(planta.getOllHeiti().get(0));
+        this.nickName.set(planta.getOllHeiti().get(1));
         this.thinnTimiMilliVokvana.set(planta.getAlmennurTimiMilliVokvana());
         //this.planta = planta;
         sidastaVokvunListener();
@@ -68,7 +68,7 @@ public class MinPlanta extends Planta {
     }
 
     public void reiknaPlanadarVokvanir() {
-        planadarVokvanirTestListener();
+        //planadarVokvanirTestListener(); //prentar
         LocalDate date = LocalDate.now();
         LocalDate eftirThrjaManudi = date.plusMonths(3);
         for (LocalDate dagur = date; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {

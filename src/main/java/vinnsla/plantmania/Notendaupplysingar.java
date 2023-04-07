@@ -57,8 +57,11 @@ public class Notendaupplysingar {
         });
     }
 
-    //skoða þetta. Mér finnst að það ætti að reikna einn mánuð í einu eða svo
-    //Mér finnst að kannski væru þrír mánuðir betri, passar t.d. betur fyrir plöntu sem er vökvuð mánaðarlega
+
+    /**
+     * Finnur vökvanir þrjá mánuði fram í tímann.
+     * Passa að hafa einhverja tilkynningu um að engar upplýsingar séu skráðar um fyrri vökvun
+     */
     public void finnaNaestuVokvanir() {
         System.out.println("finnaNaestuVokvanir adferd");
         //hafa binding/listener hér

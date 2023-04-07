@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.util.Locale;
 
 /**
- * plöntuspjald fyrir einhverja plöntu, hlutur af gerð Planta. það er líka til MinPlantaSpjald
+ * plöntuspjald fyrir einhverja plöntu, hlutur af gerð Planta. það er líka til MinPlantaSpjald.
+ * PlantaSpjald er fyrir plöntu sem notandi á ekki
  */
 public class PlantaSpjald extends AnchorPane {
     @FXML
@@ -35,14 +36,13 @@ public class PlantaSpjald extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        if (fxSpjald != null) {
-            fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
-            fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));
-            fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
-        } else {
-            System.out.println("fxSpjald er null");
-        }
-
+        //if (fxSpjald != null) {
+        fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
+        fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));
+        fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
+        //} else {
+        System.out.println("fxSpjald er null");
+        //}
     }
 
     public String toString() {
