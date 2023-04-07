@@ -1,10 +1,3 @@
-/**
- * skoða með að hafa eiginlega accordionPane í skrollanlega partinum. Þyrfti að vera TitledPane hlutir í VBox sem er í
- * ScrollPane, því accordion leyfir bara eitt opið í einu.
- * Nota listener til að setja min stærð eftir því hvort titledPane er opið eða lokað.
- * <p>
- * Byrja að gera þetta bara fyrir minPlanta hlut
- */
 package vidmot.plantmania;
 
 import javafx.event.ActionEvent;
@@ -19,6 +12,13 @@ import vinnsla.plantmania.MinPlanta;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * skoða með að hafa eiginlega accordionPane í skrollanlega partinum. Þyrfti að vera TitledPane hlutir í VBox sem er í
+ * ScrollPane, því accordion leyfir bara eitt opið í einu.
+ * Nota listener til að setja min stærð eftir því hvort titledPane er opið eða lokað.
+ * <p>
+ * Byrja að gera þetta bara fyrir minPlanta hlut. Einhver virkni komin
+ */
 public class Plontugluggi extends Dialog<Void> {
     @FXML
     private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn;
@@ -37,7 +37,6 @@ public class Plontugluggi extends Dialog<Void> {
         setDialogPane(lesaGlugga());
         ButtonType lokaTakki = new ButtonType("Loka glugga", ButtonBar.ButtonData.CANCEL_CLOSE);
         getDialogPane().getButtonTypes().add(lokaTakki);
-        //setResult(null);
     }
 
     public Plontugluggi(MinPlanta minPlanta) {
@@ -57,22 +56,6 @@ public class Plontugluggi extends Dialog<Void> {
     }
 
 
-    private void resultConverter() {
-        setResult(null);
-    }
-
-    /*
-    private void resultConverter() {
-        setResultConverter();
-        setResultConverter(b -> {
-            if (b.getButtonData() == ButtonBar.ButtonData.OK_DONE) {
-                return;
-            }
-        });
-    }
-
-     */
-
     private DialogPane lesaGlugga() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(View.GLUGGI.getFileName()));
         try {
@@ -82,9 +65,13 @@ public class Plontugluggi extends Dialog<Void> {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
     }
 
+    /**
+     * Breytir nickname fyrir MinPlanta hlut
+     *
+     * @param event smellt á litla merkið við hliðina á nafni plöntu
+     */
     private void breytaNafniHandler(MouseEvent event) {
         System.out.println("nafni verdur breytt");
         TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getNickName());
@@ -92,14 +79,13 @@ public class Plontugluggi extends Dialog<Void> {
         Optional<String> inntak = nafnDialog.showAndWait();
         if (inntak.isPresent()) {
             minPlantan.setNickName(inntak.get());
-            //if (!minPlantan.getOllHeiti().contains(inntak.get())) {
-            /*
+            /* skoða betur, kastar villu
+            if (!minPlantan.getOllHeiti().contains(inntak.get())) {
             List<String> nyrListi = minPlantan.getOllHeiti();
             nyrListi.add(inntak.get());
             minPlantan.setOllHeiti(nyrListi);
-
-             */
-            //}
+            }
+            */
         }
     }
 
@@ -110,20 +96,14 @@ public class Plontugluggi extends Dialog<Void> {
      * @param event smellt á takkann breyta nótum eða eitthvað
      */
     private void athugasemdirHandler(ActionEvent event) {
-
         ButtonType vista = new ButtonType("vista breytingar", ButtonBar.ButtonData.OK_DONE);
         ButtonType haettaVid = new ButtonType("hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
         Dialog<String> dialogur = new Dialog<>();
         dialogur.getDialogPane().getButtonTypes().addAll(vista, haettaVid);
-        //DialogPane dialogPane = new DialogPane(vista, haettaVid);
-        //String eldriTexti = "eldri upplýsingar";
         TextArea textArea = new TextArea(minPlantan.getNotesFraNotanda());
         dialogur.getDialogPane().setContent(textArea);
         dialogur.setResultConverter(b -> {
-            //if (b.getButtonData().equals(ButtonBar.ButtonData.CANCEL_CLOSE)) return null;
             if (b.getButtonData().equals(ButtonBar.ButtonData.OK_DONE)) return textArea.getText();
-            //return eldriTexti;
-            //return textArea.getText();
             return null;
         });
 
@@ -135,12 +115,14 @@ public class Plontugluggi extends Dialog<Void> {
         }
     }
 
+    /**
+     * prentar fyrri vökvanir og planaðar vökvanir fyrir plöntuna
+     *
+     * @param event smellt á vökvunarsaga hnapp
+     */
     private void vokvunarsagaHandler(ActionEvent event) {
         System.out.println("fyrri vokvanir: " + minPlantan.getVokvanir());
         System.out.println("planadar vokvanir: " + minPlantan.getPlanadarVokvanir());
     }
 
-    public static void main(String[] args) {
-
-    }
 }
