@@ -55,7 +55,20 @@ public class MinPlanta extends Planta {
 
     }
 
+    private void planadarVokvanirTestListener() {
+        planadarVokvanir.addListener((ListChangeListener<? super LocalDate>) change -> {
+            change.next();
+            if (change.wasAdded()) System.out.print("added ");
+            if (change.wasRemoved()) System.out.print("removed ");
+            if (change.wasPermutated()) System.out.print("permutated ");
+            if (change.wasReplaced()) System.out.print("replaced "); //ef bæði removed og added true
+            if (change.wasUpdated()) System.out.print("updated ");
+            System.out.println();
+        });
+    }
+
     private void reiknaPlanadarVokvanir() {
+        planadarVokvanirTestListener();
         LocalDate date = LocalDate.now();
         LocalDate eftirThrjaManudi = date.plusMonths(3);
         for (LocalDate dagur = date; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {
@@ -64,10 +77,17 @@ public class MinPlanta extends Planta {
 
         naestaVokvun.addListener((obs, o, n) -> {
             if (n.intValue() > o.intValue()) {
+                for (int i = 0; i < planadarVokvanir.size(); i++) {
+                    //planadarVokvanir.get(i)=planadarVokvanir.get(i).plusDays(n.intValue()-o.intValue());
+                    //planadarVokvanir.get(i).plusDays(n.intValue()-o.intValue());
+                    planadarVokvanir.set(i, planadarVokvanir.get(i).plusDays(n.intValue() - o.intValue()));
+                }
+                /*
                 for (LocalDate vDay : planadarVokvanir) {
                     vDay = vDay.plusDays(n.intValue() - o.intValue());
-
                 }
+
+                 */
                 System.out.println(planadarVokvanir);
             } else if (n.intValue() < o.intValue()) {
                 for (LocalDate vDay : planadarVokvanir) {
@@ -254,9 +274,14 @@ public class MinPlanta extends Planta {
         this.planta = planta;
     }
 
+    public ObservableList<LocalDate> getPlanadarVokvanir() {
+        return planadarVokvanir;
+    }
+
     public String toString() {
         return "MinPlanta{" +
-                "nickName=" + nickName.get() +
+                "planadarVokvanir: " + planadarVokvanir +
+                ", nickName=" + nickName.get() +
                 ", vokvanir=" + vokvanir.toString() +
                 ", notesFraNotanda=" + notesFraNotanda.get() +
                 ", flokkar=" + flokkar.toString() +

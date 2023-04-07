@@ -63,11 +63,29 @@ public class Notendaupplysingar {
     //skoða þetta. Mér finnst að það ætti að reikna einn mánuð í einu eða svo
     //Mér finnst að kannski væru þrír mánuðir betri, passar t.d. betur fyrir plöntu sem er vökvuð mánaðarlega
     public void finnaNaestuVokvanir() {
+        System.out.println("finnaNaestuVokvanir adferd");
         //hafa binding/listener hér
         // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
 
         //Þegar nýrri plöntu er bætt við:
         //setja vökvun í dag
+        minarPlontur.addListener((ListChangeListener<? super MinPlanta>) change -> {
+            System.out.println("Listenerinn");
+            change.next();
+
+
+            if (change.wasAdded()) {
+                System.out.println("Plontu var baett vid minarPlontur i notendaupplysingar");
+                for (MinPlanta mp : change.getAddedSubList()) {
+                    for (LocalDate date : mp.getPlanadarVokvanir()) {
+                        naestuVokvanir.add(new Pair<>(mp, date));
+                        //System.out.println("naestuVokvanir: " + naestuVokvanir);
+                    }
+                }
+                System.out.println("naestuVokvanir: " + naestuVokvanir);
+            }
+
+        });
 
 
     }

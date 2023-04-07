@@ -84,7 +84,7 @@ public class Plontuyfirlit extends AnchorPane {
 
 
         setjaMenuItemHandlera();
-        
+
     }
 
 
@@ -313,6 +313,13 @@ public class Plontuyfirlit extends AnchorPane {
     private void flokkunItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
+    }
+
+    /**
+     * @return öll spjöld yfirlits
+     */
+    public ObservableList<Node> getSyndSpjold() {
+        return syndSpjold;
     }
 
 

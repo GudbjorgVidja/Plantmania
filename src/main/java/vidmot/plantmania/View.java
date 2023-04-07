@@ -5,7 +5,8 @@ package vidmot.plantmania;
  */
 public enum View {
     UPPHAFSSIDA("upphaf-view.fxml"),
-    ADALSIDA("mania-view.fxml");
+    ADALSIDA("mania-view.fxml"),
+    GLUGGI("plontugluggi-view.fxml");
     private final String fileName;
 
     View(String fileName) {

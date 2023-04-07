@@ -66,6 +66,20 @@ public class PlantController {
 
         birtaNotendaPlontur();
         skradurNotandi.get().getNotendaupplysingar().finnaFyrriVokvanir();
+
+        skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
+        /*
+        skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
+            change.next();
+            if (change.wasAdded())
+                System.out.println("\n" + change.getAddedSubList() + " baett vid notendaupplysingar");
+        });
+
+         */
+
+        //fxMinarPlonturYfirlit.getMinarPlontur.addListener() og bæta allaf sömu við
+        //fxMinarPlonturYfirlit.getSyndSpjold().addListener((ListChangeListener<? super Node>) change ->{
+        //});
     }
 
     /**
@@ -188,10 +202,18 @@ public class PlantController {
     @FXML
     protected void fxBaetaVidHandler(MouseEvent event) {
         //eintaki af öllum plöntum (gerðum) bætt við plöntur notanda
+        /*
         for (int i = 0; i < allarPlontur.size(); i++) {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
             fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
         }
+
+         */
+
+        Plontugluggi gluggi = new Plontugluggi();
+        gluggi.showAndWait();
+
+
 
         /* held að þetta sé óþarfi, nákvæmlega sama í hladaOllumPlontum handlernum fyrir neðan
         //System.out.println(event.getTarget().getClass());
