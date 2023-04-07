@@ -69,6 +69,7 @@ public class Notendaupplysingar {
         //Þegar nýrri plöntu er bætt við:
         //setja vökvun í dag
 
+
     }
 
     public ObservableList<MinPlanta> getMinarPlontur() {
@@ -97,7 +98,6 @@ public class Notendaupplysingar {
     }
 
     public void baetaVidPlontu(Planta planta) {
-
         minarPlontur.add(new MinPlanta(planta));
         //MinPlanta ny = new MinPlanta();
         //ny.setAlmenntNafn(planta.getAlmenntNafn());

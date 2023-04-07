@@ -37,6 +37,7 @@ public class MinPlanta extends Planta {
 
     private IntegerProperty naestaVokvun = new SimpleIntegerProperty(2);//setja hér niðurtalningu
 
+    private ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
 
     //passa hvernig smiðurinn lítur út hér!
     public MinPlanta(Planta planta) {
@@ -45,7 +46,38 @@ public class MinPlanta extends Planta {
         this.planta = planta;
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
+
+        naestaVokvun = (thinnTimiMilliVokvana);
+
         naestaVokvunRegla();
+
+        reiknaPlanadarVokvanir();
+
+    }
+
+    private void reiknaPlanadarVokvanir() {
+        LocalDate date = LocalDate.now();
+        LocalDate eftirThrjaManudi = date.plusMonths(3);
+        for (LocalDate dagur = date; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {
+            planadarVokvanir.add(dagur);
+        }
+
+        naestaVokvun.addListener((obs, o, n) -> {
+            if (n.intValue() > o.intValue()) {
+                for (LocalDate vDay : planadarVokvanir) {
+                    vDay = vDay.plusDays(n.intValue() - o.intValue());
+
+                }
+                System.out.println(planadarVokvanir);
+            } else if (n.intValue() < o.intValue()) {
+                for (LocalDate vDay : planadarVokvanir) {
+                    vDay = vDay.plusDays(o.intValue() - n.intValue());
+
+                }
+                System.out.println(planadarVokvanir);
+            }
+        });
+        //date.plusDays(1);
     }
 
     public void sidastaVokvunListener() {
