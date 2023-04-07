@@ -9,27 +9,34 @@ import vinnsla.plantmania.Notandi;
 
 import java.util.List;
 
+/**
+ * Klasi fyrir dialoginn sem kemur þegar notandi gerir nýjan aðgang
+ */
 public class NyskraningDialog extends Dialog<Notandi> {
     private List<Notandi> adgangarISkra;
     private TextField fxNotendanafn;
     private PasswordField fxLykilord;
     private PasswordField fxEndurtekning;
-    private Notandi notandi = new Notandi();
     private BooleanProperty notandiTil = new SimpleBooleanProperty();
     private BooleanProperty lykilordRettEndurtekid = new SimpleBooleanProperty();
 
+    /**
+     * @param notendur - List<Notandi> listi yfir alla notendur sem eru til í kerfinu
+     */
     public NyskraningDialog(List<Notandi> notendur) {
         this.adgangarISkra = notendur;
         geraUtlit();
 
-        geraBinding();
         takkaRegla();
-        erNotandiTilRegla();
+        erNotandiTilListener();
         erLykilordRettRegla();
 
         setResultConverter();
     }
 
+    /**
+     * setur upp útlitið fyrir Dialoginn
+     */
     private void geraUtlit() {
         fxNotendanafn = new TextField();
         fxLykilord = new PasswordField();
@@ -39,22 +46,29 @@ public class NyskraningDialog extends Dialog<Notandi> {
         g.add(fxNotendanafn, 1, 0);
         g.add(new Label("Lykilorð"), 0, 1);
         g.add(fxLykilord, 1, 1);
-        g.add(new Label("endurtaka lykilorð"), 0, 2);
+        g.add(new Label("Endurtaka lykilorð"), 0, 2);
         g.add(fxEndurtekning, 1, 2);
         getDialogPane().setContent(g);
         getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         getDialogPane().setHeaderText("Nýskráning");
-        //initStyle(StageStyle.UNDECORATED);
-        //getDialogPane().getContent().setStyle();
-        //getDialogPane().setStyle("-fx-border-color: black;");
-        //getDialogPane().setStyle("-fx-border-width: 5px;");
     }
 
+    /**
+     * gerir reglu til að óvikja í lagi takkann ef reitir eru tómir, notendanafn er ekki laust
+     * eða lykilorð ekki rétt endurtekið
+     */
+    //TODO: Hafa eitt sameiginlegt BooleanProperty fyrir alla lógíkina
     private void takkaRegla() {
-        getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(fxNotendanafn.textProperty().isEmpty().or(fxLykilord.textProperty().isEmpty()).or(fxEndurtekning.textProperty().isEmpty()).or(notandiTil).or(lykilordRettEndurtekid.not()));
+        getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(fxNotendanafn.textProperty().
+                isEmpty().or(fxLykilord.textProperty().isEmpty()).or(fxEndurtekning.textProperty().isEmpty()).
+                or(notandiTil).or(lykilordRettEndurtekid.not()));
     }
 
-    private void erNotandiTilRegla() {
+    /**
+     * gerir listener sem fylgist með notendanafnsreit og uppfærir booleanProperty eftir því hvort
+     * notendanafnið er nú þegar í notkun
+     */
+    private void erNotandiTilListener() {
         fxNotendanafn.textProperty().addListener((observable, oldValue, newValue) -> {
             notandiTil.set(false);
             for (Notandi n : adgangarISkra) {
@@ -65,6 +79,10 @@ public class NyskraningDialog extends Dialog<Notandi> {
         });
     }
 
+    /**
+     * gerir listenera til að fylgjast með hvort það sé sami texti í báðum lykilorðareitum
+     * og uppfærir booleanproperty eftir því sem við á
+     */
     private void erLykilordRettRegla() {
         fxEndurtekning.textProperty().addListener((observable, oldValue, newValue) -> {
             lykilordRettEndurtekid.set(fxEndurtekning.textProperty().get().equals(fxLykilord.textProperty().get()));
@@ -74,15 +92,13 @@ public class NyskraningDialog extends Dialog<Notandi> {
         });
     }
 
-    private void geraBinding() {
-        notandi.notendanafnProperty().bind(fxNotendanafn.textProperty());
-        notandi.lykilordProperty().bind(fxLykilord.textProperty());
-    }
-
+    /**
+     * gerir resultConverter til að túlka niðurstöður
+     */
     private void setResultConverter() {
         Callback<ButtonType, Notandi> personResultConverter = param -> {
             if (param == ButtonType.OK) {
-                return notandi;
+                return new Notandi(fxNotendanafn.getText(), fxLykilord.getText());
             } else {
                 return null;
             }

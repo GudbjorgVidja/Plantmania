@@ -31,7 +31,7 @@
             <children>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Label">
+                        <Label layoutX="24.0" layoutY="15.0" text="Mán">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -40,7 +40,7 @@
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Label">
+                        <Label layoutX="24.0" layoutY="15.0" text="Þri">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -49,7 +49,7 @@
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="26.0" layoutY="16.0" text="Label">
+                        <Label layoutX="26.0" layoutY="16.0" text="Mið">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -58,7 +58,7 @@
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Label">
+                        <Label layoutX="24.0" layoutY="15.0" text="Fim">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -67,7 +67,7 @@
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Label">
+                        <Label layoutX="24.0" layoutY="15.0" text="Fös">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -76,7 +76,7 @@
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Label">
+                        <Label layoutX="24.0" layoutY="15.0" text="Lau">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -85,7 +85,7 @@
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Label">
+                        <Label layoutX="24.0" layoutY="15.0" text="Sun">
                             <font>
                                 <Font size="14.0" />
                             </font>
