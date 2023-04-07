@@ -68,7 +68,7 @@
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0"
                                       text="Þegar plantan er vökvuð skal gegnbleyta moldina. Sumir velja að setja pottin á kaf þar til engar loftbólur stíga upp.  Almennt er gert ráð fyrir að vökva þurfi á 12-16 daga fresti yfir sumarið, og sjaldnar á veturna."
                                       wrappingWidth="295.0"/>
-                                <Button mnemonicParsing="false" text="vökvunarsaga"/>
+                                <Button mnemonicParsing="false" text="vökvunarsaga" fx:id="fxVokvunarsaga"/>
                                 <HBox layoutX="25.0" layoutY="49.0" styleClass="titilbox">
                                     <children>
                                         <Label styleClass="titill-label" text="Ljósþörf"/>

@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import vinnsla.plantmania.MinPlanta;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class Plontugluggi extends Dialog<Void> {
     @FXML
@@ -26,7 +27,7 @@ public class Plontugluggi extends Dialog<Void> {
     private ImageView fxMynd;
 
     @FXML
-    private Button fxAthugasemdir;
+    private Button fxAthugasemdir, fxVokvunarsaga;
 
     private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
 
@@ -51,6 +52,7 @@ public class Plontugluggi extends Dialog<Void> {
 
         fxBreytaNafni.setOnMouseClicked(this::breytaNafniHandler);
         fxAthugasemdir.setOnAction(this::athugasemdirHandler);
+        fxVokvunarsaga.setOnAction(this::vokvunarsagaHandler);
 
     }
 
@@ -85,10 +87,57 @@ public class Plontugluggi extends Dialog<Void> {
 
     private void breytaNafniHandler(MouseEvent event) {
         System.out.println("nafni verdur breytt");
+        TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getNickName());
+        //nafnDialog.getDialogPane().getButtonTypes()
+        Optional<String> inntak = nafnDialog.showAndWait();
+        if (inntak.isPresent()) {
+            minPlantan.setNickName(inntak.get());
+            //if (!minPlantan.getOllHeiti().contains(inntak.get())) {
+            /*
+            List<String> nyrListi = minPlantan.getOllHeiti();
+            nyrListi.add(inntak.get());
+            minPlantan.setOllHeiti(nyrListi);
+
+             */
+            //}
+        }
     }
 
+    /**
+     * Dialogur sem inniheldur textArea opnast. Í þessu textArea eru Notes frá notanda, ef ekkert þá er það tomt.
+     * Ef eitthvað er skrifað í gluggann og valið að vista það, þá vistast það í minPlanta hlutinn.
+     *
+     * @param event smellt á takkann breyta nótum eða eitthvað
+     */
     private void athugasemdirHandler(ActionEvent event) {
-        System.out.println("Athugasemdagluggi opnast");
+
+        ButtonType vista = new ButtonType("vista breytingar", ButtonBar.ButtonData.OK_DONE);
+        ButtonType haettaVid = new ButtonType("hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Dialog<String> dialogur = new Dialog<>();
+        dialogur.getDialogPane().getButtonTypes().addAll(vista, haettaVid);
+        //DialogPane dialogPane = new DialogPane(vista, haettaVid);
+        //String eldriTexti = "eldri upplýsingar";
+        TextArea textArea = new TextArea(minPlantan.getNotesFraNotanda());
+        dialogur.getDialogPane().setContent(textArea);
+        dialogur.setResultConverter(b -> {
+            //if (b.getButtonData().equals(ButtonBar.ButtonData.CANCEL_CLOSE)) return null;
+            if (b.getButtonData().equals(ButtonBar.ButtonData.OK_DONE)) return textArea.getText();
+            //return eldriTexti;
+            //return textArea.getText();
+            return null;
+        });
+
+        //dialogur.setDialogPane(dialogPane);
+        Optional<String> result = dialogur.showAndWait();
+        if (result.isPresent()) {//result vistar breytingar á texta
+            System.out.println("utkoma ur dialog: " + result);
+            minPlantan.setNotesFraNotanda(result.get());
+        }
+    }
+
+    private void vokvunarsagaHandler(ActionEvent event) {
+        System.out.println("fyrri vokvanir: " + minPlantan.getVokvanir());
+        System.out.println("planadar vokvanir: " + minPlantan.getPlanadarVokvanir());
     }
 
     public static void main(String[] args) {
