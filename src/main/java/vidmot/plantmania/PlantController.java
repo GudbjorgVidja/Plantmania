@@ -233,6 +233,7 @@ public class PlantController {
             SimpleModule module = new SimpleModule();
             module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
             objectMapper.registerModule(module);
+            objectMapper.findAndRegisterModules();
             try {
                 List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
                 });
@@ -270,6 +271,8 @@ public class PlantController {
         SimpleModule module = new SimpleModule();
         module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
         objectMapper.registerModule(module);
+        objectMapper.findAndRegisterModules();
+
         try {
             List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
             });
