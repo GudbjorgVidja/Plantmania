@@ -1,7 +1,3 @@
-/**
- * minPlantaSpjald les inn fxml skrána minplanta-view.fxml. Þessi klasi er controllerinn
- * MinPlantaSpjald inniheldur Spjald hlut með sömu plöntu
- */
 package vidmot.plantmania;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -18,6 +14,10 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Locale;
 
+/**
+ * minPlantaSpjald les inn fxml skrána minplanta-view.fxml. Þessi klasi er controllerinn
+ * MinPlantaSpjald inniheldur Spjald hlut með sömu plöntu
+ */
 public class MinPlantaSpjald extends AnchorPane {
     @FXML
     private Label fxLabel;
@@ -50,9 +50,9 @@ public class MinPlantaSpjald extends AnchorPane {
         minPlantan = minPlanta;
 
         if (fxSpjald != null) {
-            fxSpjald.setFxAlmenntNafn(minPlantan.getPlanta().getAlmenntNafn());
-            fxSpjald.setFxFlokkur(minPlantan.getPlanta().getUppruni().toString().toLowerCase(Locale.ROOT));
-            fxSpjald.setFxPlontuMynd(minPlantan.getPlanta().getMyndaslod());
+            fxSpjald.setFxAlmenntNafn(minPlantan.getAlmenntNafn());
+            fxSpjald.setFxFlokkur(minPlantan.getUppruni().toString().toLowerCase(Locale.ROOT));
+            fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
         } else {
             System.out.println("fxSpjald is null");
         }
@@ -92,7 +92,7 @@ public class MinPlantaSpjald extends AnchorPane {
     }
 
     public String toString() {
-        return minPlantan.getPlanta().getAlmenntNafn();
+        return minPlantan.getAlmenntNafn();
     }
 
     private void frestaHandler(ActionEvent event) {

@@ -70,7 +70,6 @@ public class Notendaupplysingar {
             System.out.println("Listenerinn");
             change.next();
 
-
             if (change.wasAdded()) {
                 System.out.println("Plontu var baett vid minarPlontur i notendaupplysingar");
                 for (MinPlanta mp : change.getAddedSubList()) {
@@ -81,10 +80,7 @@ public class Notendaupplysingar {
                 }
                 System.out.println("naestuVokvanir: " + naestuVokvanir);
             }
-
         });
-
-
     }
 
     public ObservableList<MinPlanta> getMinarPlontur() {
@@ -94,7 +90,6 @@ public class Notendaupplysingar {
     public void setMinarPlontur(ObservableList<MinPlanta> minarPlontur) {
         this.minarPlontur = minarPlontur;
     }
-
 
     public ObservableList<Pair<MinPlanta, LocalDate>> getFyrriVokvanir() {
         return fyrriVokvanir;
@@ -112,6 +107,7 @@ public class Notendaupplysingar {
         this.naestuVokvanir = naestuVokvanir;
     }
 
+    //passa að engar tvær plöntur fái sama nickname
     public void baetaVidPlontu(Planta planta) {
         minarPlontur.add(new MinPlanta(planta));
         //MinPlanta ny = new MinPlanta();

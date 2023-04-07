@@ -17,6 +17,7 @@ package vinnsla.plantmania;
 
 import java.util.List;
 
+//TODO: bæta kannski við enum fyrir vökvunaraðferð? veit ekki, en eru ekki örfáar basic aðferðir og mælt með mismunandi eftir plöntum?
 public class Planta {
     private String latnesktNafn;
     private String almenntNafn; //má breyta í mínPlanta, annars ekki
@@ -33,19 +34,35 @@ public class Planta {
     private List<String> einkenniPlontu;//t.d. ákveðin lauf... má sleppa
 
     public Planta(String latnesktNafn, String almenntNafn, List<String> ollHeiti, String myndaslod, String texti, Uppruni uppruni, Ljosstyrkur ljosstyrkur, Eitrun eitrun, int kjorhitastig, Vatnsthorf vatnsthorf, int almennurTimiMilliVokvana, int ljosStundir, List<String> einkenniPlontu) {
-        this.latnesktNafn = latnesktNafn; //eða hafa bara latnesktNafn=ollHeiti.get(0)
-        this.almenntNafn = almenntNafn; // eða almenntNafn=ollHeiti.get(1)
+        this.latnesktNafn = latnesktNafn; //eða hafa bara latnesktNafn=ollHeiti.get(0)   JÁ!! SNIÐUG
+        this.almenntNafn = almenntNafn; // eða almenntNafn=ollHeiti.get(1)  AHA
         this.ollHeiti = ollHeiti;
         this.myndaslod = myndaslod;
         this.texti = texti;
         this.uppruni = uppruni;
         this.ljosstyrkur = ljosstyrkur;
         this.eitrun = eitrun;
-        this.kjorhitastig = kjorhitastig;
+        this.kjorhitastig = kjorhitastig;//hafa 3 gildi, min, kjör og max í fylki
         this.vatnsthorf = vatnsthorf;
         this.almennurTimiMilliVokvana = almennurTimiMilliVokvana;
         this.ljosStundir = ljosStundir;
         this.einkenniPlontu = einkenniPlontu;
+    }
+
+    public Planta(Planta planta) {
+        this.latnesktNafn = planta.latnesktNafn; //eða hafa bara latnesktNafn=ollHeiti.get(0)
+        this.almenntNafn = planta.almenntNafn; // eða almenntNafn=ollHeiti.get(1)
+        this.ollHeiti = planta.ollHeiti;
+        this.myndaslod = planta.myndaslod;
+        this.texti = planta.texti;
+        this.uppruni = planta.uppruni;
+        this.ljosstyrkur = planta.ljosstyrkur;
+        this.eitrun = planta.eitrun;
+        this.kjorhitastig = planta.kjorhitastig;//hafa 3 gildi, min, kjör og max í fylki
+        this.vatnsthorf = planta.vatnsthorf;
+        this.almennurTimiMilliVokvana = planta.almennurTimiMilliVokvana;
+        this.ljosStundir = planta.ljosStundir;
+        this.einkenniPlontu = planta.einkenniPlontu;
     }
 
     public Planta() {

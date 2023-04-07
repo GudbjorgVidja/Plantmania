@@ -105,6 +105,7 @@ public class UpphafController {
         SimpleModule module = new SimpleModule();
         module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
         objectMapper.registerModule(module);
+        objectMapper.findAndRegisterModules();
 
         try {
             notendur = objectMapper.readValue(new File(filename), new TypeReference<>() {
@@ -125,6 +126,8 @@ public class UpphafController {
         SimpleModule module = new SimpleModule();
         module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
         objectMapper.registerModule(module);
+        objectMapper.findAndRegisterModules();
+
         try {
             File file = new File(filename);
             if (file.createNewFile()) {

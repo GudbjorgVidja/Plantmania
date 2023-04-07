@@ -5,6 +5,7 @@
  */
 package vinnsla.plantmania;
 
+//TODO: taka út slóð fyrir mynd?
 public enum Uppruni {
     EYDIMORK("mynd", "eyðimörk"),
     REGNSKOGUR("", "regnskógur"),

@@ -1,6 +1,3 @@
-/**
- * plöntuspjald fyrir einhverja plöntu, hlutur af gerð Planta. það er líka til MinPlantaSpjald
- */
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;
@@ -11,6 +8,9 @@ import vinnsla.plantmania.Planta;
 import java.io.IOException;
 import java.util.Locale;
 
+/**
+ * plöntuspjald fyrir einhverja plöntu, hlutur af gerð Planta. það er líka til MinPlantaSpjald
+ */
 public class PlantaSpjald extends AnchorPane {
     @FXML
     private AnchorPane fxBreytilegtSvaedi;//laga nafn, en er anchorPane sem inniheldur stats, til að geta breytt því og sýnt takka

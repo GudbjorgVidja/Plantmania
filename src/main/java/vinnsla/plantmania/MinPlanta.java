@@ -31,19 +31,19 @@ public class MinPlanta extends Planta {
     private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();
     private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();
     private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();
-    private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
+    //private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
     //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
     //en það væri kannski bara meira vesen
 
     private IntegerProperty naestaVokvun = new SimpleIntegerProperty(2);//setja hér niðurtalningu
-
     private ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
 
     //passa hvernig smiðurinn lítur út hér!
     public MinPlanta(Planta planta) {
+        super(planta);
         this.nickName.set(planta.getOllHeiti().get(0));
         this.thinnTimiMilliVokvana.set(planta.getAlmennurTimiMilliVokvana());
-        this.planta = planta;
+        //this.planta = planta;
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
 
@@ -266,15 +266,6 @@ public class MinPlanta extends Planta {
         naestaVokvun.set(i);
     }
 
-
-    public Planta getPlanta() {
-        return planta;
-    }
-
-    public void setPlanta(Planta planta) {
-        this.planta = planta;
-    }
-
     public ObservableList<LocalDate> getPlanadarVokvanir() {
         return planadarVokvanir;
     }
@@ -294,7 +285,7 @@ public class MinPlanta extends Planta {
                 ", medaltimiMilliVokvana=" + medaltimiMilliVokvana.get() +
                 ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
                 ", naestaVokvun=" + naestaVokvun.get() +
-                ", planta=" + planta +
+                ", planta= " + super.toString() +
                 '}';
     }
 
