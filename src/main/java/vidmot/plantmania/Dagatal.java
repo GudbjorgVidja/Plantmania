@@ -59,10 +59,6 @@ public class Dagatal extends AnchorPane {
     public void geraDagatal(LocalDate dagur) {
         ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsLokid = allarPlonturOgFyrriVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth() && p.getValue().getYear() == syndurDagur.getYear());
         ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsOlokid = allarPlonturOgAaetladarVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth() && p.getValue().getYear() == syndurDagur.getYear());
-        System.out.println("vokvanir manadarins lokid: " + vokvanirManadarinsLokid);
-        System.out.println("allar vokvanir, lokid: " + allarPlonturOgFyrriVokvanir);
-        System.out.println("vokvanir manadarins olokid: " + vokvanirManadarinsOlokid);
-        System.out.println("allar aaetladar vokvanir: " + allarPlonturOgAaetladarVokvanir);
 
         int fjoldiDaga = dagur.getMonth().length(dagur.isLeapYear());
         DayOfWeek fyrstiDagurManadar = LocalDate.of(dagur.getYear(), dagur.getMonthValue(), 1).getDayOfWeek();
@@ -79,8 +75,12 @@ public class Dagatal extends AnchorPane {
                 IntegerBinding fjoldiVokvanaLokid = Bindings.size(vokvanirManadarinsLokid.filtered(p -> p.getValue().isEqual(dagurinn)));
                 IntegerBinding fjoldiVokvanaOlokid = Bindings.size(vokvanirManadarinsOlokid.filtered(p -> p.getValue().isEqual(dagurinn)));
 
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().textProperty().bind(fjoldiVokvanaOlokid.asString());
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().bind(fjoldiVokvanaLokid.asString());//ath að breyta þessu svo ef það er 0 sé labelinn tómur
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().textProperty().bind(
+                        Bindings.when(fjoldiVokvanaOlokid.isEqualTo(0)).then("")
+                                .otherwise(fjoldiVokvanaOlokid.asString()));
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().bind(
+                        Bindings.when(fjoldiVokvanaLokid.isEqualTo(0)).then("")
+                                .otherwise(fjoldiVokvanaLokid.asString()));
                 ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().bind(fjoldiVokvanaLokid.greaterThan(0));
                 ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText(dagalisti.get(0) + "");
 
