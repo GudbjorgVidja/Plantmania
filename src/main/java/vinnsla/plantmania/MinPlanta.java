@@ -47,7 +47,7 @@ public class MinPlanta extends Planta {
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
 
-        naestaVokvun = (thinnTimiMilliVokvana);
+        //naestaVokvun = (thinnTimiMilliVokvana);
 
         naestaVokvunRegla();
 
@@ -67,7 +67,7 @@ public class MinPlanta extends Planta {
         });
     }
 
-    private void reiknaPlanadarVokvanir() {
+    public void reiknaPlanadarVokvanir() {
         planadarVokvanirTestListener();
         LocalDate date = LocalDate.now();
         LocalDate eftirThrjaManudi = date.plusMonths(3);
@@ -85,6 +85,7 @@ public class MinPlanta extends Planta {
                 /*
                 for (LocalDate vDay : planadarVokvanir) {
                     vDay = vDay.plusDays(n.intValue() - o.intValue());
+
                 }
 
                  */
@@ -278,6 +279,11 @@ public class MinPlanta extends Planta {
         return planadarVokvanir;
     }
 
+
+    public void setPlanadarVokvanir(ObservableList<LocalDate> planadarVokvanir) {
+        this.planadarVokvanir = planadarVokvanir;
+    }
+
     public String toString() {
         return "MinPlanta{" +
                 "planadarVokvanir: " + planadarVokvanir +
@@ -287,7 +293,18 @@ public class MinPlanta extends Planta {
                 ", flokkar=" + flokkar.toString() +
                 ", medaltimiMilliVokvana=" + medaltimiMilliVokvana.get() +
                 ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
+                ", naestaVokvun=" + naestaVokvun.get() +
                 ", planta=" + planta +
                 '}';
+    }
+
+    public static void main(String[] args) {
+        MinPlanta m = new MinPlanta();
+        m.setThinnTimiMilliVokvana(10);
+        m.baetaVidVokvun(LocalDate.now().minusDays(4));
+        //m.naestaVokvun.set(3);
+        m.reiknaPlanadarVokvanir();
+        System.out.println(m.getNaestaVokvun().get());
+        System.out.println(m.getPlanadarVokvanir());
     }
 }

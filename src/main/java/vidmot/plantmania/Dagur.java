@@ -18,6 +18,8 @@ public class Dagur extends Pane {
     private Label fxFjoldiVokvana;
     @FXML
     private ImageView fxDropi;
+    @FXML
+    private Label fxFjoldiVokvanaOlokid;
 
     /**
      * Les inn fxml skrá, setur controller og rót og hleður fxmlLoadernum
@@ -40,6 +42,10 @@ public class Dagur extends Pane {
 
     public Label getFxFjoldiVokvana() {
         return fxFjoldiVokvana;
+    }
+
+    public Label getFxFjoldiVokvanaOlokid() {
+        return fxFjoldiVokvanaOlokid;
     }
 
     public ImageView getFxDropi() {

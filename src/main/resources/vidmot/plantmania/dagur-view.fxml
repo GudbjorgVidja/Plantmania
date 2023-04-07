@@ -5,17 +5,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<fx:root prefHeight="55.0" prefWidth="73.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/11"
+<fx:root prefHeight="55.0" prefWidth="73.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/16"
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="fxManadardagur" layoutX="5.0" layoutY="5.0" prefHeight="24.0"
-               prefWidth="17.0">
+        <Label fx:id="fxManadardagur" layoutX="5.0" layoutY="5.0" prefHeight="24.0" prefWidth="17.0">
             <font>
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Label fx:id="fxFjoldiVokvana" layoutX="50.0" layoutY="23.0" prefHeight="18.0"
-               prefWidth="17.0">
+        <Label fx:id="fxFjoldiVokvana" layoutX="51.0" layoutY="31.0" prefHeight="18.0" prefWidth="17.0">
             <font>
                 <Font size="14.0"/>
             </font>
@@ -26,5 +24,10 @@
                 <Image url="@styling/icon/water.png"/>
             </image>
         </ImageView>
+        <Label fx:id="fxFjoldiVokvanaOlokid" layoutX="51.0" layoutY="7.0" prefHeight="18.0" prefWidth="17.0">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
     </children>
 </fx:root>
