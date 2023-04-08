@@ -11,18 +11,21 @@ import java.util.Comparator;
 import java.util.List;
 
 //athuga hvernig það er greint á milli tveggja eins planta!!! það er nauðsynlegt!
+//@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
 public class Notendaupplysingar {
     private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();
     private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
     private ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();//ditto
 
     public Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) {
+        //System.out.println("Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) smidur");
         this.minarPlontur = minarPlontur;
-        finnaNaestuVokvanir();
+        //finnaNaestuVokvanir();
     }
 
     public Notendaupplysingar() {
-        finnaNaestuVokvanir();
+        //System.out.println("Notendaupplysingar() smidur");
+        //finnaNaestuVokvanir();
     }
 
 
@@ -116,7 +119,11 @@ public class Notendaupplysingar {
     }
 
     public String toString() {
-        return minarPlontur.toString() + ", fyrri vokvanir: " + fyrriVokvanir.toString() + ", naestu vokvanir: " + naestuVokvanir.toString();
+        return "Notendaupplysingar{" +
+                "minarPlontur=" + minarPlontur +
+                ", fyrriVokvanir=" + fyrriVokvanir +
+                ", naestuVokvanir=" + naestuVokvanir +
+                '}';
     }
 
     public static void main(String[] args) {
