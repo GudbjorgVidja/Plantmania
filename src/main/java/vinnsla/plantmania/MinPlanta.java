@@ -23,12 +23,13 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 
+//@JsonDeserialize(using = MinPlantaDeserializer.class)
 public class MinPlanta extends Planta {
     private StringProperty nickName = new SimpleStringProperty();
     private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
     private StringProperty notesFraNotanda = new SimpleStringProperty();//hafa listener fyrir notes!
     private ObservableList<String> flokkar = FXCollections.observableArrayList(); //ath þetta aðeins
-    private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();
+    private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();//upphafsstilla?
     private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();
     private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();
     //private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
