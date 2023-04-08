@@ -7,6 +7,10 @@
 package vinnsla.plantmania;
 
 import edu.princeton.cs.algs4.In;
+import vinnsla.plantmania.enums.Eitrun;
+import vinnsla.plantmania.enums.Ljosstyrkur;
+import vinnsla.plantmania.enums.Uppruni;
+import vinnsla.plantmania.enums.Vatnsthorf;
 
 import java.util.ArrayList;
 import java.util.List;

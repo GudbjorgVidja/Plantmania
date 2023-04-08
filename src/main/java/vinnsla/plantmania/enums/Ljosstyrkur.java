@@ -1,4 +1,4 @@
-package vinnsla.plantmania;
+package vinnsla.plantmania.enums;
 
 //kannski líka skuggaþolin? eða ekki
 public enum Ljosstyrkur {

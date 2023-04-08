@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 
 //athuga hvernig það er greint á milli tveggja eins planta!!! það er nauðsynlegt!
+//@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
 public class Notendaupplysingar {
     private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();
     private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
@@ -18,13 +19,13 @@ public class Notendaupplysingar {
 
     public Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) {
         this.minarPlontur = minarPlontur;
-        finnaNaestuVokvanir();
+        //finnaNaestuVokvanir();//held þetta sé óþarfi
     }
 
     public Notendaupplysingar() {
         //kallað á þetta fimm sinnum við upphaf keyrslu, af hverju?
         System.out.println("Notendaupplysingar smidur");
-        finnaNaestuVokvanir();
+        //finnaNaestuVokvanir();
     }
 
 
@@ -78,6 +79,25 @@ public class Notendaupplysingar {
             if (change.wasAdded()) {
                 System.out.println("Notendaupplysingar.finnaNaestuVokvanir: Plontu var baett vid minarPlontur i notendaupplysingar");
                 for (MinPlanta mp : change.getAddedSubList()) {
+                    mp.getPlanadarVokvanir().addListener((ListChangeListener<? super LocalDate>) breyting -> {
+                        while (breyting.next()) {
+                            //ath hvort breyting.wasReplaced() virkar hér
+                            if (breyting.wasAdded()) {
+                                System.out.println("breyting.wasAdded() - minPlanta planadarVokvanir listi");
+                                for (LocalDate dags : breyting.getAddedSubList()) {
+                                    naestuVokvanir.add(new Pair<>(mp, dags));
+                                }
+                            }
+                            if (breyting.wasRemoved()) {
+                                List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
+                                for (LocalDate date : breyting.getRemoved()) {
+                                    eytt.add(new Pair<>(mp, date));
+                                }
+                                naestuVokvanir.removeAll(eytt);
+                            }
+                        }
+                    });
+                    //skoða hvað þetta gerir nákvæmlega, ef ég tek þetta út er ekkert á dagatalinu þegar það er opnað án þess að eiga við plöntu
                     for (LocalDate date : mp.getPlanadarVokvanir()) {
                         naestuVokvanir.add(new Pair<>(mp, date));
                         //System.out.println("naestuVokvanir: " + naestuVokvanir);
@@ -122,7 +142,11 @@ public class Notendaupplysingar {
     }
 
     public String toString() {
-        return minarPlontur.toString() + ", fyrri vokvanir: " + fyrriVokvanir.toString() + ", naestu vokvanir: " + naestuVokvanir.toString();
+        return "Notendaupplysingar{" +
+                "minarPlontur=" + minarPlontur +
+                ", fyrriVokvanir=" + fyrriVokvanir +
+                ", naestuVokvanir=" + naestuVokvanir +
+                '}';
     }
 
     public static void main(String[] args) {

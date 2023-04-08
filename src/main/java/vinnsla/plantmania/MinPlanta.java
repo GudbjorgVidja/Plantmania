@@ -23,19 +23,20 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 
+//@JsonDeserialize(using = MinPlantaDeserializer.class)
 public class MinPlanta extends Planta {
     private StringProperty nickName = new SimpleStringProperty();
     private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
     private StringProperty notesFraNotanda = new SimpleStringProperty();//hafa listener fyrir notes!
     private ObservableList<String> flokkar = FXCollections.observableArrayList(); //ath þetta aðeins
-    private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();
+    private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();//upphafsstilla?
     private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();
     private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();
     //private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
     //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
     //en það væri kannski bara meira vesen
 
-    private IntegerProperty naestaVokvun = new SimpleIntegerProperty(2);//setja hér niðurtalningu
+    private IntegerProperty naestaVokvun = new SimpleIntegerProperty();//setja hér niðurtalningu
     private ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
 
     //passa hvernig smiðurinn lítur út hér!
@@ -82,6 +83,10 @@ public class MinPlanta extends Planta {
 
         //ef tími í næstu vökvun breytist þá er öllum dagsetningum hliðrað um muninn
         naestaVokvun.addListener((obs, o, n) -> {
+            //spá hvort eitthvað svona myndi virka?
+            /*for (LocalDate d = LocalDate.now().plusDays(naestaVokvun.get()); d.isBefore(LocalDate.now().plusMonths(3)); d = d.plusDays(thinnTimiMilliVokvana.get())) {
+                planadarVokvanir.add(d);
+            }*/
             if (n.intValue() > o.intValue()) {
                 for (int i = 0; i < planadarVokvanir.size(); i++) {
                     planadarVokvanir.set(i, planadarVokvanir.get(i).plusDays(n.intValue() - o.intValue()));

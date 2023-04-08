@@ -11,11 +11,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import vidmot.plantmania.deserializers.ObservableListDeserializer;
 import vinnsla.plantmania.Notandi;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,7 +112,10 @@ public class UpphafController {
         try {
             notendur = objectMapper.readValue(new File(filename), new TypeReference<>() {
             });
+            System.out.println(notendur);
         } catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.out.println(Arrays.toString(e.getStackTrace()));
             System.out.println("Skrá er ekki til");
         }
         return notendur;

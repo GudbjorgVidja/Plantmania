@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
+import vidmot.plantmania.deserializers.ObservableListDeserializer;
 import vinnsla.plantmania.LesaPlontur;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Notandi;
@@ -245,6 +246,7 @@ public class PlantController {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
 
+            //það sem eftir er af blokkinni veldur því að smiðir fyrir notendaupplysingar og notandi erukeyrðir
             ObjectMapper objectMapper = new ObjectMapper();
             SimpleModule module = new SimpleModule();
             module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
@@ -266,7 +268,9 @@ public class PlantController {
                     objectMapper.writeValue(file, notendur);
                 } else {
                     System.out.println("skráin er til og er núna uppfærð");
-                    objectMapper.writeValue(file, notendur);//bætti við
+                    objectMapper.writeValue(file, notendur);//bætti við. Kastar villu ef maður fylgir eftirfarandi skrefum:
+                    //(1. clean. 2. keyra. 3. gera nýjan aðgang. 4. ýta á plöntu á lista yfir allar plöntur.
+                    //5. skrá út. 6. loka glugga. 7. keyra forrit. 8. skrá inn með sama aðgang og áðan. 9. velja plöntu á lista yfir almennar plöntur)
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

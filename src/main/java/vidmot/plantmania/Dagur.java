@@ -1,12 +1,9 @@
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import java.io.IOException;
 
 /**
  * Sérhæfður klasi fyrir hvern dag í dagatali
@@ -25,15 +22,7 @@ public class Dagur extends Pane {
      * Les inn fxml skrá, setur controller og rót og hleður fxmlLoadernum
      */
     public Dagur() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("dagur-view.fxml"));
-        loader.setRoot(this);
-        loader.setController(this);
-
-        try {
-            loader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        LesaFXML.lesa(this, "dagur-view.fxml");
     }
 
     public Label getFxManadardagur() {

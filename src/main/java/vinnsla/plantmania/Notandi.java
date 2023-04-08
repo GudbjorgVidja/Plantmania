@@ -62,7 +62,7 @@ public class Notandi {
         return "Notandi{" +
                 "notendanafn=" + notendanafn.get() +
                 ", lykilord=" + lykilord.get() +
-                ", notendaupplysingar=" + notendaupplysingar.toString() +
+                ", notendaupplysingar=" + notendaupplysingar +
                 '}';
     }
 }
