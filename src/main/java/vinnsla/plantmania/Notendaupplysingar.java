@@ -67,7 +67,6 @@ public class Notendaupplysingar {
      */
     public void finnaNaestuVokvanir() {
         System.out.println("Notendaupplysingar.finnaNaestuVokvanir(): ");
-        //hafa binding/listener hér
         // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
 
         //Þegar nýrri plöntu er bætt við:
@@ -98,6 +97,7 @@ public class Notendaupplysingar {
                         }
                     });
                     //skoða hvað þetta gerir nákvæmlega, ef ég tek þetta út er ekkert á dagatalinu þegar það er opnað án þess að eiga við plöntu
+                    //þwtta keyrir stundum
                     for (LocalDate date : mp.getPlanadarVokvanir()) {
                         naestuVokvanir.add(new Pair<>(mp, date));
                         //System.out.println("naestuVokvanir: " + naestuVokvanir);
@@ -136,9 +136,6 @@ public class Notendaupplysingar {
     public void baetaVidPlontu(Planta planta) {
         System.out.println("Notendaupplysingar.baetaVidPlontu(Planta)");
         minarPlontur.add(new MinPlanta(planta));
-        //MinPlanta ny = new MinPlanta();
-        //ny.setAlmenntNafn(planta.getAlmenntNafn());
-        //minarPlontur.add(ny);
     }
 
     public String toString() {
@@ -147,51 +144,5 @@ public class Notendaupplysingar {
                 ", fyrriVokvanir=" + fyrriVokvanir +
                 ", naestuVokvanir=" + naestuVokvanir +
                 '}';
-    }
-
-    public static void main(String[] args) {
-        Notendaupplysingar notendaupplysingar = new Notendaupplysingar();
-        List<Planta> plontur = new LesaPlontur().getPlontur();
-        MinPlanta minPlanta = new MinPlanta(plontur.get(0));
-        System.out.println(minPlanta);
-        //minPlanta.reiknaPlanadarVokvanir();
-        System.out.println(minPlanta.getPlanadarVokvanir());
-
-
-
-        /*Notendaupplysingar uppl = new Notendaupplysingar();
-        uppl.finnaNaestuVokvanir();
-        List<Planta> plontur = new LesaPlontur().getPlontur();
-
-        for (Planta p : plontur) {
-            //System.out.println(p);
-            uppl.minarPlontur.add(new MinPlanta(p));
-        }
-
-
-        System.out.println(uppl.minarPlontur.get(0));
-        System.out.println("Naestu vokvanir: " + uppl.naestuVokvanir);
-
-        System.out.println("fyrri vokvanir: " + uppl.fyrriVokvanir);*/
-/*
-        uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2022, 3, 18));
-        uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2023, 3, 14));
-        uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2023, 3, 22));
-        uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2023, 3, 10));
-        uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2023, 3, 26));
-        uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2023, 3, 30));
-        uppl.minarPlontur.get(0).baetaVidVokvun(LocalDate.of(2023, 4, 3));
-
-        System.out.println(uppl.minarPlontur.get(0));
-
-        //uppl.minarPlontur.get(0).getVokvanir().remove(LocalDate.of(2023, 3, 10));
-        //uppl.minarPlontur.get(0).getVokvanir().remove(LocalDate.of(2023, 4, 3));
-        uppl.minarPlontur.get(0).takaUtVokvun(LocalDate.of(2023, 4, 3));
-
-        System.out.println(uppl.minarPlontur.get(0));
-
-        //uppl.finnaFyrriVokvanir();
-        System.out.println("fyrri vokvanir: " + uppl.fyrriVokvanir);
-        System.out.println("Naestu vokvanir: " + uppl.naestuVokvanir);*/
     }
 }

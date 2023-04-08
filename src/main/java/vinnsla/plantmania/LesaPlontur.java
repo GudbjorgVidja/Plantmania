@@ -32,7 +32,7 @@ public class LesaPlontur {
         String[] ollHeiti = lesaInnStreng(fjoldi, inn);
         List<String>[] heitiFylki = new List[fjoldi];
         for (int i = 0; i < fjoldi; i++) {
-            heitiFylki[i] = List.of(ollHeiti[i].split(","));
+            heitiFylki[i] = List.of(ollHeiti[i].split(", "));
         }
 
         String[] myndaslodir = lesaInnStreng(fjoldi, inn);
@@ -83,7 +83,7 @@ public class LesaPlontur {
         String[] einkenni = lesaInnStreng(fjoldi, inn);
         List<String>[] einkennafylki = new List[fjoldi];
         for (int i = 0; i < fjoldi; i++) {
-            einkennafylki[i] = List.of(einkenni[i].split(","));
+            einkennafylki[i] = List.of(einkenni[i].split(", "));
         }
 
 

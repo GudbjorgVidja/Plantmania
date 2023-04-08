@@ -70,8 +70,14 @@ public class MinPlantaSpjald extends AnchorPane {
      */
     private void vokvaHandler(ActionEvent event) {
         if (minPlantan.getNaestaVokvun().get() >= minPlantan.getThinnTimiMilliVokvana()) {
+            //TODO: já, gera takkann óvirkan
             System.out.println("kannski ekki vokva");//frekar gera takkann óvirkan held ég rite?
         } else {
+            //TODO: Skoða af hverju þetta lagar vesenið
+            //ekki fallegt, en virkar (næstu 3 línur eru úr frestaHandler). Skoða af hverju þetta þarf!!
+            minPlantan.getNaestaVokvun().unbind(); //ný viðbót
+            minPlantan.setNaestaVokvun(minPlantan.getNaestaVokvun().get() + 1);
+            minPlantan.naestaVokvunRegla(); //ný viðbót
             minPlantan.baetaVidVokvun(LocalDate.now());
             System.out.println("vokva");
         }

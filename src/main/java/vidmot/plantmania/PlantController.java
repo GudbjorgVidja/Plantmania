@@ -29,7 +29,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-//TODO: hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma
+//TODO: hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma. S: þarf þess? er ekki bara skoðað út frá minPLanta?
 
 /**
  * Controller fyrir aðalsenuna. Þar sem við notum TabPane er það sem væri annars í 5 senum eða svo í einni
@@ -45,6 +45,7 @@ public class PlantController {
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
+    //TODO: væri ekki hægt að hafa þetta local þar sem þetta er notað? eða hvað
     private ObservableList<Planta> allarPlontur = FXCollections.observableArrayList();//er í vesi, geymi hér
     //ætti frekar kannski að geyma í öðrum klasa, t.d. vinnsluklasa fyrir allarPlonturYfirlit
 
@@ -69,14 +70,11 @@ public class PlantController {
         skradurNotandi.get().getNotendaupplysingar().finnaFyrriVokvanir();
 
         skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
-        /*
-        skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
+        /*skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
             change.next();
             if (change.wasAdded())
                 System.out.println("\n" + change.getAddedSubList() + " baett vid notendaupplysingar");
-        });
-
-         */
+        });*/
 
         //fxMinarPlonturYfirlit.getMinarPlontur.addListener() og bæta allaf sömu við
         //fxMinarPlonturYfirlit.getSyndSpjold().addListener((ListChangeListener<? super Node>) change ->{
@@ -93,22 +91,17 @@ public class PlantController {
         }
     }
 
-    /*
-    private void bindaNotendaPlontur(){
+    /*private void bindaNotendaPlontur(){
         fxMinarPlonturYfirlit.getMinarPlonturYfirlit().addListener((ListChangeListener<? super Node>) change -> {
             change.next();
             if(change.wasAdded()){
-
                 List<Node> listi = (List<Node>) change.getAddedSubList();
                 for(Node node: listi){
                     if(node instanceof MinPlanta)
                 }
             }
         });
-
-    }
-
-     */
+    }*/
 
     /**
      * birtir plöntur notanda í yfirliti
@@ -206,19 +199,16 @@ public class PlantController {
      * þegar smellt er, plönturnar úr plontur.txt sem MinPlantaSpjald hlutir
      */
     @FXML
+    //TODO: Taka út? er þetta nokkuð í notkun?
     protected void fxBaetaVidHandler(MouseEvent event) {
         //eintaki af öllum plöntum (gerðum) bætt við plöntur notanda
-        /*
-        for (int i = 0; i < allarPlontur.size(); i++) {
+        /*for (int i = 0; i < allarPlontur.size(); i++) {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
             fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
-        }
-         */
-
-
+        }*/
     }
 
-
+    //hvað er þetta?
     @FXML
     private void hladaOllumPlontum(MouseEvent event) {
 
@@ -229,9 +219,7 @@ public class PlantController {
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
-            
         }
-
     }
 
     public void skraUt(ActionEvent actionEvent) {
@@ -260,9 +248,5 @@ public class PlantController {
         } catch (IOException e) {
             System.out.println(e.getCause());
         }
-    }
-
-    public StringProperty getNotendanafn() {
-        return new SimpleStringProperty(skradurNotandi.get().getNotendanafn());
     }
 }
