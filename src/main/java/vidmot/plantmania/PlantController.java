@@ -229,36 +229,7 @@ public class PlantController {
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
-
-            //það sem eftir er af blokkinni veldur því að smiðir fyrir notendaupplysingar og notandi erukeyrðir
-            ObjectMapper objectMapper = new ObjectMapper();
-            SimpleModule module = new SimpleModule();
-            module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-            objectMapper.registerModule(module);
-            objectMapper.findAndRegisterModules();
-            try {
-                List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
-                });
-
-                for (Notandi n : notendur) {
-                    if (n.getNotendanafn().equals(skradurNotandi.get().getNotendanafn())) {
-                        n = skradurNotandi.get();
-                        System.out.println(n);
-                    }
-                }
-                File file = new File("target/classes/vidmot/plantmania/notendur.json");
-                if (file.createNewFile()) {
-                    System.out.println("Ný skrá búin til");
-                    objectMapper.writeValue(file, notendur);
-                } else {
-                    System.out.println("skráin er til og er núna uppfærð");
-                    objectMapper.writeValue(file, notendur);//bætti við. Kastar villu ef maður fylgir eftirfarandi skrefum:
-                    //(1. clean. 2. keyra. 3. gera nýjan aðgang. 4. ýta á plöntu á lista yfir allar plöntur.
-                    //5. skrá út. 6. loka glugga. 7. keyra forrit. 8. skrá inn með sama aðgang og áðan. 9. velja plöntu á lista yfir almennar plöntur)
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            
         }
 
     }
