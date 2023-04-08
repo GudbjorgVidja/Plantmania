@@ -4,11 +4,9 @@ keyrist ekki af óþörfu
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.Planta;
 
-import java.io.IOException;
 import java.util.Locale;
 
 /**
@@ -33,14 +31,8 @@ public class PlantaSpjald extends AnchorPane {
         //keyrist einu sinni fyrir hvert PlantaSpjald, í upphafi keyrslu :)
         //System.out.println("Plantaspjald smidur");
         planta = p;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("planta-view.fxml"));
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        LesaFXML.lesa(this, "planta-view.fxml");
+        
 
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
         fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));

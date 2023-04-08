@@ -3,14 +3,12 @@ package vidmot.plantmania;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.MinPlanta;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Locale;
 
@@ -38,14 +36,8 @@ public class MinPlantaSpjald extends AnchorPane {
 
     public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn sem er notaður
         System.out.println("MinPlantaSpjald smidur");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("minplanta-view.fxml"));
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+
+        LesaFXML.lesa(this, "minplanta-view.fxml");
 
         //minPlanta vistuð í tilviksbreytu
         minPlantan = minPlanta;

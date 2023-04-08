@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
@@ -23,7 +22,6 @@ import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Planta;
 import vinnsla.plantmania.Uppruni;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -58,14 +56,7 @@ public class Plontuyfirlit extends AnchorPane {
     private FilteredList<Node> filteredSpjold = new FilteredList<>(syndSpjold); //filtered listinn
 
     public Plontuyfirlit() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("plontuyfirlit.fxml"));
-        loader.setRoot(this);
-        loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        LesaFXML.lesa(this, "plontuyfirlit.fxml");
 
 
         //TODO passa að þetta gerist ekki óþarflega oft, eða jafnvel finna aðra leið
