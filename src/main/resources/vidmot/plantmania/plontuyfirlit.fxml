@@ -1,38 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
-<fx:root minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="650.0" styleClass="anchorpane"
-         stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/11"
-         xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="650.0" styleClass="anchorpane" stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <MenuBar layoutX="14.0" layoutY="10.0" prefHeight="29.0" prefWidth="255.0" fx:id="fxMenuBar">
+        <MenuBar fx:id="fxMenuBar" layoutX="14.0" layoutY="10.0" prefHeight="29.0" prefWidth="255.0">
             <menus>
-                <Menu mnemonicParsing="false" text="röðun" fx:id="rodunMenu">
+                <Menu fx:id="rodunMenu" mnemonicParsing="false" text="röðun">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="almennt heiti A-Ö"/>
-                        <MenuItem mnemonicParsing="false" text="almennt heiti Ö-A"/>
-                        <MenuItem mnemonicParsing="false" text="fræðiheiti A-Ö"/>
-                        <MenuItem mnemonicParsing="false" text="næsta vökvun"/>
+                        <MenuItem mnemonicParsing="false" text="almennt heiti A-Ö" />
+                        <MenuItem mnemonicParsing="false" text="almennt heiti Ö-A" />
+                        <MenuItem mnemonicParsing="false" text="fræðiheiti A-Ö" />
+                        <MenuItem mnemonicParsing="false" text="næsta vökvun" />
                         <!-- <MenuItem mnemonicParsing="false" text="fræðiheiti Ö-A"/> -->
                         <!-- <MenuItem mnemonicParsing="false" text="næsta vökvun"/>
                         <MenuItem mnemonicParsing="false" text="stafrófsröð"/>
                         <MenuItem mnemonicParsing="false" text="afmæli"/> -->
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="flokkun" fx:id="flokkunMenu">
+                <Menu fx:id="flokkunMenu" mnemonicParsing="false" text="flokkun">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="sjálfgefið"/>
-                        <MenuItem mnemonicParsing="false" text="flokkur"/>
-                        <MenuItem mnemonicParsing="false" text="tegund"/>
+                        <MenuItem mnemonicParsing="false" text="sjálfgefið" />
+                        <MenuItem mnemonicParsing="false" text="flokkur" />
+                        <MenuItem mnemonicParsing="false" text="tegund" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="sía" fx:id="fxSiaMenu">
+                <Menu fx:id="fxSiaMenu" mnemonicParsing="false" text="sía">
                     <items>
-                        <CheckMenuItem mnemonicParsing="false" text="velja allt"/>
-                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <CheckMenuItem mnemonicParsing="false" text="velja allt" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
 
                         <!--  <CheckMenuItem mnemonicParsing="false" text="thirsty bees"/>
                           <CheckMenuItem mnemonicParsing="false" text="tropical"/>
@@ -41,15 +46,18 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <ScrollPane layoutX="8.0" layoutY="57.0" prefHeight="414.0" prefWidth="622.0">
+        <ScrollPane hbarPolicy="NEVER" layoutX="31.0" layoutY="57.0" prefHeight="414.0" prefWidth="588.0">
             <content>
-                <FlowPane fx:id="fxFlowPane" prefHeight="409.0" prefWidth="611.0" styleClass="flowpane">
+                <FlowPane fx:id="fxFlowPane" prefHeight="414.0" prefWidth="571.0" styleClass="flowpane">
                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </FlowPane>
             </content>
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
         </ScrollPane>
-        <Label fx:id="notandiLabel" layoutX="370.0" layoutY="7.0" text="notandi"/>
+        <Label fx:id="notandiLabel" layoutX="370.0" layoutY="7.0" text="notandi" />
     </children>
 </fx:root>
