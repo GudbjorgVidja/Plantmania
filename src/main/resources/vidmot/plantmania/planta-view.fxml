@@ -2,61 +2,58 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import vidmot.plantmania.Spjald?>
-<fx:root fx:id="rot" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="185.0" prefWidth="135.0"
-         stylesheets="@styling/planta-style.css" type="javafx.scene.layout.AnchorPane"
-         xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root fx:id="rot" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="195.0" prefWidth="150.0" stylesheets="@styling/planta-style.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Pane layoutX="18.0" prefHeight="125.0" prefWidth="100.0" style="-fx-background-color: powderblue;">
-            <!-- <Spjald fx:id="fxSpjald"/> -->
-            <Spjald fx:id="fxSpjald"/>
+        <Pane layoutX="18.0" prefHeight="125.0" prefWidth="100.0">
+            <Spjald fx:id="fxSpjald" layoutX="8.0" />
         </Pane>
-        <AnchorPane fx:id="fxBreytilegtSvaedi" layoutX="14.0" layoutY="128.0" prefHeight="51.0" prefWidth="107.0"
-                    style="-fx-border-color: lightgreen;">
+        <AnchorPane fx:id="fxBreytilegtSvaedi" layoutX="20.0" layoutY="134.0" prefHeight="51.0" prefWidth="107.0" style="-fx-border-color: lightgreen;">
             <children>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="107.0"
-                      style="-fx-border-color: lightgreen;">
+                <HBox alignment="BOTTOM_CENTER" prefHeight="51.0" prefWidth="107.0" style="-fx-border-color: lightgreen;">
                     <children>
-                        <VBox alignment="BOTTOM_CENTER" fillWidth="false" prefHeight="27.0" prefWidth="36.0"
-                              spacing="5.0">
+                        <VBox fx:id="vatnBox" styleClass="vboxStats">
                             <children>
-                                <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66"/>
+                                <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66" />
                                 <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <VBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </VBox.margin>
                                     <image>
-                                        <Image url="@styling/icon/water.png"/>
+                                        <Image url="@styling/icon/water.png" />
                                     </image>
                                 </ImageView>
                             </children>
                         </VBox>
-                        <VBox alignment="BOTTOM_CENTER" fillWidth="false" layoutX="46.0" layoutY="11.0"
-                              prefHeight="27.0" prefWidth="36.0" spacing="5.0">
+                        <VBox fx:id="ljosBox" layoutX="46.0" layoutY="11.0" styleClass="vboxStats">
                             <children>
-                                <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66"/>
+                                <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66" />
                                 <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <VBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </VBox.margin>
                                     <image>
-                                        <Image url="@styling/icon/sol.png"/>
+                                        <Image url="@styling/icon/sol.png" />
                                     </image>
                                 </ImageView>
                             </children>
                         </VBox>
-                        <VBox alignment="BOTTOM_CENTER" fillWidth="false" layoutX="28.0" layoutY="11.0"
-                              prefHeight="27.0" prefWidth="36.0" spacing="5.0">
+                        <VBox fx:id="hitiBox" layoutX="28.0" layoutY="11.0" styleClass="vboxStats">
                             <children>
-                                <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66"/>
+                                <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66" />
                                 <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <VBox.margin>
-                                        <Insets/>
+                                        <Insets />
                                     </VBox.margin>
                                     <image>
-                                        <Image url="@styling/icon/search1.png"/>
+                                        <Image url="@styling/icon/search1.png" />
                                     </image>
                                 </ImageView>
                             </children>

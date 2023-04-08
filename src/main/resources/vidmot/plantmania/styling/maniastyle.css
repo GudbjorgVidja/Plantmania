@@ -79,8 +79,9 @@
 }
 .flowpane{
     fx-border-color: lightsteelblue;
-    -fx-vgap:20;
-    -fx-hgap: 15;
+    -fx-vgap:10;
+    -fx-hgap: 25;
+    fx-alignment: center;
 }
 
 .scroll-pane{

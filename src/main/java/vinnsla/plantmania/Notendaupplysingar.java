@@ -18,13 +18,13 @@ public class Notendaupplysingar {
     private ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();//ditto
 
     public Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) {
-        //System.out.println("Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) smidur");
         this.minarPlontur = minarPlontur;
-        //finnaNaestuVokvanir();
+        //finnaNaestuVokvanir();//held þetta sé óþarfi
     }
 
     public Notendaupplysingar() {
-        //System.out.println("Notendaupplysingar() smidur");
+        //kallað á þetta fimm sinnum við upphaf keyrslu, af hverju?
+        System.out.println("Notendaupplysingar smidur");
         //finnaNaestuVokvanir();
     }
 
@@ -60,21 +60,24 @@ public class Notendaupplysingar {
         });
     }
 
-    //skoða þetta. Mér finnst að það ætti að reikna einn mánuð í einu eða svo
-    //Mér finnst að kannski væru þrír mánuðir betri, passar t.d. betur fyrir plöntu sem er vökvuð mánaðarlega
+
+    /**
+     * Finnur vökvanir þrjá mánuði fram í tímann.
+     * Passa að hafa einhverja tilkynningu um að engar upplýsingar séu skráðar um fyrri vökvun
+     */
     public void finnaNaestuVokvanir() {
-        System.out.println("finnaNaestuVokvanir adferd");
+        System.out.println("Notendaupplysingar.finnaNaestuVokvanir(): ");
         //hafa binding/listener hér
         // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
 
         //Þegar nýrri plöntu er bætt við:
         //setja vökvun í dag
         minarPlontur.addListener((ListChangeListener<? super MinPlanta>) change -> {
-            System.out.println("Listenerinn");
+            //System.out.println("Listenerinn");
             change.next();
 
             if (change.wasAdded()) {
-                System.out.println("Plontu var baett vid minarPlontur i notendaupplysingar");
+                System.out.println("Notendaupplysingar.finnaNaestuVokvanir: Plontu var baett vid minarPlontur i notendaupplysingar");
                 for (MinPlanta mp : change.getAddedSubList()) {
                     for (LocalDate date : mp.getPlanadarVokvanir()) {
                         naestuVokvanir.add(new Pair<>(mp, date));
@@ -112,6 +115,7 @@ public class Notendaupplysingar {
 
     //passa að engar tvær plöntur fái sama nickname
     public void baetaVidPlontu(Planta planta) {
+        System.out.println("Notendaupplysingar.baetaVidPlontu(Planta)");
         minarPlontur.add(new MinPlanta(planta));
         //MinPlanta ny = new MinPlanta();
         //ny.setAlmenntNafn(planta.getAlmenntNafn());

@@ -1,3 +1,6 @@
+/*
+ * TODO: passa að sía innihaldi bara uppruna sem eru í yfirlitinu
+ */
 package vidmot.plantmania;
 
 import javafx.beans.binding.Bindings;
@@ -39,7 +42,7 @@ public class Plontuyfirlit extends AnchorPane {
     private Label notandiLabel;//label í efra hægra horni með notendanafni
 
     @FXML
-    private Menu fxSiaMenu, flokkunMenu, rodunMenu;
+    private Menu fxSiaMenu, flokkunMenu, rodunMenu;//menuItems á MenuBar, til að stjórna sýnileika og röðun hluta
 
     private ObservableList<MenuItem> checkMenuItems = FXCollections.observableArrayList();
 
@@ -58,33 +61,25 @@ public class Plontuyfirlit extends AnchorPane {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("plontuyfirlit.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-
         try {
             loader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
 
-        /*
-        Predicate<Node> pred = node -> {
-            return node.toString().startsWith("S");
-        };
-        filteredSpjold.setPredicate(pred);
 
-         */
-
-        filteredSpjold.addListener((ListChangeListener<? super Node>) change -> {//syndspjold
+        //TODO passa að þetta gerist ekki óþarflega oft, eða jafnvel finna aðra leið
+        filteredSpjold.addListener((ListChangeListener<? super Node>) change -> {
             fxFlowPane.getChildren().clear();
-            fxFlowPane.getChildren().addAll(filteredSpjold);//syndspjold
+            fxFlowPane.getChildren().addAll(filteredSpjold);
         });
 
 
         //siaMenuBreytingar();
         siaMenuReglur();
 
-
+        //setur onAAction
         setjaMenuItemHandlera();
-
     }
 
 
@@ -119,8 +114,8 @@ public class Plontuyfirlit extends AnchorPane {
         ((CheckMenuItem) fxSiaMenu.getItems().get(0)).setSelected(true);
         Uppruni[] upprunar = Uppruni.values();
         for (Uppruni upp : upprunar) {
-            //CheckMenuItem item = new CheckMenuItem(upp.getStadur());
-            CheckMenuItem item = new CheckMenuItem(upp.toString().toLowerCase());
+            CheckMenuItem item = new CheckMenuItem(upp.getStadur());
+            //CheckMenuItem item = new CheckMenuItem(upp.toString().toLowerCase());
             item.setSelected(true);
             siaItems.add(item);
             upprunaMap.put(upp, item);
@@ -133,35 +128,26 @@ public class Plontuyfirlit extends AnchorPane {
         setjaPredicateFilter();
 
 
+        //sleppa, ekki geta bæst við fleiri hlutir á keyrslutíma
         siaItems.addListener((ListChangeListener<? super MenuItem>) change -> {
             //uppfæra síureglur
-            //filteredSpjold.setPredicate();
             setjaPredicateFilter();
             System.out.println("filteredSiaItems: " + filteredSiaItems);
         });
 
-
-
-
-        /*
-        siaItems.addListener((ListChangeListener<? super MenuItem>) change -> {
-            if (allirFlokkarValdir() && !((CheckMenuItem) siaItems.get(0)).isSelected()) {
-                ((CheckMenuItem) siaItems.get(0)).setSelected(true);
-            }
-            //else if(!allirFlokkarValdir())
-        });
-
-         */
-
     }
 
+    /**
+     * setur reglu á FilteredList af menuItems. FilteredSiaItems inniheldur hluti af einhverjum uppruna sem hakað er við.
+     */
     private void setjaPredicateFilter() {
         //filteredSiaItems inniheldur valda flokka
 
-        Predicate<MenuItem> itemPred = mi -> {
-            return ((CheckMenuItem) mi).isSelected();
-        };
+        Predicate<MenuItem> itemPred = mi -> ((CheckMenuItem) mi).isSelected();
         filteredSiaItems.setPredicate(itemPred);//valdir hlutir
+        //líka hægt að nota eftirfarandi:
+        //filteredSiaItems.setPredicate(mi -> ((CheckMenuItem)mi).isSelected());
+
 
         //ath hvort filteredSiaItems innihaldi flokkinn fyrir uppruna plöntuspjaldsins
         Predicate<Node> pred = it -> {
@@ -234,19 +220,18 @@ public class Plontuyfirlit extends AnchorPane {
     }
 
     /**
-     * PlantaSpjald hlut bætt við viðeigandi yfirlit
+     * PlantaSpjald hlut bætt við yfirlit
      *
      * @param planta Planta
      */
     public void baetaVidYfirlit(Planta planta) {
         PlantaSpjald spjald = new PlantaSpjald(planta);
         syndSpjold.add(spjald);
-
     }
 
 
     /**
-     * Ef inntakið er MinPlanta þá er þetta tilvik af Plontuyfirlit MinPlantaYfirlit í þeim flipa
+     * Bætir MinPlanta hlut við yfirlitið, sem þýðir að þetta er yfirlitið í mínar plöntur flipanum.
      *
      * @param minPlanta MinPlanta hlutur
      */
@@ -255,7 +240,6 @@ public class Plontuyfirlit extends AnchorPane {
         syndSpjold.add(spjald);
 
         //hafa syndirFlokkar eða það bara flokkarnir sem eru á plöntum í syndSpjold, sem eru öll möguleg spjöld (base listinn)
-
     }
 
 
@@ -270,8 +254,12 @@ public class Plontuyfirlit extends AnchorPane {
     }
 
 
-    //handlerar fyrir þegar ýtt er á menuItem undir menu á menubar. Einn fyrir hvert menu
-
+    /**
+     * TODO passa að röðunin haldist, og að ef hlut er bætt við yfirlit þá kemur hann inn á réttum stað.
+     * Raðar hlutum í yfirliti eftir því hvað er valið.
+     *
+     * @param event smellt á hlut undir röðun
+     */
     private void rodunItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
@@ -286,9 +274,15 @@ public class Plontuyfirlit extends AnchorPane {
         else if (uppruni.getText().equals("næsta vökvun")) Collections.sort(syndSpjold, naestaVokvunComparator);
     }
 
+    /**
+     * TODO einfalda og hreinsa upp kóðann -G
+     *
+     * @param event smellt á CheckMenuItem undir sía
+     */
     private void siaItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
+
         setjaPredicateFilter();
         Predicate<MenuItem> itemPred = mi -> {
             return ((CheckMenuItem) mi).isSelected();
@@ -310,6 +304,7 @@ public class Plontuyfirlit extends AnchorPane {
 
     }
 
+    //sleppa kannski flokkun til að byrja með? held það sé óþarflega flókið
     private void flokkunItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
@@ -325,30 +320,16 @@ public class Plontuyfirlit extends AnchorPane {
 
     //TODO: flest hér fyrir neðan er í raun vinnsla!!! Passa að gera viðeigandi vinnsluklasa og færa yfir!!!!
 
-    /*
+    /* til að raða rétt eftir íslenska stafrófinu
         String stafrof = "A a Á á B b D d Ð ð E e É é F f G g H h I i Í í J j K k L l M m N n O o Ó ó P p R r S s T t U u Ú ú V v X x Y y Ý ý Þ þ Æ æ Ö ö";
         String[] srof = stafrof.split(" ");
 
      */
 
 
-    public int compare(Node n1, Node n2) {//ber saman almennt heiti n1 og n2 til að raða þeim
-        if (n1 instanceof PlantaSpjald) {
-            return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
-        }
-        return ((MinPlantaSpjald) n1).getMinPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getAlmenntNafn().toLowerCase());
-    }
-
-    /*
-    private Comparator<Node> almenntHeitiComparator = new Comparator<Node>() {
-        public int compare(Node n1, Node n2) {
-            if (n1 instanceof PlantaSpjald) {
-                return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
-            }
-            return ((MinPlantaSpjald) n1).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getPlanta().getAlmenntNafn().toLowerCase());
-
-        }
-    };
+    /**
+     * Comparator til að raða eftir almennu heiti.
+     * TODO passa að raða MinPlanta eftir Nickname, ekki bara almennu heiti
      */
     private Comparator<Node> almenntHeitiComparator = (n1, n2) -> {
         if (n1 instanceof PlantaSpjald) {
@@ -357,6 +338,10 @@ public class Plontuyfirlit extends AnchorPane {
         return ((MinPlantaSpjald) n1).getMinPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getAlmenntNafn().toLowerCase());
     };
 
+    /**
+     * Comparator til að raða eftir fræðiheiti
+     * TODO ákveða hvort við viljum hafa þetta sem möguleika, og hvort fræðiheiti eigi að sjást á yfirliti
+     */
     private Comparator<Node> fraediheitiComparator = new Comparator<Node>() {
         public int compare(Node n1, Node n2) {
             if (n1 instanceof PlantaSpjald) {
@@ -367,22 +352,12 @@ public class Plontuyfirlit extends AnchorPane {
         }
     };
 
+    /**
+     * Comparator til að raða eftir næsta vökvunardegi
+     */
     private Comparator<Node> naestaVokvunComparator = new Comparator<Node>() {
         public int compare(Node n1, Node n2) {
             return Integer.compare(((MinPlantaSpjald) n1).getMinPlanta().getNaestaVokvun().get(), ((MinPlantaSpjald) n2).getMinPlanta().getNaestaVokvun().get());
         }
     };
-
-    /*
-    public ObservableList<Node> getMinarPlonturYfirlit() {
-        return ollStok;
-    }
-
-     */
-
-    /*
-    public ObservableList<MinPlanta> getMinarPlontur(){
-
-    }
-     */
 }

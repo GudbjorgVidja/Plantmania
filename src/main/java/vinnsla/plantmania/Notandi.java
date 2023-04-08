@@ -17,11 +17,13 @@ public class Notandi {
     private Notendaupplysingar notendaupplysingar = new Notendaupplysingar();//setja listener fyrir þetta/hafa sem ObjectProperty?
 
     public Notandi(String notendanafn, String lykilord) {
+        System.out.println("Notandi(String, String) smidur");
         this.notendanafn.set(notendanafn);
         this.lykilord.set(lykilord);
     }
 
     public Notandi() {
+        System.out.println("Notandi() smidur");
     }
 
     public String getNotendanafn() {

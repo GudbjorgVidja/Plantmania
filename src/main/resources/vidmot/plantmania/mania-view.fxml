@@ -1,70 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import vidmot.plantmania.Dagatal?>
-<?import vidmot.plantmania.Plontuyfirlit?>
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
-         prefWidth="750.0" rotateGraphic="true" side="LEFT" stylesheets="@styling/maniastyle.css"
-         tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="vidmot.plantmania.PlantController">
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import vidmot.plantmania.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" rotateGraphic="true" side="LEFT" stylesheets="@styling/maniastyle.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vidmot.plantmania.PlantController">
     <tabs>
         <Tab>
             <content>
-                <Plontuyfirlit fx:id="fxMinarPlonturYfirlit" onMouseClicked="#fxBaetaVidHandler" prefHeight="458.0"
-                               prefWidth="604.0"/>
+                <Plontuyfirlit fx:id="fxMinarPlonturYfirlit" prefHeight="458.0" prefWidth="536.0" /><!-- onMouseClicked="#fxBaetaVidHandler"-->
             </content>
             <graphic>
-                <Label styleClass="tablabell" text="plöntur"/>
+                <Label styleClass="tablabell" text="plöntur" />
             </graphic>
         </Tab>
         <Tab>
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorpane">
                     <children>
-                        <Dagatal fx:id="fxDagatal" layoutX="18" layoutY="25"/>
+                        <Dagatal fx:id="fxDagatal" layoutX="18" layoutY="25" />
                     </children>
                 </AnchorPane>
             </content>
             <graphic>
-                <Label styleClass="tablabell" text="dagatal"/>
+                <Label styleClass="tablabell" text="dagatal" />
             </graphic>
         </Tab>
         <Tab>
             <content>
-                <Plontuyfirlit fx:id="fxAllarPlonturYfirlit" onMouseClicked="#hladaOllumPlontum" prefHeight="458.0"
-                               prefWidth="604.0"/>
+                <Plontuyfirlit fx:id="fxAllarPlonturYfirlit" onMouseClicked="#hladaOllumPlontum" prefHeight="458.0" prefWidth="604.0" />
             </content>
             <graphic>
-                <Label styleClass="tablabell" text="skoða"/>
-            </graphic>
-        </Tab>
-        <Tab>
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorpane">
-                    <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dce5ed" height="130.0" layoutX="35.0"
-                                   layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="136.0"/>
-                    </children>
-                </AnchorPane>
-            </content>
-            <graphic>
-                <Label styleClass="tablabell" text="fræðsla"/>
+                <Label styleClass="tablabell" text="skoða" />
             </graphic>
         </Tab>
         <Tab>
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorpane">
                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dce5ed" height="130.0" layoutX="35.0"
-                                   layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="136.0"/>
-                        <Button layoutX="144.0" layoutY="233.0" onAction="#skraUt" text="Skrá út"/>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dce5ed" height="130.0" layoutX="35.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="136.0" />
                     </children>
                 </AnchorPane>
             </content>
             <graphic>
-                <Label styleClass="tablabell" text="notandi"/>
+                <Label styleClass="tablabell" text="fræðsla" />
+            </graphic>
+        </Tab>
+        <Tab>
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorpane">
+                    <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dce5ed" height="130.0" layoutX="35.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="136.0" />
+                        <Button layoutX="144.0" layoutY="233.0" onAction="#skraUt" text="Skrá út" />
+                    </children>
+                </AnchorPane>
+            </content>
+            <graphic>
+                <Label styleClass="tablabell" text="notandi" />
             </graphic>
         </Tab>
     </tabs>

@@ -1,0 +1,19 @@
+.root{
+    -fx-alignment: top-center;
+    -fx-fill-width: false;
+    -fx-background-color: transparent;
+}
+
+#fxFlokkur{
+    -fx-alignment: center;
+    -fx-background-color: #beefed;
+    -fx-background-radius: 20;
+}
+
+#fxAlmenntNafn{
+    -fx-font-size: 14;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+

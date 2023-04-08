@@ -28,6 +28,18 @@ fx-background-color: -beef;
     -fx-background-color: lightsteelblue;
 }
 
+.vboxStats{
+    -fx-pref-height: 27;
+    -fx-pref-width: 36;
+    -fx-spacing: 5;
+    -fx-alignment: bottom-center;
+    -fx-fill-width: false;
+}
+
+.mynd{
+
+}
+
 
 
 .button{
@@ -56,18 +68,24 @@ fx-background-color: -beef;
 }
 
 .vokva-label{
--fx-background-image: url("icon/water.png");
+fx-background-image: url("icon/water.png");
+-fx-padding: 2 3 2 20;
+-fx-background-image: url("icon/clock.png");
 }
 
 .vokva-takki{
+-fx-padding: 2 3 2 20;
 -fx-background-image: url("icon/water.png");
 }
+
+
 
 .sol-takki{
 -fx-background-image: url("icon/sol.png");
 }
 
 .plus-takki{
+-fx-padding: 3 3 3 20;
 -fx-background-image: url("icon/plus.png");
 }
 
@@ -75,7 +93,7 @@ fx-background-color: -beef;
 fx-image: url("plants/Picture1.png");
 }
 
-#almenntHeiti{
+#fxAlmenntNafn{
     -fx-background-color: transparent;
     -fx-font-size: 14px;
     -fx-padding: 0;

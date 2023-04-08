@@ -9,7 +9,7 @@
 <DialogPane stylesheets="@styling/gluggi-style.css" xmlns="http://javafx.com/javafx/19"
             xmlns:fx="http://javafx.com/fxml/1">
     <content>
-        <AnchorPane prefHeight="400.0" prefWidth="600.0">
+        <AnchorPane prefHeight="400.0" prefWidth="600.0"> <!-- eiginlega allt hér -->
             <children>
                 <Pane layoutX="23.0" layoutY="31.0" prefHeight="344.0" prefWidth="205.0"
                       style="-fx-border-color: lightsteelblue;">
@@ -18,17 +18,18 @@
                               style="-fx-border-color: lightsteelblue;">
                             <children>
                                 <ImageView fitHeight="114.0" fitWidth="126.0" layoutX="6.0" layoutY="3.0"
-                                           pickOnBounds="true" preserveRatio="true"/>
+                                           pickOnBounds="true" preserveRatio="true" fx:id="fxMynd"/>
                             </children>
                         </Pane>
                         <Label layoutX="20.0" layoutY="150.0" prefHeight="17.0" prefWidth="149.0"
-                               text="Gælunafn plöntunnar">
+                               text="Gælunafn plöntunnar" fx:id="fxAlmenntNafn">
                             <font>
                                 <Font size="14.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="fxBreyta" layoutX="158.0" layoutY="143.0" prefHeight="25.0" prefWidth="27.0"/>
-                        <Label layoutX="20.0" layoutY="170.0" text="fræðiheiti skáletrað"/>
+                        <Label fx:id="fxBreytaNafni" layoutX="158.0" layoutY="143.0" prefHeight="25.0"
+                               prefWidth="27.0"/>
+                        <Label layoutX="20.0" layoutY="170.0" text="fræðiheiti skáletrað" fx:id="fxLatnesktNafn"/>
                         <AnchorPane layoutX="16.0" layoutY="233.0" prefHeight="97.0" prefWidth="175.0"
                                     style="-fx-border-color: lightgray;">
                             <children>
@@ -49,6 +50,7 @@
                                                text="svefnherbergi"/>
                                         <Label layoutX="59.0" layoutY="10.0" styleClass="rammi-label"
                                                text="í skammarkróknum"/>
+                                        <Button text="breyta nótum" fx:id="fxAthugasemdir"/>
                                     </children>
                                     <padding>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
@@ -66,7 +68,7 @@
                                 <Text strokeType="OUTSIDE" strokeWidth="0.0"
                                       text="Þegar plantan er vökvuð skal gegnbleyta moldina. Sumir velja að setja pottin á kaf þar til engar loftbólur stíga upp.  Almennt er gert ráð fyrir að vökva þurfi á 12-16 daga fresti yfir sumarið, og sjaldnar á veturna."
                                       wrappingWidth="295.0"/>
-                                <Button mnemonicParsing="false" text="vökvunarsaga"/>
+                                <Button mnemonicParsing="false" text="vökvunarsaga" fx:id="fxVokvunarsaga"/>
                                 <HBox layoutX="25.0" layoutY="49.0" styleClass="titilbox">
                                     <children>
                                         <Label styleClass="titill-label" text="Ljósþörf"/>
