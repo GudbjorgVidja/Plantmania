@@ -23,26 +23,30 @@ import java.util.List;
  */
 public class Dagatal extends AnchorPane {
     @FXML
-    private Button fxTilBaka;
+    private Button fxTilBaka;//takki til að fara til baka á næsta mánuð á undan
     @FXML
-    private Button fxAfram;
+    private Button fxAfram;//takki til að fara yfir á næsta mánuð á eftir
     @FXML
-    private Label fxDagsetning;
+    private Label fxDagsetning;//labell með mánuði og ártali mánaðarins sem er sýndur
     @FXML
-    private GridPane fxGrid;
+    private GridPane fxGrid;//gridpane sem inniheldur dagana í dagatalinu. Inniheldur labels með vikudögum og Dagur hluti
 
-    private String[] manudir;
+    private final String[] manudir = new String[]{"Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí",
+            "Ágúst", "September", "Október", "Nóvember", "Desember"};
+    ;//fylki af strengjum með mánaðarheitum
+
     private LocalDate syndurDagur;//dagurinn sem dagatalið sýnir. Notað til að vita hvaða mánuður er sýndur í augnablikinu
+
     //listi af pörum sem gefa dagsetningu og plöntu sem var vökvuð þá. inniheldur öll skipti sem einhver planta hefur verið vökvuð
     private ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgFyrriVokvanir = FXCollections.observableArrayList();
+
+    //listi af pörum sem gefa dagsetningu og plöntu sem ætti að vökva þá. inniheldur þrjá mánuði fram í tímann
     private ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgAaetladarVokvanir = FXCollections.observableArrayList();
 
+    //smiðurinn, les fxml, gerir fyrsta mánuðinn, sem er núverandi mánuður
     public Dagatal() {
         LesaFXML.lesa(this, "dagatal-view.fxml");
-
-        manudir = new String[]{"Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí", "Ágúst", "September", "Október", "Nóvember", "Desember"};
         syndurDagur = LocalDate.now();
-
         geraDagatal(LocalDate.now());
     }
 
@@ -69,6 +73,7 @@ public class Dagatal extends AnchorPane {
 
         for (int i = 7; i < 49; i++) {
             if (fxGrid.getChildren().get(i) instanceof Dagur && !dagalisti.isEmpty() && !((i - 7) < fyrstiDagurManadar.ordinal())) {
+                (fxGrid.getChildren().get(i)).setStyle("-fx-background-color: #85edad;");
                 LocalDate dagurinn = LocalDate.of(syndurDagur.getYear(), syndurDagur.getMonthValue(), dagalisti.get(0));
                 IntegerBinding fjoldiVokvanaLokid = Bindings.size(vokvanirManadarinsLokid.filtered(p -> p.getValue().isEqual(dagurinn)));
                 IntegerBinding fjoldiVokvanaOlokid = Bindings.size(vokvanirManadarinsOlokid.filtered(p -> p.getValue().isEqual(dagurinn)));
@@ -89,6 +94,11 @@ public class Dagatal extends AnchorPane {
         }
     }
 
+    /**
+     * setur bindings á gefinn dag til að sýna að hann er ekki hluti af mánuðinum
+     *
+     * @param dagur - Dagur, tómur
+     */
     private void setjaOvirkanDag(Dagur dagur) {
         dagur.getFxFjoldiVokvanaOlokid().textProperty().unbind();
         dagur.getFxFjoldiVokvanaOlokid().setText("");
@@ -98,6 +108,8 @@ public class Dagatal extends AnchorPane {
         dagur.getFxFjoldiVokvana().setText("");
         dagur.getFxManadardagur().textProperty().unbind();
         dagur.getFxManadardagur().setText("");
+        dagur.setStyle("-fx-background-color: #a9f5c2;");
+
     }
 
     //getterar og setterar
