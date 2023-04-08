@@ -7,7 +7,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -171,10 +170,10 @@ public class PlantController {
                 int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
 
-                System.out.println("fyrri vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir());
-                System.out.println("naestu vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir());
-
-
+                //System.out.println("fyrri vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir());
+                //System.out.println("naestu vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir());
+                //System.out.println("minar plontur: " + skradurNotandi.get().getNotendaupplysingar().getMinarPlontur());
+                System.out.println("uppl: " + skradurNotandi.get().getNotendaupplysingar());
                 if (valinDagsetning.isBefore(LocalDate.now())) {
                     //TODO: Hér á að opnast listi yfir plöntur sem voru vökvaðar þennan dag
                 } else if (valinDagsetning.isAfter(LocalDate.now())) {
