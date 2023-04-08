@@ -37,7 +37,6 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         minPlanta.setAlmenntNafn(node.get("almenntNafn").asText());
         minPlanta.setMyndaslod(node.get("myndaslod").asText());
         minPlanta.setTexti(node.get("texti").asText());
-        minPlanta.setKjorhitastig(node.get("kjorhitastig").asInt());
         minPlanta.setAlmennurTimiMilliVokvana(node.get("almennurTimiMilliVokvana").asInt());
         minPlanta.setLjosStundir(node.get("ljosStundir").asInt());
         minPlanta.setNickName(node.get("nickName").asText());
@@ -61,6 +60,7 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         //og venjulegir listar. hvernig er þetta?
         minPlanta.setOllHeiti(Arrays.asList(objectMapper.treeToValue(node.get("ollHeiti"), String[].class)));
         minPlanta.setEinkenniPlontu(Arrays.asList(objectMapper.treeToValue(node.get("einkenniPlontu"), String[].class)));
+        minPlanta.setKjorhitastig(Arrays.asList(objectMapper.treeToValue(node.get("kjorhitastig"), Integer[].class)));//
 
 
         //observableList fyrir vökvanir
@@ -83,10 +83,7 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
             flokkar.add(flokkur);
         }
         minPlanta.setFlokkar(flokkar);
-
-
-        //Planta planta;//taka út!
-
+        
 
         return minPlanta;
     }

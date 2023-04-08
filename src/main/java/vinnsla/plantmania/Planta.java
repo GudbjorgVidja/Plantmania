@@ -27,15 +27,15 @@ public class Planta {
     private Uppruni uppruni;
     private Ljosstyrkur ljosstyrkur;
     private Eitrun eitrun;
-    private int kjorhitastig;
+    private List<Integer> kjorhitastig;
     private Vatnsthorf vatnsthorf;
     private int almennurTimiMilliVokvana;
     private int ljosStundir;//fjöldi klukkustunda af sólarljósi á dag
     private List<String> einkenniPlontu;//t.d. ákveðin lauf... má sleppa
 
-    public Planta(String latnesktNafn, String almenntNafn, List<String> ollHeiti, String myndaslod, String texti, Uppruni uppruni, Ljosstyrkur ljosstyrkur, Eitrun eitrun, int kjorhitastig, Vatnsthorf vatnsthorf, int almennurTimiMilliVokvana, int ljosStundir, List<String> einkenniPlontu) {
-        this.latnesktNafn = latnesktNafn; //eða hafa bara latnesktNafn=ollHeiti.get(0)   JÁ!! SNIÐUG
-        this.almenntNafn = almenntNafn; // eða almenntNafn=ollHeiti.get(1)  AHA
+    public Planta(List<String> ollHeiti, String myndaslod, String texti, Uppruni uppruni, Ljosstyrkur ljosstyrkur, Eitrun eitrun, List<Integer> kjorhitastig, Vatnsthorf vatnsthorf, int almennurTimiMilliVokvana, int ljosStundir, List<String> einkenniPlontu) {
+        this.latnesktNafn = ollHeiti.get(0);
+        this.almenntNafn = ollHeiti.get(1);
         this.ollHeiti = ollHeiti;
         this.myndaslod = myndaslod;
         this.texti = texti;
@@ -133,11 +133,11 @@ public class Planta {
         this.eitrun = eitrun;
     }
 
-    public int getKjorhitastig() {
+    public List<Integer> getKjorhitastig() {
         return kjorhitastig;
     }
 
-    public void setKjorhitastig(int kjorhitastig) {
+    public void setKjorhitastig(List<Integer> kjorhitastig) {
         this.kjorhitastig = kjorhitastig;
     }
 
