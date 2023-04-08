@@ -30,6 +30,7 @@ public class PlantaSpjald extends AnchorPane {
     }
 
     public PlantaSpjald(Planta p) {
+        //System.out.println("PlantaSpjald(Planta p) smidur");
         //keyrist einu sinni fyrir hvert PlantaSpjald, í upphafi keyrslu :)
         //System.out.println("Plantaspjald smidur");
         planta = p;
@@ -46,6 +47,14 @@ public class PlantaSpjald extends AnchorPane {
         fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
     }
+
+    /* ekki viss u, að þetta megi?
+    public PlantaSpjald(List<Planta> allarPlontur){
+        for(Planta p: allarPlontur){
+
+        }
+    }
+     */
 
     public String toString() {
         return planta.getAlmenntNafn();

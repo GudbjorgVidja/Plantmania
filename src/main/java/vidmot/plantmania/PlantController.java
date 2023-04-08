@@ -8,7 +8,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,7 +43,8 @@ public class PlantController {
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
-    private ObservableList<Planta> allarPlontur = FXCollections.observableArrayList();//er í vesi, geymi hér
+    //bara kallað á tvisvar: til að setja inn í listann og til að setja í yfirlit
+    //private ObservableList<Planta> allarPlontur = FXCollections.observableArrayList();//er í vesi, geymi hér
     //ætti frekar kannski að geyma í öðrum klasa, t.d. vinnsluklasa fyrir allarPlonturYfirlit
 
     public void initialize() {
@@ -54,6 +54,7 @@ public class PlantController {
         System.out.println(skradurNotandi.get());
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
+        //fxAllarPlonturYfirlit.lesaAllarPlontur();//loadar fxml oftar
         lesaInnAllarPlontur();
         //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
 
@@ -78,7 +79,7 @@ public class PlantController {
          */
 
         //fxMinarPlonturYfirlit.getMinarPlontur.addListener() og bæta allaf sömu við
-        //fxMinarPlonturYfirlit.getSyndSpjold().addListener((ListChangeListener<? super Node>) change ->{
+        //fxMinarPlonturYfirlit.getOllSpjold().addListener((ListChangeListener<? super Node>) change ->{
         //});
     }
 
@@ -86,10 +87,25 @@ public class PlantController {
      * lesa inn af skrá, og setja í yfirlitið  fxAllarPlonturYfirlit
      */
     private void lesaInnAllarPlontur() {
+        List<Planta> lesnarPlontur = (new LesaPlontur()).getPlontur();
+        for (Planta p : lesnarPlontur) {
+
+            fxAllarPlonturYfirlit.baetaVidYfirlit(p);
+
+            /*loadar nákvæmlega jafn oft og línan fyrir ofan
+            PlantaSpjald spjald = new PlantaSpjald(p);
+            fxAllarPlonturYfirlit.baetaVidYfirlit(spjald);
+
+             */
+
+        }
+
+        /* //sleppa alveg allarPlontur listanum
         allarPlontur.addAll((new LesaPlontur()).getPlontur());
         for (Planta planta : allarPlontur) {
             fxAllarPlonturYfirlit.baetaVidYfirlit(planta);
         }
+         */
     }
 
     /*
@@ -219,7 +235,7 @@ public class PlantController {
 
 
     @FXML
-    private void hladaOllumPlontum(MouseEvent event) {
+    private void hladaOllumPlontum(MouseEvent event) {//nær planta sem ýtt var á
 
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
