@@ -3,7 +3,7 @@
  * sniðugt væri að hafa hér staðinn sem streng auk myndarinnar, t.d. EYDIMORK("mynd.png", "eyðimörk").
  * Gæti líka verið stuttur texti sem birtist í plöntuglugganum.
  */
-package vinnsla.plantmania;
+package vinnsla.plantmania.enums;
 
 //TODO: taka út slóð fyrir mynd?
 public enum Uppruni {

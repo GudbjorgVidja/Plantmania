@@ -8,6 +8,7 @@ module vidmot.plantmania {
     opens vidmot.plantmania to javafx.fxml;
     exports vidmot.plantmania;
     exports vinnsla.plantmania to com.fasterxml.jackson.databind;
+    exports vinnsla.plantmania.enums to com.fasterxml.jackson.databind;
     //exports vidmot.plantmania.deserializers;
     //opens vidmot.plantmania.deserializers to javafx.fxml;
 

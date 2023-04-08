@@ -7,7 +7,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import vinnsla.plantmania.*;
+import vinnsla.plantmania.MinPlanta;
+import vinnsla.plantmania.enums.Eitrun;
+import vinnsla.plantmania.enums.Ljosstyrkur;
+import vinnsla.plantmania.enums.Uppruni;
+import vinnsla.plantmania.enums.Vatnsthorf;
 
 import java.io.IOException;
 import java.time.LocalDate;

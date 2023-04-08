@@ -15,6 +15,11 @@
  */
 package vinnsla.plantmania;
 
+import vinnsla.plantmania.enums.Eitrun;
+import vinnsla.plantmania.enums.Ljosstyrkur;
+import vinnsla.plantmania.enums.Uppruni;
+import vinnsla.plantmania.enums.Vatnsthorf;
+
 import java.util.List;
 
 //TODO: bæta kannski við enum fyrir vökvunaraðferð? veit ekki, en eru ekki örfáar basic aðferðir og mælt með mismunandi eftir plöntum?

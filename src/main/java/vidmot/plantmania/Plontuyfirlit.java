@@ -20,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Planta;
-import vinnsla.plantmania.Uppruni;
+import vinnsla.plantmania.enums.Uppruni;
 
 import java.util.Collections;
 import java.util.Comparator;

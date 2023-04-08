@@ -3,7 +3,7 @@
  * mjög gott, en væri kannski hægt að lengja einhver skilaboðanna og birta beint í plöntuglugganum?
  * TIL_MANNELDIS gæti verið eitthvað eins og "*plantan* er æt, og er víða notuð til manneldis"
  */
-package vinnsla.plantmania;
+package vinnsla.plantmania.enums;
 
 public enum Eitrun {
     TIL_MANNELDIS("Til manneldis"),
