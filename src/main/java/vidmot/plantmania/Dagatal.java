@@ -5,7 +5,6 @@ import javafx.beans.binding.IntegerBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -13,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import vinnsla.plantmania.MinPlanta;
 
-import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class Dagatal extends AnchorPane {
     private ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgAaetladarVokvanir = FXCollections.observableArrayList();
 
     public Dagatal() {
-        lesaFXML();
+        LesaFXML.lesa(this, "dagatal-view.fxml");
 
         manudir = new String[]{"Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí", "Ágúst", "September", "Október", "Nóvember", "Desember"};
         syndurDagur = LocalDate.now();
@@ -81,38 +79,25 @@ public class Dagatal extends AnchorPane {
                 ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().bind(
                         Bindings.when(fjoldiVokvanaLokid.isEqualTo(0)).then("")
                                 .otherwise(fjoldiVokvanaLokid.asString()));
-                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().bind(fjoldiVokvanaLokid.greaterThan(0));
+                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().bind(fjoldiVokvanaLokid.greaterThan(0).or(fjoldiVokvanaOlokid.greaterThan(0)));
                 ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText(dagalisti.get(0) + "");
 
                 dagalisti.remove(0);
             } else {
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().textProperty().unbind();
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().setText("");
-                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().unbind();
-                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().setVisible(false);
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().unbind();
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().setText("");
-                ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().textProperty().unbind();
-                ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText("");
+                setjaOvirkanDag(((Dagur) fxGrid.getChildren().get(i)));
             }
         }
     }
 
-
-    /**
-     * les inn fxml skrána, setur controller og rót og hleður fxmlLoadernum
-     */
-    private void lesaFXML() {
-        FXMLLoader fxmlLoader = new
-                FXMLLoader(this.getClass().getResource("dagatal-view.fxml"));
-        fxmlLoader.setClassLoader(this.getClass().getClassLoader());
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+    private void setjaOvirkanDag(Dagur dagur) {
+        dagur.getFxFjoldiVokvanaOlokid().textProperty().unbind();
+        dagur.getFxFjoldiVokvanaOlokid().setText("");
+        dagur.getFxDropi().visibleProperty().unbind();
+        dagur.getFxDropi().setVisible(false);
+        dagur.getFxFjoldiVokvana().textProperty().unbind();
+        dagur.getFxFjoldiVokvana().setText("");
+        dagur.getFxManadardagur().textProperty().unbind();
+        dagur.getFxManadardagur().setText("");
     }
 
     //getterar og setterar
