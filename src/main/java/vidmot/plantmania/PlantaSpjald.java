@@ -1,3 +1,6 @@
+/*
+keyrist ekki af óþörfu
+ */
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;
@@ -22,10 +25,13 @@ public class PlantaSpjald extends AnchorPane {
     private Planta planta;//Planta vinnsluhluturinn, plantan sem spjaldið er fyrir.
 
     public PlantaSpjald() {
-
+        //keyrist aldrei
+        //System.out.println("Plantaspjald tomur smidur");
     }
 
     public PlantaSpjald(Planta p) {
+        //keyrist einu sinni fyrir hvert PlantaSpjald, í upphafi keyrslu :)
+        //System.out.println("Plantaspjald smidur");
         planta = p;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("planta-view.fxml"));
         loader.setRoot(this);
@@ -36,13 +42,9 @@ public class PlantaSpjald extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
-        //if (fxSpjald != null) {
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
         fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
-        //} else {
-        System.out.println("fxSpjald er null");
-        //}
     }
 
     public String toString() {

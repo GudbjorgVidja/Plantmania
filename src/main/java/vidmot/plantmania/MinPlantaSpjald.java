@@ -33,11 +33,11 @@ public class MinPlantaSpjald extends AnchorPane {
 
 
     public MinPlantaSpjald() {//tómur smiður. Athuga hvort hann sé óþarfi
-
+        System.out.println("MinPlantaSpjald tomur smidur");
     }
 
     public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn sem er notaður
-
+        System.out.println("MinPlantaSpjald smidur");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("minplanta-view.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -50,13 +50,10 @@ public class MinPlantaSpjald extends AnchorPane {
         //minPlanta vistuð í tilviksbreytu
         minPlantan = minPlanta;
 
-        //if (fxSpjald != null) {
         fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.nickNameProperty());
         fxSpjald.setFxFlokkur(minPlantan.getUppruni().toString().toLowerCase(Locale.ROOT));
         fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
-        //} else {
-        System.out.println("fxSpjald is null");
-        //}
+
 
         //setja handlera á takkana
         fxVokva.setOnAction(this::vokvaHandler);

@@ -47,6 +47,8 @@ public class MinPlanta extends Planta {
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
 
+        System.out.println("MinPlanta(Planta planta) smidur");
+
         //naestaVokvun = (thinnTimiMilliVokvana);
 
         naestaVokvunRegla();
@@ -55,7 +57,7 @@ public class MinPlanta extends Planta {
 
     }
 
-    private void planadarVokvanirTestListener() {
+    private void planadarVokvanirTestListener() { //prentar bara, gerir ekkert þannig séð
         planadarVokvanir.addListener((ListChangeListener<? super LocalDate>) change -> {
             change.next();
             if (change.wasAdded()) System.out.print("added ");
@@ -67,6 +69,9 @@ public class MinPlanta extends Planta {
         });
     }
 
+    /**
+     * bara kallað á úr MinPlanta smið, svo gerist bara einu sinni fyrir hverja
+     */
     public void reiknaPlanadarVokvanir() {
         //planadarVokvanirTestListener(); //prentar
         LocalDate date = LocalDate.now();
@@ -75,30 +80,20 @@ public class MinPlanta extends Planta {
             planadarVokvanir.add(dagur);
         }
 
+        //ef tími í næstu vökvun breytist þá er öllum dagsetningum hliðrað um muninn
         naestaVokvun.addListener((obs, o, n) -> {
             if (n.intValue() > o.intValue()) {
                 for (int i = 0; i < planadarVokvanir.size(); i++) {
-                    //planadarVokvanir.get(i)=planadarVokvanir.get(i).plusDays(n.intValue()-o.intValue());
-                    //planadarVokvanir.get(i).plusDays(n.intValue()-o.intValue());
                     planadarVokvanir.set(i, planadarVokvanir.get(i).plusDays(n.intValue() - o.intValue()));
                 }
-                /*
-                for (LocalDate vDay : planadarVokvanir) {
-                    vDay = vDay.plusDays(n.intValue() - o.intValue());
-
-                }
-
-                 */
-                System.out.println(planadarVokvanir);
+                System.out.println("planadarVokvanir uppfaersla: " + planadarVokvanir);
             } else if (n.intValue() < o.intValue()) {
-                for (LocalDate vDay : planadarVokvanir) {
-                    vDay = vDay.plusDays(o.intValue() - n.intValue());
-
+                for (int i = 0; i < planadarVokvanir.size(); i++) {
+                    planadarVokvanir.set(i, planadarVokvanir.get(i).minusDays(n.intValue() - o.intValue()));
                 }
-                System.out.println(planadarVokvanir);
+                System.out.println("planadarVokvanir uppfaersla: " + planadarVokvanir);
             }
         });
-        //date.plusDays(1);
     }
 
     public void sidastaVokvunListener() {
@@ -112,6 +107,7 @@ public class MinPlanta extends Planta {
     }
 
     //skoða með að þurfa ekki að reikna frá grunni í hvert skipti?
+    //á ekki bara að setja teljara á frestun eða eitthvað? og þegar ýtt á vökva þá er teljarinn sóttur? -G
     public void medaltimiMilliVokvanaListener() {
         vokvanir.addListener((ListChangeListener<LocalDate>) (observable) -> {
             if (!vokvanir.isEmpty() && vokvanir.size() != 1) {
@@ -172,6 +168,7 @@ public class MinPlanta extends Planta {
     //getterar, setterar og tómur smiður fyrir json
 
     public MinPlanta() {
+        System.out.println("MinPlanta() smidur");
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
         naestaVokvunRegla();

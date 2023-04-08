@@ -22,6 +22,8 @@ public class Notendaupplysingar {
     }
 
     public Notendaupplysingar() {
+        //kallað á þetta fimm sinnum við upphaf keyrslu, af hverju?
+        System.out.println("Notendaupplysingar smidur");
         finnaNaestuVokvanir();
     }
 
@@ -63,18 +65,18 @@ public class Notendaupplysingar {
      * Passa að hafa einhverja tilkynningu um að engar upplýsingar séu skráðar um fyrri vökvun
      */
     public void finnaNaestuVokvanir() {
-        System.out.println("finnaNaestuVokvanir adferd");
+        System.out.println("Notendaupplysingar.finnaNaestuVokvanir(): ");
         //hafa binding/listener hér
         // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
 
         //Þegar nýrri plöntu er bætt við:
         //setja vökvun í dag
         minarPlontur.addListener((ListChangeListener<? super MinPlanta>) change -> {
-            System.out.println("Listenerinn");
+            //System.out.println("Listenerinn");
             change.next();
 
             if (change.wasAdded()) {
-                System.out.println("Plontu var baett vid minarPlontur i notendaupplysingar");
+                System.out.println("Notendaupplysingar.finnaNaestuVokvanir: Plontu var baett vid minarPlontur i notendaupplysingar");
                 for (MinPlanta mp : change.getAddedSubList()) {
                     for (LocalDate date : mp.getPlanadarVokvanir()) {
                         naestuVokvanir.add(new Pair<>(mp, date));
@@ -112,6 +114,7 @@ public class Notendaupplysingar {
 
     //passa að engar tvær plöntur fái sama nickname
     public void baetaVidPlontu(Planta planta) {
+        System.out.println("Notendaupplysingar.baetaVidPlontu(Planta)");
         minarPlontur.add(new MinPlanta(planta));
         //MinPlanta ny = new MinPlanta();
         //ny.setAlmenntNafn(planta.getAlmenntNafn());
