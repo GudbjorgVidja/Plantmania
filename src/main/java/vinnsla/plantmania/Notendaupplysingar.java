@@ -79,6 +79,25 @@ public class Notendaupplysingar {
             if (change.wasAdded()) {
                 System.out.println("Notendaupplysingar.finnaNaestuVokvanir: Plontu var baett vid minarPlontur i notendaupplysingar");
                 for (MinPlanta mp : change.getAddedSubList()) {
+                    mp.getPlanadarVokvanir().addListener((ListChangeListener<? super LocalDate>) breyting -> {
+                        while (breyting.next()) {
+                            //ath hvort breyting.wasReplaced() virkar hér
+                            if (breyting.wasAdded()) {
+                                System.out.println("breyting.wasAdded() - minPlanta planadarVokvanir listi");
+                                for (LocalDate dags : breyting.getAddedSubList()) {
+                                    naestuVokvanir.add(new Pair<>(mp, dags));
+                                }
+                            }
+                            if (breyting.wasRemoved()) {
+                                List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
+                                for (LocalDate date : breyting.getRemoved()) {
+                                    eytt.add(new Pair<>(mp, date));
+                                }
+                                naestuVokvanir.removeAll(eytt);
+                            }
+                        }
+                    });
+                    //skoða hvað þetta gerir nákvæmlega, ef ég tek þetta út er ekkert á dagatalinu þegar það er opnað án þess að eiga við plöntu
                     for (LocalDate date : mp.getPlanadarVokvanir()) {
                         naestuVokvanir.add(new Pair<>(mp, date));
                         //System.out.println("naestuVokvanir: " + naestuVokvanir);

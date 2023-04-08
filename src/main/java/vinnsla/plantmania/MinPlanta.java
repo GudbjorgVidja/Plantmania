@@ -36,7 +36,7 @@ public class MinPlanta extends Planta {
     //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
     //en það væri kannski bara meira vesen
 
-    private IntegerProperty naestaVokvun = new SimpleIntegerProperty(2);//setja hér niðurtalningu
+    private IntegerProperty naestaVokvun = new SimpleIntegerProperty();//setja hér niðurtalningu
     private ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
 
     //passa hvernig smiðurinn lítur út hér!
@@ -83,6 +83,10 @@ public class MinPlanta extends Planta {
 
         //ef tími í næstu vökvun breytist þá er öllum dagsetningum hliðrað um muninn
         naestaVokvun.addListener((obs, o, n) -> {
+            //spá hvort eitthvað svona myndi virka?
+            /*for (LocalDate d = LocalDate.now().plusDays(naestaVokvun.get()); d.isBefore(LocalDate.now().plusMonths(3)); d = d.plusDays(thinnTimiMilliVokvana.get())) {
+                planadarVokvanir.add(d);
+            }*/
             if (n.intValue() > o.intValue()) {
                 for (int i = 0; i < planadarVokvanir.size(); i++) {
                     planadarVokvanir.set(i, planadarVokvanir.get(i).plusDays(n.intValue() - o.intValue()));
