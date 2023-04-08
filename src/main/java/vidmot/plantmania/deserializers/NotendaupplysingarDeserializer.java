@@ -1,10 +1,11 @@
-package vidmot.plantmania;
+package vidmot.plantmania.deserializers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
@@ -24,6 +25,7 @@ public class NotendaupplysingarDeserializer extends JsonDeserializer<Notendauppl
     public Notendaupplysingar deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException {
         Notendaupplysingar notendaupplysingar = new Notendaupplysingar();
         ObjectMapper objectMapper = (ObjectMapper) parser.getCodec();
+        objectMapper.registerModule(new SimpleModule().addDeserializer(MinPlanta.class, new MinPlantaDeserializer()));
         JsonNode node = objectMapper.readTree(parser);
 
         // setjum venjulegu gildin - tilviksbreyturnar eru tvær en gætu verið færri eða fleiri
@@ -49,7 +51,7 @@ public class NotendaupplysingarDeserializer extends JsonDeserializer<Notendauppl
         if (fyrriVokvanirNode != null) {
             for (JsonNode pairNode : fyrriVokvanirNode) {
                 MinPlanta minPlanta = objectMapper.treeToValue(pairNode.get("key"), MinPlanta.class);
-                
+
                 LocalDate date = LocalDate.parse(pairNode.get("value").asText());
                 fyrriVokvanir.add(new Pair<>(minPlanta, date));
             }

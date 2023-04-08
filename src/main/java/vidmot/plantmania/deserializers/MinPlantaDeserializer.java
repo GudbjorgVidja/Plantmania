@@ -1,4 +1,4 @@
-package vidmot.plantmania;
+package vidmot.plantmania.deserializers;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -26,9 +26,6 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
     public MinPlanta deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException {
         ObjectMapper objectMapper = (ObjectMapper) parser.getCodec();
         JsonNode node = objectMapper.readTree(parser);
-        // lesum tréð - node er rótin
-
-
         MinPlanta minPlanta = new MinPlanta();
 
 
@@ -47,8 +44,11 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
 
         //og LocalDate (var objectProperty). Er þetta rétt?
         //minPlanta.setSidastaVokvun(objectMapper.readValue(node.toString(), LocalDate.class));
-        Integer[] dagar = objectMapper.treeToValue(node.get("sidastaVokvun"), Integer[].class);
-        minPlanta.setSidastaVokvun(LocalDate.of(dagar[0], dagar[1], dagar[2]));
+        //Integer[] dagar = objectMapper.treeToValue(node.get("sidastaVokvun"), Integer[].class);
+        //minPlanta.setSidastaVokvun(LocalDate.of(dagar[0], dagar[1], dagar[2]));
+        minPlanta.setSidastaVokvun(
+                objectMapper.readValue(node.get("sidastaVokvun").traverse(), LocalDate.class)
+        );
 
         //og enum. er þetta rétt?
         //minPlanta.setUppruni(objectMapper.readValue(node.get("uppruni")));
@@ -68,14 +68,16 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
 
         for (JsonNode dateNode : vokvanirNodes) {
-            Integer[] dates = objectMapper.treeToValue(node.get(dateNode.asText()), Integer[].class);
-            vokvanir.add(LocalDate.of(dates[0], dates[1], dates[2]));
+            //Integer[] dates = objectMapper.treeToValue(node.get(dateNode.asText()), Integer[].class);
+            //vokvanir.add(LocalDate.of(dates[0], dates[1], dates[2]));
+
+            vokvanir.add(objectMapper.readValue(node.get("sidastaVokvun").traverse(), LocalDate.class));
         }
         minPlanta.setVokvanir(vokvanir);
 
 
         //observableList fyrir flokka
-        JsonNode flokkarNodes = node.get("vokvanir");
+        JsonNode flokkarNodes = node.get("flokkar");
         ObservableList<String> flokkar = FXCollections.observableArrayList();
 
         for (JsonNode flokkurNode : flokkarNodes) {
@@ -83,7 +85,7 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
             flokkar.add(flokkur);
         }
         minPlanta.setFlokkar(flokkar);
-        
+
 
         return minPlanta;
     }
