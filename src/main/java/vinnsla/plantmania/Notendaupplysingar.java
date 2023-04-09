@@ -37,26 +37,29 @@ public class Notendaupplysingar {
             while (obs.next()) {
                 if (obs.wasAdded()) {
                     for (int i = 0; i < obs.getAddedSize(); i++) {
-                        int finalI = i;
-                        obs.getAddedSubList().get(i).getVokvanir().addListener((ListChangeListener<LocalDate>) (observable) -> {
-                            while (observable.next()) {
-                                if (observable.wasAdded()) {
-                                    for (int j = 0; j < observable.getAddedSize(); j++) {
-                                        fyrriVokvanir.add(new Pair<>(obs.getAddedSubList().get(finalI), observable.getAddedSubList().get(j)));
-                                    }
-                                } else if (observable.wasRemoved()) {
-                                    List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
-                                    for (int j = 0; j < observable.getRemovedSize(); j++) {
-                                        eytt.add(new Pair<>(obs.getAddedSubList().get(finalI), observable.getRemoved().get(j)));
-                                    }
-                                    fyrriVokvanir.removeAll(eytt);
-                                }
-                            }
-                        });
+                        vokvanirListener(obs.getAddedSubList().get(i));
                     }
                 }
             }
             fyrriVokvanir.sort(Comparator.comparing((Pair::getValue)));
+        });
+    }
+
+    private void vokvanirListener(MinPlanta minPlanta) {
+        minPlanta.getVokvanir().addListener((ListChangeListener<LocalDate>) (observable) -> {
+            while (observable.next()) {
+                if (observable.wasAdded()) {
+                    for (int j = 0; j < observable.getAddedSize(); j++) {
+                        fyrriVokvanir.add(new Pair<>(minPlanta, observable.getAddedSubList().get(j)));
+                    }
+                } else if (observable.wasRemoved()) {
+                    List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
+                    for (int j = 0; j < observable.getRemovedSize(); j++) {
+                        eytt.add(new Pair<>(minPlanta, observable.getRemoved().get(j)));
+                    }
+                    fyrriVokvanir.removeAll(eytt);
+                }
+            }
         });
     }
 
@@ -80,9 +83,9 @@ public class Notendaupplysingar {
                 for (MinPlanta mp : change.getAddedSubList()) {
                     mp.getPlanadarVokvanir().addListener((ListChangeListener<? super LocalDate>) breyting -> {
                         while (breyting.next()) {
-                            //ath hvort breyting.wasReplaced() virkar hér
+                            //TODO: laga hér, vandamál (tímabundin lausn í vokvaHandler MinPlantaSpjald)
+                            System.out.println("breyting a naestuVokvanir" + breyting);
                             if (breyting.wasAdded()) {
-                                System.out.println("breyting.wasAdded() - minPlanta planadarVokvanir listi");
                                 for (LocalDate dags : breyting.getAddedSubList()) {
                                     naestuVokvanir.add(new Pair<>(mp, dags));
                                 }
