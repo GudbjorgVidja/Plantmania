@@ -7,9 +7,11 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import vinnsla.plantmania.MinPlanta;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 /**
@@ -21,18 +23,25 @@ import java.util.Optional;
  */
 public class Plontugluggi extends Dialog<Void> {
     @FXML
-    private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn;
+    private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi;
 
     @FXML
     private ImageView fxMynd;
 
     @FXML
-    private Button fxAthugasemdir, fxVokvunarsaga;
+    private Button fxAthugasemdir, fxVokvunarsaga, fxBreytaTimaMilliVokvana;
+
+    @FXML
+    private Text fxHitastig, fxUmPlontuna;
+
+    @FXML
+    private DatePicker fxDatePicker;
 
     private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
 
-    //private Planta plantan;//ef glugginn er fyrir planta, kemur seinna
+    //private Planta plantan;//ef glugginn er fyrir planta, kemur etv seinna
 
+    //það segir að þetta komi sem overloaded method, held ég???
     public Plontugluggi() {
         setDialogPane(lesaGlugga());
         ButtonType lokaTakki = new ButtonType("Loka glugga", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -53,9 +62,82 @@ public class Plontugluggi extends Dialog<Void> {
         fxBreytaNafni.setOnMouseClicked(this::breytaNafniHandler);
         fxAthugasemdir.setOnAction(this::athugasemdirHandler);
         fxVokvunarsaga.setOnAction(this::vokvunarsagaHandler);
+        fxBreytaTimaMilliVokvana.setOnMouseClicked(this::setjaFxBreytaTimaMilliVokvanaEventFilter);
 
+        setFxHitasig();
+        datePickerHandler();
+        setNaestaVokvunListener();
+        setFxUmPlontuna();
+        setFxThinnTimi();
     }
 
+    //ath að þetta kemur ekki fram á dagatali eins og er, en það vantar listener í MinPlanta
+    public void setFxThinnTimi() {
+        fxThinnTimi.setText("Þinn tími milli vökvana er " + minPlantan.getThinnTimiMilliVokvana() + " dagar");
+        minPlantan.thinnTimiMilliVokvanaProperty().addListener((observable, oldValue, newValue) -> {
+            fxThinnTimi.setText("Þinn tími milli vökvana er " + newValue.intValue() + " dagar");
+        });
+    }
+
+    private void geraTextFormatter(TextField textField) {
+        textField.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.isEmpty()) {
+                return change;
+            }
+            boolean logleg = false;
+            try {
+                Integer.parseInt(newText);
+                if (!newText.equals("0")) {
+                    logleg = true;
+                }
+            } catch (NumberFormatException e) {
+                //TODo: láta skilaboðin birast einhvers staðar í viðmótinu
+                System.out.println("Vinsamlegast sláðu inn tölu");
+            }
+            if (logleg) {//ath newText.length > 1000 eða eitthvað, til að koma í veg fyrir misnotkun??
+                return change;
+            } else {
+                return null;
+            }
+        }));
+    }
+
+    private void setjaFxBreytaTimaMilliVokvanaEventFilter(MouseEvent mouseEvent) {
+        System.out.println("Thinum tima milli vokvana verdur breytt");
+        TextInputDialog timiDialog = new TextInputDialog(minPlantan.getAlmennurTimiMilliVokvana() + "");
+        geraTextFormatter(timiDialog.getEditor());
+        timiDialog.getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(timiDialog.getEditor().textProperty().isEmpty());
+        Optional<String> svar = timiDialog.showAndWait();
+        svar.ifPresent(s -> minPlantan.setThinnTimiMilliVokvana(Integer.parseInt(s)));
+    }
+
+    private void setFxUmPlontuna() {
+        fxUmPlontuna.setText(minPlantan.getTexti());
+    }
+
+    private void setFxHitasig() {
+        fxHitastig.setText("Kjörhitastig er " + minPlantan.getKjorhitastig().get(1) +
+                "°C, en plantan þolir allt á milli " + minPlantan.getKjorhitastig().get(0) +
+                "°C og " + minPlantan.getKjorhitastig().get(2) + "°C.");
+    }
+
+    private void naestaVokvunTexti(int naestaV) {
+        if (naestaV == 1) {
+            fxNaestaVokvun.setText("næst eftir " + minPlantan.getNaestaVokvun().get() + " dag");
+        } else if (naestaV == 0) {
+            fxNaestaVokvun.setText("næst í dag");
+        } else {
+            fxNaestaVokvun.setText("næst eftir " + minPlantan.getNaestaVokvun().get() + " daga");
+        }
+    }
+
+    private void setNaestaVokvunListener() {
+        naestaVokvunTexti(minPlantan.getNaestaVokvun().get());
+        minPlantan.getNaestaVokvun().addListener((observable, oldValue, newValue) -> {
+            naestaVokvunTexti(newValue.intValue());
+        });
+    }
 
     private DialogPane lesaGlugga() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(View.GLUGGI.getFileName()));
@@ -89,6 +171,19 @@ public class Plontugluggi extends Dialog<Void> {
             }
             */
         }
+    }
+
+    /**
+     * handler fyrir datePicker hlut, bætir við vökvun á plöntuna á valdri dagsetningu
+     */
+    private void datePickerHandler() {
+        fxDatePicker.setOnAction(t -> {
+            LocalDate date = fxDatePicker.getValue();
+            System.out.println("Selected date: " + date);
+            if (date != null) {
+                minPlantan.baetaVidVokvun(date);
+            }
+        });
     }
 
     /**

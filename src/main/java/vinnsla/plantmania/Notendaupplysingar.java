@@ -71,20 +71,12 @@ public class Notendaupplysingar {
     public void finnaNaestuVokvanir() {
         System.out.println("Notendaupplysingar.finnaNaestuVokvanir(): ");
         // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
-
-        //Þegar nýrri plöntu er bætt við:
-        //setja vökvun í dag
         minarPlontur.addListener((ListChangeListener<? super MinPlanta>) change -> {
-            //System.out.println("Listenerinn");
             change.next();
-
             if (change.wasAdded()) {
-                System.out.println("Notendaupplysingar.finnaNaestuVokvanir: Plontu var baett vid minarPlontur i notendaupplysingar");
                 for (MinPlanta mp : change.getAddedSubList()) {
                     mp.getPlanadarVokvanir().addListener((ListChangeListener<? super LocalDate>) breyting -> {
                         while (breyting.next()) {
-                            //TODO: laga hér, vandamál (tímabundin lausn í vokvaHandler MinPlantaSpjald)
-                            System.out.println("breyting a naestuVokvanir" + breyting);
                             if (breyting.wasAdded()) {
                                 for (LocalDate dags : breyting.getAddedSubList()) {
                                     naestuVokvanir.add(new Pair<>(mp, dags));
