@@ -10,7 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import vinnsla.plantmania.MinPlanta;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 /**
  * minPlantaSpjald les inn fxml skrána minplanta-view.fxml. Þessi klasi er controllerinn
@@ -43,7 +42,8 @@ public class MinPlantaSpjald extends AnchorPane {
         minPlantan = minPlanta;
 
         fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.nickNameProperty());
-        fxSpjald.setFxFlokkur(minPlantan.getUppruni().toString().toLowerCase(Locale.ROOT));
+        //fxSpjald.setFxFlokkur(minPlantan.getUppruni().toString().toLowerCase(Locale.ROOT));
+        fxSpjald.setFxFlokkur(minPlantan.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
 
 

@@ -4,10 +4,12 @@ keyrist ekki af óþörfu
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import vinnsla.plantmania.Planta;
-
-import java.util.Locale;
 
 /**
  * plöntuspjald fyrir einhverja plöntu, hlutur af gerð Planta. það er líka til MinPlantaSpjald.
@@ -19,6 +21,12 @@ public class PlantaSpjald extends AnchorPane {
 
     @FXML
     private Spjald fxSpjald;
+
+    @FXML
+    private VBox fxVatnBox, fxLjosBox, fxHitiBox;
+
+    @FXML
+    private HBox fxBoxaHbox;
 
     private Planta planta;//Planta vinnsluhluturinn, plantan sem spjaldið er fyrir.
 
@@ -33,12 +41,44 @@ public class PlantaSpjald extends AnchorPane {
         //System.out.println("Plantaspjald smidur");
         planta = p;
         LesaFXML.lesa(this, "planta-view.fxml");
-        
 
+
+        //todo er betra að gera þetta allt í einu? og fara þá einu sinni inn í fxSpjald?
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
-        fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));
+        //fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));
+        fxSpjald.setFxFlokkur(planta.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
+
+        stillaMyndaStaerd();
+
+        setjaOpacity();
+
     }
+
+    /**
+     * stilla stærð mynda hér, og kannski líka sýnileika? (opacity)
+     */
+    private void stillaMyndaStaerd() {
+        for (Node v : fxBoxaHbox.getChildren()) {
+            if (v instanceof VBox) {
+                for (Node i : ((VBox) v).getChildren()) {
+                    if (i instanceof ImageView) {
+                        ((ImageView) i).setFitHeight(20);
+                        ((ImageView) i).setFitWidth(20);
+                    }
+                }
+            }
+        }
+    }
+
+    private void setjaOpacity() {
+        fxVatnBox.getChildren().get(1).setOpacity(0.3);
+        fxVatnBox.getChildren().get(0).setOpacity(0.3);
+        fxLjosBox.getChildren().get(0).setOpacity(0.3);
+        fxHitiBox.getChildren().get(0).setOpacity(0.3);
+    }
+
+
 
     /* ekki viss u, að þetta megi?
     public PlantaSpjald(List<Planta> allarPlontur){

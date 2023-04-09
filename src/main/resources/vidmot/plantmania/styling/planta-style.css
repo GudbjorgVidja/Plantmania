@@ -30,14 +30,43 @@ fx-background-color: -beef;
 
 .vboxStats{
     -fx-pref-height: 27;
+    -fx-max-height: 27;
     -fx-pref-width: 36;
-    -fx-spacing: 5;
+    -fx-max-width: 36;
+    fx-spacing: 5;
     -fx-alignment: bottom-center;
     -fx-fill-width: false;
+    fx-border-color: lightsteelblue;
+    -fx-rotate: 22.5;
 }
 
 .mynd{
 
+}
+
+
+.vboxStats .image-view{
+    -fx-rotate: -22.5;
+    -fx-preserve-ratio: true;
+}
+
+.image-view{
+    fx-fit-height: 30;
+    fx-fit-width: 30;
+    fx-image: url("icon/clock.png");
+    fx-background-size: stretch;
+}
+
+.vatnBox{
+    -fx-image: url("icon/water.png");
+}
+
+.ljosBox{
+    -fx-image: url("icon/sol.png");
+}
+
+.hitiBox{
+    -fx-image: url("icon/temperature.png");
 }
 
 

@@ -35,11 +35,13 @@ public class Spjald extends VBox {
     public Spjald(Planta p) {
         LesaFXML.lesa(this, "spjald-view.fxml");
 
-        fxFlokkur.setText(p.getUppruni().toString());
+        System.out.println("Spjald(Planta p) smidur");//prentast aldrei?
+        //Todo er þetta fyrir neðan sama og er í MinPlantaSpjald? Óþarfi?
+        fxFlokkur.setText(p.getUppruni().getStadur());
         fxAlmenntNafn.setText(p.getAlmenntNafn());
         fxPlontuMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + p.getMyndaslod())));
-
     }
+
 
     public void setFxFlokkur(String nafn) {
         fxFlokkur.setText(nafn);
