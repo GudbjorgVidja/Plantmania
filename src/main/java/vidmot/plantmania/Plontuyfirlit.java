@@ -1,5 +1,6 @@
 /*
  * TODO: passa að sía innihaldi bara uppruna sem eru í yfirlitinu
+ *  todo setja mynd/texta ef yfirlitið er tómt: úbbs, engar plöntur hér. Athugaðu síurnar og reyndu aftur!
  */
 package vidmot.plantmania;
 
@@ -71,42 +72,12 @@ public class Plontuyfirlit extends AnchorPane {
 
         stillaSiaMenuItems();
 
+        //PlantaSpjald bætt við yfirlitið
         fyrstaHlutBaettVid.addListener((obs, o, n) -> {
-            if (!o && n) { //ef var false og nú true
-                System.out.println("Fyrsta PlantaSpjald baett við yfirlit");
-                setRodunMenuItems();
-            }
+            if (!o && n) setRodunMenuItems();
         });
 
-    }
-
-    private void stillaFyrstaMenuItem() {
-
-        //gengur ekki að nota listener
-
-        selectedSiaItems.addListener((ListChangeListener<? super MenuItem>) change -> {
-            change.next();
-            if (change.wasAdded()) {
-                //uppfaeraPredicateLista();
-                if (selectedSiaItems.size() == siaItems.size() - 1 && selectedSiaItems.get(0) != siaItems.get(0)) {
-                    //ef allt nema eitt er valið, og fyrsta ekki valið:
-                    System.out.println("allir moguleikar valdir nema fyrsti. Fyrsti verdur valinn");
-                    ((CheckMenuItem) siaItems.get(0)).setSelected(true);
-                    uppfaeraPredicateLista();
-                } else if (selectedSiaItems.size() < siaItems.size() && change.getAddedSubList().get(0).equals(siaItems.get(0))) {
-                    System.out.println("velja allt valid. Allir moguleikar verda valdir.");
-                    //ef fyrsta var valið
-                    for (MenuItem item : siaItems) {
-                        if (item instanceof CheckMenuItem && !((CheckMenuItem) item).isSelected()) {
-                            ((CheckMenuItem) item).setSelected(true);
-                        }
-                    }
-                    uppfaeraPredicateLista();
-                }
-
-            }
-
-        });
+        //eða:  fyrstaHlutBaettVid.addListener((obs, o, n) -> (if (!o && n)  setRodunMenuItems()));
     }
 
     private void stillaSiaMenuItems() {
@@ -130,6 +101,9 @@ public class Plontuyfirlit extends AnchorPane {
         });
     }
 
+    /**
+     * setur predicate reglu á báða FilteredList hlutina, miðað við uppfærð skilyrði
+     */
     private void uppfaeraPredicateLista() {
         //sían uppfærð
         Predicate<MenuItem> itemPred = smi -> ((CheckMenuItem) smi).isSelected();
@@ -160,7 +134,6 @@ public class Plontuyfirlit extends AnchorPane {
             if (node instanceof MinPlantaSpjald) nyrUppruni = ((MinPlantaSpjald) node).getMinPlanta().getUppruni();
             else if (node instanceof PlantaSpjald) nyrUppruni = ((PlantaSpjald) node).getPlanta().getUppruni();
 
-
             if (!upprunaMap.containsKey(nyrUppruni) && nyrUppruni != null) {
                 CheckMenuItem item = new CheckMenuItem(nyrUppruni.getStadur());
                 item.setSelected(true);
@@ -175,13 +148,11 @@ public class Plontuyfirlit extends AnchorPane {
 
     /**
      * ef þessi aðferð keyrir þá er yfirlitið ekki tómt, og inniheldur PlantaSpjald
+     * Vantar fleiri möguleika?
      */
     public void setRodunMenuItems() {
-        //rodunMenu.getItems().clear();
         rodunMenu.getItems().remove(2, 4);
         //rodunMenu.getItems().add(new MenuItem("sjálfgefið"));
-        //rodunMenu.getItems().add(new MenuItem(""));
-        //pæla í að setja handvirkt inn nöfn flokkanna? eftir tegund
     }
 
     /**
@@ -286,14 +257,11 @@ public class Plontuyfirlit extends AnchorPane {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
 
-        if (uppruni.getText().equals("almennt heiti A-Ö"))
-            Collections.sort(ollSpjold, almenntHeitiComparator);
-        else if (uppruni.getText().equals("almennt heiti Ö-A"))
-            Collections.sort(ollSpjold, almenntHeitiComparator.reversed());
-        else if (uppruni.getText().equals("fræðiheiti A-Ö"))//sleppa kannski fræðiheiti?
-            Collections.sort(ollSpjold, fraediheitiComparator);
-            //else if(uppruni.getText().equals("fræðiheiti Ö-A"))
+        if (uppruni.getText().equals("heiti A-Ö")) Collections.sort(ollSpjold, almenntHeitiComparator);
+        else if (uppruni.getText().equals("heiti Ö-A")) Collections.sort(ollSpjold, almenntHeitiComparator.reversed());
         else if (uppruni.getText().equals("næsta vökvun")) Collections.sort(ollSpjold, naestaVokvunComparator);
+        else if (uppruni.getText().equals("síðast vökvað"))
+            Collections.sort(ollSpjold, naestaVokvunComparator.reversed());
     }
 
 
@@ -331,6 +299,18 @@ public class Plontuyfirlit extends AnchorPane {
 
         uppfaeraPredicateLista();
 
+        uppfaeraFyrsta(uppruni);
+
+        uppfaeraPredicateLista();
+
+        /*
+        System.out.println("selectedSiaItems.size(): " + selectedSiaItems.size());
+        System.out.println("siaItems.size(): " + siaItems.size());
+        System.out.println();
+         */
+    }
+
+    private void uppfaeraFyrsta(MenuItem uppruni) {
         if (uppruni.equals(siaItems.get(0))) {
             System.out.println("smella a fyrsta :)");
 
@@ -343,30 +323,17 @@ public class Plontuyfirlit extends AnchorPane {
                 }
             } else if (!((CheckMenuItem) uppruni).isSelected()) {//fundið að verið var að afvelja fyrsta
                 System.out.println("fyrsta er ekki lengur valid");
-                //if (selectedSiaItems.size() < siaItems.size() - 1) {
                 for (MenuItem item : siaItems) {
                     if (item instanceof CheckMenuItem && ((CheckMenuItem) item).isSelected()) {
                         ((CheckMenuItem) item).setSelected(false);
                     }
                 }
-                //}
             }
         } else if (((CheckMenuItem) siaItems.get(0)).isSelected() && siaItems.size() > selectedSiaItems.size()) {
             ((CheckMenuItem) siaItems.get(0)).setSelected(false);
         } else if (selectedSiaItems.size() == siaItems.size() - 1 && !((CheckMenuItem) siaItems.get(0)).isSelected()) {
             ((CheckMenuItem) siaItems.get(0)).setSelected(true);
         }
-
-
-        uppfaeraPredicateLista();
-
-        //uppfaeraSiaPred();
-        //uppfaeraSyndSpjold();
-
-        System.out.println("selectedSiaItems.size(): " + selectedSiaItems.size());
-        System.out.println("siaItems.size(): " + siaItems.size());
-        System.out.println();
-
     }
 
     /*
@@ -402,21 +369,9 @@ public class Plontuyfirlit extends AnchorPane {
         if (n1 instanceof PlantaSpjald) {
             return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
         }
-        return ((MinPlantaSpjald) n1).getMinPlanta().getAlmenntNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getAlmenntNafn().toLowerCase());
+        return ((MinPlantaSpjald) n1).getMinPlanta().getNickName().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getNickName().toLowerCase());
     };
 
-    /**
-     * Comparator til að raða eftir fræðiheiti
-     * TODO ákveða hvort við viljum hafa þetta sem möguleika, og hvort fræðiheiti eigi að sjást á yfirliti
-     */
-    private Comparator<Node> fraediheitiComparator = new Comparator<Node>() {
-        public int compare(Node n1, Node n2) {
-            if (n1 instanceof PlantaSpjald) {
-                return ((PlantaSpjald) n1).getPlanta().getLatnesktNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
-            }
-            return ((MinPlantaSpjald) n1).getMinPlanta().getLatnesktNafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getAlmenntNafn().toLowerCase());
-        }
-    };
 
     /**
      * Comparator til að raða eftir næsta vökvunardegi
