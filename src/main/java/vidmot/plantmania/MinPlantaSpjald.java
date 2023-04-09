@@ -107,6 +107,7 @@ public class MinPlantaSpjald extends AnchorPane {
      * @param event smellt á MinPlantaSpjald
      */
     private void opnaPlontuglugga(MouseEvent event) {
+        //TODO: hafa nickname af öllum plöntum til að það sé ekki hægt að breyta í sama og hjá annarri plöntu?
         System.out.println("Plantan sem ytt var a: " + minPlantan);
         Plontugluggi gluggi = new Plontugluggi(minPlantan);//tekur inn hlutinn sem spjaldið er fyrir
 
