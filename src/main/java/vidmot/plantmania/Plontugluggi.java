@@ -23,7 +23,7 @@ import java.util.Optional;
  */
 public class Plontugluggi extends Dialog<Void> {
     @FXML
-    private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi;
+    private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi, fxLjosthorf, fxMedaltimi;
 
     @FXML
     private ImageView fxMynd;
@@ -32,15 +32,20 @@ public class Plontugluggi extends Dialog<Void> {
     private Button fxAthugasemdir, fxVokvunarsaga, fxBreytaTimaMilliVokvana;
 
     @FXML
-    private Text fxHitastig, fxUmPlontuna;
+    private Text fxHitastig, fxUmPlontuna, fxEinkenni, fxEitrun;
 
     @FXML
     private DatePicker fxDatePicker;
 
     private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
 
+
+    //medaltimiMilliVokvana = new SimpleIntegerProperty();//upphafsstilla?
+
+
     //private Planta plantan;//ef glugginn er fyrir planta, kemur etv seinna
 
+    //ToDo: setja fxEinkenni, fxLjosthorf (styrkur og tími?), fxEitrun, fxMedaltimi, fxUppruni
     //það segir að þetta komi sem overloaded method, held ég???
     public Plontugluggi() {
         setDialogPane(lesaGlugga());
