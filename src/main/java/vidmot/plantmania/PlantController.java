@@ -186,25 +186,32 @@ public class PlantController {
                 int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
 
+                //TODO: ath kannski hvort naestu vokvanir fari ekki örugglega fram í tímann um 3 mánuði en ekki alltaf lengra og lengra
                 System.out.println("fyrri vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir());
                 System.out.println("naestu vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir());
 
+                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
+                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
 
+                //TODO: finna leið til að setja dagsetninguna á annað form til að prenta í dialog
                 if (valinDagsetning.isBefore(LocalDate.now())) {
-                    //TODO: Hér á að opnast listi yfir plöntur sem voru vökvaðar þennan dag
+                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
+                    vokvanirDagsinsDialog.showAndWait();
                 } else if (valinDagsetning.isAfter(LocalDate.now())) {
-                    //TODO: Hér á að opnast listi yfir plöntur sem ætti að vökva þennan dag
+                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
+                    vokvanirDagsinsDialog.showAndWait();
                 } else {
-                    //TODO: skoða bæði það sem er búið að vökva og á eftir að vökva
+                    //TODO: finna betri lausn á þessu!! í staðin fyrir að sýna annað svo hitt
+                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
+                    vokvanirDagsinsDialog.showAndWait();
+                    VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
+                    vokvanirDagsinsDialog2.showAndWait();
                 }
-                System.out.println(valinDagsetning);
 
                 //gerir dropann sýnilegan þegar það er ýtt á dag, taka út seinna
+                //breyta frekar litnum!! og ef það er ýtt aftur er "afvalið"???
                 dagur.getFxDropi().visibleProperty().unbind();
                 dagur.getFxDropi().setVisible(true);
-
-                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsins = skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir().filtered(p -> p.getValue().getMonth() == valinDagsetning.getMonth());
-                //opna glugga með plontum dagsins
             }
         });
     }
