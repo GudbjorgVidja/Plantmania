@@ -23,27 +23,25 @@ import java.util.Optional;
  */
 public class Plontugluggi extends Dialog<Void> {
     @FXML
-    private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn;
+    private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi;
 
     @FXML
     private ImageView fxMynd;
 
     @FXML
-    private Button fxAthugasemdir, fxVokvunarsaga;
-
-    @FXML
-    private Label fxNaestaVokvun, fxThinnTimi;
+    private Button fxAthugasemdir, fxVokvunarsaga, fxBreytaTimaMilliVokvana;
 
     @FXML
     private Text fxHitastig, fxUmPlontuna;
+
     @FXML
     private DatePicker fxDatePicker;
-    @FXML
-    private Button fxBreytaTimaMilliVokvana;
+
     private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
 
-    //private Planta plantan;//ef glugginn er fyrir planta, kemur seinna
+    //private Planta plantan;//ef glugginn er fyrir planta, kemur etv seinna
 
+    //það segir að þetta komi sem overloaded method, held ég???
     public Plontugluggi() {
         setDialogPane(lesaGlugga());
         ButtonType lokaTakki = new ButtonType("Loka glugga", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -90,17 +88,16 @@ public class Plontugluggi extends Dialog<Void> {
             boolean logleg = false;
             try {
                 Integer.parseInt(newText);
-                //if (!newText.startsWith("0")) {//ætti þetta að vera skilyrði??
-                logleg = true;
-                //}
+                if (!newText.equals("0")) {
+                    logleg = true;
+                }
             } catch (NumberFormatException e) {
-                //ath að það er ekki heldur hægt að stroka út það sem var í upphafi!
+                //TODo: láta skilaboðin birast einhvers staðar í viðmótinu
                 System.out.println("Vinsamlegast sláðu inn tölu");
             }
-            if (logleg) {//ath newText.length > 1000 eða eitthvað, til að koma í veg fyrir misnotkun
+            if (logleg) {//ath newText.length > 1000 eða eitthvað, til að koma í veg fyrir misnotkun??
                 return change;
             } else {
-                //passa að láta vita að það megi bara vera tölustafir og annað sem veldur því að ekkert bætist við
                 return null;
             }
         }));
@@ -176,6 +173,9 @@ public class Plontugluggi extends Dialog<Void> {
         }
     }
 
+    /**
+     * handler fyrir datePicker hlut, bætir við vökvun á plöntuna á valdri dagsetningu
+     */
     private void datePickerHandler() {
         fxDatePicker.setOnAction(t -> {
             LocalDate date = fxDatePicker.getValue();
