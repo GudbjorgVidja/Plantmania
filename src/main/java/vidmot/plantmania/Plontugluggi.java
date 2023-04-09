@@ -76,6 +76,11 @@ public class Plontugluggi extends Dialog<Void> {
         setFxThinnTimi();
     }
 
+    //ath að það segir alltaf dagar í fleirtölu
+    public void setjaFxMedaltimi() {
+        //hafa bindingu/listener hér
+    }
+
     //ath að þetta kemur ekki fram á dagatali eins og er, en það vantar listener í MinPlanta
     public void setFxThinnTimi() {
         fxThinnTimi.setText("Þinn tími milli vökvana er " + minPlantan.getThinnTimiMilliVokvana() + " dagar");
