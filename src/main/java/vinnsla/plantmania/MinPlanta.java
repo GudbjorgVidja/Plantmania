@@ -48,13 +48,13 @@ public class MinPlanta extends Planta {
         //naestaVokvun = (thinnTimiMilliVokvana);
 
         naestaVokvunRegla();
-
         reiknaPlanadarVokvanir();
     }
 
     /**
-     * bara kallað á úr MinPlanta smið, svo gerist bara einu sinni fyrir hverja
+     * bara kallað á úr MinPlanta smið, svo gerist bara einu sinni fyrir hverja.
      */
+    //TODO: skipta niður!
     public void reiknaPlanadarVokvanir() {
         //planadarVokvanirTestListener(); //prentar
         LocalDate date = LocalDate.now();//þetta gefur alltaf daginn í dag, gera meira abstract með .plusDays(naestaVokvun.get())
@@ -70,6 +70,16 @@ public class MinPlanta extends Planta {
                 planadarVokvanir.add(dagur);
             }
         });
+
+        //reikna planaðar vökvanir aftur ef tími milli vökvana breytist!
+        thinnTimiMilliVokvana.addListener((observable, oldValue, newValue) -> {
+            LocalDate d = LocalDate.now().plusDays(naestaVokvun.get());
+            planadarVokvanir.clear();
+            for (LocalDate dagur = d; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {
+                planadarVokvanir.add(dagur);
+            }
+        });
+
     }
 
     //ath nafnið. Setur listener á vokvanir og uppfærir sidastaVokvun
@@ -113,10 +123,6 @@ public class MinPlanta extends Planta {
                 naestaVokvun.set(0);
             }
         });
-    }
-
-    public void breytaNickname(String nyttNafn) {//setNickname!
-        nickName.set(nyttNafn);
     }
 
     //ekki hægt að bæta við vövkun fram í tímann! og ekki hægt að bæta við fyrir 2022?
