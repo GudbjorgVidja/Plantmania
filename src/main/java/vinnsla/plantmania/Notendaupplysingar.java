@@ -106,6 +106,7 @@ public class Notendaupplysingar {
                         //System.out.println("naestuVokvanir: " + naestuVokvanir);
                     }
                 }
+                System.out.println(minarPlontur);
                 System.out.println("naestuVokvanir: " + naestuVokvanir);
             }
         });
@@ -136,9 +137,30 @@ public class Notendaupplysingar {
     }
 
     //passa að engar tvær plöntur fái sama nickname
+
+    /**
+     * bætir við plöntu af gerðinni planta við plöntur í eigu notanda. Passar að engar tvær plöntur hafi sama
+     * nickname
+     *
+     * @param planta - Planta af gerðinni sem notandi vill
+     */
     public void baetaVidPlontu(Planta planta) {
         System.out.println("Notendaupplysingar.baetaVidPlontu(Planta)");
-        minarPlontur.add(new MinPlanta(planta));
+        MinPlanta nyPlanta = new MinPlanta(planta);
+        boolean ekkertEins = false;
+        for (int i = 1; !ekkertEins; i++) {
+            boolean einsPlanta = false;
+            for (MinPlanta minPlanta : minarPlontur) {
+                if (minPlanta.getNickName().equals(nyPlanta.getNickName())) {
+                    nyPlanta.setNickName(minPlanta.getNickName() + i);
+                    einsPlanta = true;
+                }
+            }
+            if (!einsPlanta) {
+                ekkertEins = true;
+            }
+        }
+        minarPlontur.add(nyPlanta);
     }
 
     public String toString() {
