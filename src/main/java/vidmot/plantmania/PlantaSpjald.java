@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import vinnsla.plantmania.Planta;
+import vinnsla.plantmania.enums.Ljosstyrkur;
+import vinnsla.plantmania.enums.Vatnsthorf;
 
 /**
  * plöntuspjald fyrir einhverja plöntu, hlutur af gerð Planta. það er líka til MinPlantaSpjald.
@@ -72,10 +74,27 @@ public class PlantaSpjald extends AnchorPane {
     }
 
     private void setjaOpacity() {
-        fxVatnBox.getChildren().get(1).setOpacity(0.3);
-        fxVatnBox.getChildren().get(0).setOpacity(0.3);
-        fxLjosBox.getChildren().get(0).setOpacity(0.3);
-        fxHitiBox.getChildren().get(0).setOpacity(0.3);
+        if (planta.getLjosstyrkur().equals(Ljosstyrkur.HALFBEINT)) {
+            fxLjosBox.getChildren().get(0).setOpacity(0.3);
+        } else if (planta.getLjosstyrkur().equals(Ljosstyrkur.OBEINT)) {
+            fxLjosBox.getChildren().get(0).setOpacity(0.3);
+            fxLjosBox.getChildren().get(1).setOpacity(0.3);
+        }
+
+        if (planta.getVatnsthorf().equals(Vatnsthorf.MEDAL)) {
+            fxVatnBox.getChildren().get(0).setOpacity(0.3);
+        } else if (planta.getVatnsthorf().equals(Vatnsthorf.LITIL) || planta.getVatnsthorf().equals(Vatnsthorf.MJOG_LITIL)) {
+            fxVatnBox.getChildren().get(0).setOpacity(0.3);
+            fxVatnBox.getChildren().get(1).setOpacity(0.3);
+        }
+
+        if (planta.getKjorhitastig().get(1) < 20) {
+            fxHitiBox.getChildren().get(0).setOpacity(0.3);
+        } else if (planta.getKjorhitastig().get(1) < 15) {
+            fxHitiBox.getChildren().get(0).setOpacity(0.3);
+            fxHitiBox.getChildren().get(1).setOpacity(0.3);
+        }
+        
     }
 
 
