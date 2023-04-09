@@ -4,6 +4,8 @@
 package vidmot.plantmania;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -42,7 +44,7 @@ public class Plontuyfirlit extends AnchorPane {
     private Label notandiLabel;//label í efra hægra horni með notendanafni
 
     @FXML
-    private Menu fxSiaMenu, flokkunMenu, rodunMenu;//menuItems á MenuBar, til að stjórna sýnileika og röðun hluta
+    private Menu fxSiaMenu, rodunMenu;// flokkunMenu //menuItems á MenuBar, til að stjórna sýnileika og röðun hluta
 
     //allir möguleikar undir sia. Bæta nýjum item handvirkt við viðmótið
     private ObservableList<MenuItem> siaItems = FXCollections.observableArrayList();//todo á fyrsta líka að vera hér inni?
@@ -57,40 +59,53 @@ public class Plontuyfirlit extends AnchorPane {
     //Sýnileg spjöld í yfirlitinu að hverju sinni.
     private FilteredList<Node> filteredSpjold = new FilteredList<>(ollSpjold);
 
+    //til að breyta möguleikum fyrir röðun ef yfirlitið inniheldur PlantaSpjald hluti
+    private BooleanProperty fyrstaHlutBaettVid = new SimpleBooleanProperty(false);
+
+
     public Plontuyfirlit() {
         LesaFXML.lesa(this, "plontuyfirlit.fxml");
-
-        /*todo ný breyting
-        Bindings.bindContent(fxFlowPane.getChildren(), filteredSpjold);//flowpane inniheldur alltaf filteredSpjold
-
-        //ef nýjum hlut er bætt við yfirlit:
-        ollSpjold.addListener((ListChangeListener<? super Node>) change -> {
-            change.next();
-            if (change.wasAdded()) athBaetaVidFlokk((List<Node>) change.getAddedSubList());//passa að þetta sé löglegt
-        });
-
-        siaMenuReglur();
-
-         */
 
         //setur onAction
         setjaMenuItemHandlera();
 
-        //velja hvaða röðunarmöguleikar eru gefnir (mismunandi fyrir plöntur og mínar pöntur
-        
-
         stillaSiaMenuItems();
+
+        fyrstaHlutBaettVid.addListener((obs, o, n) -> {
+            if (!o && n) { //ef var false og nú true
+                System.out.println("Fyrsta PlantaSpjald baett við yfirlit");
+                setRodunMenuItems();
+            }
+        });
 
     }
 
     private void stillaFyrstaMenuItem() {
 
+        //gengur ekki að nota listener
+
         selectedSiaItems.addListener((ListChangeListener<? super MenuItem>) change -> {
             change.next();
-            if (change.wasAdded() && selectedSiaItems.size() == siaItems.size() - 1 && selectedSiaItems.get(0) != siaItems.get(0)) {
-                System.out.println("allir moguleikar valdir nema fyrsti. Fyrsti verdur valinn");
+            if (change.wasAdded()) {
                 //uppfaeraPredicateLista();
+                if (selectedSiaItems.size() == siaItems.size() - 1 && selectedSiaItems.get(0) != siaItems.get(0)) {
+                    //ef allt nema eitt er valið, og fyrsta ekki valið:
+                    System.out.println("allir moguleikar valdir nema fyrsti. Fyrsti verdur valinn");
+                    ((CheckMenuItem) siaItems.get(0)).setSelected(true);
+                    uppfaeraPredicateLista();
+                } else if (selectedSiaItems.size() < siaItems.size() && change.getAddedSubList().get(0).equals(siaItems.get(0))) {
+                    System.out.println("velja allt valid. Allir moguleikar verda valdir.");
+                    //ef fyrsta var valið
+                    for (MenuItem item : siaItems) {
+                        if (item instanceof CheckMenuItem && !((CheckMenuItem) item).isSelected()) {
+                            ((CheckMenuItem) item).setSelected(true);
+                        }
+                    }
+                    uppfaeraPredicateLista();
+                }
+
             }
+
         });
     }
 
@@ -107,7 +122,6 @@ public class Plontuyfirlit extends AnchorPane {
         //Bindings.bindContent(fxFlowPane.getChildren(), filteredSpjold);
         Bindings.bindContentBidirectional(fxFlowPane.getChildren(), filteredSpjold);
 
-        stillaFyrstaMenuItem();
 
         //setja listener, þ.a. ef hlut er bætt við þá sé passað að hann hafi flokk
         ollSpjold.addListener((ListChangeListener<? super Node>) change -> {
@@ -119,8 +133,8 @@ public class Plontuyfirlit extends AnchorPane {
     private void uppfaeraPredicateLista() {
         //sían uppfærð
         Predicate<MenuItem> itemPred = smi -> ((CheckMenuItem) smi).isSelected();
-        selectedSiaItems.setPredicate(itemPred);//valdir hlutir
-        //selectedSiaItems = new FilteredList<>(siaItems, itemPred);
+        //selectedSiaItems.setPredicate(itemPred);//valdir hlutir
+        selectedSiaItems = new FilteredList<>(siaItems, itemPred);
 
         //yfirlitið uppfært
         Predicate<Node> pred = plant -> {
@@ -130,22 +144,6 @@ public class Plontuyfirlit extends AnchorPane {
             return selectedSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) plant).getMinPlanta().getUppruni()));
         };
         //filteredSpjold = new FilteredList<>(ollSpjold, pred);
-        filteredSpjold.setPredicate(pred);
-    }
-
-
-    private void uppfaeraSiaPred() {//til að selectedSiaItems innihaldi alla valda möguleika
-        Predicate<MenuItem> itemPred = smi -> ((CheckMenuItem) smi).isSelected();
-        selectedSiaItems.setPredicate(itemPred);//valdir hlutir
-    }
-
-    private void uppfaeraSyndSpjold() {//ef hakað við flokkinn: hlutur sýndur
-        Predicate<Node> pred = it -> {
-            if (it instanceof PlantaSpjald) {
-                return selectedSiaItems.contains(upprunaMap.get(((PlantaSpjald) it).getPlanta().getUppruni()));
-            }
-            return selectedSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getUppruni()));
-        };
         filteredSpjold.setPredicate(pred);
     }
 
@@ -175,8 +173,14 @@ public class Plontuyfirlit extends AnchorPane {
         }
     }
 
-
+    /**
+     * ef þessi aðferð keyrir þá er yfirlitið ekki tómt, og inniheldur PlantaSpjald
+     */
     public void setRodunMenuItems() {
+        //rodunMenu.getItems().clear();
+        rodunMenu.getItems().remove(2, 4);
+        //rodunMenu.getItems().add(new MenuItem("sjálfgefið"));
+        //rodunMenu.getItems().add(new MenuItem(""));
         //pæla í að setja handvirkt inn nöfn flokkanna? eftir tegund
     }
 
@@ -218,10 +222,6 @@ public class Plontuyfirlit extends AnchorPane {
             item.setOnAction(this::rodunItemHandler);
         }
 
-        for (MenuItem item : flokkunMenu.getItems()) {
-            item.setOnAction(this::flokkunItemHandler);
-        }
-
         for (MenuItem item : fxSiaMenu.getItems()) {
             item.setOnAction(this::siaItemHandler);
         }
@@ -229,13 +229,14 @@ public class Plontuyfirlit extends AnchorPane {
 
 
     /**
-     * PlantaSpjald hlut bætt við yfirlit
+     * PlantaSpjald hlut bætt við yfirlit. Notað við innlesturinn í upphafi.
      *
      * @param planta Planta
      */
     public void baetaVidYfirlit(Planta planta) {
         PlantaSpjald spjald = new PlantaSpjald(planta);
         ollSpjold.add(spjald);
+        fyrstaHlutBaettVid.set(true);
     }
 
 
@@ -295,6 +296,26 @@ public class Plontuyfirlit extends AnchorPane {
         else if (uppruni.getText().equals("næsta vökvun")) Collections.sort(ollSpjold, naestaVokvunComparator);
     }
 
+
+    private void uppfaeraSiaPred() {//til að selectedSiaItems innihaldi alla valda möguleika
+        Predicate<MenuItem> itemPred = mi -> {//þetta á að vera í sér aðferð
+            return ((CheckMenuItem) mi).isSelected();
+        };
+        //selectedSiaItems.setPredicate(itemPred);//þetta virkar ekki, en línan fyrir neðan virkar
+        selectedSiaItems = new FilteredList<>(siaItems, itemPred);
+    }
+
+    private void uppfaeraSyndSpjold() {//ef hakað við flokkinn: hlutur sýndur
+        Predicate<Node> pred = it -> {
+            if (it instanceof PlantaSpjald) {
+                return selectedSiaItems.contains(upprunaMap.get(((PlantaSpjald) it).getPlanta().getUppruni()));
+            }
+            return selectedSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getUppruni()));
+        };
+        filteredSpjold.setPredicate(pred);
+    }
+
+
     /**
      * TODO einfalda og hreinsa upp kóðann -G
      *
@@ -304,48 +325,57 @@ public class Plontuyfirlit extends AnchorPane {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
 
-        //uppfaeraPredicateLista();
-        //uppfaeraPredicateLista();
+        System.out.println("selectedSiaItems.size(): " + selectedSiaItems.size());
+        System.out.println("siaItems.size(): " + siaItems.size());
+        System.out.println();
 
+        uppfaeraPredicateLista();
 
-        //uppfaeraSyndSpjold();
+        if (uppruni.equals(siaItems.get(0))) {
+            System.out.println("smella a fyrsta :)");
 
-        //todo af hverju virkar ekki að nota uppfaeraPredicateLista í staðinn fyrir þetta fyrir neðan?
-
-        // ætti allt að gerast í setjaPredicateFilter aðferðinni
-        Predicate<MenuItem> itemPred = mi -> {//þetta á að vera í sér aðferð
-            return ((CheckMenuItem) mi).isSelected();
-        };
-        selectedSiaItems.setPredicate(itemPred);//valdir hlutir
-
-
-        Predicate<Node> pred = it -> {
-            if (it instanceof PlantaSpjald) {
-                return selectedSiaItems.contains(upprunaMap.get(((PlantaSpjald) it).getPlanta().getUppruni()));
+            if (((CheckMenuItem) uppruni).isSelected()) {//fundið að verið var að velja fyrsta
+                System.out.println("fyrsta er nu valid");
+                for (MenuItem item : siaItems) {
+                    if (item instanceof CheckMenuItem && !((CheckMenuItem) item).isSelected()) {
+                        ((CheckMenuItem) item).setSelected(true);
+                    }
+                }
+            } else if (!((CheckMenuItem) uppruni).isSelected()) {//fundið að verið var að afvelja fyrsta
+                System.out.println("fyrsta er ekki lengur valid");
+                //if (selectedSiaItems.size() < siaItems.size() - 1) {
+                for (MenuItem item : siaItems) {
+                    if (item instanceof CheckMenuItem && ((CheckMenuItem) item).isSelected()) {
+                        ((CheckMenuItem) item).setSelected(false);
+                    }
+                }
+                //}
             }
-            return selectedSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getUppruni()));
-        };
-        filteredSpjold.setPredicate(pred);
+        } else if (((CheckMenuItem) siaItems.get(0)).isSelected() && siaItems.size() > selectedSiaItems.size()) {
+            ((CheckMenuItem) siaItems.get(0)).setSelected(false);
+        } else if (selectedSiaItems.size() == siaItems.size() - 1 && !((CheckMenuItem) siaItems.get(0)).isSelected()) {
+            ((CheckMenuItem) siaItems.get(0)).setSelected(true);
+        }
 
 
         uppfaeraPredicateLista();
 
-        /*
-        System.out.println("selectedSiaItems: " + selectedSiaItems);
-        System.out.println("selectedSiaItems fjoldi: " + selectedSiaItems.size());
-        System.out.println("filteredSpjold: " + filteredSpjold);
-        System.out.println("filteredSpjold.size(): " + filteredSpjold.size());
-        System.out.println("ollSpjold.size(): " + ollSpjold.size());
-         */
+        //uppfaeraSiaPred();
+        //uppfaeraSyndSpjold();
 
+        System.out.println("selectedSiaItems.size(): " + selectedSiaItems.size());
+        System.out.println("siaItems.size(): " + siaItems.size());
+        System.out.println();
 
     }
 
+    /*
     //sleppa kannski flokkun til að byrja með? held það sé óþarflega flókið
     private void flokkunItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
         System.out.println("Smellt á " + uppruni.getText());
     }
+     */
 
     /**
      * @return öll spjöld yfirlits

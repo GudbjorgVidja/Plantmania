@@ -16,17 +16,6 @@ fx-background-color: -beef;
 -fx-padding: 3 1 1 1;
 }
 
-.progress-bar{
--fx-rotate: 270;
-}
-
-.progress-bar .track{
-    -fx-background-color: darkseagreen;
-}
-
-.progress-bar .bar{
-    -fx-background-color: lightsteelblue;
-}
 
 .vboxStats{
     -fx-pref-height: 27;
