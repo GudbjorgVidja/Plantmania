@@ -194,18 +194,22 @@ public class PlantController {
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
 
                 //TODO: finna leið til að setja dagsetninguna á annað form til að prenta í dialog
-                if (valinDagsetning.isBefore(LocalDate.now())) {
+                if (valinDagsetning.isBefore(LocalDate.now()) && !plonturDagsinsLokid.isEmpty()) {
                     VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
                     vokvanirDagsinsDialog.showAndWait();
-                } else if (valinDagsetning.isAfter(LocalDate.now())) {
+                } else if (valinDagsetning.isAfter(LocalDate.now()) && !plonturDagsinsOlokid.isEmpty()) {
                     VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
                     vokvanirDagsinsDialog.showAndWait();
                 } else {
                     //TODO: finna betri lausn á þessu!! í staðin fyrir að sýna annað svo hitt
-                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
-                    vokvanirDagsinsDialog.showAndWait();
-                    VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
-                    vokvanirDagsinsDialog2.showAndWait();
+                    if (!plonturDagsinsLokid.isEmpty()) {
+                        VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
+                        vokvanirDagsinsDialog.showAndWait();
+                    }
+                    if (!plonturDagsinsOlokid.isEmpty()) {
+                        VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
+                        vokvanirDagsinsDialog2.showAndWait();
+                    }
                 }
 
                 //gerir dropann sýnilegan þegar það er ýtt á dag, taka út seinna
