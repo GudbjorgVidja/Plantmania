@@ -52,19 +52,6 @@ public class MinPlanta extends Planta {
         reiknaPlanadarVokvanir();
     }
 
-    //TODO: ertu að nota þetta eða má eyða?
-    private void planadarVokvanirTestListener() { //prentar bara, gerir ekkert þannig séð
-        planadarVokvanir.addListener((ListChangeListener<? super LocalDate>) change -> {
-            change.next();
-            if (change.wasAdded()) System.out.print("added ");
-            if (change.wasRemoved()) System.out.print("removed ");
-            if (change.wasPermutated()) System.out.print("permutated ");
-            if (change.wasReplaced()) System.out.print("replaced "); //ef bæði removed og added true
-            if (change.wasUpdated()) System.out.print("updated ");
-            System.out.println();
-        });
-    }
-
     /**
      * bara kallað á úr MinPlanta smið, svo gerist bara einu sinni fyrir hverja
      */
@@ -76,18 +63,11 @@ public class MinPlanta extends Planta {
             planadarVokvanir.add(dagur);
         }
 
-        //ef tími í næstu vökvun breytist þá er öllum dagsetningum hliðrað um muninn
         naestaVokvun.addListener((obs, o, n) -> {
-            if (n.intValue() > o.intValue()) {
-                for (int i = 0; i < planadarVokvanir.size(); i++) {
-                    planadarVokvanir.set(i, planadarVokvanir.get(i).plusDays(n.intValue() - o.intValue()));
-                }
-                System.out.println("planadarVokvanir uppfaersla: " + planadarVokvanir);
-            } else if (n.intValue() < o.intValue()) {
-                for (int i = 0; i < planadarVokvanir.size(); i++) {
-                    planadarVokvanir.set(i, planadarVokvanir.get(i).minusDays(n.intValue() - o.intValue()));
-                }
-                System.out.println("planadarVokvanir uppfaersla: " + planadarVokvanir);
+            LocalDate d = LocalDate.now().plusDays(naestaVokvun.get());
+            planadarVokvanir.clear();
+            for (LocalDate dagur = d; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {
+                planadarVokvanir.add(dagur);
             }
         });
     }
