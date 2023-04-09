@@ -70,8 +70,14 @@ public class MinPlantaSpjald extends AnchorPane {
      */
     private void vokvaHandler(ActionEvent event) {
         if (minPlantan.getNaestaVokvun().get() >= minPlantan.getThinnTimiMilliVokvana()) {
+            //TODO: já, gera takkann óvirkan
             System.out.println("kannski ekki vokva");//frekar gera takkann óvirkan held ég rite?
         } else {
+            //TODO: TÍMABUNDIN LAUSN!!! Vandamál í finnaNaestuVokvanir() í Notendaupplysingar. Skoða af hverju þetta lagar vesenið.
+            //ekki fallegt, en virkar (næstu 3 línur eru úr frestaHandler). Skoða af hverju þetta þarf!!
+            minPlantan.getNaestaVokvun().unbind(); //ný viðbót
+            minPlantan.setNaestaVokvun(minPlantan.getNaestaVokvun().get() + 1);
+            minPlantan.naestaVokvunRegla(); //ný viðbót
             minPlantan.baetaVidVokvun(LocalDate.now());
             System.out.println("vokva");
         }
@@ -101,6 +107,7 @@ public class MinPlantaSpjald extends AnchorPane {
      * @param event smellt á MinPlantaSpjald
      */
     private void opnaPlontuglugga(MouseEvent event) {
+        //TODO: hafa nickname af öllum plöntum til að það sé ekki hægt að breyta í sama og hjá annarri plöntu?
         System.out.println("Plantan sem ytt var a: " + minPlantan);
         Plontugluggi gluggi = new Plontugluggi(minPlantan);//tekur inn hlutinn sem spjaldið er fyrir
 

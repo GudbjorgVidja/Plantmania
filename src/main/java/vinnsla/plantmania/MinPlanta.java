@@ -32,10 +32,6 @@ public class MinPlanta extends Planta {
     private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();//upphafsstilla?
     private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();
     private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();
-    //private Planta planta;//var ekki málið að ef MinPlanta extends Planta þá inniheldur hún í raun sjálfkrafa Planta hlut?
-    //væri kannski hægt að hafa setter sem í raun copyar öll planta gildin og setur gildi MinPlanta hlutarins eins?
-    //en það væri kannski bara meira vesen
-
     private IntegerProperty naestaVokvun = new SimpleIntegerProperty();//setja hér niðurtalningu
     private ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
 
@@ -44,7 +40,6 @@ public class MinPlanta extends Planta {
         super(planta);
         this.nickName.set(planta.getOllHeiti().get(1));
         this.thinnTimiMilliVokvana.set(planta.getAlmennurTimiMilliVokvana());
-        //this.planta = planta;
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
 
@@ -55,9 +50,9 @@ public class MinPlanta extends Planta {
         naestaVokvunRegla();
 
         reiknaPlanadarVokvanir();
-
     }
 
+    //TODO: ertu að nota þetta eða má eyða?
     private void planadarVokvanirTestListener() { //prentar bara, gerir ekkert þannig séð
         planadarVokvanir.addListener((ListChangeListener<? super LocalDate>) change -> {
             change.next();
@@ -75,7 +70,7 @@ public class MinPlanta extends Planta {
      */
     public void reiknaPlanadarVokvanir() {
         //planadarVokvanirTestListener(); //prentar
-        LocalDate date = LocalDate.now();
+        LocalDate date = LocalDate.now();//þetta gefur alltaf daginn í dag, gera meira abstract með .plusDays(naestaVokvun.get())
         LocalDate eftirThrjaManudi = date.plusMonths(3);
         for (LocalDate dagur = date; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {
             planadarVokvanir.add(dagur);
@@ -83,10 +78,6 @@ public class MinPlanta extends Planta {
 
         //ef tími í næstu vökvun breytist þá er öllum dagsetningum hliðrað um muninn
         naestaVokvun.addListener((obs, o, n) -> {
-            //spá hvort eitthvað svona myndi virka?
-            /*for (LocalDate d = LocalDate.now().plusDays(naestaVokvun.get()); d.isBefore(LocalDate.now().plusMonths(3)); d = d.plusDays(thinnTimiMilliVokvana.get())) {
-                planadarVokvanir.add(d);
-            }*/
             if (n.intValue() > o.intValue()) {
                 for (int i = 0; i < planadarVokvanir.size(); i++) {
                     planadarVokvanir.set(i, planadarVokvanir.get(i).plusDays(n.intValue() - o.intValue()));
@@ -101,6 +92,7 @@ public class MinPlanta extends Planta {
         });
     }
 
+    //ath nafnið. Setur listener á vokvanir og uppfærir sidastaVokvun
     public void sidastaVokvunListener() {
         vokvanir.addListener((ListChangeListener<LocalDate>) (observable) -> {
             if (!vokvanir.isEmpty()) {
@@ -118,7 +110,6 @@ public class MinPlanta extends Planta {
             if (!vokvanir.isEmpty() && vokvanir.size() != 1) {
                 int dagar = 0;
                 for (int i = 0; i < vokvanir.size() - 1; i++) {
-                    //dagar += vokvanir.get(i).until(vokvanir.get(i + 1)).getDays();
                     dagar += ChronoUnit.DAYS.between(vokvanir.get(i), vokvanir.get(i + 1));
                 }
                 medaltimiMilliVokvana.set(dagar / (vokvanir.size() - 1));

@@ -7,7 +7,6 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +27,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-//TODO: hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma
+//TODO: hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma. S: þarf þess? er ekki bara skoðað út frá minPLanta?
 
 /**
  * Controller fyrir aðalsenuna. Þar sem við notum TabPane er það sem væri annars í 5 senum eða svo í einni
@@ -44,6 +43,7 @@ public class PlantController {
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
+    //TODO: væri ekki hægt að hafa þetta local þar sem þetta er notað? eða hvað
     //bara kallað á tvisvar: til að setja inn í listann og til að setja í yfirlit
     //private ObservableList<Planta> allarPlontur = FXCollections.observableArrayList();//er í vesi, geymi hér
     //ætti frekar kannski að geyma í öðrum klasa, t.d. vinnsluklasa fyrir allarPlonturYfirlit
@@ -70,14 +70,11 @@ public class PlantController {
         skradurNotandi.get().getNotendaupplysingar().finnaFyrriVokvanir();
 
         skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
-        /*
-        skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
+        /*skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
             change.next();
             if (change.wasAdded())
                 System.out.println("\n" + change.getAddedSubList() + " baett vid notendaupplysingar");
-        });
-
-         */
+        });*/
 
         //fxMinarPlonturYfirlit.getMinarPlontur.addListener() og bæta allaf sömu við
         //fxMinarPlonturYfirlit.getOllSpjold().addListener((ListChangeListener<? super Node>) change ->{
@@ -109,22 +106,17 @@ public class PlantController {
          */
     }
 
-    /*
-    private void bindaNotendaPlontur(){
+    /*private void bindaNotendaPlontur(){
         fxMinarPlonturYfirlit.getMinarPlonturYfirlit().addListener((ListChangeListener<? super Node>) change -> {
             change.next();
             if(change.wasAdded()){
-
                 List<Node> listi = (List<Node>) change.getAddedSubList();
                 for(Node node: listi){
                     if(node instanceof MinPlanta)
                 }
             }
         });
-
-    }
-
-     */
+    }*/
 
     /**
      * birtir plöntur notanda í yfirliti
@@ -194,25 +186,32 @@ public class PlantController {
                 int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
 
+                //TODO: ath kannski hvort naestu vokvanir fari ekki örugglega fram í tímann um 3 mánuði en ekki alltaf lengra og lengra
                 System.out.println("fyrri vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir());
                 System.out.println("naestu vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir());
 
+                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
+                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
 
+                //TODO: finna leið til að setja dagsetninguna á annað form til að prenta í dialog
                 if (valinDagsetning.isBefore(LocalDate.now())) {
-                    //TODO: Hér á að opnast listi yfir plöntur sem voru vökvaðar þennan dag
+                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
+                    vokvanirDagsinsDialog.showAndWait();
                 } else if (valinDagsetning.isAfter(LocalDate.now())) {
-                    //TODO: Hér á að opnast listi yfir plöntur sem ætti að vökva þennan dag
+                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
+                    vokvanirDagsinsDialog.showAndWait();
                 } else {
-                    //TODO: skoða bæði það sem er búið að vökva og á eftir að vökva
+                    //TODO: finna betri lausn á þessu!! í staðin fyrir að sýna annað svo hitt
+                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
+                    vokvanirDagsinsDialog.showAndWait();
+                    VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
+                    vokvanirDagsinsDialog2.showAndWait();
                 }
-                System.out.println(valinDagsetning);
 
                 //gerir dropann sýnilegan þegar það er ýtt á dag, taka út seinna
+                //breyta frekar litnum!! og ef það er ýtt aftur er "afvalið"???
                 dagur.getFxDropi().visibleProperty().unbind();
                 dagur.getFxDropi().setVisible(true);
-
-                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsins = skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir().filtered(p -> p.getValue().getMonth() == valinDagsetning.getMonth());
-                //opna glugga með plontum dagsins
             }
         });
     }
@@ -222,19 +221,16 @@ public class PlantController {
      * þegar smellt er, plönturnar úr plontur.txt sem MinPlantaSpjald hlutir
      */
     @FXML
+    //TODO: Taka út? er þetta nokkuð í notkun?
     protected void fxBaetaVidHandler(MouseEvent event) {
         //eintaki af öllum plöntum (gerðum) bætt við plöntur notanda
-        /*
-        for (int i = 0; i < allarPlontur.size(); i++) {
+        /*for (int i = 0; i < allarPlontur.size(); i++) {
             MinPlanta mp = new MinPlanta(allarPlontur.get(i));
             fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
-        }
-         */
-
-
+        }*/
     }
 
-
+    //hvað er þetta?
     @FXML
     private void hladaOllumPlontum(MouseEvent event) {//nær planta sem ýtt var á
 
@@ -245,38 +241,7 @@ public class PlantController {
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
-
-            //það sem eftir er af blokkinni veldur því að smiðir fyrir notendaupplysingar og notandi erukeyrðir
-            ObjectMapper objectMapper = new ObjectMapper();
-            SimpleModule module = new SimpleModule();
-            module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-            objectMapper.registerModule(module);
-            objectMapper.findAndRegisterModules();
-            try {
-                List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
-                });
-
-                for (Notandi n : notendur) {
-                    if (n.getNotendanafn().equals(skradurNotandi.get().getNotendanafn())) {
-                        n = skradurNotandi.get();
-                        System.out.println(n);
-                    }
-                }
-                File file = new File("target/classes/vidmot/plantmania/notendur.json");
-                if (file.createNewFile()) {
-                    System.out.println("Ný skrá búin til");
-                    objectMapper.writeValue(file, notendur);
-                } else {
-                    System.out.println("skráin er til og er núna uppfærð");
-                    objectMapper.writeValue(file, notendur);//bætti við. Kastar villu ef maður fylgir eftirfarandi skrefum:
-                    //(1. clean. 2. keyra. 3. gera nýjan aðgang. 4. ýta á plöntu á lista yfir allar plöntur.
-                    //5. skrá út. 6. loka glugga. 7. keyra forrit. 8. skrá inn með sama aðgang og áðan. 9. velja plöntu á lista yfir almennar plöntur)
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         }
-
     }
 
     public void skraUt(ActionEvent actionEvent) {
@@ -305,9 +270,5 @@ public class PlantController {
         } catch (IOException e) {
             System.out.println(e.getCause());
         }
-    }
-
-    public StringProperty getNotendanafn() {
-        return new SimpleStringProperty(skradurNotandi.get().getNotendanafn());
     }
 }
