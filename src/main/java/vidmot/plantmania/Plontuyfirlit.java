@@ -1,5 +1,4 @@
 /*
- * TODO: passa að sía innihaldi bara uppruna sem eru í yfirlitinu
  *  todo setja mynd/texta ef yfirlitið er tómt: úbbs, engar plöntur hér. Athugaðu síurnar og reyndu aftur!
  */
 package vidmot.plantmania;
@@ -47,27 +46,40 @@ public class Plontuyfirlit extends AnchorPane {
     @FXML
     private Menu fxSiaMenu, rodunMenu;// flokkunMenu //menuItems á MenuBar, til að stjórna sýnileika og röðun hluta
 
-    //allir möguleikar undir sia. Bæta nýjum item handvirkt við viðmótið
-    private ObservableList<MenuItem> siaItems = FXCollections.observableArrayList();//todo á fyrsta líka að vera hér inni?
-    private FilteredList<MenuItem> selectedSiaItems;//passa skilgreiningu ef fyrsta er bætt við siaItems
+    /**
+     * Öll MenuItem undir sía. Inniheldur velja allt, og uppruna gildi plantna (og minnaPlantna) í yfirlitinu
+     */
+    private ObservableList<MenuItem> siaItems = FXCollections.observableArrayList();
 
-    //tengir saman flokk(uppruna) og checkMenuItem fyrir hann
+    /**
+     * Öll MenuItem sem hakað er við undir sía
+     */
+    private FilteredList<MenuItem> selectedSiaItems;
+
+    /**
+     * Tengir saman enum Uppruna gildi og CheckMenuItem fyrir gildið
+     */
     private HashMap<Uppruni, MenuItem> upprunaMap = new HashMap<>();
 
-    //Öll spjöld sem sett hafa verið í yfirlitið, þ.e. öll spjöld sem hægt er að sjá
-    private ObservableList<Node> ollSpjold = FXCollections.observableArrayList();//Hlutirnir í þessu yfirliti, baselistinn
+    /**
+     * Öll spjöld yfirlitsins, falin og sýnileg.
+     */
+    private ObservableList<Node> ollSpjold = FXCollections.observableArrayList();
 
-    //Sýnileg spjöld í yfirlitinu að hverju sinni.
+    /**
+     * Sýnileg spjöld í yfirlitinu að hverju sinni.
+     */
     private FilteredList<Node> filteredSpjold = new FilteredList<>(ollSpjold);
 
-    //til að breyta möguleikum fyrir röðun ef yfirlitið inniheldur PlantaSpjald hluti
+    /**
+     * Fylgist með þegar PlantaSpjald hlutur er fyrst settur inn, til að vita hvort röðunarmöguleikar séu réttir
+     */
     private BooleanProperty fyrstaHlutBaettVid = new SimpleBooleanProperty(false);
 
 
     public Plontuyfirlit() {
         LesaFXML.lesa(this, "plontuyfirlit.fxml");
 
-        //setur onAction
         setjaMenuItemHandlera();
 
         stillaSiaMenuItems();
@@ -76,25 +88,25 @@ public class Plontuyfirlit extends AnchorPane {
         fyrstaHlutBaettVid.addListener((obs, o, n) -> {
             if (!o && n) setRodunMenuItems();
         });
-
         //eða:  fyrstaHlutBaettVid.addListener((obs, o, n) -> (if (!o && n)  setRodunMenuItems()));
     }
 
+    /**
+     * MenuItems undir sía eru upphafsstilltir, filteredList gerður, og listener settur til að passa að MenuItems sé
+     * bætt við ef þarf.
+     */
     private void stillaSiaMenuItems() {
         //síaItems inniheldur öll börn fxSiaMenu í upphafi
         siaItems = fxSiaMenu.getItems();
         ((CheckMenuItem) fxSiaMenu.getItems().get(0)).setSelected(true);
 
-        // selectedSiaItems er filteredList af siaItems, inniheldur selected hlutina
-        selectedSiaItems = new FilteredList<>(siaItems);
+        selectedSiaItems = new FilteredList<>(siaItems); //inniheldur valda CheckMenuItems (sem MenuItems)
 
         uppfaeraPredicateLista();
 
-        //Bindings.bindContent(fxFlowPane.getChildren(), filteredSpjold);
-        Bindings.bindContentBidirectional(fxFlowPane.getChildren(), filteredSpjold);
+        Bindings.bindContent(fxFlowPane.getChildren(), filteredSpjold);
+        //Bindings.bindContentBidirectional(fxFlowPane.getChildren(), filteredSpjold);//óþarfi, en virkar líka
 
-
-        //setja listener, þ.a. ef hlut er bætt við þá sé passað að hann hafi flokk
         ollSpjold.addListener((ListChangeListener<? super Node>) change -> {
             change.next();
             if (change.wasAdded()) athBaetaVidFlokk((List<Node>) change.getAddedSubList());
@@ -231,8 +243,6 @@ public class Plontuyfirlit extends AnchorPane {
     public void baetaVidYfirlit(MinPlanta minPlanta) {
         MinPlantaSpjald spjald = new MinPlantaSpjald(minPlanta);
         ollSpjold.add(spjald);
-
-        //hafa syndirFlokkar eða það bara flokkarnir sem eru á plöntum í ollSpjold, sem eru öll möguleg spjöld (base listinn)
     }
 
 
@@ -255,7 +265,7 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private void rodunItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
-        System.out.println("Smellt á " + uppruni.getText());
+        //System.out.println("Smellt á " + uppruni.getText());
 
         if (uppruni.getText().equals("heiti A-Ö")) Collections.sort(ollSpjold, almenntHeitiComparator);
         else if (uppruni.getText().equals("heiti Ö-A")) Collections.sort(ollSpjold, almenntHeitiComparator.reversed());
@@ -265,37 +275,20 @@ public class Plontuyfirlit extends AnchorPane {
     }
 
 
-    private void uppfaeraSiaPred() {//til að selectedSiaItems innihaldi alla valda möguleika
-        Predicate<MenuItem> itemPred = mi -> {//þetta á að vera í sér aðferð
-            return ((CheckMenuItem) mi).isSelected();
-        };
-        //selectedSiaItems.setPredicate(itemPred);//þetta virkar ekki, en línan fyrir neðan virkar
-        selectedSiaItems = new FilteredList<>(siaItems, itemPred);
-    }
-
-    private void uppfaeraSyndSpjold() {//ef hakað við flokkinn: hlutur sýndur
-        Predicate<Node> pred = it -> {
-            if (it instanceof PlantaSpjald) {
-                return selectedSiaItems.contains(upprunaMap.get(((PlantaSpjald) it).getPlanta().getUppruni()));
-            }
-            return selectedSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) it).getMinPlanta().getUppruni()));
-        };
-        filteredSpjold.setPredicate(pred);
-    }
-
-
     /**
-     * TODO einfalda og hreinsa upp kóðann -G
+     * selectedSiaItems er uppfært miðað við inntakið og sýnd spjöld svo uppfærð miðað við það.
      *
      * @param event smellt á CheckMenuItem undir sía
      */
     private void siaItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
-        System.out.println("Smellt á " + uppruni.getText());
 
+        /*
+        System.out.println("Smellt á " + uppruni.getText());
         System.out.println("selectedSiaItems.size(): " + selectedSiaItems.size());
         System.out.println("siaItems.size(): " + siaItems.size());
         System.out.println();
+         */
 
         uppfaeraPredicateLista();
 
@@ -310,6 +303,12 @@ public class Plontuyfirlit extends AnchorPane {
          */
     }
 
+    /**
+     * Fundið er hvort eitthvað breytist annað en það sem ýtt var á. Velja allt möguleikinn er sérstaklega athugaður, og
+     * hvort allt sé rétt miðað við hann.
+     *
+     * @param uppruni MenuItem sem ýtt var á
+     */
     private void uppfaeraFyrsta(MenuItem uppruni) {
         if (uppruni.equals(siaItems.get(0))) {
             System.out.println("smella a fyrsta :)");
@@ -334,21 +333,6 @@ public class Plontuyfirlit extends AnchorPane {
         } else if (selectedSiaItems.size() == siaItems.size() - 1 && !((CheckMenuItem) siaItems.get(0)).isSelected()) {
             ((CheckMenuItem) siaItems.get(0)).setSelected(true);
         }
-    }
-
-    /*
-    //sleppa kannski flokkun til að byrja með? held það sé óþarflega flókið
-    private void flokkunItemHandler(ActionEvent event) {
-        MenuItem uppruni = (MenuItem) event.getSource();
-        System.out.println("Smellt á " + uppruni.getText());
-    }
-     */
-
-    /**
-     * @return öll spjöld yfirlits
-     */
-    public ObservableList<Node> getOllSpjold() {
-        return ollSpjold;
     }
 
 
