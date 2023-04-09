@@ -1,0 +1,17 @@
+.root{
+    -fx-background-color: #F2FFF6;
+}
+
+.button{
+    -fx-background-color: #DDFFE7;
+    -fx-border-color: #84cf9a;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-width: 2px;
+}
+
+.button:focused{
+    -fx-border-color: green;
+}
+
+

@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #F2FFF6;"
             xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="vidmot.plantmania.UpphafController">
+            fx:controller="vidmot.plantmania.UpphafController" stylesheets="@styling/innskraning-style.css">
     <children>
         <Label layoutX="308.0" layoutY="60.0" text="Plantmania">
             <font>
@@ -23,11 +23,7 @@
         <PasswordField fx:id="fxLykilord" layoutX="338.0" layoutY="216.0"/>
         <Label layoutX="327.0" layoutY="369.0" text="Enginn aðgangur?"/>
         <Button fx:id="fxInnskraning" layoutX="312.0" layoutY="280.0" mnemonicParsing="false" onAction="#skraInn"
-                prefHeight="26.0" prefWidth="126.0"
-                style="-fx-background-color: #DDFFE7; -fx-border-color: #84cf9a; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-border-width: 2px;"
-                text="Skrá inn"/>
-        <Button layoutX="337.0" layoutY="410.0" mnemonicParsing="false" onAction="#geraNyjanAdgang"
-                style="-fx-background-color: #DDFFE7; -fx-border-color: #84cf9a; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-border-width: 2px;"
-                text="Nýskráning"/>
+                prefHeight="26.0" prefWidth="126.0" text="Skrá inn"/>
+        <Button layoutX="337.0" layoutY="410.0" mnemonicParsing="false" onAction="#geraNyjanAdgang" text="Nýskráning"/>
     </children>
 </AnchorPane>
