@@ -4,21 +4,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-
-<fx:root alignment="TOP_CENTER" prefHeight="125.0" prefWidth="100.0" stylesheets="@styling/spjald-style.css" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-    <Label fx:id="fxFlokkur" text=" frumskógur " />
-    <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: darkgreen" VBox.vgrow="NEVER">
+<?import javafx.scene.layout.*?>
+<fx:root alignment="TOP_CENTER" prefHeight="125.0" prefWidth="100.0" stylesheets="@styling/spjald-style.css"
+         type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="fxFlokkur" text=" frumskógur "/>
+    <BorderPane styleClass="border-pane" prefHeight="80.0" prefWidth="80.0" VBox.vgrow="NEVER">
 
         <center>
-            <ImageView fx:id="fxPlontuMynd" fitHeight="80" fitWidth="69.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true" styleClass="mynd" BorderPane.alignment="CENTER">
-                <Image url="@styling/plants/jelly.png" />
+            <ImageView fx:id="fxPlontuMynd" fitHeight="80" fitWidth="69.0" layoutX="6.0" pickOnBounds="true"
+                       preserveRatio="true" styleClass="mynd" BorderPane.alignment="CENTER">
+                <Image url="@styling/plants/jelly.png"/>
             </ImageView>
         </center>
     </BorderPane>
-    <Label fx:id="fxAlmenntNafn" prefHeight="9.0" prefWidth="97.0" text="Jelly babe" />
+    <Label fx:id="fxAlmenntNafn" prefHeight="9.0" prefWidth="97.0" text="Jelly babe"/>
     <padding>
-        <Insets top="1.0" />
+        <Insets top="1.0"/>
     </padding>
 </fx:root>

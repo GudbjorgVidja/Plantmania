@@ -17,7 +17,6 @@ import vinnsla.plantmania.enums.Vatnsthorf;
  * plöntuspjald fyrir einhverja plöntu, hlutur af gerð Planta. það er líka til MinPlantaSpjald.
  * PlantaSpjald er fyrir plöntu sem notandi á ekki
  * <p>
- * todo setja handler á takka til að bæta plöntu við mínar plöntur
  */
 public class PlantaSpjald extends AnchorPane {
     @FXML

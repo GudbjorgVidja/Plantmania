@@ -1,5 +1,5 @@
 .root{
--beef: #beefed;
+beef: #beefed;
 
 -fx-background-color: #ddffe7;
 fx-background-color: -beef;
@@ -9,11 +9,24 @@ fx-background-color: -beef;
 
 }
 #rot{
--fx-background-radius: 20;
--fx-border-radius: 20;
--fx-border-color: forestgreen;
--fx-background-color: #ddffe7;
--fx-padding: 3 1 1 1;
+    -fx-pref-height: 200;
+    -fx-pref-width: 150;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: forestgreen;
+    -fx-background-color: #ddffe7;
+    -fx-padding: 3 1 1 1;
+}
+
+
+#rot:pressed{
+    fx-background-color: pink;
+    -fx-background-color: #C8F8D6;
+}
+
+#rot:hover{
+    -fx-border-color: darkgreen;
+    fx-background-color: purple;
 }
 
 

@@ -6,8 +6,15 @@
 
 #fxFlokkur{
     -fx-alignment: center;
-    -fx-background-color: #beefed;
-    -fx-background-radius: 20;
+    -fx-text-fill: darkgreen;
+    -fx-background-color: transparent;
+    fx-background-color: #beefed;
+    fx-background-radius: 20;
+}
+
+.border-pane{
+    -fx-border-color: darkgreen;
+    -fx-background-color: #ddffe7;
 }
 
 #fxAlmenntNafn{

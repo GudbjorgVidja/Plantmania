@@ -258,7 +258,7 @@ public class Plontuyfirlit extends AnchorPane {
 
 
     /**
-     * TODO passa að röðunin haldist, og að ef hlut er bætt við yfirlit þá kemur hann inn á réttum stað.
+     * todo passa að röðunin haldist, og að ef hlut er bætt við yfirlit þá kemur hann inn á réttum stað.
      * Raðar hlutum í yfirliti eftir því hvað er valið.
      *
      * @param event smellt á hlut undir röðun
@@ -336,7 +336,7 @@ public class Plontuyfirlit extends AnchorPane {
     }
 
 
-    //TODO: flest hér fyrir neðan er í raun vinnsla!!! Passa að gera viðeigandi vinnsluklasa og færa yfir!!!!
+    //todo: eiga comparatorar (fyrir neðan) að vera í vinnslu?
 
     /* til að raða rétt eftir íslenska stafrófinu
         String stafrof = "A a Á á B b D d Ð ð E e É é F f G g H h I i Í í J j K k L l M m N n O o Ó ó P p R r S s T t U u Ú ú V v X x Y y Ý ý Þ þ Æ æ Ö ö";
@@ -347,7 +347,6 @@ public class Plontuyfirlit extends AnchorPane {
 
     /**
      * Comparator til að raða eftir almennu heiti.
-     * TODO passa að raða MinPlanta eftir Nickname, ekki bara almennu heiti
      */
     private Comparator<Node> almenntHeitiComparator = (n1, n2) -> {
         if (n1 instanceof PlantaSpjald) {
