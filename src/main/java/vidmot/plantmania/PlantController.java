@@ -69,7 +69,7 @@ public class PlantController {
         birtaNotendaPlontur();
         skradurNotandi.get().getNotendaupplysingar().finnaFyrriVokvanir();
 
-        skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
+        //skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
         /*skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
             change.next();
             if (change.wasAdded())

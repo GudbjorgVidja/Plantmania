@@ -38,84 +38,48 @@ public class Notendaupplysingar {
      * aðferðinni vokvanirListener sem uppfærir fyrriVokvanir. Svo er fyrriVokvanir raðað
      * ATH: passa að það sé brugðist við þegar plöntu er eytt af listanum! Á eftir að útfæra allt tengt því tho
      */
-    //TODO: Hér er settur listener á minarPlontur, og kallað á aðferð sem setur listener á stakan MinPlanta hlut sem bætt er við. Endurskrifa svo það þurfi ekki að setja líka listener á minarPlontur í aðferðinni finnaNaestuVokvanir!
     public void finnaFyrriVokvanir() {
         minarPlontur.addListener((ListChangeListener<MinPlanta>) (obs) -> {
             while (obs.next()) {
                 if (obs.wasAdded()) {
-                    for (int i = 0; i < obs.getAddedSize(); i++) {
-                        vokvanirListener(obs.getAddedSubList().get(i));
+                    for (MinPlanta minPlanta : obs.getAddedSubList()) {
+                        for (LocalDate date : minPlanta.getPlanadarVokvanir()) {
+                            naestuVokvanir.add(new Pair<>(minPlanta, date));
+                        }
+                        listaListener(minPlanta, fyrriVokvanir, minPlanta.getVokvanir());
+                        listaListener(minPlanta, naestuVokvanir, minPlanta.getPlanadarVokvanir());
                     }
                 }
             }
             fyrriVokvanir.sort(Comparator.comparing((Pair::getValue)));
+            // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
         });
     }
 
     /**
-     * Setur listener á vökvanir fyrir staka MinPlanta til að uppfæra fyrriVokvanir listann
+     * Setur listener á dagsetningar, sem er observableList af dagsetningum (getur verið vokvanir eða
+     * planadarVokvanir í MinPlanta), fyrir gefna plöntu
      *
-     * @param minPlanta - MinPlanta hlutur, sú sem á að setja listener á vökvanir hjá
+     * @param minPlanta    - MinPlanta, sú sem inniheldur listann sem á að vakta
+     * @param vokvanir     - ObservableList af pörum af MinPlanta og LocalDate, annað hvort naestuVokvanir eða fyrriVokvanir
+     *                     tilviksbreyturnar í Notendaupplysingar (hér)
+     * @param dagsetningar - ObservableList af LocalDate vökvunardagsetningum fyrir staka plöntu sem á að vakta
      */
-    private void vokvanirListener(MinPlanta minPlanta) {
-        minPlanta.getVokvanir().addListener((ListChangeListener<LocalDate>) (observable) -> {
-            while (observable.next()) {
-                if (observable.wasAdded()) {
-                    for (int j = 0; j < observable.getAddedSize(); j++) {
-                        fyrriVokvanir.add(new Pair<>(minPlanta, observable.getAddedSubList().get(j)));
+    private void listaListener(MinPlanta minPlanta, ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, ObservableList<LocalDate> dagsetningar) {
+        dagsetningar.addListener((ListChangeListener<? super LocalDate>) breyting -> {
+            while (breyting.next()) {
+                if (breyting.wasAdded()) {
+                    for (LocalDate dags : breyting.getAddedSubList()) {
+                        vokvanir.add(new Pair<>(minPlanta, dags));
                     }
-                } else if (observable.wasRemoved()) {
+                }
+                if (breyting.wasRemoved()) {
                     List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
-                    for (int j = 0; j < observable.getRemovedSize(); j++) {
-                        eytt.add(new Pair<>(minPlanta, observable.getRemoved().get(j)));
+                    for (LocalDate date : breyting.getRemoved()) {
+                        eytt.add(new Pair<>(minPlanta, date));
                     }
-                    fyrriVokvanir.removeAll(eytt);
+                    vokvanir.removeAll(eytt);
                 }
-            }
-        });
-    }
-
-
-    /**
-     * Finnur vökvanir þrjá mánuði fram í tímann.
-     * Passa að hafa einhverja tilkynningu um að engar upplýsingar séu skráðar um fyrri vökvun
-     * <p>
-     * setur listener á minarPlontur listann, þegar nýrri plöntu er bætt við er vökvunum bætt við naestuVokvanir
-     * (ath hvort það sé hægt að sleppa því?) og settur listener á planadarVokvanir í MinPlanta. Þegar planadarVokvanir
-     * breytast er naestuVokvanir listinn uppfærður
-     * ATH: Sameina aðeins með aðferðum til að finna síðustu vökvanir!!!
-     */
-    public void finnaNaestuVokvanir() {
-        System.out.println("Notendaupplysingar.finnaNaestuVokvanir(): ");
-        // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
-        minarPlontur.addListener((ListChangeListener<? super MinPlanta>) change -> {
-            change.next();
-            if (change.wasAdded()) {
-                for (MinPlanta mp : change.getAddedSubList()) {
-                    //ath hér
-                    for (LocalDate date : mp.getPlanadarVokvanir()) {
-                        naestuVokvanir.add(new Pair<>(mp, date));
-                        //System.out.println("naestuVokvanir: " + naestuVokvanir);
-                    }
-                    mp.getPlanadarVokvanir().addListener((ListChangeListener<? super LocalDate>) breyting -> {
-                        while (breyting.next()) {
-                            if (breyting.wasAdded()) {
-                                for (LocalDate dags : breyting.getAddedSubList()) {
-                                    naestuVokvanir.add(new Pair<>(mp, dags));
-                                }
-                            }
-                            if (breyting.wasRemoved()) {
-                                List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
-                                for (LocalDate date : breyting.getRemoved()) {
-                                    eytt.add(new Pair<>(mp, date));
-                                }
-                                naestuVokvanir.removeAll(eytt);
-                            }
-                        }
-                    });
-                }
-                System.out.println(minarPlontur);
-                System.out.println("naestuVokvanir: " + naestuVokvanir);
             }
         });
     }

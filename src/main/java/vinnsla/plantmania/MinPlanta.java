@@ -54,34 +54,32 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
      * Reiknar planaðarvökvanir þrjá mánuði fram í tímann, upphafsstillir þær og setur listenera á naestaVokvun
      * og thinnTimiMilliVokvana svo planadarVokvanir uppfærist þegar annað gildið breytist
      */
-    //TODO: skipta niður!
     public void reiknaPlanadarVokvanir() {
-        //planadarVokvanirTestListener(); //prentar
-        LocalDate date = LocalDate.now();//þetta gefur alltaf daginn í dag, gera meira abstract með .plusDays(naestaVokvun.get())
-        LocalDate eftirThrjaManudi = date.plusMonths(3);
-        for (LocalDate dagur = date; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {
-            planadarVokvanir.add(dagur);
-        }
+        LocalDate lengdAaetlunar = LocalDate.now().plusMonths(3);
+        uppfaeraPlanadarVokvanir(lengdAaetlunar);
 
         naestaVokvun.addListener((obs, o, n) -> {
-            LocalDate d = LocalDate.now().plusDays(naestaVokvun.get());
-            planadarVokvanir.clear();
-            for (LocalDate dagur = d; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {
-                planadarVokvanir.add(dagur);
-            }
+            uppfaeraPlanadarVokvanir(lengdAaetlunar);
         });
 
-        //reikna planaðar vökvanir aftur ef tími milli vökvana breytist!
         thinnTimiMilliVokvana.addListener((observable, oldValue, newValue) -> {
-            LocalDate d = LocalDate.now().plusDays(naestaVokvun.get());
-            planadarVokvanir.clear();
-            for (LocalDate dagur = d; dagur.isBefore(eftirThrjaManudi); dagur = dagur.plusDays(thinnTimiMilliVokvana.get())) {
-                planadarVokvanir.add(dagur);
-            }
+            uppfaeraPlanadarVokvanir(lengdAaetlunar);
         });
-
     }
 
+    /**
+     * Setur planadarVokvanir fyrir plöntuna með réttu millibili ákveðið langt fram í tímann.
+     * Tæmir planadarVokvanir svo það reiknast alltaf frá grunni
+     *
+     * @param lengd - LocalDate, þar sem áætlun hættir
+     */
+    private void uppfaeraPlanadarVokvanir(LocalDate lengd) {
+        LocalDate dagur = LocalDate.now().plusDays(naestaVokvun.get());
+        planadarVokvanir.clear();
+        for (LocalDate d = dagur; d.isBefore(lengd); d = d.plusDays(thinnTimiMilliVokvana.get())) {
+            planadarVokvanir.add(d);
+        }
+    }
 
     /**
      * ath nafnið. Setur listener á vokvanir og uppfærir sidastaVokvun
