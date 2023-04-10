@@ -5,8 +5,7 @@
  */
 package vinnsla.plantmania.enums;
 
-//TODO: taka út slóð fyrir mynd?
-//todo: já, allavega til að byrja með
+
 public enum Uppruni {
     EYDIMORK("eyðimörk"),
     REGNSKOGUR("regnskógur"),
@@ -16,23 +15,15 @@ public enum Uppruni {
     FJALLLENDI("fjalllendi"),
     GRASLENDI("graslendi"),
     SKOGLENDI("skóglendi"),
-    HITABELTI("hitabelti");
+    HITABELTI("hitabelti"),
+    VOTLENDI("votlendi");
 
-    private String mynd;
 
     private String stadur;
 
-    Uppruni(String stadur) {//String mynd,
-        //this.mynd = mynd;
+    Uppruni(String stadur) {
         this.stadur = stadur;
     }
-
-    /*
-    public String getMynd() {
-        return mynd;
-    }
-
-     */
 
     public String getStadur() {
         return stadur;

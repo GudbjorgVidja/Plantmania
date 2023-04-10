@@ -40,13 +40,9 @@ public class Plontugluggi extends Dialog<Void> {
 
     private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
 
-
-    //medaltimiMilliVokvana = new SimpleIntegerProperty();//upphafsstilla?
-
-
     //private Planta plantan;//ef glugginn er fyrir planta, kemur etv seinna
 
-    //ToDo: setja fxEinkenni, fxLjosthorf (styrkur og tími?), fxEitrun, fxMedaltimi, fxUppruni
+    //ToDo: setja fxEinkenni, fxLjosthorf (styrkur og tími?), fxEitrun, fxUppruni
     //það segir að þetta komi sem overloaded method, held ég???
     public Plontugluggi() {
         setDialogPane(lesaGlugga());
