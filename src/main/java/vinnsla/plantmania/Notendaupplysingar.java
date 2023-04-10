@@ -27,11 +27,14 @@ public class Notendaupplysingar {
         System.out.println("Notendaupplysingar smidur");
         //finnaNaestuVokvanir();
     }
+    
 
-
-    //athuga hvar það er brugðist við þegar plantan er einfaldlega tekin af listanum!
-    //er þetta sett á plöntu um leið og henni er bætt við í mínarPlöntur? gera kannski sér aðferð sem hægt er að kalla á oftar?
-    //það þarf að refactora þetta, en þetta virkar!
+    /**
+     * setur listener á <minarPlontur>, þegar nýrri plöntu er bætt við er settur listener á hana með
+     * aðferðinni vokvanirListener sem uppfærir <fyrriVokvanir>. Svo er fyrriVokvanir raðað
+     * ATH: passa að það sé brugðist við þegar plöntu er eytt af listanum! Á eftir að útfæra allt tengt því tho
+     */
+    //TODO: Hér er settur listener á minarPlontur, og kallað á aðferð sem setur listener á stakan MinPlanta hlut sem bætt er við. Endurskrifa svo það þurfi ekki að setja líka listener á minarPlontur í aðferðinni finnaNaestuVokvanir!
     public void finnaFyrriVokvanir() {
         minarPlontur.addListener((ListChangeListener<MinPlanta>) (obs) -> {
             while (obs.next()) {
@@ -45,6 +48,11 @@ public class Notendaupplysingar {
         });
     }
 
+    /**
+     * Setur listener á vökvanir fyrir staka MinPlanta til að uppfæra fyrriVokvanir listann
+     *
+     * @param minPlanta - MinPlanta hlutur, sú sem á að setja listener á vökvanir hjá
+     */
     private void vokvanirListener(MinPlanta minPlanta) {
         minPlanta.getVokvanir().addListener((ListChangeListener<LocalDate>) (observable) -> {
             while (observable.next()) {
@@ -67,6 +75,11 @@ public class Notendaupplysingar {
     /**
      * Finnur vökvanir þrjá mánuði fram í tímann.
      * Passa að hafa einhverja tilkynningu um að engar upplýsingar séu skráðar um fyrri vökvun
+     * <p>
+     * setur listener á minarPlontur listann, þegar nýrri plöntu er bætt við er vökvunum bætt við naestuVokvanir
+     * (ath hvort það sé hægt að sleppa því?) og settur listener á planadarVokvanir í MinPlanta. Þegar planadarVokvanir
+     * breytast er naestuVokvanir listinn uppfærður
+     * ATH: Sameina aðeins með aðferðum til að finna síðustu vökvanir!!!
      */
     public void finnaNaestuVokvanir() {
         System.out.println("Notendaupplysingar.finnaNaestuVokvanir(): ");
@@ -75,6 +88,11 @@ public class Notendaupplysingar {
             change.next();
             if (change.wasAdded()) {
                 for (MinPlanta mp : change.getAddedSubList()) {
+                    //ath hér
+                    for (LocalDate date : mp.getPlanadarVokvanir()) {
+                        naestuVokvanir.add(new Pair<>(mp, date));
+                        //System.out.println("naestuVokvanir: " + naestuVokvanir);
+                    }
                     mp.getPlanadarVokvanir().addListener((ListChangeListener<? super LocalDate>) breyting -> {
                         while (breyting.next()) {
                             if (breyting.wasAdded()) {
@@ -91,12 +109,6 @@ public class Notendaupplysingar {
                             }
                         }
                     });
-                    //skoða hvað þetta gerir nákvæmlega, ef ég tek þetta út er ekkert á dagatalinu þegar það er opnað án þess að eiga við plöntu
-                    //þwtta keyrir stundum
-                    for (LocalDate date : mp.getPlanadarVokvanir()) {
-                        naestuVokvanir.add(new Pair<>(mp, date));
-                        //System.out.println("naestuVokvanir: " + naestuVokvanir);
-                    }
                 }
                 System.out.println(minarPlontur);
                 System.out.println("naestuVokvanir: " + naestuVokvanir);
@@ -128,11 +140,11 @@ public class Notendaupplysingar {
         this.naestuVokvanir = naestuVokvanir;
     }
 
-    //passa að engar tvær plöntur fái sama nickname
-
     /**
      * bætir við plöntu af gerðinni planta við plöntur í eigu notanda. Passar að engar tvær plöntur hafi sama
      * nickname
+     * ATH: bætir alltaf við 1 fyrir aftan nafnið ef það er nú þegar til en telur ekki, svo það kemur
+     * 1, 11, 111 en ekki 1, 2, 3
      *
      * @param planta - Planta af gerðinni sem notandi vill
      */
