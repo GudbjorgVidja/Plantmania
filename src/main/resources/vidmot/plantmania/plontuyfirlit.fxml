@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <fx:root minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="650.0" styleClass="anchorpane"
-         stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/16"
+         stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19"
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <MenuBar fx:id="fxMenuBar" layoutX="50.0" layoutY="21.0" prefHeight="29.0" prefWidth="180.0">
@@ -14,29 +14,14 @@
                     <items>
                         <MenuItem mnemonicParsing="false" text="heiti A-Ö"/>
                         <MenuItem mnemonicParsing="false" text="heiti Ö-A"/>
-                        <!--<MenuItem mnemonicParsing="false" text="fræðiheiti A-Ö"/> -->
                         <MenuItem mnemonicParsing="false" text="næsta vökvun"/>
                         <MenuItem mnemonicParsing="false" text="síðast vökvað"/>
-                        <!-- <MenuItem mnemonicParsing="false" text="fræðiheiti Ö-A"/> -->
-                        <!-- <MenuItem mnemonicParsing="false" text="næsta vökvun"/>
-                        <MenuItem mnemonicParsing="false" text="stafrófsröð"/>
-                        <MenuItem mnemonicParsing="false" text="afmæli"/> -->
                     </items>
                 </Menu>
-                <!-- <Menu fx:id="flokkunMenu" mnemonicParsing="false" text="flokkun">
-                     <items>
-                         <MenuItem mnemonicParsing="false" text="sjálfgefið"/>
-                         <MenuItem mnemonicParsing="false" text="flokkur"/>
-                         <MenuItem mnemonicParsing="false" text="tegund"/>
-                     </items>
-                 </Menu> -->
                 <Menu fx:id="fxSiaMenu" mnemonicParsing="false" text="sía">
                     <items>
                         <CheckMenuItem mnemonicParsing="false" text="velja allt"/>
-                        <!-- <SeparatorMenuItem mnemonicParsing="false" /> -->
-                        <!--  <CheckMenuItem mnemonicParsing="false" text="thirsty bees"/>
-                          <CheckMenuItem mnemonicParsing="false" text="tropical"/>
-                          <CheckMenuItem mnemonicParsing="false" text="soaked"/> -->
+                        <SeparatorMenuItem mnemonicParsing="false"/>
                     </items>
                 </Menu>
             </menus>
@@ -54,5 +39,11 @@
             </padding>
         </ScrollPane>
         <Label fx:id="notandiLabel" layoutX="444.0" layoutY="14.0" text="notandi"/>
+        <!--  <MenuButton layoutX="306.0" layoutY="16.0" mnemonicParsing="false" text="notandi" fx:id="fxNotandi">
+              <items>
+                  <MenuItem mnemonicParsing="false" text="skrá út" fx:id="fxSkraUt"/>
+                  <MenuItem mnemonicParsing="false" text="Action 2"/>
+              </items>
+          </MenuButton> -->
     </children>
 </fx:root>

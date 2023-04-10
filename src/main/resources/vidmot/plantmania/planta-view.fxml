@@ -10,61 +10,25 @@
             <Spjald fx:id="fxSpjald"/>
         </Pane>
         <AnchorPane fx:id="fxBreytilegtSvaedi" layoutX="13.0" layoutY="125.0" prefHeight="61.0" prefWidth="123.0">
-
             <HBox fx:id="fxBoxaHbox" alignment="BOTTOM_CENTER" prefHeight="61.0" prefWidth="123.0">
                 <children>
                     <VBox fx:id="fxVatnBox" styleClass="vboxStats">
                         <ImageView styleClass="vatnBox"/>
                         <ImageView styleClass="vatnBox"/>
                         <ImageView styleClass="vatnBox"/>
-                        <!-- <children>
-                             <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66"/>
-                             <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <VBox.margin>
-                                     <Insets/>
-                                 </VBox.margin>
-                                 <image>
-                                     <Image url="@styling/icon/water.png"/>
-                                 </image>
-                             </ImageView>
-                         </children> -->
                     </VBox>
                     <VBox fx:id="fxLjosBox" layoutX="46.0" layoutY="11.0" styleClass="vboxStats">
                         <ImageView styleClass="ljosBox"/>
                         <ImageView styleClass="ljosBox"/>
                         <ImageView styleClass="ljosBox"/>
-                        <!--<children>
-                            <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66"/>
-                            <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                <VBox.margin>
-                                    <Insets/>
-                                </VBox.margin>
-                                <image>
-                                    <Image url="@styling/icon/sol.png"/>
-                                </image>
-                            </ImageView>
-                        </children> -->
                     </VBox>
                     <VBox fx:id="fxHitiBox" layoutX="28.0" layoutY="11.0" styleClass="vboxStats">
                         <ImageView styleClass="hitiBox"/>
                         <ImageView styleClass="hitiBox"/>
                         <ImageView styleClass="hitiBox"/>
-                        <!-- <children>
-                             <ProgressBar prefHeight="15.0" prefWidth="37.0" progress="0.66" />
-                             <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                 <VBox.margin>
-                                     <Insets />
-                                 </VBox.margin>
-                                 <image>
-                                     <Image url="@styling/icon/search1.png" />
-                                 </image>
-                             </ImageView>
-                         </children> -->
                     </VBox>
                 </children>
             </HBox>
-
         </AnchorPane>
-        <!--<Button layoutX="4.0" layoutY="4.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="27.0" text="+" />-->
     </children>
 </fx:root>

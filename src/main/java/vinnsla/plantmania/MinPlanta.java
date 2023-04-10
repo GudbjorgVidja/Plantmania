@@ -1,14 +1,5 @@
 /**
- * MinPlanta erfir frá Planta, sem er almenn útgáfa (planta sem við eigum ekki).
- * inniheldur lista af dagsetningum þegar plantan var vökvuð
- * <p>
- * MinPlanta ætti að vera controller fyrir fxml skrá fyrir plöntuspjald af plöntu sem við eigum.
- * Hefur þá handlera fyrir þegar ýtt er á takka á spjaldinu (vökva og fresta), og þegar ýtt er á spjaldið(upplýsingadíalogur).
- * <p>
  * á kannski að vera með observable list planaðarVökvanir, sem er listi af dagsetningum vökvana næstu þrjá mánuði?
- * <p>
- * bæta við integerProperty hlut nidurtalning, sem telur niður að næstu vökvun og uppfærist bara ef hún breytist. Held það
- * sé betra en að reikna það út í hvert skipti.
  * Það þarf líka að uppfærast þegar það líður dagur!
  */
 
@@ -23,8 +14,15 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 
-//@JsonDeserialize(using = MinPlantaDeserializer.class)
-public class MinPlanta extends Planta {
+
+/**
+ * MinPlanta erfir frá Planta. Planta inniheldur grunnupplýsingar, en MinPlanta er útgáfa sem notandi á, og MinPlanta
+ * inniheldur og geymir upplýsingar um bara þann tiltekna hlut.
+ * Klasinn er controller, og les inn viðmót úr skránni minplanta-view.fxml.
+ * MinPlanta inniheldur m.a. skráðar vökvanir aftur í tímann, auk þess að reikna út og geyma dagsetningar fyrir planaðar
+ * vökvanir.
+ */
+public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeserializer.class)
     private StringProperty nickName = new SimpleStringProperty();
     private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
     private StringProperty notesFraNotanda = new SimpleStringProperty();//hafa listener fyrir notes!
@@ -84,8 +82,9 @@ public class MinPlanta extends Planta {
 
     }
 
+
     /**
-     * ATH nafnið: Setur listener á vokvanir og uppfærir sidastaVokvun
+     * ath nafnið. Setur listener á vokvanir og uppfærir sidastaVokvun
      */
     public void sidastaVokvunListener() {
         vokvanir.addListener((ListChangeListener<LocalDate>) (observable) -> {

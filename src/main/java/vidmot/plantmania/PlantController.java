@@ -284,4 +284,14 @@ public class PlantController {
             System.out.println(e.getCause());
         }
     }
+
+
+    public void setSkradurNotandi(Notandi n) {
+        skradurNotandi = (new SimpleObjectProperty<Notandi>(n));
+        // skradurNotandi=n;
+    }
+
+    public void publicVistaUpplysingar() {
+        vistaNotendaupplysingar();
+    }
 }

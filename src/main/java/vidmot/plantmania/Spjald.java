@@ -1,5 +1,5 @@
 /**
- * TODO: væri kannski betra að gera Spjald með MinPlanta hlut, frekar en bara Planta?
+ * todo: væri kannski betra að gera Spjald með MinPlanta hlut, frekar en bara Planta?
  */
 package vidmot.plantmania;
 
@@ -36,7 +36,7 @@ public class Spjald extends VBox {
         LesaFXML.lesa(this, "spjald-view.fxml");
 
         System.out.println("Spjald(Planta p) smidur");//prentast aldrei?
-        //Todo er þetta fyrir neðan sama og er í MinPlantaSpjald? Óþarfi?
+        //todo er þetta fyrir neðan sama og er í MinPlantaSpjald? Óþarfi?
         fxFlokkur.setText(p.getUppruni().getStadur());
         fxAlmenntNafn.setText(p.getAlmenntNafn());
         fxPlontuMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + p.getMyndaslod())));

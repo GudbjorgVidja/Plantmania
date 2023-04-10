@@ -38,11 +38,9 @@ public class MinPlantaSpjald extends AnchorPane {
 
         LesaFXML.lesa(this, "minplanta-view.fxml");
 
-        //minPlanta vistuð í tilviksbreytu
         minPlantan = minPlanta;
 
         fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.nickNameProperty());
-        //fxSpjald.setFxFlokkur(minPlantan.getUppruni().toString().toLowerCase(Locale.ROOT));
         fxSpjald.setFxFlokkur(minPlantan.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
 
