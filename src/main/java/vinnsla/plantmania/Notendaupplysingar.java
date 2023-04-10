@@ -12,6 +12,10 @@ import java.util.List;
 
 //athuga hvernig það er greint á milli tveggja eins planta!!! það er nauðsynlegt!
 //@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
+
+/**
+ * vinnsluklasi sem inniheldur upplýsingar um plöntur notanda, hvenær þær hafa verið vökvaðar og áætlaðar vökvanir
+ */
 public class Notendaupplysingar {
     private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();
     private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
@@ -27,11 +31,11 @@ public class Notendaupplysingar {
         System.out.println("Notendaupplysingar smidur");
         //finnaNaestuVokvanir();
     }
-    
+
 
     /**
-     * setur listener á <minarPlontur>, þegar nýrri plöntu er bætt við er settur listener á hana með
-     * aðferðinni vokvanirListener sem uppfærir <fyrriVokvanir>. Svo er fyrriVokvanir raðað
+     * setur listener á minarPlontur, þegar nýrri plöntu er bætt við er settur listener á hana með
+     * aðferðinni vokvanirListener sem uppfærir fyrriVokvanir. Svo er fyrriVokvanir raðað
      * ATH: passa að það sé brugðist við þegar plöntu er eytt af listanum! Á eftir að útfæra allt tengt því tho
      */
     //TODO: Hér er settur listener á minarPlontur, og kallað á aðferð sem setur listener á stakan MinPlanta hlut sem bætt er við. Endurskrifa svo það þurfi ekki að setja líka listener á minarPlontur í aðferðinni finnaNaestuVokvanir!

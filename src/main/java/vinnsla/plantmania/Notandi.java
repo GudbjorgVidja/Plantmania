@@ -11,6 +11,9 @@ package vinnsla.plantmania;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * vinnsluklasi sem inniheldur grunnupplýsingar um notanda
+ */
 public class Notandi {
     private StringProperty notendanafn = new SimpleStringProperty();
     private StringProperty lykilord = new SimpleStringProperty();
