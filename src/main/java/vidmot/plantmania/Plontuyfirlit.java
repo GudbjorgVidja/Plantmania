@@ -14,10 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import vinnsla.plantmania.LesaPlontur;
@@ -45,6 +42,9 @@ public class Plontuyfirlit extends AnchorPane {
 
     @FXML
     private Menu fxSiaMenu, rodunMenu;// flokkunMenu //menuItems á MenuBar, til að stjórna sýnileika og röðun hluta
+
+    @FXML
+    private MenuButton fxSkraUt;
 
     /**
      * Öll MenuItem undir sía. Inniheldur velja allt, og uppruna gildi plantna (og minnaPlantna) í yfirlitinu
@@ -76,19 +76,41 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private BooleanProperty fyrstaHlutBaettVid = new SimpleBooleanProperty(false);
 
+    //private PlantController plantController;//rétt tilvik af plantController
+
+    private Comparator<Node> yfirlitComparator;//núverandi comparator
+
 
     public Plontuyfirlit() {
         LesaFXML.lesa(this, "plontuyfirlit.fxml");
+        //fxSkraUt.setOnAction(this::skraUtHandler);
+        //plantController = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
+
+        yfirlitComparator = naestaVokvunComparator;
 
         setjaMenuItemHandlera();
 
         stillaSiaMenuItems();
 
+
         //PlantaSpjald bætt við yfirlitið
         fyrstaHlutBaettVid.addListener((obs, o, n) -> {
-            if (!o && n) setRodunMenuItems();
+            if (!o && n) {
+                setRodunMenuItems();
+                yfirlitComparator = almenntHeitiComparator;
+                Collections.sort(ollSpjold, yfirlitComparator);
+            }
         });
         //eða:  fyrstaHlutBaettVid.addListener((obs, o, n) -> (if (!o && n)  setRodunMenuItems()));
+    }
+
+    private void listenerarSettir() {//er annars staðar
+        ollSpjold.addListener((ListChangeListener<? super Node>) change -> {
+            change.next();
+            if (change.wasAdded()) athBaetaVidFlokk((List<Node>) change.getAddedSubList());
+        });
+
+
     }
 
     /**
@@ -96,7 +118,6 @@ public class Plontuyfirlit extends AnchorPane {
      * bætt við ef þarf.
      */
     private void stillaSiaMenuItems() {
-        //síaItems inniheldur öll börn fxSiaMenu í upphafi
         siaItems = fxSiaMenu.getItems();
         ((CheckMenuItem) fxSiaMenu.getItems().get(0)).setSelected(true);
 
@@ -109,7 +130,10 @@ public class Plontuyfirlit extends AnchorPane {
 
         ollSpjold.addListener((ListChangeListener<? super Node>) change -> {
             change.next();
-            if (change.wasAdded()) athBaetaVidFlokk((List<Node>) change.getAddedSubList());
+            if (change.wasAdded()) {
+                athBaetaVidFlokk((List<Node>) change.getAddedSubList());
+                Collections.sort(ollSpjold, yfirlitComparator);
+            }
         });
     }
 
@@ -118,7 +142,8 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private void uppfaeraPredicateLista() {
         //sían uppfærð
-        Predicate<MenuItem> itemPred = smi -> ((CheckMenuItem) smi).isSelected();
+        //Predicate<MenuItem> itemPred = smi -> ((CheckMenuItem) smi).isSelected();
+        Predicate<MenuItem> itemPred = smi -> (smi instanceof CheckMenuItem && ((CheckMenuItem) smi).isSelected());
         //selectedSiaItems.setPredicate(itemPred);//valdir hlutir
         selectedSiaItems = new FilteredList<>(siaItems, itemPred);
 
@@ -267,11 +292,21 @@ public class Plontuyfirlit extends AnchorPane {
         MenuItem uppruni = (MenuItem) event.getSource();
         //System.out.println("Smellt á " + uppruni.getText());
 
+        if (uppruni.getText().equals("heiti A-Ö")) yfirlitComparator = almenntHeitiComparator;
+        else if (uppruni.getText().equals("heiti Ö-A")) yfirlitComparator = almenntHeitiComparator.reversed();
+        else if (uppruni.getText().equals("næsta vökvun")) yfirlitComparator = naestaVokvunComparator;
+        else if (uppruni.getText().equals("síðast vökvað")) yfirlitComparator = naestaVokvunComparator.reversed();
+
+        Collections.sort(ollSpjold, yfirlitComparator);
+
+        /*
         if (uppruni.getText().equals("heiti A-Ö")) Collections.sort(ollSpjold, almenntHeitiComparator);
         else if (uppruni.getText().equals("heiti Ö-A")) Collections.sort(ollSpjold, almenntHeitiComparator.reversed());
         else if (uppruni.getText().equals("næsta vökvun")) Collections.sort(ollSpjold, naestaVokvunComparator);
         else if (uppruni.getText().equals("síðast vökvað"))
             Collections.sort(ollSpjold, naestaVokvunComparator.reversed());
+
+         */
     }
 
 
@@ -335,7 +370,19 @@ public class Plontuyfirlit extends AnchorPane {
         }
     }
 
+    /*
+    private void skraUtHandler(ActionEvent event) {
 
+        // todo notaði private aðferð í plantController, en aðferðin er bara notuð fyrir þetta. Færa hana hingað?
+        plantController.publicVistaUpplysingar();//vistaNotendaupplysingar();
+
+        plantController.setSkradurNotandi(null);//skradurNotandi = null;
+
+        System.out.println("skra ut");
+        ViewSwitcher.switchTo(View.UPPHAFSSIDA);
+    }
+
+     */
     //todo: eiga comparatorar (fyrir neðan) að vera í vinnslu?
 
     /* til að raða rétt eftir íslenska stafrófinu
@@ -348,7 +395,7 @@ public class Plontuyfirlit extends AnchorPane {
     /**
      * Comparator til að raða eftir almennu heiti.
      */
-    private Comparator<Node> almenntHeitiComparator = (n1, n2) -> {
+    private Comparator<Node> almenntHeitiComparator = (n1, n2) -> { //todo passa íslenska stafrófið
         if (n1 instanceof PlantaSpjald) {
             return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
         }
