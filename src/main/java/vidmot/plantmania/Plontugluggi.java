@@ -1,5 +1,6 @@
 package vidmot.plantmania;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,14 +75,21 @@ public class Plontugluggi extends Dialog<Void> {
         setNaestaVokvunListener();
         setFxUmPlontuna();
         setFxThinnTimi();
+        setjaFxMedaltimi();
     }
 
-    //ath að það segir alltaf dagar í fleirtölu
+    /**
+     * setur bindingu fyrir label með meðaltíma milli vökvana. ATH: það segir alltaf dagar í fleirtölu
+     */
     public void setjaFxMedaltimi() {
+        fxMedaltimi.textProperty().bind(Bindings.concat("Meðaltími milli vökvana: ").concat(minPlantan.medaltimiMilliVokvanaProperty()).concat(" dagar"));
         //hafa bindingu/listener hér
     }
 
-    //ath að þetta kemur ekki fram á dagatali eins og er, en það vantar listener í MinPlanta
+    /**
+     * upphafsstillir label með upplýsingum um hversu langt notandi vill að líði á milli vökvana, og setur listener
+     * á thinnTimiMilliVokvanaProperty í MinPlanta til að uppfæra það. Ath að dagar er alltaf í fleirtölu
+     */
     public void setFxThinnTimi() {
         fxThinnTimi.setText("Þinn tími milli vökvana er " + minPlantan.getThinnTimiMilliVokvana() + " dagar");
         minPlantan.thinnTimiMilliVokvanaProperty().addListener((observable, oldValue, newValue) -> {
@@ -89,6 +97,14 @@ public class Plontugluggi extends Dialog<Void> {
         });
     }
 
+    /**
+     * gerir text formatter sem settur er á TextField svo það sé aðeins hægt að slá inn tölur,
+     * og hún getur ekki byrjað á 0
+     * ATH: láta skilaboðin birast einhvers staðar í viðmótinu þegar villa er gripin
+     * ATH: á að takmarka lengd tölu til að koma í veg fyrir misnotkun??
+     *
+     * @param textField - Textfield reiturinn
+     */
     private void geraTextFormatter(TextField textField) {
         textField.setTextFormatter(new TextFormatter<>(change -> {
             String newText = change.getControlNewText();
@@ -98,14 +114,13 @@ public class Plontugluggi extends Dialog<Void> {
             boolean logleg = false;
             try {
                 Integer.parseInt(newText);
-                if (!newText.equals("0")) {
+                if (!newText.startsWith("0")) {
                     logleg = true;
                 }
             } catch (NumberFormatException e) {
-                //TODo: láta skilaboðin birast einhvers staðar í viðmótinu
                 System.out.println("Vinsamlegast sláðu inn tölu");
             }
-            if (logleg) {//ath newText.length > 1000 eða eitthvað, til að koma í veg fyrir misnotkun??
+            if (logleg) {
                 return change;
             } else {
                 return null;
@@ -113,8 +128,13 @@ public class Plontugluggi extends Dialog<Void> {
         }));
     }
 
+    /**
+     * Handler til að breyta tíma milli vökvana þegar ýtt er á hnappinn, gerir TextInputDialog, setur formatter
+     * á hann, óvirkjar ok takkann við réttar aðstæður og uppfærir thinnTimiMilliVokvana í MinPlanta ef við á
+     *
+     * @param mouseEvent - atburðurinn
+     */
     private void setjaFxBreytaTimaMilliVokvanaEventFilter(MouseEvent mouseEvent) {
-        System.out.println("Thinum tima milli vokvana verdur breytt");
         TextInputDialog timiDialog = new TextInputDialog(minPlantan.getAlmennurTimiMilliVokvana() + "");
         geraTextFormatter(timiDialog.getEditor());
         timiDialog.getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(timiDialog.getEditor().textProperty().isEmpty());
@@ -122,16 +142,27 @@ public class Plontugluggi extends Dialog<Void> {
         svar.ifPresent(s -> minPlantan.setThinnTimiMilliVokvana(Integer.parseInt(s)));
     }
 
+    /**
+     * Sækir texta um plöntuna og birtir í viðmótinu
+     */
     private void setFxUmPlontuna() {
         fxUmPlontuna.setText(minPlantan.getTexti());
     }
 
+    /**
+     * Sækir upplýsingar um kjörhitastig plöntu, setur í streng og birtir í viðmóti
+     */
     private void setFxHitasig() {
         fxHitastig.setText("Kjörhitastig er " + minPlantan.getKjorhitastig().get(1) +
                 "°C, en plantan þolir allt á milli " + minPlantan.getKjorhitastig().get(0) +
                 "°C og " + minPlantan.getKjorhitastig().get(2) + "°C.");
     }
 
+    /**
+     * setur texta fyrir fxNaestaVokvun eftir því hvað er langt í hana
+     *
+     * @param naestaV - heiltala, dagar í næstu vökvun
+     */
     private void naestaVokvunTexti(int naestaV) {
         if (naestaV == 1) {
             fxNaestaVokvun.setText("næst eftir " + minPlantan.getNaestaVokvun().get() + " dag");
@@ -142,6 +173,9 @@ public class Plontugluggi extends Dialog<Void> {
         }
     }
 
+    /**
+     * upphafsstillir label fyrir næstu vökvun og setur listener sem uppfærir hann
+     */
     private void setNaestaVokvunListener() {
         naestaVokvunTexti(minPlantan.getNaestaVokvun().get());
         minPlantan.getNaestaVokvun().addListener((observable, oldValue, newValue) -> {
