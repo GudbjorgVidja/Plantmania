@@ -23,13 +23,11 @@ public class Notendaupplysingar {
 
     public Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) {
         this.minarPlontur = minarPlontur;
-        //finnaNaestuVokvanir();//held þetta sé óþarfi
     }
 
     public Notendaupplysingar() {
         //kallað á þetta fimm sinnum við upphaf keyrslu, af hverju?
         System.out.println("Notendaupplysingar smidur");
-        //finnaNaestuVokvanir();
     }
 
 

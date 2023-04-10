@@ -26,7 +26,6 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
     private StringProperty nickName = new SimpleStringProperty();
     private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
     private StringProperty notesFraNotanda = new SimpleStringProperty();//hafa listener fyrir notes!
-    private ObservableList<String> flokkar = FXCollections.observableArrayList(); //ath þetta aðeins
     private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();//upphafsstilla?
     private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();
     private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();
@@ -199,14 +198,6 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
         this.notesFraNotanda.set(notesFraNotanda);
     }
 
-    public ObservableList<String> getFlokkar() {
-        return flokkar;
-    }
-
-    public void setFlokkar(ObservableList<String> flokkar) {
-        this.flokkar = flokkar;
-    }
-
     public int getMedaltimiMilliVokvana() {
         return medaltimiMilliVokvana.get();
     }
@@ -271,7 +262,6 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
                 ", nickName=" + nickName.get() +
                 ", vokvanir=" + vokvanir.toString() +
                 ", notesFraNotanda=" + notesFraNotanda.get() +
-                ", flokkar=" + flokkar.toString() +
                 ", medaltimiMilliVokvana=" + medaltimiMilliVokvana.get() +
                 ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
                 ", naestaVokvun=" + naestaVokvun.get() +

@@ -19,7 +19,7 @@ import java.util.Arrays;
 
 
 //@JsonDeserialize(using = MinPlantaDeserializer.class)
-// notum MinPlantaDeserializer til að lesa í klasann í staðinn fyrir sjálfgefn
+// notum MinPlantaDeserializer til að lesa í klasann í staðinn fyrir sjálfgefinn?
 
 public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
     public MinPlantaDeserializer() {
@@ -55,7 +55,6 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         );
 
         //og enum. er þetta rétt?
-        //minPlanta.setUppruni(objectMapper.readValue(node.get("uppruni")));
         minPlanta.setUppruni(Uppruni.valueOf(node.get("uppruni").asText()));
         minPlanta.setLjosstyrkur(Ljosstyrkur.valueOf(node.get("ljosstyrkur").asText()));
         minPlanta.setEitrun(Eitrun.valueOf(node.get("eitrun").asText()));
@@ -78,18 +77,6 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
             vokvanir.add(objectMapper.readValue(node.get("sidastaVokvun").traverse(), LocalDate.class));
         }
         minPlanta.setVokvanir(vokvanir);
-
-
-        //observableList fyrir flokka
-        JsonNode flokkarNodes = node.get("flokkar");
-        ObservableList<String> flokkar = FXCollections.observableArrayList();
-
-        for (JsonNode flokkurNode : flokkarNodes) {
-            String flokkur = flokkurNode.get("flokkar").asText();
-            flokkar.add(flokkur);
-        }
-        minPlanta.setFlokkar(flokkar);
-
 
         return minPlanta;
     }
