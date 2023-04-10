@@ -53,6 +53,8 @@ public class MinPlanta extends Planta {
 
     /**
      * bara kallað á úr MinPlanta smið, svo gerist bara einu sinni fyrir hverja.
+     * Reiknar planaðarvökvanir þrjá mánuði fram í tímann, upphafsstillir þær og setur listenera á naestaVokvun
+     * og thinnTimiMilliVokvana svo planadarVokvanir uppfærist þegar annað gildið breytist
      */
     //TODO: skipta niður!
     public void reiknaPlanadarVokvanir() {
@@ -82,7 +84,9 @@ public class MinPlanta extends Planta {
 
     }
 
-    //ath nafnið. Setur listener á vokvanir og uppfærir sidastaVokvun
+    /**
+     * ATH nafnið: Setur listener á vokvanir og uppfærir sidastaVokvun
+     */
     public void sidastaVokvunListener() {
         vokvanir.addListener((ListChangeListener<LocalDate>) (observable) -> {
             if (!vokvanir.isEmpty()) {
@@ -93,8 +97,11 @@ public class MinPlanta extends Planta {
         });
     }
 
-    //skoða með að þurfa ekki að reikna frá grunni í hvert skipti?
-    //á ekki bara að setja teljara á frestun eða eitthvað? og þegar ýtt á vökva þá er teljarinn sóttur? -G
+    /**
+     * setur listener á vokvanir til að uppfæra medaltimiMilliVokvana þegar vökvun er tekin út eða bætt við
+     * S: skoða með að þurfa ekki að reikna frá grunni í hvert skipti?
+     * G: á ekki bara að setja teljara á frestun eða eitthvað? og þegar ýtt á vökva þá er teljarinn sóttur?
+     */
     public void medaltimiMilliVokvanaListener() {
         vokvanir.addListener((ListChangeListener<LocalDate>) (observable) -> {
             if (!vokvanir.isEmpty() && vokvanir.size() != 1) {
@@ -112,7 +119,10 @@ public class MinPlanta extends Planta {
 
     /**
      * ath hvað gerist milli daga (localDate.now() breytist!)
-     * setur listener á sidastaVokvun, ef hún breytist þá er sett binding á naestaVokvun
+     * setur listener á sidastaVokvun, ef hún breytist þá er sett binding á naestaVokvun, eða bindingin tekin af og
+     * naestaVokvun sett sem 0
+     * ATH: tekur þetta bara þessa bindingu af, eða hefur það áhrif á fleiri!?!?! og verður naestaVokvun ekki
+     * örugglega 0 þegar það var komin vökvun en hún tekin út aftur
      */
     public void naestaVokvunRegla() {
         sidastaVokvun.addListener((observable, oldValue, newValue) -> {
@@ -125,7 +135,12 @@ public class MinPlanta extends Planta {
         });
     }
 
-    //ekki hægt að bæta við vövkun fram í tímann! og ekki hægt að bæta við fyrir 2022?
+
+    /**
+     * Bætir við vökvun. ekki hægt að bæta við vökvun fram í tímann eða fyrir árið 2022
+     *
+     * @param vokvun - LocalDate, dagsetning vökvunar
+     */
     public void baetaVidVokvun(LocalDate vokvun) {
         if (!(vokvun.isAfter(LocalDate.now())) && !(vokvun.isBefore(LocalDate.of(2022, 1, 1)))) {
             vokvanir.add(vokvun);
@@ -133,6 +148,11 @@ public class MinPlanta extends Planta {
         }
     }
 
+    /**
+     * Athugar hvort plantan var vökvuð á gefnum degi, ef svo er er vökvunin tekin út
+     *
+     * @param vokvun - LocalDate, dagsetning vökvunar sem á að taka út
+     */
     public void takaUtVokvun(LocalDate vokvun) {
         for (LocalDate l : vokvanir) {
             if (l.equals(vokvun)) {
@@ -142,13 +162,7 @@ public class MinPlanta extends Planta {
         }
     }
 
-    public void breytaTimaMilliVokvana(int timi) {
-        thinnTimiMilliVokvana.set(timi);
-    }
-
-
     //getterar, setterar og tómur smiður fyrir json
-
     public MinPlanta() {
         System.out.println("MinPlanta() smidur");
         sidastaVokvunListener();
