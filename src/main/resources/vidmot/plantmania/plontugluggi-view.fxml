@@ -91,10 +91,11 @@
                                     <Label fx:id="fxThinnTimi" text="Þinn tími milli vökvana: "/>
                                     <Button fx:id="fxBreytaTimaMilliVokvana" text="Breyta"/>
                                 </HBox>
+                                <Label fx:id="fxMedaltimi" text="Meðaltími milli vökvana: "/>
                                 <HBox layoutX="25.0" layoutY="49.0" styleClass="titilbox">
                                     <children>
                                         <Label styleClass="titill-label" text="Ljósþörf"/>
-                                        <Label text="sterkt sólarljós yfir lengri tíma"/>
+                                        <Label fx:id="fxLjosthorf" text="sterkt sólarljós yfir lengri tíma"/>
                                     </children>
                                 </HBox>
                                 <Text layoutX="25.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0"
@@ -113,7 +114,7 @@
                                 <HBox layoutX="25.0" layoutY="253.0" styleClass="titilbox">
                                     <children>
                                         <Label styleClass="titill-label" text="Uppruni"/>
-                                        <Label/>
+                                        <Label fx:id="fxUppruni" text="Fjallendi"/>
                                     </children>
                                 </HBox>
                                 <HBox layoutX="25.0" layoutY="317.0" styleClass="titilbox">
@@ -122,6 +123,17 @@
                                         <Label/>
                                     </children>
                                 </HBox>
+                                <Text fx:id="fxEitrun" layoutX="25.0" layoutY="232.0" strokeType="OUTSIDE"
+                                      strokeWidth="0.0" wrappingWidth="295.0"/>
+
+                                <HBox layoutX="25.0" layoutY="317.0" styleClass="titilbox">
+                                    <children>
+                                        <Label styleClass="titill-label" text="Einkenni plöntunnar"/>
+                                        <Label/>
+                                    </children>
+                                </HBox>
+                                <Text fx:id="fxEinkenni" layoutX="25.0" layoutY="232.0" strokeType="OUTSIDE"
+                                      strokeWidth="0.0" wrappingWidth="295.0"/>
                             </children>
                             <padding>
                                 <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
