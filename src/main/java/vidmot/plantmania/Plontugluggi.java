@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import vinnsla.plantmania.MinPlanta;
 
@@ -24,7 +25,7 @@ import java.util.Optional;
  */
 public class Plontugluggi extends Dialog<Void> {
     @FXML
-    private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi, fxLjosthorf, fxMedaltimi;
+    private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi, fxMedaltimi, fxUppruni;
 
     @FXML
     private ImageView fxMynd;
@@ -33,10 +34,13 @@ public class Plontugluggi extends Dialog<Void> {
     private Button fxAthugasemdir, fxVokvunarsaga, fxBreytaTimaMilliVokvana;
 
     @FXML
-    private Text fxHitastig, fxUmPlontuna, fxEinkenni, fxEitrun;
+    private Text fxHitastig, fxUmPlontuna, fxEitrun, fxNotes, fxLjosthorf;
 
     @FXML
     private DatePicker fxDatePicker;
+
+    @FXML
+    private FlowPane fxHeiti, fxEinkenni;
 
     private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
 
@@ -72,6 +76,45 @@ public class Plontugluggi extends Dialog<Void> {
         setFxUmPlontuna();
         setFxThinnTimi();
         setjaFxMedaltimi();
+        setjaFxHeiti();
+        setjaFxNotesBinding();
+        setjaFxEitrun();
+        setjaFxEinkenni();
+        setjaFxUppruni();
+        setjaFxLjosthorf();
+    }
+
+    private void setjaFxLjosthorf() {
+        fxLjosthorf.setText("Best er fyrir plöntuna að fá " + minPlantan.getLjosstyrkur().getStyrkur() + " sólarljós í um " + minPlantan.getLjosStundir() + " tíma á dag");
+
+    }
+
+    private void setjaFxUppruni() {
+        fxUppruni.setText(minPlantan.getUppruni().getStadur());
+    }
+
+    public void setjaFxEitrun() {
+        fxEitrun.setText(minPlantan.getEitrun().getEitrunarSkilabod());
+    }
+
+    public void setjaFxEinkenni() {
+        for (String einkenni : minPlantan.getEinkenniPlontu()) {
+            Label label = new Label(einkenni);
+            label.getStyleClass().add("rammi-label");
+            fxEinkenni.getChildren().add(label);
+        }
+    }
+
+    public void setjaFxNotesBinding() {
+        fxNotes.textProperty().bind(minPlantan.notesFraNotandaProperty());
+    }
+
+    public void setjaFxHeiti() {
+        for (String nafn : minPlantan.getOllHeiti()) {
+            Label label = new Label(nafn);
+            label.getStyleClass().add("rammi-label");
+            fxHeiti.getChildren().add(label);
+        }
     }
 
     /**
