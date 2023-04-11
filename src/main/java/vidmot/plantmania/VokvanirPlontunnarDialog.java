@@ -18,17 +18,17 @@ public class VokvanirPlontunnarDialog extends Dialog<Void> {
         getDialogPane().setHeaderText("Vökvanir fyrir þessa plöntu");
 
         ListView<LocalDate> listView = new ListView<>(minPlanta.getVokvanir());
-        listView.setMaxHeight(50);
+        listView.setMaxHeight(100);
         //listView.setCellFactory(new PlantaCellFactory());
-        Button eyða = new Button("Eyða");
+        Button eyda = new Button("Eyða");
 
-        eyða.addEventFilter(MouseEvent.MOUSE_CLICKED, (Event event) -> {
+        eyda.addEventFilter(MouseEvent.MOUSE_CLICKED, (Event event) -> {
             if (listView.getSelectionModel().getSelectedItem() != null) {
                 minPlanta.takaUtVokvun(listView.getSelectionModel().getSelectedItem());
             }
         });
 
-        getDialogPane().setContent(new VBox(listView, eyða));
+        getDialogPane().setContent(new VBox(listView, eyda));
         getDialogPane().getButtonTypes().setAll(ButtonType.CLOSE);
     }
 }

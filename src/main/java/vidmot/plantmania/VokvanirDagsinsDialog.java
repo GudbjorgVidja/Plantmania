@@ -30,7 +30,7 @@ public class VokvanirDagsinsDialog extends Dialog<Void> {
         getDialogPane().setHeaderText(message);
 
         ListView<MinPlanta> listView = new ListView<>(minarPlontur);
-        listView.setMaxHeight(50);
+        listView.setMaxHeight(100);
         listView.setCellFactory(new PlantaCellFactory());
         Button skoda = new Button("Skoða");
 

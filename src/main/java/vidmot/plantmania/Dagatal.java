@@ -2,6 +2,8 @@ package vidmot.plantmania;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -77,6 +79,9 @@ public class Dagatal extends AnchorPane {
                 LocalDate dagurinn = LocalDate.of(syndurDagur.getYear(), syndurDagur.getMonthValue(), dagalisti.get(0));
                 IntegerBinding fjoldiVokvanaLokid = Bindings.size(vokvanirManadarinsLokid.filtered(p -> p.getValue().isEqual(dagurinn)));
                 IntegerBinding fjoldiVokvanaOlokid = Bindings.size(vokvanirManadarinsOlokid.filtered(p -> p.getValue().isEqual(dagurinn)));
+
+                BooleanProperty dagurinnErLidinn = new SimpleBooleanProperty(dagurinn.isBefore(LocalDate.now()));
+                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().styleProperty().bind(Bindings.when(dagurinnErLidinn).then("-fx-text-fill: red").otherwise("-fx-text-fill: black"));
 
                 ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().textProperty().bind(
                         Bindings.when(fjoldiVokvanaOlokid.isEqualTo(0)).then("")
