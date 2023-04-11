@@ -11,22 +11,21 @@ import java.util.Comparator;
 import java.util.List;
 
 //athuga hvernig það er greint á milli tveggja eins planta!!! það er nauðsynlegt!
-//@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
 
 /**
  * vinnsluklasi sem inniheldur upplýsingar um plöntur notanda, hvenær þær hafa verið vökvaðar og áætlaðar vökvanir
  */
-public class Notendaupplysingar {
-    private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();
-    private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
-    private ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();//ditto
+public class Notendaupplysingar {//@JsonDeserialize(using = NotendaupplysingarDeserializer.class) //Ef NotendaupplysingarDeserializer er notað
+    private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();//vaktanlegur listi yfir plöntur (MinPlanta hlutir) í eigu notanda
+    private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem hafa verið gerðar fyrir allar plöntur, pör af plöntu og dagsetningu. þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
+    private ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem eru áætlaðar fyrir allar plöntur, pör af plöntu og dagsetningu.ditto
 
     public Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) {
         this.minarPlontur = minarPlontur;
     }
 
     public Notendaupplysingar() {
-        //kallað á þetta fimm sinnum við upphaf keyrslu, af hverju?
+        //kallað á þetta fimm sinnum við upphaf keyrslu, af hverju? Vegna lesturs úr skrá og skrifa í skrá
         System.out.println("Notendaupplysingar smidur");
     }
 
@@ -36,7 +35,7 @@ public class Notendaupplysingar {
      * aðferðinni vokvanirListener sem uppfærir fyrriVokvanir. Svo er fyrriVokvanir raðað
      * ATH: passa að það sé brugðist við þegar plöntu er eytt af listanum! Á eftir að útfæra allt tengt því tho
      */
-    public void finnaFyrriVokvanir() {
+    public void finnaFyrriOgSidariVokvanirListener() {
         minarPlontur.addListener((ListChangeListener<MinPlanta>) (obs) -> {
             while (obs.next()) {
                 if (obs.wasAdded()) {
@@ -44,8 +43,8 @@ public class Notendaupplysingar {
                         for (LocalDate date : minPlanta.getPlanadarVokvanir()) {
                             naestuVokvanir.add(new Pair<>(minPlanta, date));
                         }
-                        listaListener(minPlanta, fyrriVokvanir, minPlanta.getVokvanir());
-                        listaListener(minPlanta, naestuVokvanir, minPlanta.getPlanadarVokvanir());
+                        vokvanalistiListener(minPlanta, fyrriVokvanir, minPlanta.getVokvanir());
+                        vokvanalistiListener(minPlanta, naestuVokvanir, minPlanta.getPlanadarVokvanir());
                     }
                 }
             }
@@ -63,7 +62,7 @@ public class Notendaupplysingar {
      *                     tilviksbreyturnar í Notendaupplysingar (hér)
      * @param dagsetningar - ObservableList af LocalDate vökvunardagsetningum fyrir staka plöntu sem á að vakta
      */
-    private void listaListener(MinPlanta minPlanta, ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, ObservableList<LocalDate> dagsetningar) {
+    private void vokvanalistiListener(MinPlanta minPlanta, ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, ObservableList<LocalDate> dagsetningar) {
         dagsetningar.addListener((ListChangeListener<? super LocalDate>) breyting -> {
             while (breyting.next()) {
                 if (breyting.wasAdded()) {
@@ -131,6 +130,15 @@ public class Notendaupplysingar {
             }
         }
         minarPlontur.add(nyPlanta);
+    }
+
+    /**
+     * drög að aðferð til að eyða plöntu. á eftir að skoða alla listenera
+     *
+     * @param minPlanta - MinPlanta hlutur sem á að eyða
+     */
+    public void eydaPlontu(MinPlanta minPlanta) {
+        minarPlontur.remove(minPlanta);
     }
 
     public String toString() {

@@ -1,8 +1,3 @@
-/**
- * á kannski að vera með observable list planaðarVökvanir, sem er listi af dagsetningum vökvana næstu þrjá mánuði?
- * Það þarf líka að uppfærast þegar það líður dagur!
- */
-
 package vinnsla.plantmania;
 
 import javafx.beans.property.*;
@@ -20,19 +15,19 @@ import java.util.Collections;
  * inniheldur og geymir upplýsingar um bara þann tiltekna hlut.
  * Klasinn er controller, og les inn viðmót úr skránni minplanta-view.fxml.
  * MinPlanta inniheldur m.a. skráðar vökvanir aftur í tímann, auk þess að reikna út og geyma dagsetningar fyrir planaðar
- * vökvanir.
+ * vökvanir. Allar tilviksbreytur hér eru vaktanlegar
  */
-public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeserializer.class)
-    private StringProperty nickName = new SimpleStringProperty();
-    private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
-    private StringProperty notesFraNotanda = new SimpleStringProperty();//hafa listener fyrir notes!
-    private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();//upphafsstilla?
-    private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();
-    private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();
-    private IntegerProperty naestaVokvun = new SimpleIntegerProperty();//setja hér niðurtalningu
-    private ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
+public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeserializer.class) //ef MinPlantaDeserializer er notaður
+    private StringProperty nickName = new SimpleStringProperty();//gælunafn plöntunnar, vaktanlegt
+    private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();//vaktanlegur listi yfir allar dagsetningar sem plantan hefur verið vökvuð á
+    private StringProperty notesFraNotanda = new SimpleStringProperty();//athugasemdir sem notandi skrifar niður fyrir plöntuna, vaktanlegt
+    private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();//vaktanlegt gildi fyrir meðaltíma milli vökvana
+    private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();//vaktanlegt gildi fyrir tíma sem notandi vill hafa milli vökvana
+    private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();//vaktanlegt gildi fyrir dagsetningu síðustu vökvunar
+    private IntegerProperty naestaVokvun = new SimpleIntegerProperty();//vaktanlegt gildi fyrir fjölda daga í næstu vökvun
+    private ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();//vaktanlegur listi yfir áætlaðar vökvanir fyrir plöntuna næstu þrjá mánuðina
 
-    //passa hvernig smiðurinn lítur út hér!
+
     public MinPlanta(Planta planta) {
         super(planta);
         this.nickName.set(planta.getOllHeiti().get(1));
@@ -46,6 +41,13 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
 
         naestaVokvunRegla();
         reiknaPlanadarVokvanir();
+    }
+
+    public MinPlanta() {
+        System.out.println("MinPlanta() smidur");
+        sidastaVokvunListener();
+        medaltimiMilliVokvanaListener();
+        naestaVokvunRegla();
     }
 
     /**
@@ -117,13 +119,15 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
      * ath hvað gerist milli daga (localDate.now() breytist!)
      * setur listener á sidastaVokvun, ef hún breytist þá er sett binding á naestaVokvun, eða bindingin tekin af og
      * naestaVokvun sett sem 0
-     * ATH: tekur þetta bara þessa bindingu af, eða hefur það áhrif á fleiri!?!?! og verður naestaVokvun ekki
-     * örugglega 0 þegar það var komin vökvun en hún tekin út aftur
+     * ATH: tekur þetta bara þessa bindingu af, eða hefur það áhrif á fleiri!?!?!
      */
     public void naestaVokvunRegla() {
         sidastaVokvun.addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 naestaVokvun.bind(thinnTimiMilliVokvana.subtract(ChronoUnit.DAYS.between(newValue, LocalDate.now())));
+
+                //ef við myndum vilja hafa þetta þannig að það komi aldrei mínustala fyrir daga í síðustu vökvun. Sleppa samt frekar, held ég
+                //naestaVokvun.bind(Bindings.when(thinnTimiMilliVokvana.greaterThanOrEqualTo(ChronoUnit.DAYS.between(sidastaVokvun.get(), LocalDate.now()))).then(thinnTimiMilliVokvana.subtract(ChronoUnit.DAYS.between(sidastaVokvun.get(), LocalDate.now()))).otherwise(0));
             } else {
                 naestaVokvun.unbind();
                 naestaVokvun.set(0);
@@ -145,27 +149,15 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
     }
 
     /**
-     * Athugar hvort plantan var vökvuð á gefnum degi, ef svo er er vökvunin tekin út
+     * Fjarlægir vökvun á gefinni dagsetningu úr vokvanir listanum, ef plantan var vökvuð á þeim degi
      *
      * @param vokvun - LocalDate, dagsetning vökvunar sem á að taka út
      */
     public void takaUtVokvun(LocalDate vokvun) {
-        for (LocalDate l : vokvanir) {
-            if (l.equals(vokvun)) {
-                vokvanir.remove(vokvun);
-                return;
-            }
-        }
+        vokvanir.remove(vokvun);
     }
 
-    //getterar, setterar og tómur smiður fyrir json
-    public MinPlanta() {
-        System.out.println("MinPlanta() smidur");
-        sidastaVokvunListener();
-        medaltimiMilliVokvanaListener();
-        naestaVokvunRegla();
-    }
-
+    //getterar og setterar
     public String getNickName() {
         return nickName.get();
     }
@@ -267,15 +259,5 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
                 ", naestaVokvun=" + naestaVokvun.get() +
                 ", planta= " + super.toString() +
                 '}';
-    }
-
-    public static void main(String[] args) {
-        MinPlanta m = new MinPlanta();
-        m.setThinnTimiMilliVokvana(10);
-        m.baetaVidVokvun(LocalDate.now().minusDays(4));
-        //m.naestaVokvun.set(3);
-        m.reiknaPlanadarVokvanir();
-        System.out.println(m.getNaestaVokvun().get());
-        System.out.println(m.getPlanadarVokvanir());
     }
 }

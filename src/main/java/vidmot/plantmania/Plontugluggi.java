@@ -253,13 +253,16 @@ public class Plontugluggi extends Dialog<Void> {
     }
 
     /**
-     * prentar fyrri vökvanir og planaðar vökvanir fyrir plöntuna
+     * prentar fyrri vökvanir og planaðar vökvanir fyrir plöntuna. Opnar dialog með listview yfir vökvunardagsetningar
+     * fyrir plöntuna. Hægt að eyða út fyrri vökvun
      *
      * @param event smellt á vökvunarsaga hnapp
      */
     private void vokvunarsagaHandler(ActionEvent event) {
         System.out.println("fyrri vokvanir: " + minPlantan.getVokvanir());
         System.out.println("planadar vokvanir: " + minPlantan.getPlanadarVokvanir());
+        VokvanirPlontunnarDialog vokvanirPlontunnarDialog = new VokvanirPlontunnarDialog(minPlantan);
+        vokvanirPlontunnarDialog.showAndWait();
     }
 
 }

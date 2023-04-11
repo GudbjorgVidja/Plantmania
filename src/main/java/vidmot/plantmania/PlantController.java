@@ -67,7 +67,7 @@ public class PlantController {
         fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
 
         birtaNotendaPlontur();
-        skradurNotandi.get().getNotendaupplysingar().finnaFyrriVokvanir();
+        skradurNotandi.get().getNotendaupplysingar().finnaFyrriOgSidariVokvanirListener();
 
         //skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
         /*skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {

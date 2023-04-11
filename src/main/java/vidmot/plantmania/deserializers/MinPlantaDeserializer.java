@@ -63,10 +63,10 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         //og venjulegir listar. hvernig er þetta?
         minPlanta.setOllHeiti(Arrays.asList(objectMapper.treeToValue(node.get("ollHeiti"), String[].class)));
         minPlanta.setEinkenniPlontu(Arrays.asList(objectMapper.treeToValue(node.get("einkenniPlontu"), String[].class)));
-        minPlanta.setKjorhitastig(Arrays.asList(objectMapper.treeToValue(node.get("kjorhitastig"), Integer[].class)));//
+        minPlanta.setKjorhitastig(Arrays.asList(objectMapper.treeToValue(node.get("kjorhitastig"), Integer[].class)));
 
 
-        //observableList fyrir vökvanir
+        //observableList fyrir vökvanir. Hef ekki hugmynd
         JsonNode vokvanirNodes = node.get("vokvanir");
         ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
 
