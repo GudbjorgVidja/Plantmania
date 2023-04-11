@@ -14,7 +14,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import vinnsla.plantmania.LesaPlontur;
@@ -44,7 +47,7 @@ public class Plontuyfirlit extends AnchorPane {
     private Menu fxSiaMenu, rodunMenu;// flokkunMenu //menuItems á MenuBar, til að stjórna sýnileika og röðun hluta
 
     @FXML
-    private MenuButton fxSkraUt;
+    private MenuItem fxSkraUt;
 
     /**
      * Öll MenuItem undir sía. Inniheldur velja allt, og uppruna gildi plantna (og minnaPlantna) í yfirlitinu
@@ -76,15 +79,15 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private BooleanProperty fyrstaHlutBaettVid = new SimpleBooleanProperty(false);
 
-    //private PlantController plantController;//rétt tilvik af plantController
+    private PlantController plantController;//rétt tilvik af plantController
 
     private Comparator<Node> yfirlitComparator;//núverandi comparator
 
 
     public Plontuyfirlit() {
         LesaFXML.lesa(this, "plontuyfirlit.fxml");
-        //fxSkraUt.setOnAction(this::skraUtHandler);
-        //plantController = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
+        fxSkraUt.setOnAction(this::skraUtHandler);
+        plantController = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
 
         yfirlitComparator = naestaVokvunComparator;
 
@@ -283,7 +286,6 @@ public class Plontuyfirlit extends AnchorPane {
 
 
     /**
-     * todo passa að röðunin haldist, og að ef hlut er bætt við yfirlit þá kemur hann inn á réttum stað.
      * Raðar hlutum í yfirliti eftir því hvað er valið.
      *
      * @param event smellt á hlut undir röðun
@@ -298,15 +300,6 @@ public class Plontuyfirlit extends AnchorPane {
         else if (uppruni.getText().equals("síðast vökvað")) yfirlitComparator = naestaVokvunComparator.reversed();
 
         Collections.sort(ollSpjold, yfirlitComparator);
-
-        /*
-        if (uppruni.getText().equals("heiti A-Ö")) Collections.sort(ollSpjold, almenntHeitiComparator);
-        else if (uppruni.getText().equals("heiti Ö-A")) Collections.sort(ollSpjold, almenntHeitiComparator.reversed());
-        else if (uppruni.getText().equals("næsta vökvun")) Collections.sort(ollSpjold, naestaVokvunComparator);
-        else if (uppruni.getText().equals("síðast vökvað"))
-            Collections.sort(ollSpjold, naestaVokvunComparator.reversed());
-
-         */
     }
 
 
@@ -370,19 +363,24 @@ public class Plontuyfirlit extends AnchorPane {
         }
     }
 
-    /*
+
     private void skraUtHandler(ActionEvent event) {
 
-        // todo notaði private aðferð í plantController, en aðferðin er bara notuð fyrir þetta. Færa hana hingað?
-        plantController.publicVistaUpplysingar();//vistaNotendaupplysingar();
 
-        plantController.setSkradurNotandi(null);//skradurNotandi = null;
+        //plantController = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
+        PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
+        // todo notaði private aðferð í plantController, en aðferðin er bara notuð fyrir þetta. Færa hana hingað?
+        pc.publicVistaUpplysingar();//vistaNotendaupplysingar();
+
+        pc.setSkradurNotandi(null);//skradurNotandi = null;
 
         System.out.println("skra ut");
         ViewSwitcher.switchTo(View.UPPHAFSSIDA);
+        
+
     }
 
-     */
+
     //todo: eiga comparatorar (fyrir neðan) að vera í vinnslu?
 
     /* til að raða rétt eftir íslenska stafrófinu

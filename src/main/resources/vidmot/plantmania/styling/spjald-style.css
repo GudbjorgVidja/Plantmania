@@ -13,8 +13,9 @@
 }
 
 .border-pane{
-    -fx-border-color: darkgreen;
     -fx-background-color: #ddffe7;
+    -fx-background-image: url("icon/rammi22.png");
+    -fx-background-size: stretch;
 }
 
 #fxAlmenntNafn{

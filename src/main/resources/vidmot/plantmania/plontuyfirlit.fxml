@@ -1,49 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
-<fx:root minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="650.0" styleClass="anchorpane"
-         stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19"
-         xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="650.0" styleClass="anchorpane" stylesheets="@styling/maniastyle.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <MenuBar fx:id="fxMenuBar" layoutX="50.0" layoutY="21.0" prefHeight="29.0" prefWidth="180.0">
             <menus>
                 <Menu fx:id="rodunMenu" mnemonicParsing="false" text="röðun">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="heiti A-Ö"/>
-                        <MenuItem mnemonicParsing="false" text="heiti Ö-A"/>
-                        <MenuItem mnemonicParsing="false" text="næsta vökvun"/>
-                        <MenuItem mnemonicParsing="false" text="síðast vökvað"/>
+                        <MenuItem mnemonicParsing="false" text="heiti A-Ö" />
+                        <MenuItem mnemonicParsing="false" text="heiti Ö-A" />
+                        <MenuItem mnemonicParsing="false" text="næsta vökvun" />
+                        <MenuItem mnemonicParsing="false" text="síðast vökvað" />
                     </items>
                 </Menu>
                 <Menu fx:id="fxSiaMenu" mnemonicParsing="false" text="sía">
                     <items>
-                        <CheckMenuItem mnemonicParsing="false" text="velja allt"/>
-                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <CheckMenuItem mnemonicParsing="false" text="velja allt" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <ScrollPane hbarPolicy="NEVER" layoutX="31.0" layoutY="57.0" prefHeight="414.0" prefWidth="588.0">
+        <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="57.0" prefHeight="414.0" prefWidth="588.0">
             <content>
                 <FlowPane fx:id="fxFlowPane" prefHeight="414.0" prefWidth="571.0" styleClass="flowpane">
                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </FlowPane>
             </content>
             <padding>
-                <Insets left="15.0" right="15.0"/>
+                <Insets bottom="1.0" left="15.0" right="15.0" top="1.0" />
             </padding>
         </ScrollPane>
-        <Label fx:id="notandiLabel" layoutX="444.0" layoutY="14.0" text="notandi"/>
-        <!--  <MenuButton layoutX="306.0" layoutY="16.0" mnemonicParsing="false" text="notandi" fx:id="fxNotandi">
-              <items>
-                  <MenuItem mnemonicParsing="false" text="skrá út" fx:id="fxSkraUt"/>
-                  <MenuItem mnemonicParsing="false" text="Action 2"/>
-              </items>
-          </MenuButton> -->
+        <Label fx:id="notandiLabel" layoutX="444.0" layoutY="14.0" text="notandi" />
+        <MenuButton fx:id="fxNotandi" layoutX="444.0" layoutY="12.0" mnemonicParsing="false" text="notandi">
+            <items>
+                <MenuItem fx:id="fxSkraUt" mnemonicParsing="false" text="skrá út" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+            </items>
+        </MenuButton>
     </children>
 </fx:root>

@@ -16,7 +16,7 @@
                 <Plontuyfirlit fx:id="fxMinarPlonturYfirlit" prefHeight="458.0" prefWidth="536.0"/>
             </content>
             <graphic>
-                <Label styleClass="tablabell" text="plöntur"/>
+                <Label styleClass="tablabell" text="mínar plöntur"/>
             </graphic>
         </Tab>
         <Tab>
