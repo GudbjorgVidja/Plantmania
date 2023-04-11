@@ -1,9 +1,11 @@
 package vinnsla.plantmania;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
+import vidmot.plantmania.deserializers.NotendaupplysingarDeserializer;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +17,8 @@ import java.util.List;
 /**
  * vinnsluklasi sem inniheldur upplýsingar um plöntur notanda, hvenær þær hafa verið vökvaðar og áætlaðar vökvanir
  */
-public class Notendaupplysingar {//@JsonDeserialize(using = NotendaupplysingarDeserializer.class) //Ef NotendaupplysingarDeserializer er notað
+@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
+public class Notendaupplysingar {
     private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();//vaktanlegur listi yfir plöntur (MinPlanta hlutir) í eigu notanda
     private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem hafa verið gerðar fyrir allar plöntur, pör af plöntu og dagsetningu. þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
     private ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem eru áætlaðar fyrir allar plöntur, pör af plöntu og dagsetningu.ditto

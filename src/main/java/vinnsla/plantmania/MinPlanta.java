@@ -1,9 +1,11 @@
 package vinnsla.plantmania;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import vidmot.plantmania.deserializers.MinPlantaDeserializer;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -17,7 +19,8 @@ import java.util.Collections;
  * MinPlanta inniheldur m.a. skráðar vökvanir aftur í tímann, auk þess að reikna út og geyma dagsetningar fyrir planaðar
  * vökvanir. Allar tilviksbreytur hér eru vaktanlegar
  */
-public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeserializer.class) //ef MinPlantaDeserializer er notaður
+@JsonDeserialize(using = MinPlantaDeserializer.class)
+public class MinPlanta extends Planta {
     private StringProperty nickName = new SimpleStringProperty();//gælunafn plöntunnar, vaktanlegt
     private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();//vaktanlegur listi yfir allar dagsetningar sem plantan hefur verið vökvuð á
     private StringProperty notesFraNotanda = new SimpleStringProperty();//athugasemdir sem notandi skrifar niður fyrir plöntuna, vaktanlegt

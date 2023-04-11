@@ -2,7 +2,6 @@ package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
-import vidmot.plantmania.deserializers.ObservableListDeserializer;
 import vinnsla.plantmania.LesaPlontur;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Notandi;
@@ -267,9 +265,9 @@ public class PlantController {
      */
     private void vistaNotendaupplysingar() {
         ObjectMapper objectMapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-        objectMapper.registerModule(module);
+        //SimpleModule module = new SimpleModule();
+        //module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        //objectMapper.registerModule(module);
         objectMapper.findAndRegisterModules();
 
         try {

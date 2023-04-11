@@ -16,7 +16,7 @@ import java.io.IOException;
  * Bara svo það sé á hreinu er þetta af netinu. Ég var að vesenast með þetta í heilan dag, sneri mér svo
  * til ChatGPT og vesenaðist aðeins þar, og fékk þetta
  */
-public class ObservableListDeserializer extends JsonDeserializer<ObservableList<?>> {
+class ObservableListDeserializer extends JsonDeserializer<ObservableList<?>> {
 
     @Override
     public ObservableList<?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
