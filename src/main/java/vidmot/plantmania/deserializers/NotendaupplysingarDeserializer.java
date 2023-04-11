@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 //@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
-public class NotendaupplysingarDeserializer extends JsonDeserializer<Notendaupplysingar> {
+class NotendaupplysingarDeserializer extends JsonDeserializer<Notendaupplysingar> {
     public NotendaupplysingarDeserializer() {
 
     }
@@ -25,7 +24,7 @@ public class NotendaupplysingarDeserializer extends JsonDeserializer<Notendauppl
     public Notendaupplysingar deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException {
         Notendaupplysingar notendaupplysingar = new Notendaupplysingar();
         ObjectMapper objectMapper = (ObjectMapper) parser.getCodec();
-        objectMapper.registerModule(new SimpleModule().addDeserializer(MinPlanta.class, new MinPlantaDeserializer()));
+        //objectMapper.registerModule(new SimpleModule().addDeserializer(MinPlanta.class, new MinPlantaDeserializer()));
         JsonNode node = objectMapper.readTree(parser);
 
         // setjum venjulegu gildin - tilviksbreyturnar eru tvær en gætu verið færri eða fleiri

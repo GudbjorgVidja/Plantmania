@@ -21,7 +21,7 @@ import java.util.Arrays;
 //@JsonDeserialize(using = MinPlantaDeserializer.class)
 // notum MinPlantaDeserializer til að lesa í klasann í staðinn fyrir sjálfgefinn?
 
-public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
+class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
     public MinPlantaDeserializer() {
 
     }
