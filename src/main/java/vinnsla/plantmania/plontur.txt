@@ -1,11 +1,12 @@
-6
+7
 
 monstera deliciosa, Monstera, swiss cheese plant
 Ficus lyrata, Fiddle Leaf Fig, fiðlufíkus
 Curio rowleyanus, String of Pearls, String of Beads
-Aloe Vera, aloe, brunagel
+Aloe Vera, aloe, brunagel, Aloe V, Medicine Plant, True Aloe, Burn Plant, (common). — Aloe V, Aloe barbadensis (botanical/scientific).
 Dracaena trifasciata, snákaplanta, snake plant, indjánafjöður, Saint George's sword, mother-in-law's tongue, viper's bowstring hemp
 sveppur barabeppur, Sveppur, rauðhetta, mushy
+Dionaea Muscipula, Venusargildra, Venus fly trap
 
 monstera.png
 fiddleLeafFig.png
@@ -13,6 +14,7 @@ perlur2.png
 aloe.png
 snek.png
 sveppi.png
+venus.png
 
 Monsteran er vinsæl planta, falleg, götótt. Hún tekur sig vel út í stærri plássum, og getur orðið vel stór.
 Fiðlufíkusinn er fallegur, en getur verið nokkuð krefjandi. Ekki endilega mælt með fyrir byrjendur.
@@ -20,6 +22,7 @@ String of pearls er hengiplanta, á henni vaxa grænar baunir sem gott er að bo
 Aloe Vera er vinsæl pottaplanta. Hún er oft notuð í snyrtivörur og smyrsl og er harðgerð. Aloe vera drekkur djúpt, svo vökva almennilega og láta moldina þorna alveg á milli
 Indjánafjöður lítur út eins og plöntur sem vaxa á hafsbotni í teiknimyndum. Hún hreinsar loftið. Er helst viðkvæm fyrir ofvökvun og frosti. Hún þolir óbeint eða beint ljós
 Sveppurinn dafnar í litlu ljósi, en hann finnst oft á skógarbotni, sérlega þar sem trjákrónan er þétt.
+Venusargildran er kjötætuplanta. Hver planta hefur yfirleitt um fjórar til sjö gildrur, og blómstra hvítum blómum á löngum stilkum af og til
 
 REGNSKOGUR
 REGNSKOGUR
@@ -27,6 +30,7 @@ EYDIMORK
 HITABELTI
 HITABELTI
 SKOGLENDI
+VOTLENDI
 
 HALFBEINT
 HALFBEINT
@@ -34,6 +38,7 @@ HALFBEINT
 HALFBEINT
 BEINT
 OBEINT
+HALFBEINT
 
 NIDURGANGUR_ISH
 MADUR_VERDUR_SKAKKUR
@@ -41,13 +46,15 @@ NIDURGANGUR_ISH
 SAKLAUS
 ERTING
 MADUR_VERDUR_SKAKKUR
+SAKLAUS
 
-7 18 21
-7 15 21
-7 23 24
+10 22 35
+12 15 32
+8 23 28
 7 20 21
-7 18 21
+5 18 21
 7 12 21
+5 23 35
 
 LITIL
 MEDAL
@@ -55,6 +62,7 @@ LITIL
 MIKIL
 MEDAL
 MIKIL
+MEDAL
 
 15
 10
@@ -62,6 +70,7 @@ MIKIL
 7
 14
 9
+12
 
 8
 6
@@ -69,12 +78,14 @@ MIKIL
 6
 8
 1
+12
 
 stór, græn, götótt, stofustjáss, falleg
-krefjandi, falleg, tré, díva
+krefjandi, falleg, tré, díva, stór
 hengiplanta, grænar baunir, auðveld
 þykkblöðungur, lækningajurt
 Kúl planta bruh
 viltu ekki bara sleikja körtu
+Ránplanta
 
 

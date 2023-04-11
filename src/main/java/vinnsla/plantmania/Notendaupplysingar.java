@@ -11,95 +11,72 @@ import java.util.Comparator;
 import java.util.List;
 
 //athuga hvernig það er greint á milli tveggja eins planta!!! það er nauðsynlegt!
-//@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
-public class Notendaupplysingar {
-    private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();
-    private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
-    private ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();//ditto
+
+/**
+ * vinnsluklasi sem inniheldur upplýsingar um plöntur notanda, hvenær þær hafa verið vökvaðar og áætlaðar vökvanir
+ */
+public class Notendaupplysingar {//@JsonDeserialize(using = NotendaupplysingarDeserializer.class) //Ef NotendaupplysingarDeserializer er notað
+    private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();//vaktanlegur listi yfir plöntur (MinPlanta hlutir) í eigu notanda
+    private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem hafa verið gerðar fyrir allar plöntur, pör af plöntu og dagsetningu. þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
+    private ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem eru áætlaðar fyrir allar plöntur, pör af plöntu og dagsetningu.ditto
 
     public Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) {
         this.minarPlontur = minarPlontur;
-        //finnaNaestuVokvanir();//held þetta sé óþarfi
     }
 
     public Notendaupplysingar() {
-        //kallað á þetta fimm sinnum við upphaf keyrslu, af hverju?
+        //kallað á þetta fimm sinnum við upphaf keyrslu, af hverju? Vegna lesturs úr skrá og skrifa í skrá
         System.out.println("Notendaupplysingar smidur");
-        //finnaNaestuVokvanir();
-    }
-
-
-    //athuga hvar það er brugðist við þegar plantan er einfaldlega tekin af listanum!
-    //er þetta sett á plöntu um leið og henni er bætt við í mínarPlöntur? gera kannski sér aðferð sem hægt er að kalla á oftar?
-    //það þarf að refactora þetta, en þetta virkar!
-    public void finnaFyrriVokvanir() {
-        minarPlontur.addListener((ListChangeListener<MinPlanta>) (obs) -> {
-            while (obs.next()) {
-                if (obs.wasAdded()) {
-                    for (int i = 0; i < obs.getAddedSize(); i++) {
-                        vokvanirListener(obs.getAddedSubList().get(i));
-                    }
-                }
-            }
-            fyrriVokvanir.sort(Comparator.comparing((Pair::getValue)));
-        });
-    }
-
-    private void vokvanirListener(MinPlanta minPlanta) {
-        minPlanta.getVokvanir().addListener((ListChangeListener<LocalDate>) (observable) -> {
-            while (observable.next()) {
-                if (observable.wasAdded()) {
-                    for (int j = 0; j < observable.getAddedSize(); j++) {
-                        fyrriVokvanir.add(new Pair<>(minPlanta, observable.getAddedSubList().get(j)));
-                    }
-                } else if (observable.wasRemoved()) {
-                    List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
-                    for (int j = 0; j < observable.getRemovedSize(); j++) {
-                        eytt.add(new Pair<>(minPlanta, observable.getRemoved().get(j)));
-                    }
-                    fyrriVokvanir.removeAll(eytt);
-                }
-            }
-        });
     }
 
 
     /**
-     * Finnur vökvanir þrjá mánuði fram í tímann.
-     * Passa að hafa einhverja tilkynningu um að engar upplýsingar séu skráðar um fyrri vökvun
+     * setur listener á minarPlontur, þegar nýrri plöntu er bætt við er settur listener á hana með
+     * aðferðinni vokvanirListener sem uppfærir fyrriVokvanir. Svo er fyrriVokvanir raðað
+     * ATH: passa að það sé brugðist við þegar plöntu er eytt af listanum! Á eftir að útfæra allt tengt því tho
      */
-    public void finnaNaestuVokvanir() {
-        System.out.println("Notendaupplysingar.finnaNaestuVokvanir(): ");
-        // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
-        minarPlontur.addListener((ListChangeListener<? super MinPlanta>) change -> {
-            change.next();
-            if (change.wasAdded()) {
-                for (MinPlanta mp : change.getAddedSubList()) {
-                    mp.getPlanadarVokvanir().addListener((ListChangeListener<? super LocalDate>) breyting -> {
-                        while (breyting.next()) {
-                            if (breyting.wasAdded()) {
-                                for (LocalDate dags : breyting.getAddedSubList()) {
-                                    naestuVokvanir.add(new Pair<>(mp, dags));
-                                }
-                            }
-                            if (breyting.wasRemoved()) {
-                                List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
-                                for (LocalDate date : breyting.getRemoved()) {
-                                    eytt.add(new Pair<>(mp, date));
-                                }
-                                naestuVokvanir.removeAll(eytt);
-                            }
+    public void finnaFyrriOgSidariVokvanirListener() {
+        minarPlontur.addListener((ListChangeListener<MinPlanta>) (obs) -> {
+            while (obs.next()) {
+                if (obs.wasAdded()) {
+                    for (MinPlanta minPlanta : obs.getAddedSubList()) {
+                        for (LocalDate date : minPlanta.getPlanadarVokvanir()) {
+                            naestuVokvanir.add(new Pair<>(minPlanta, date));
                         }
-                    });
-                    //skoða hvað þetta gerir nákvæmlega, ef ég tek þetta út er ekkert á dagatalinu þegar það er opnað án þess að eiga við plöntu
-                    //þwtta keyrir stundum
-                    for (LocalDate date : mp.getPlanadarVokvanir()) {
-                        naestuVokvanir.add(new Pair<>(mp, date));
-                        //System.out.println("naestuVokvanir: " + naestuVokvanir);
+                        vokvanalistiListener(minPlanta, fyrriVokvanir, minPlanta.getVokvanir());
+                        vokvanalistiListener(minPlanta, naestuVokvanir, minPlanta.getPlanadarVokvanir());
                     }
                 }
-                System.out.println(minarPlontur);
-                System.out.println("naestuVokvanir: " + naestuVokvanir);
+            }
+            fyrriVokvanir.sort(Comparator.comparing((Pair::getValue)));
+            // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
+        });
+    }
+
+    /**
+     * Setur listener á dagsetningar, sem er observableList af dagsetningum (getur verið vokvanir eða
+     * planadarVokvanir í MinPlanta), fyrir gefna plöntu
+     *
+     * @param minPlanta    - MinPlanta, sú sem inniheldur listann sem á að vakta
+     * @param vokvanir     - ObservableList af pörum af MinPlanta og LocalDate, annað hvort naestuVokvanir eða fyrriVokvanir
+     *                     tilviksbreyturnar í Notendaupplysingar (hér)
+     * @param dagsetningar - ObservableList af LocalDate vökvunardagsetningum fyrir staka plöntu sem á að vakta
+     */
+    private void vokvanalistiListener(MinPlanta minPlanta, ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, ObservableList<LocalDate> dagsetningar) {
+        dagsetningar.addListener((ListChangeListener<? super LocalDate>) breyting -> {
+            while (breyting.next()) {
+                if (breyting.wasAdded()) {
+                    for (LocalDate dags : breyting.getAddedSubList()) {
+                        vokvanir.add(new Pair<>(minPlanta, dags));
+                    }
+                }
+                if (breyting.wasRemoved()) {
+                    List<Pair<MinPlanta, LocalDate>> eytt = new ArrayList<>();
+                    for (LocalDate date : breyting.getRemoved()) {
+                        eytt.add(new Pair<>(minPlanta, date));
+                    }
+                    vokvanir.removeAll(eytt);
+                }
             }
         });
     }
@@ -128,11 +105,11 @@ public class Notendaupplysingar {
         this.naestuVokvanir = naestuVokvanir;
     }
 
-    //passa að engar tvær plöntur fái sama nickname
-
     /**
      * bætir við plöntu af gerðinni planta við plöntur í eigu notanda. Passar að engar tvær plöntur hafi sama
      * nickname
+     * ATH: bætir alltaf við 1 fyrir aftan nafnið ef það er nú þegar til en telur ekki, svo það kemur
+     * 1, 11, 111 en ekki 1, 2, 3
      *
      * @param planta - Planta af gerðinni sem notandi vill
      */
@@ -153,6 +130,15 @@ public class Notendaupplysingar {
             }
         }
         minarPlontur.add(nyPlanta);
+    }
+
+    /**
+     * drög að aðferð til að eyða plöntu. á eftir að skoða alla listenera
+     *
+     * @param minPlanta - MinPlanta hlutur sem á að eyða
+     */
+    public void eydaPlontu(MinPlanta minPlanta) {
+        minarPlontur.remove(minPlanta);
     }
 
     public String toString() {

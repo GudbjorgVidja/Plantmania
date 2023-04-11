@@ -26,4 +26,8 @@ public enum Eitrun {
     Eitrun(String eitrunarSkilabod) {
         this.eitrunarSkilabod = eitrunarSkilabod;
     }
+
+    public String getEitrunarSkilabod() {
+        return eitrunarSkilabod;
+    }
 }

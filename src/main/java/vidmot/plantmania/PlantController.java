@@ -67,9 +67,9 @@ public class PlantController {
         fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
 
         birtaNotendaPlontur();
-        skradurNotandi.get().getNotendaupplysingar().finnaFyrriVokvanir();
+        skradurNotandi.get().getNotendaupplysingar().finnaFyrriOgSidariVokvanirListener();
 
-        skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
+        //skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
         /*skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
             change.next();
             if (change.wasAdded())
@@ -248,6 +248,11 @@ public class PlantController {
         }
     }
 
+    /**
+     * Atburðahandler. kallar á aðferð til að vista upplýsingar, setur skráðan notanda sem null og fer á upphafssíðu
+     *
+     * @param actionEvent - atburður
+     */
     public void skraUt(ActionEvent actionEvent) {
         vistaNotendaupplysingar();
         skradurNotandi = null;
@@ -255,6 +260,10 @@ public class PlantController {
         ViewSwitcher.switchTo(View.UPPHAFSSIDA);
     }
 
+    /**
+     * sækir alla notendur sem eru í skránni, finnur þann sem er skráður inn og uppfærir upplýsingar um hann með
+     * því að skrifa í skrána. ATH að eins og allt annað tengt json virkar þetta ekki
+     */
     private void vistaNotendaupplysingar() {
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
