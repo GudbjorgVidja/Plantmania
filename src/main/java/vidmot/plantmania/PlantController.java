@@ -244,7 +244,8 @@ public class PlantController {
         }
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
-            skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
+            //skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
+            skradurNotandi.get().getNotendaupplysingar().addaPlanta(p);
         }
     }
 
