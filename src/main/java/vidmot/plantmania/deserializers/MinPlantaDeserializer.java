@@ -99,6 +99,14 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         }
         minPlanta.setVokvanir(vokvanir);
 
+        JsonNode planaarVokvanirNodes = node.get("planadarVokvanir");
+        ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
+        for (JsonNode plonudVokvunNode : planaarVokvanirNodes) {
+            Integer[] dates = objectMapper.treeToValue(plonudVokvunNode, Integer[].class);
+            planadarVokvanir.add(LocalDate.of(dates[0], dates[1], dates[2]));
+        }
+        minPlanta.setPlanadarVokvanir(planadarVokvanir);
+
         return minPlanta;
     }
 }

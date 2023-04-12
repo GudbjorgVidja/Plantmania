@@ -155,6 +155,7 @@ public class UpphafController {
         if (ogiltInntak()) {
             setjaSkradanNotanda();
             hreinsaReiti();
+            System.out.println(skradurNotandi.get());
 
             ViewSwitcher.switchTo(View.ADALSIDA);
         } else {

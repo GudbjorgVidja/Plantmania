@@ -49,14 +49,12 @@ public class PlantController {
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
         skradurNotandi.setValue(upphafController.getSkradurNotandi());
-
+        
         System.out.println(skradurNotandi.get());
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
         //fxAllarPlonturYfirlit.lesaAllarPlontur();//loadar fxml oftar
         lesaInnAllarPlontur();
-        //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
-
         dagatalsEventFilterar();
 
         //binda nafn notanda við label i báðum yfirlitum.
@@ -66,17 +64,21 @@ public class PlantController {
 
         birtaNotendaPlontur();
         skradurNotandi.get().getNotendaupplysingar().finnaFyrriOgSidariVokvanirListener();
+        hladaUpplysingum();
 
-        //skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
-        /*skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
-            change.next();
-            if (change.wasAdded())
-                System.out.println("\n" + change.getAddedSubList() + " baett vid notendaupplysingar");
-        });*/
+        System.out.println(skradurNotandi.get());
+        Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
-        //fxMinarPlonturYfirlit.getMinarPlontur.addListener() og bæta allaf sömu við
-        //fxMinarPlonturYfirlit.getOllSpjold().addListener((ListChangeListener<? super Node>) change ->{
-        //});
+        System.out.println(skradurNotandi);
+    }
+
+    private void hladaUpplysingum() {
+        for (MinPlanta m : skradurNotandi.get().getNotendaupplysingar().getMinarPlontur()) {
+            //birtaNotendaPlontur
+            fxMinarPlonturYfirlit.baetaVidYfirlit(m);
+            //hlaða planadarVokvanir fyrir allar plöntur
+            //m.reiknaPlanadarVokvanir();
+        }
     }
 
     /**
@@ -172,8 +174,9 @@ public class PlantController {
      * þegar ýtt er á dag
      */
     public void dagatalsEventFilterar() {
-        Bindings.bindContentBidirectional(skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir(), fxDagatal.getAllarPlonturOgFyrriVokvanir());
-        Bindings.bindContentBidirectional(skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir(), fxDagatal.getAllarPlonturOgAaetladarVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgFyrriVokvanir(), skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgAaetladarVokvanir(), skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir());
+
         dagatalTilBakaRegla();
         dagatalAframRegla();
 
