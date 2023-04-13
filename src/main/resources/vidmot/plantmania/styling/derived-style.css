@@ -27,7 +27,6 @@
 .date-picker-popup > * > .previous-month,
 .date-picker-popup > * > .next-month {
     fx-background: derive(-fx-control-inner-background, -4%);
-    fx-background: derive(-fx-control-inner-background, 10%);
     -fx-background: -unfocusedlitur;
 }
 
