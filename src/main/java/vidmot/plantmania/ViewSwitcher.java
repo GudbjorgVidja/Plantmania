@@ -12,9 +12,11 @@ import java.util.Map;
  * @author Almas Baimagambetov (almaslvl@gmail.com)
  * <p>
  * EÞH - changed to include caching of controllers
+ * <p>
+ * Breyttum til að vista ekki í cache
  */
 public class ViewSwitcher {
-    private static final Map<View, Parent> cache = new HashMap<>();
+    //private static final Map<View, Parent> cache = new HashMap<>();
     private static final Map<View, Object> controllers = new HashMap<>();
     private static Scene scene;
 
@@ -28,20 +30,12 @@ public class ViewSwitcher {
             return;
         }
         try {
-            Parent root;
-            FXMLLoader loader = null;
-            if (cache.containsKey(view)) {
-                System.out.println("Loading from cache");
-                root = cache.get(view);
-            } else {
-                System.out.println("Loading from FXML");
-                loader = new
-                        FXMLLoader(ViewSwitcher.class.getResource(view.getFileName()));
-                root = loader.load();
-                cache.put(view, root);
-                scene.setRoot(root);
-                controllers.put(view, loader.getController());
-            }
+            FXMLLoader loader = new
+                    FXMLLoader(ViewSwitcher.class.getResource(view.getFileName()));
+            System.out.println("Loading from FXML");
+            Parent root = loader.load();
+            scene.setRoot(root);
+            controllers.put(view, loader.getController());
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

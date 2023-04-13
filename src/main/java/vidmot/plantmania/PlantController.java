@@ -2,7 +2,6 @@ package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
-import vidmot.plantmania.deserializers.ObservableListDeserializer;
 import vinnsla.plantmania.LesaPlontur;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Notandi;
@@ -53,12 +51,10 @@ public class PlantController {
         skradurNotandi.setValue(upphafController.getSkradurNotandi());
 
         System.out.println(skradurNotandi.get());
-        Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
+        Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());//af hverju ekki bara upphafsstilling?
 
         //fxAllarPlonturYfirlit.lesaAllarPlontur();//loadar fxml oftar
         lesaInnAllarPlontur();
-        //System.out.println("Buid ad lesa inn allar plontur. Staerd lista: " + allarPlontur.size()); //virkar rétt
-
         dagatalsEventFilterar();
 
         //binda nafn notanda við label i báðum yfirlitum.
@@ -68,17 +64,23 @@ public class PlantController {
 
         birtaNotendaPlontur();
         skradurNotandi.get().getNotendaupplysingar().finnaFyrriOgSidariVokvanirListener();
+        hladaUpplysingum();
 
-        //skradurNotandi.get().getNotendaupplysingar().finnaNaestuVokvanir();
-        /*skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
-            change.next();
-            if (change.wasAdded())
-                System.out.println("\n" + change.getAddedSubList() + " baett vid notendaupplysingar");
-        });*/
+        System.out.println(skradurNotandi.get());
+        Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
-        //fxMinarPlonturYfirlit.getMinarPlontur.addListener() og bæta allaf sömu við
-        //fxMinarPlonturYfirlit.getOllSpjold().addListener((ListChangeListener<? super Node>) change ->{
-        //});
+        System.out.println(skradurNotandi);
+    }
+
+    private void hladaUpplysingum() {
+        for (MinPlanta m : skradurNotandi.get().getNotendaupplysingar().getMinarPlontur()) {
+            //birtaNotendaPlontur
+            fxMinarPlonturYfirlit.baetaVidYfirlit(m);
+
+            //setja listenera á fyrriVokvanir og naestuVokvanir
+            skradurNotandi.get().getNotendaupplysingar().vokvanalistiListener(m, skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir(), m.getVokvanir());
+            skradurNotandi.get().getNotendaupplysingar().vokvanalistiListener(m, skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir(), m.getPlanadarVokvanir());
+        }
     }
 
     /**
@@ -174,8 +176,9 @@ public class PlantController {
      * þegar ýtt er á dag
      */
     public void dagatalsEventFilterar() {
-        Bindings.bindContentBidirectional(skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir(), fxDagatal.getAllarPlonturOgFyrriVokvanir());
-        Bindings.bindContentBidirectional(skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir(), fxDagatal.getAllarPlonturOgAaetladarVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgFyrriVokvanir(), skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgAaetladarVokvanir(), skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir());
+
         dagatalTilBakaRegla();
         dagatalAframRegla();
 
@@ -244,7 +247,8 @@ public class PlantController {
         }
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
-            skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
+            //skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
+            skradurNotandi.get().getNotendaupplysingar().addaPlanta(p);
         }
     }
 
@@ -266,9 +270,9 @@ public class PlantController {
      */
     private void vistaNotendaupplysingar() {
         ObjectMapper objectMapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-        objectMapper.registerModule(module);
+        //SimpleModule module = new SimpleModule();
+        //module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        //objectMapper.registerModule(module);
         objectMapper.findAndRegisterModules();
 
         try {

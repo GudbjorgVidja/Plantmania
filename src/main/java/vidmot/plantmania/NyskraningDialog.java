@@ -1,9 +1,11 @@
 package vidmot.plantmania;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import vinnsla.plantmania.Notandi;
 
@@ -17,6 +19,7 @@ public class NyskraningDialog extends Dialog<Notandi> {
     private TextField fxNotendanafn;
     private PasswordField fxLykilord;
     private PasswordField fxEndurtekning;
+    private Text fxVilla;
     private BooleanProperty notandiTil = new SimpleBooleanProperty();
     private BooleanProperty lykilordRettEndurtekid = new SimpleBooleanProperty();
 
@@ -31,6 +34,7 @@ public class NyskraningDialog extends Dialog<Notandi> {
         erNotandiTilListener();
         erLykilordRettRegla();
 
+        fxVilla.textProperty().bind(Bindings.when(notandiTil).then("Vinsamlegast veldu annað notendanafn").otherwise(""));
         setResultConverter();
     }
 
@@ -41,13 +45,15 @@ public class NyskraningDialog extends Dialog<Notandi> {
         fxNotendanafn = new TextField();
         fxLykilord = new PasswordField();
         fxEndurtekning = new PasswordField();
+        fxVilla = new Text();
         GridPane g = new GridPane();
-        g.add(new Label("Notendanafn"), 0, 0);
-        g.add(fxNotendanafn, 1, 0);
-        g.add(new Label("Lykilorð"), 0, 1);
-        g.add(fxLykilord, 1, 1);
-        g.add(new Label("Endurtaka lykilorð"), 0, 2);
-        g.add(fxEndurtekning, 1, 2);
+        g.add(fxVilla, 0, 0, 2, 1);
+        g.add(new Label("Notendanafn"), 0, 1);
+        g.add(fxNotendanafn, 1, 1);
+        g.add(new Label("Lykilorð"), 0, 2);
+        g.add(fxLykilord, 1, 2);
+        g.add(new Label("Endurtaka lykilorð"), 0, 3);
+        g.add(fxEndurtekning, 1, 3);
         getDialogPane().setContent(g);
         getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         getDialogPane().setHeaderText("Nýskráning");

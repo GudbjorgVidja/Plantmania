@@ -15,10 +15,11 @@ import java.io.IOException;
 /**
  * Bara svo það sé á hreinu er þetta af netinu. Ég var að vesenast með þetta í heilan dag, sneri mér svo
  * til ChatGPT og vesenaðist aðeins þar, og fékk þetta
+ * Ég er hætt að nota þetta
  */
-public class ObservableListDeserializer extends JsonDeserializer<ObservableList<?>> {
+class ObservableListDeserializer extends JsonDeserializer<ObservableList<?>> {
 
-    @Override
+    // @Override
     public ObservableList<?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         ObjectMapper mapper = (ObjectMapper) jp.getCodec();
         ArrayNode node = mapper.readTree(jp);

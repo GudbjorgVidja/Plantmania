@@ -14,58 +14,56 @@ import vinnsla.plantmania.Notendaupplysingar;
 import java.io.IOException;
 import java.time.LocalDate;
 
-//@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
-class NotendaupplysingarDeserializer extends JsonDeserializer<Notendaupplysingar> {
+
+/**
+ * Custom deserializer fyrir vinnsluklasann Notendaupplysingar. Held þetta sé rétt. Smá pæling því þetta stendur
+ * í javadocs fyrir JsonDeserializer<T>:
+ * Custom deserializers should usually not directly extend this class,
+ * but instead extend com.fasterxml.jackson.databind.deser.std.StdDeserializer
+ */
+public class NotendaupplysingarDeserializer extends JsonDeserializer<Notendaupplysingar> {//StdDeserializer<Notendaupplysingar> {
+
     public NotendaupplysingarDeserializer() {
 
     }
 
     @Override
-    public Notendaupplysingar deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException {
+    public Notendaupplysingar deserialize(JsonParser parser, DeserializationContext deserializationContext) throws
+            IOException {
         Notendaupplysingar notendaupplysingar = new Notendaupplysingar();
         ObjectMapper objectMapper = (ObjectMapper) parser.getCodec();
-        //objectMapper.registerModule(new SimpleModule().addDeserializer(MinPlanta.class, new MinPlantaDeserializer()));
         JsonNode node = objectMapper.readTree(parser);
 
-        // setjum venjulegu gildin - tilviksbreyturnar eru tvær en gætu verið færri eða fleiri
-        //engin hér
 
-        //listarnir
-        JsonNode childNodes = node.get("minarPlontur");
-        ObservableList<MinPlanta> children = FXCollections.observableArrayList();
-
-        //ítrum yfir stökin á listanum
-        for (JsonNode childNode : childNodes) {
-            //listinn inniheldur MinPlanta hluti, en MinPlanta hefur líka ObservableList, svo það þarf að gera sér
-            //deserializer fyrir það. Er þetta þá rétt?
-            MinPlanta minPlanta = objectMapper.treeToValue(childNode, MinPlanta.class);
-            children.add(minPlanta);
+        //deserializa minarPlontur
+        JsonNode minarPlonturNodes = node.get("minarPlontur");
+        ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();
+        for (JsonNode minPlantaNode : minarPlonturNodes) {
+            MinPlanta minPlanta = objectMapper.treeToValue(minPlantaNode, MinPlanta.class);
+            minarPlontur.add(minPlanta);
         }
-        notendaupplysingar.setMinarPlontur(children); // setjum listann inn í tilviksbreytuna
+        notendaupplysingar.setMinarPlontur(minarPlontur);
 
 
-        // Deserialize fyrriVokvanir
+        // Deserializa fyrriVokvanir
         ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();
-        JsonNode fyrriVokvanirNode = node.get("fyrriVokvanir");
-        if (fyrriVokvanirNode != null) {
-            for (JsonNode pairNode : fyrriVokvanirNode) {
-                MinPlanta minPlanta = objectMapper.treeToValue(pairNode.get("key"), MinPlanta.class);
-
-                LocalDate date = LocalDate.parse(pairNode.get("value").asText());
-                fyrriVokvanir.add(new Pair<>(minPlanta, date));
-            }
+        JsonNode fyrriVokvanirNodes = node.get("fyrriVokvanir");
+        for (JsonNode pairNode : fyrriVokvanirNodes) {
+            MinPlanta minPlanta = objectMapper.treeToValue(pairNode.get("key"), MinPlanta.class);
+            Integer[] dagur = objectMapper.treeToValue(pairNode.get("value"), Integer[].class);
+            LocalDate date = LocalDate.of(dagur[0], dagur[1], dagur[2]);
+            fyrriVokvanir.add(new Pair<>(minPlanta, date));
         }
         notendaupplysingar.setFyrriVokvanir(fyrriVokvanir);
 
         // Deserialize naestuVokvanir
         ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();
-        JsonNode naestuVokvanirNode = node.get("naestuVokvanir");
-        if (naestuVokvanirNode != null) {
-            for (JsonNode pairNode : naestuVokvanirNode) {
-                MinPlanta minPlanta = objectMapper.treeToValue(pairNode.get("key"), MinPlanta.class);
-                LocalDate date = LocalDate.parse(pairNode.get("value").asText());
-                naestuVokvanir.add(new Pair<>(minPlanta, date));
-            }
+        JsonNode naestuVokvanirNodes = node.get("naestuVokvanir");
+        for (JsonNode pairNode : naestuVokvanirNodes) {
+            MinPlanta minPlanta = objectMapper.treeToValue(pairNode.get("key"), MinPlanta.class);
+            Integer[] dagur = objectMapper.treeToValue(pairNode.get("value"), Integer[].class);
+            LocalDate date = LocalDate.of(dagur[0], dagur[1], dagur[2]);
+            naestuVokvanir.add(new Pair<>(minPlanta, date));
         }
         notendaupplysingar.setNaestuVokvanir(naestuVokvanir);
 

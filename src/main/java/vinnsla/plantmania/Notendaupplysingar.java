@@ -1,9 +1,11 @@
 package vinnsla.plantmania;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
+import vidmot.plantmania.deserializers.NotendaupplysingarDeserializer;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +17,8 @@ import java.util.List;
 /**
  * vinnsluklasi sem inniheldur upplýsingar um plöntur notanda, hvenær þær hafa verið vökvaðar og áætlaðar vökvanir
  */
-public class Notendaupplysingar {//@JsonDeserialize(using = NotendaupplysingarDeserializer.class) //Ef NotendaupplysingarDeserializer er notað
+@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
+public class Notendaupplysingar {
     private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();//vaktanlegur listi yfir plöntur (MinPlanta hlutir) í eigu notanda
     private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem hafa verið gerðar fyrir allar plöntur, pör af plöntu og dagsetningu. þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
     private ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem eru áætlaðar fyrir allar plöntur, pör af plöntu og dagsetningu.ditto
@@ -62,7 +65,7 @@ public class Notendaupplysingar {//@JsonDeserialize(using = NotendaupplysingarDe
      *                     tilviksbreyturnar í Notendaupplysingar (hér)
      * @param dagsetningar - ObservableList af LocalDate vökvunardagsetningum fyrir staka plöntu sem á að vakta
      */
-    private void vokvanalistiListener(MinPlanta minPlanta, ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, ObservableList<LocalDate> dagsetningar) {
+    public void vokvanalistiListener(MinPlanta minPlanta, ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, ObservableList<LocalDate> dagsetningar) {
         dagsetningar.addListener((ListChangeListener<? super LocalDate>) breyting -> {
             while (breyting.next()) {
                 if (breyting.wasAdded()) {
@@ -130,6 +133,47 @@ public class Notendaupplysingar {//@JsonDeserialize(using = NotendaupplysingarDe
             }
         }
         minarPlontur.add(nyPlanta);
+    }
+
+    //prófa að gera endurkvæmt fall til að bæta við plöntu í mínarPlontur
+    public void addaPlanta(Planta planta) {
+        minarPlontur.add(endurkvaemni(new MinPlanta(planta)));
+    }
+
+    /**
+     * Ef sjálfgefið nickname fyrir plöntuna sem á að bæta við er nú þegar í notkun er kallað á endurkvæmt fall.
+     * Það prófar að setja tölu fyrir aftan nafnið og finnur þannig næsta lausa nafn
+     *
+     * @param minPlanta - MinPlanta hlutur sem á að bæta við
+     * @return - MinPlanta hlutur með nickname sem er ekki í notkun
+     */
+    private MinPlanta endurkvaemni(MinPlanta minPlanta) {
+        for (MinPlanta min : minarPlontur) {
+            if (min.getNickName().equals(minPlanta.getNickName())) {
+                minPlanta = endurkvaemni(minPlanta, 1);
+            }
+        }
+        return minPlanta;
+    }
+
+    /**
+     * Endurkvæmt fall til að finna næsta lausa nickname fyrir plöntu með því að bæta tölu aftan við sjálfgefið
+     * nicname. kallar endurkvæmt á sjálft sig þar til það finnur tölu sem er ekki í notkun nú þegar og skilar
+     * MinPlanta hlutnum með því nicknami
+     *
+     * @param minPlanta - sjálfgefinn MinPlanta hlutur sem á að bæta við
+     * @param gildi     - gildi sem á að prófa að skeyta aftan við nickname hjá minPlanta
+     * @return kallar endurkvæmt á sjálft sig þar til það skilar MinPlanta plöntu með næsta lausa nickname
+     */
+    private MinPlanta endurkvaemni(MinPlanta minPlanta, int gildi) {
+        String nyttNickname = minPlanta.getNickName() + gildi;
+        for (MinPlanta min : minarPlontur) {
+            if (min.getNickName().equals(nyttNickname)) {
+                return endurkvaemni(minPlanta, gildi + 1);
+            }
+        }
+        minPlanta.setNickName(nyttNickname);
+        return minPlanta;
     }
 
     /**

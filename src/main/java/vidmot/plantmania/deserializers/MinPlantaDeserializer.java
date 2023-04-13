@@ -18,10 +18,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 
-//@JsonDeserialize(using = MinPlantaDeserializer.class)
-// notum MinPlantaDeserializer til að lesa í klasann í staðinn fyrir sjálfgefinn?
+public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {  //StdDeserializer<MinPlanta> {
 
-class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
     public MinPlantaDeserializer() {
 
     }
@@ -46,13 +44,10 @@ class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         minPlanta.setThinnTimiMilliVokvana(node.get("thinnTimiMilliVokvana").asInt());
         minPlanta.setNaestaVokvun(node.get("naestaVokvun").asInt());
 
-        //og LocalDate (var objectProperty). Er þetta rétt?
-        //minPlanta.setSidastaVokvun(objectMapper.readValue(node.toString(), LocalDate.class));
-        //Integer[] dagar = objectMapper.treeToValue(node.get("sidastaVokvun"), Integer[].class);
-        //minPlanta.setSidastaVokvun(LocalDate.of(dagar[0], dagar[1], dagar[2]));
-        minPlanta.setSidastaVokvun(
-                objectMapper.readValue(node.get("sidastaVokvun").traverse(), LocalDate.class)
-        );
+        //og LocalDate (var objectProperty).
+        Integer[] dagur = objectMapper.treeToValue(node.get("sidastaVokvun"), Integer[].class);
+        minPlanta.setSidastaVokvun(LocalDate.of(dagur[0], dagur[1], dagur[2]));
+
 
         //og enum. er þetta rétt?
         minPlanta.setUppruni(Uppruni.valueOf(node.get("uppruni").asText()));
@@ -60,23 +55,55 @@ class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         minPlanta.setEitrun(Eitrun.valueOf(node.get("eitrun").asText()));
         minPlanta.setVatnsthorf(Vatnsthorf.valueOf(node.get("vatnsthorf").asText()));
 
+
         //og venjulegir listar. hvernig er þetta?
         minPlanta.setOllHeiti(Arrays.asList(objectMapper.treeToValue(node.get("ollHeiti"), String[].class)));
         minPlanta.setEinkenniPlontu(Arrays.asList(objectMapper.treeToValue(node.get("einkenniPlontu"), String[].class)));
         minPlanta.setKjorhitastig(Arrays.asList(objectMapper.treeToValue(node.get("kjorhitastig"), Integer[].class)));
 
 
+        //veit að þetta virkar fyrir venjulega lista!
+        /*JsonNode childNodes1 = node.get("ollHeiti");
+        List<String> children1 = new ArrayList<>();
+        for (JsonNode childNode : childNodes1) {
+            String child = childNode.asText();
+            children1.add(child);
+        }
+        minPlanta.setOllHeiti(children1);
+
+        JsonNode childNodes2 = node.get("einkenniPlontu");
+        List<String> children2 = new ArrayList<>();
+        for (JsonNode childNode : childNodes2) {
+            String child = childNode.asText();
+            children2.add(child);
+        }
+        minPlanta.setEinkenniPlontu(children2);
+
+        JsonNode childNodes3 = node.get("kjorhitastig");
+        List<Integer> children3 = new ArrayList<>();
+        for (JsonNode childNode : childNodes3) {
+            int child = childNode.asInt();
+            children3.add(child);
+        }
+        minPlanta.setKjorhitastig(children3);*/
+
+
         //observableList fyrir vökvanir. Hef ekki hugmynd
         JsonNode vokvanirNodes = node.get("vokvanir");
         ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
-
-        for (JsonNode dateNode : vokvanirNodes) {
-            //Integer[] dates = objectMapper.treeToValue(node.get(dateNode.asText()), Integer[].class);
-            //vokvanir.add(LocalDate.of(dates[0], dates[1], dates[2]));
-
-            vokvanir.add(objectMapper.readValue(node.get("sidastaVokvun").traverse(), LocalDate.class));
+        for (JsonNode vokvunNode : vokvanirNodes) {
+            Integer[] dates = objectMapper.treeToValue(vokvunNode, Integer[].class);
+            vokvanir.add(LocalDate.of(dates[0], dates[1], dates[2]));
         }
         minPlanta.setVokvanir(vokvanir);
+
+        JsonNode planadarVokvanirNodes = node.get("planadarVokvanir");
+        ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
+        for (JsonNode plonudVokvunNode : planadarVokvanirNodes) {
+            Integer[] dates = objectMapper.treeToValue(plonudVokvunNode, Integer[].class);
+            planadarVokvanir.add(LocalDate.of(dates[0], dates[1], dates[2]));
+        }
+        minPlanta.setPlanadarVokvanir(planadarVokvanir);
 
         return minPlanta;
     }

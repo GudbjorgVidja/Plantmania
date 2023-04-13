@@ -1,9 +1,11 @@
 package vinnsla.plantmania;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import vidmot.plantmania.deserializers.MinPlantaDeserializer;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -17,10 +19,11 @@ import java.util.Collections;
  * MinPlanta inniheldur m.a. skráðar vökvanir aftur í tímann, auk þess að reikna út og geyma dagsetningar fyrir planaðar
  * vökvanir. Allar tilviksbreytur hér eru vaktanlegar
  */
-public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeserializer.class) //ef MinPlantaDeserializer er notaður
+@JsonDeserialize(using = MinPlantaDeserializer.class)
+public class MinPlanta extends Planta {
     private StringProperty nickName = new SimpleStringProperty();//gælunafn plöntunnar, vaktanlegt
     private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();//vaktanlegur listi yfir allar dagsetningar sem plantan hefur verið vökvuð á
-    private StringProperty notesFraNotanda = new SimpleStringProperty();//athugasemdir sem notandi skrifar niður fyrir plöntuna, vaktanlegt
+    private StringProperty notesFraNotanda = new SimpleStringProperty("");//athugasemdir sem notandi skrifar niður fyrir plöntuna, vaktanlegt
     private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();//vaktanlegt gildi fyrir meðaltíma milli vökvana
     private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();//vaktanlegt gildi fyrir tíma sem notandi vill hafa milli vökvana
     private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();//vaktanlegt gildi fyrir dagsetningu síðustu vökvunar
@@ -143,8 +146,10 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
      */
     public void baetaVidVokvun(LocalDate vokvun) {
         if (!(vokvun.isAfter(LocalDate.now())) && !(vokvun.isBefore(LocalDate.of(2022, 1, 1)))) {
-            vokvanir.add(vokvun);
-            Collections.sort(vokvanir);
+            if (!vokvanir.contains(vokvun)) {
+                vokvanir.add(vokvun);
+                Collections.sort(vokvanir);
+            }
         }
     }
 
@@ -246,6 +251,10 @@ public class MinPlanta extends Planta {//@JsonDeserialize(using = MinPlantaDeser
 
     public void setPlanadarVokvanir(ObservableList<LocalDate> planadarVokvanir) {
         this.planadarVokvanir = planadarVokvanir;
+    }
+
+    public IntegerProperty naestaVokvunProperty() {
+        return naestaVokvun;
     }
 
     public String toString() {

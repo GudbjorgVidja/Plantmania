@@ -2,16 +2,13 @@ package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import vidmot.plantmania.deserializers.ObservableListDeserializer;
 import vinnsla.plantmania.Notandi;
 
 import java.io.File;
@@ -104,9 +101,9 @@ public class UpphafController {
         ObjectMapper objectMapper = new ObjectMapper();
 
         //ath að þessar þrjár línur hafa með deserializerinn minn að gera, en það þarf að laga hann!
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-        objectMapper.registerModule(module);
+        //SimpleModule module = new SimpleModule();
+        //module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        //objectMapper.registerModule(module);
         objectMapper.findAndRegisterModules();
 
         try {
@@ -128,9 +125,9 @@ public class UpphafController {
     private void skrifaISkra(List<Notandi> notendur) {
         System.out.println("skrifa i skra");
         ObjectMapper objectMapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-        objectMapper.registerModule(module);
+        //SimpleModule module = new SimpleModule();
+        //module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
+        //objectMapper.registerModule(module);
         objectMapper.findAndRegisterModules();
 
         try {
@@ -158,6 +155,7 @@ public class UpphafController {
         if (ogiltInntak()) {
             setjaSkradanNotanda();
             hreinsaReiti();
+            System.out.println(skradurNotandi.get());
 
             ViewSwitcher.switchTo(View.ADALSIDA);
         } else {
