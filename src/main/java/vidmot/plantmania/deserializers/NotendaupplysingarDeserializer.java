@@ -14,17 +14,24 @@ import vinnsla.plantmania.Notendaupplysingar;
 import java.io.IOException;
 import java.time.LocalDate;
 
-//@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
-public class NotendaupplysingarDeserializer extends JsonDeserializer<Notendaupplysingar> {
+
+/**
+ * Custom deserializer fyrir vinnsluklasann Notendaupplysingar. Held þetta sé rétt. Smá pæling því þetta stendur
+ * í javadocs fyrir JsonDeserializer<T>:
+ * Custom deserializers should usually not directly extend this class,
+ * but instead extend com.fasterxml.jackson.databind.deser.std.StdDeserializer
+ */
+public class NotendaupplysingarDeserializer extends JsonDeserializer<Notendaupplysingar> {//StdDeserializer<Notendaupplysingar> {
+
     public NotendaupplysingarDeserializer() {
 
     }
 
     @Override
-    public Notendaupplysingar deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException {
+    public Notendaupplysingar deserialize(JsonParser parser, DeserializationContext deserializationContext) throws
+            IOException {
         Notendaupplysingar notendaupplysingar = new Notendaupplysingar();
         ObjectMapper objectMapper = (ObjectMapper) parser.getCodec();
-        //objectMapper.registerModule(new SimpleModule().addDeserializer(MinPlanta.class, new MinPlantaDeserializer()));
         JsonNode node = objectMapper.readTree(parser);
 
 

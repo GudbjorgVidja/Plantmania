@@ -65,7 +65,7 @@ public class Notendaupplysingar {
      *                     tilviksbreyturnar í Notendaupplysingar (hér)
      * @param dagsetningar - ObservableList af LocalDate vökvunardagsetningum fyrir staka plöntu sem á að vakta
      */
-    private void vokvanalistiListener(MinPlanta minPlanta, ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, ObservableList<LocalDate> dagsetningar) {
+    public void vokvanalistiListener(MinPlanta minPlanta, ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, ObservableList<LocalDate> dagsetningar) {
         dagsetningar.addListener((ListChangeListener<? super LocalDate>) breyting -> {
             while (breyting.next()) {
                 if (breyting.wasAdded()) {

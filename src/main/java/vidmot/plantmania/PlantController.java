@@ -49,9 +49,9 @@ public class PlantController {
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
         skradurNotandi.setValue(upphafController.getSkradurNotandi());
-        
+
         System.out.println(skradurNotandi.get());
-        Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
+        Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());//af hverju ekki bara upphafsstilling?
 
         //fxAllarPlonturYfirlit.lesaAllarPlontur();//loadar fxml oftar
         lesaInnAllarPlontur();
@@ -76,8 +76,10 @@ public class PlantController {
         for (MinPlanta m : skradurNotandi.get().getNotendaupplysingar().getMinarPlontur()) {
             //birtaNotendaPlontur
             fxMinarPlonturYfirlit.baetaVidYfirlit(m);
-            //hlaða planadarVokvanir fyrir allar plöntur
-            //m.reiknaPlanadarVokvanir();
+
+            //setja listenera á fyrriVokvanir og naestuVokvanir
+            skradurNotandi.get().getNotendaupplysingar().vokvanalistiListener(m, skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir(), m.getVokvanir());
+            skradurNotandi.get().getNotendaupplysingar().vokvanalistiListener(m, skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir(), m.getPlanadarVokvanir());
         }
     }
 

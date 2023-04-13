@@ -18,10 +18,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 
-//@JsonDeserialize(using = MinPlantaDeserializer.class)
-// notum MinPlantaDeserializer til að lesa í klasann í staðinn fyrir sjálfgefinn?
+public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {  //StdDeserializer<MinPlanta> {
 
-public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
     public MinPlantaDeserializer() {
 
     }
@@ -99,9 +97,9 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         }
         minPlanta.setVokvanir(vokvanir);
 
-        JsonNode planaarVokvanirNodes = node.get("planadarVokvanir");
+        JsonNode planadarVokvanirNodes = node.get("planadarVokvanir");
         ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
-        for (JsonNode plonudVokvunNode : planaarVokvanirNodes) {
+        for (JsonNode plonudVokvunNode : planadarVokvanirNodes) {
             Integer[] dates = objectMapper.treeToValue(plonudVokvunNode, Integer[].class);
             planadarVokvanir.add(LocalDate.of(dates[0], dates[1], dates[2]));
         }
