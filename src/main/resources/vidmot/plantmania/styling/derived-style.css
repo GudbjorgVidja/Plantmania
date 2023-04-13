@@ -4,16 +4,12 @@
     -graenn2: #DDFFE7;
     -graenn3: #C8F8D6;
     -graenn4: darkgreen;
-    fx-background-color: -graenn1;
-    -baselitur: #e8fff1;
 
     unfocusedlitur: #cce8d2;
     -unfocusedlitur: #dff0e3;
 
-
     -fx-focus-color: #03d37c;
     fx-faint-focus-color: #03d37c22;
-
 
     -fx-accent: #30d9b1;
 
@@ -32,7 +28,6 @@
 .date-picker-popup > * > .next-month {
     fx-background: derive(-fx-control-inner-background, -4%);
     fx-background: derive(-fx-control-inner-background, 10%);
-    fx-background: green;
     -fx-background: -unfocusedlitur;
 }
 
@@ -42,11 +37,11 @@
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-border-color: forestgreen;
-    -fx-background-color: -graenn2;
+    -fx-background-color: -litur2;
     -fx-padding: 3 1 1 1;
 }
 #rot:pressed{
-    -fx-background-color: -graenn3;
+    -fx-background-color: -litur3;
 }
 #rot:hover{
     -fx-border-color: darkgreen;
@@ -56,15 +51,14 @@
 
 
 .button{
-    fx-background-color: -graenn3;
-    fx-border-color: -graenn4;
+    fx-background-color: -litur3;
     fx-border-color: darkgreen;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
 }
 
 .button:pressed{
-    fx-background-color: -graenn2;
+    fx-background-color: -litur2;
 }
 .button:hover{
     fx-border-color: forestgreen;
@@ -77,9 +71,9 @@
 }
 
 .label-filled{
-    fx-background-color: -graenn3;
+    -fx-background-color: -litur3;
     -fx-background-radius: 20;
-    fx-border-color: -graenn3;
+    fx-border-color: -litur3;
     fx-border-radius: 20;
 }
 
@@ -91,7 +85,6 @@
 
 
 .anchorpane{
-    fx-background-color: -graenn1;
     -fx-background-color: -litur1;
     -fx-border-color: green;
 }
@@ -131,7 +124,7 @@
     -fx-background-position: 10%;
     -fx-alignment: center;
     -fx-background-radius: 20;
-    fx-background-color: -graenn3;
+    fx-background-color: -litur3;
 }
 
 
@@ -222,7 +215,7 @@
     fx-background-color: -litur2;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
-    fx-border-color: -graenn3;
+    fx-border-color: -litur3;
     -fx-border-color: darkgreen;
     -fx-alignment: center;
     -fx-font-size: 16px;
