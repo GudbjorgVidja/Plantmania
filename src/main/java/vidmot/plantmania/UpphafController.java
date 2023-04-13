@@ -185,6 +185,7 @@ public class UpphafController {
 
     /**
      * hreinsar reit fyrir notendanafn og lykilorð
+     * ATH: sennilega óþarfi núna!!!
      */
     public void hreinsaReiti() {
         fxNotendanafn.textProperty().set("");

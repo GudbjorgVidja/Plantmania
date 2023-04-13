@@ -133,9 +133,16 @@ public class MinPlanta extends Planta {
                 naestaVokvun.set(0);
             }
         });
+    }
+
+    /**
+     * ath: það þarf bara að nota þetta í PlantController hladaUpplysingum, en athuga hvort það var komið
+     * eitthvað sambærilegt. Ég fatta ekki alveg af hverju þetta þarf þegar það er búið að vista upplýsingar
+     * en annars ekki. uppfærir naestaVokvun þegar thinnTimiMilliVokvana breytist
+     */
+    public void breytingAThinnTimiMilliVokvanaRegla() {
         thinnTimiMilliVokvanaProperty().addListener((observable, oldValue, newValue) -> {
             naestaVokvunProperty().unbind();
-            setNaestaVokvun(newValue.intValue());
             naestaVokvunRegla();
         });
     }
@@ -261,14 +268,15 @@ public class MinPlanta extends Planta {
 
     public String toString() {
         return "MinPlanta{" +
-                "planadarVokvanir: " + planadarVokvanir +
-                ", nickName=" + nickName.get() +
-                ", vokvanir=" + vokvanir.toString() +
-                //", notesFraNotanda=" + notesFraNotanda.get() +
+                "nickName=" + nickName.get() +
+                ", vokvanir=" + vokvanir +
+                ", notesFraNotanda=" + notesFraNotanda.get() +
                 ", medaltimiMilliVokvana=" + medaltimiMilliVokvana.get() +
                 ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
+                ", sidastaVokvun=" + sidastaVokvun.get() +
                 ", naestaVokvun=" + naestaVokvun.get() +
-                //", planta= " + super.toString() +
+                ", planadarVokvanir=" + planadarVokvanir +
+                ", planta= " + super.toString() +
                 '}';
     }
 }

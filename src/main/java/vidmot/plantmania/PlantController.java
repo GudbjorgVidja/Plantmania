@@ -72,21 +72,20 @@ public class PlantController {
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
         System.out.println(skradurNotandi);
+
     }
 
+    /**
+     * birtir plöntur notandans sem voru í skránni og setur listenera á MinPlanta hlutina
+     */
     private void hladaUpplysingum() {
         for (MinPlanta m : skradurNotandi.get().getMinarPlontur()) {
-            //birtaNotendaPlontur
             fxMinarPlonturYfirlit.baetaVidYfirlit(m);
-
             m.sidastaVokvunListener();
             m.naestaVokvunRegla();
             m.medaltimiMilliVokvanaListener();
-            //m.reiknaPlanadarVokvanir();//Þetta lætur naestuVokvanir tvítelja allar vökvanir, en útgáfan sem þetta setur inn virðist rétt
-            System.out.println("MinPlanta(Planta planta) smidur");
-
-            //naestaVokvun = (thinnTimiMilliVokvana);
-
+            m.reiknaPlanadarVokvanir();
+            m.breytingAThinnTimiMilliVokvanaRegla();
         }
     }
 
@@ -267,9 +266,6 @@ public class PlantController {
      */
     private void vistaNotendaupplysingar() {
         ObjectMapper objectMapper = new ObjectMapper();
-        //SimpleModule module = new SimpleModule();
-        //module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-        //objectMapper.registerModule(module);
         objectMapper.findAndRegisterModules();
 
         try {
@@ -278,7 +274,7 @@ public class PlantController {
             for (Notandi n : notendur) {
                 if (n.notendanafnProperty().get().equals(skradurNotandi.get().getNotendanafn())) {
                     n.setMinarPlontur(skradurNotandi.get().getMinarPlontur());
-                    objectMapper.writeValue(new File("target/classes/vidmot/plantmania/notendur.json"), notendur);//bætti við
+                    objectMapper.writeValue(new File("target/classes/vidmot/plantmania/notendur.json"), notendur);
                 }
             }
         } catch (IOException e) {
