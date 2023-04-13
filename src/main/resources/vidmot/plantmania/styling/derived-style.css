@@ -22,11 +22,19 @@
     -fx-base: -litur2;
     -fx-control-inner-background: -litur05;
     -fx-background: -litur05;
+    fx-background: -litur1;
 
     fx-outer-border: forestgreen;
 
 
-}
+    -fx-body-color: linear-gradient(to bottom,
+        ladder(
+            -fx-color,
+            derive(-litur3,8%) 75%,
+            derive(-litur3,10%) 80%
+        ),
+        derive(-litur3,-8%));
+    }
 
 .date-picker-popup > * > .previous-month,
 .date-picker-popup > * > .next-month {
@@ -111,7 +119,6 @@
 }
 
 
-
 #fxFlokkur{
     -fx-alignment: center;
     -fx-text-fill: darkgreen;
@@ -132,12 +139,10 @@
 }
 
 
-
 .spjald-root{
     -fx-alignment: top-center;
     -fx-fill-width: false;
 }
-
 
 
 .vboxStats{
@@ -225,7 +230,8 @@
     fx-font-size: 16px;
     -fx-font-size: 14px;
 
-    -fx-padding: 1 17 1 20;
+    fx-padding: 1 17 1 20;
+    -fx-padding: 0 17 0 20;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 95%, 5%;
     fx-background-size: 16px, 20px;
@@ -263,31 +269,26 @@
     fx-clear: true;
 }
 
-
 .menu-bar{
     -fx-background-color: transparent;
     -fx-spacing: 20;
     -fx-alignment: bottom-center;
 }
 
-
 .tab-label{
     -fx-padding: 50 1 1 1;
     -fx-rotate: 90;
 }
-
 
 .tab-pane .tab-header-area .tab {
     -fx-pref-height: 125;
     -fx-pref-width: 40;
 }
 
-
 .flowpane{
     -fx-vgap:10;
     -fx-hgap: 25;
 }
-
 
 .tab .label{
     -fx-pref-height: 20;
@@ -302,7 +303,6 @@
     -fx-background-color: -litur2;
     -fx-padding: 10 10 10 0;
 }
-
 
 .tab{
     -fx-background-color: -litur3;
