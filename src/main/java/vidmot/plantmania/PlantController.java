@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-//TODO: hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma. S: þarf þess? er ekki bara skoðað út frá minPLanta?
+//TODO: hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma. S: þarf þess? er ekki bara skoðað út frá minPLanta?  G: jú sorry
 
 /**
  * Controller fyrir aðalsenuna. Þar sem við notum TabPane er það sem væri annars í 5 senum eða svo í einni
@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class PlantController {
     @FXML
-    private Plontuyfirlit fxMinarPlonturYfirlit; //mínar plöntur yfirlitið. Er eiginlega meira eins og allar plöntur yfirlit
+    private Plontuyfirlit fxMinarPlonturYfirlit; //mínar plöntur yfirlitið.
     @FXML
     private Plontuyfirlit fxAllarPlonturYfirlit; //yfirlit yfir allar plöntur
     @FXML
@@ -231,23 +231,13 @@ public class PlantController {
     }
 
 
-    /**
-     * þegar smellt er, plönturnar úr plontur.txt sem MinPlantaSpjald hlutir
-     */
-    @FXML
-    //TODO: Taka út? er þetta nokkuð í notkun?
-    protected void fxBaetaVidHandler(MouseEvent event) {
-        //eintaki af öllum plöntum (gerðum) bætt við plöntur notanda
-        /*for (int i = 0; i < allarPlontur.size(); i++) {
-            MinPlanta mp = new MinPlanta(allarPlontur.get(i));
-            fxMinarPlonturYfirlit.baetaVidYfirlit(mp);
-        }*/
-    }
-
     //hvað er þetta?
     @FXML
-    private void hladaOllumPlontum(MouseEvent event) {//nær planta sem ýtt var á
-
+    /**
+     * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
+     * todo: bætir þetta plöntu við yfirlit?
+     */
+    private void hladaOllumPlontum(MouseEvent event) {
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
             node = node.getParent();

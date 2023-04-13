@@ -43,8 +43,7 @@ public class MinPlantaSpjald extends AnchorPane {
         fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.nickNameProperty());
         fxSpjald.setFxFlokkur(minPlantan.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
-
-
+        
         //setja handlera á takkana
         fxVokva.setOnAction(this::vokvaHandler);
         fxFresta.setOnAction(this::frestaHandler);
@@ -70,12 +69,12 @@ public class MinPlantaSpjald extends AnchorPane {
         if (minPlantan.getNaestaVokvun().get() >= minPlantan.getThinnTimiMilliVokvana()) {
             //TODO: já, gera takkann óvirkan
             System.out.println("kannski ekki vokva");//frekar gera takkann óvirkan held ég rite?
+            //todo: setja listener á niðurtalninguna sem gerir takkann óvirkan
         } else {
             minPlantan.baetaVidVokvun(LocalDate.now());
             System.out.println("vokva");
         }
 
-        //System.out.println("thinnTimiMilliVokvanna: " + minPlantan.getThinnTimiMilliVokvana());
         System.out.println(minPlantan.getVokvanir().toString());//vökvanir prentaðar
     }
 

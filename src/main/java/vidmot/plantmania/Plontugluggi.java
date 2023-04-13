@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -82,6 +83,18 @@ public class Plontugluggi extends Dialog<Void> {
         setjaFxEinkenni();
         setjaFxUppruni();
         setjaFxLjosthorf();
+
+        setStyleClass();
+    }
+
+    private void setStyleClass() {
+        for (Node l : fxHeiti.getChildren()) {
+            if (l instanceof Label) l.getStyleClass().add("rammi-label");
+        }
+
+        for (Node l : fxEinkenni.getChildren()) {
+            if (l instanceof Label) l.getStyleClass().add("rammi-label");
+        }
     }
 
     private void setjaFxLjosthorf() {
@@ -241,18 +254,11 @@ public class Plontugluggi extends Dialog<Void> {
     private void breytaNafniHandler(MouseEvent event) {
         System.out.println("nafni verdur breytt");
         TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getNickName());
-        //nafnDialog.getDialogPane().getButtonTypes()
         Optional<String> inntak = nafnDialog.showAndWait();
         if (inntak.isPresent()) {
             minPlantan.setNickName(inntak.get());
             System.out.println(inntak);
-            /* skoða betur, kastar villu
-            if (!minPlantan.getOllHeiti().contains(inntak.get())) {
-            List<String> nyrListi = minPlantan.getOllHeiti();
-            nyrListi.add(inntak.get());
-            minPlantan.setOllHeiti(nyrListi);
-            }
-            */
+            //todo passa að nafn bætist við öll heiti?
         }
     }
 
@@ -286,8 +292,7 @@ public class Plontugluggi extends Dialog<Void> {
             if (b.getButtonData().equals(ButtonBar.ButtonData.OK_DONE)) return textArea.getText();
             return null;
         });
-
-        //dialogur.setDialogPane(dialogPane);
+        
         Optional<String> result = dialogur.showAndWait();
         if (result.isPresent()) {//result vistar breytingar á texta
             System.out.println("utkoma ur dialog: " + result);
