@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="500.0" prefWidth="750.0" style="-fx-background-color: #F2FFF6;"
+<AnchorPane prefHeight="500.0" prefWidth="750.0"
             xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="vidmot.plantmania.UpphafController" stylesheets="@styling/innskraning-style.css">
+            fx:controller="vidmot.plantmania.UpphafController" stylesheets="@styling/derived-style.css">
     <children>
         <Label layoutX="308.0" layoutY="60.0" text="Plantmania">
             <font>

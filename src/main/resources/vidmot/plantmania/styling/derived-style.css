@@ -1,0 +1,328 @@
+.root{
+    -graenn1: #F2FFF6;
+    -graenn11: #edfcf2;
+    -graenn2: #DDFFE7;
+    -graenn3: #C8F8D6;
+    -graenn4: darkgreen;
+    fx-background-color: -graenn1;
+    -baselitur: #e8fff1;
+
+    unfocusedlitur: #cce8d2;
+    -unfocusedlitur: #dff0e3;
+
+
+    -fx-focus-color: #03d37c;
+    fx-faint-focus-color: #03d37c22;
+
+
+    -fx-accent: #30d9b1;
+
+    -litur3: #C8F8D6;
+    -litur2: derive(-litur3, 25%);
+    -litur1: derive(-litur3, 40%);
+    -litur05: derive(-litur3, 55%);
+
+    -fx-base: -litur3;
+    -fx-control-inner-background: -litur05;
+    -fx-background: -litur05;
+
+}
+
+.date-picker-popup > * > .previous-month,
+.date-picker-popup > * > .next-month {
+    fx-background: derive(-fx-control-inner-background, -4%);
+    fx-background: derive(-fx-control-inner-background, 10%);
+    fx-background: green;
+    -fx-background: -unfocusedlitur;
+}
+
+#rot{
+    -fx-pref-height: 200;
+    -fx-pref-width: 150;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: forestgreen;
+    -fx-background-color: -graenn2;
+    -fx-padding: 3 1 1 1;
+}
+#rot:pressed{
+    -fx-background-color: -graenn3;
+}
+#rot:hover{
+    -fx-border-color: darkgreen;
+    -fx-border-width: 2;
+}
+
+
+
+.button{
+    fx-background-color: -graenn3;
+    fx-border-color: -graenn4;
+    fx-border-color: darkgreen;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+.button:pressed{
+    fx-background-color: -graenn2;
+}
+.button:hover{
+    fx-border-color: forestgreen;
+}
+
+
+.label{
+    -fx-background-radius: 20;
+    -fx-alignment: center;
+}
+
+.label-filled{
+    fx-background-color: -graenn3;
+    -fx-background-radius: 20;
+    fx-border-color: -graenn3;
+    fx-border-radius: 20;
+}
+
+.rammi-label{
+    -fx-border-radius: 20;
+    fx-border-color: darkgreen;
+    -fx-padding: 1 5 1 5;
+}
+
+
+.anchorpane{
+    fx-background-color: -graenn1;
+    -fx-background-color: -litur1;
+    -fx-border-color: green;
+}
+
+
+.border-pane-rammi{
+    -fx-background-color: #ddffe7;
+    -fx-background-image: url("icon/rammi22.png");
+    -fx-background-size: stretch;
+    -fx-background-radius: 10;
+}
+
+
+#fxAlmenntNafn{
+    -fx-font-size: 14;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+
+    -fx-padding: 0;
+}
+
+
+
+#fxFlokkur{
+    -fx-alignment: center;
+    -fx-text-fill: darkgreen;
+    -fx-padding: 2;
+}
+
+
+.graphic-hlutur{
+    fx-padding: 2 3 2 20;
+    -fx-padding: 4 3 4 20;
+
+    -fx-background-size: 16px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10%;
+    -fx-alignment: center;
+    -fx-background-radius: 20;
+    fx-background-color: -graenn3;
+}
+
+
+
+.spjald-root{
+    -fx-alignment: top-center;
+    -fx-fill-width: false;
+}
+
+
+
+.vboxStats{
+    -fx-pref-height: 27;
+    -fx-pref-width: 36;
+    -fx-alignment: bottom-center;
+    -fx-fill-width: false;
+    -fx-rotate: 22.5;
+}
+
+
+.vboxStats .image-view{
+    -fx-rotate: -22.5;
+    -fx-preserve-ratio: true;
+}
+
+
+
+.vatnBox{
+    -fx-image: url("icon/water.png");
+}
+
+.ljosBox{
+    -fx-image: url("icon/sol.png");
+}
+
+.hitiBox{
+    -fx-image: url("icon/temperature.png");
+}
+
+
+
+.vokva-label{
+    -fx-background-image: url("icon/clock.png");
+}
+
+.vokva-takki{
+    -fx-background-image: url("icon/water.png");
+}
+
+
+.plus-takki{
+    -fx-background-image: url("icon/plus.png");
+}
+
+
+
+.titill-label{
+    -fx-font-size: 16px;
+}
+
+#fxBreytaNafni{
+    -fx-background-image: url("icon/edit.png");
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.titilbox{
+    -fx-alignment: center-left;
+    -fx-pref-height: 25;
+    -fx-pref-width: 300;
+    -fx-spacing: 5;
+    -fx-fill-height: false;
+    -fx-padding: 10 0 0 0;
+}
+
+
+
+
+#fxNotandi .arrow{
+    -fx-background-color: transparent;
+}
+#fxNotandi > .arrow-button > .arrow {
+    -fx-padding: 0;
+}
+
+#fxNotandi{
+    fx-background-color: -litur2;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    fx-border-color: -graenn3;
+    -fx-border-color: darkgreen;
+    -fx-alignment: center;
+    -fx-font-size: 16px;
+
+    -fx-padding: 1 17 1 20;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 95%, 5%;
+    -fx-background-size: 16px, 20px;
+    -fx-background-image: url("icon/arrow270bil.png"), url("icon/user.png");
+}
+
+
+
+
+.menu-button{
+    -fx-background-position: right;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: darkgreen;
+
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 16px;
+    -fx-background-image: url("icon/arrow270bil.png");
+    -fx-padding: 1 17 1 3;
+
+    fx-background-color: #c8f8e6;
+    -fx-background-color: -litur3;
+
+    -fx-alignment: center;
+}
+
+
+.menu-item{
+    fx-background-color: blue;
+}
+
+.menu-item .label{
+    fx-background-color: pink;
+    fx-clear: true;
+}
+
+
+.menu-bar{
+    -fx-background-color: transparent;
+    -fx-spacing: 20;
+    -fx-alignment: bottom-center;
+}
+
+
+.tab-label{
+    -fx-padding: 50 1 1 1;
+    -fx-rotate: 90;
+}
+
+
+.tab-pane .tab-header-area .tab {
+    -fx-pref-height: 125;
+    -fx-pref-width: 40;
+}
+
+
+.flowpane{
+    -fx-vgap:10;
+    -fx-hgap: 25;
+}
+
+
+.tab .label{
+    -fx-pref-height: 20;
+    -fx-pref-width: 100;
+    -fx-background-radius: 20;
+    -fx-alignment: center;
+    -fx-font-size: 14px;
+    -fx-translate-y: 10;
+}
+
+.tab-content-area{
+    -fx-background-color: -litur2;
+    -fx-padding: 10 10 10 0;
+}
+
+
+.tab{
+    -fx-background-color: -litur3;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.tab-pane .tab-header-area .tab {
+    -fx-pref-height: 125;
+    -fx-pref-width: 40;
+}
+
+
+.tab-header-background{
+    -fx-background-color: -litur2;
+}
+
+
+.tab:selected{
+    -fx-background-color: -litur1;
+    -fx-border-color: -litur3;
+}

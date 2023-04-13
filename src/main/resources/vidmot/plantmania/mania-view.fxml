@@ -7,7 +7,7 @@
 <?import vidmot.plantmania.Dagatal?>
 <?import vidmot.plantmania.Plontuyfirlit?>
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
-         prefWidth="750.0" rotateGraphic="true" side="LEFT" stylesheets="@styling/maniastyle.css"
+         prefWidth="750.0" rotateGraphic="true" side="LEFT" stylesheets="@styling/derived-style.css"
          tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="vidmot.plantmania.PlantController">
     <tabs>
