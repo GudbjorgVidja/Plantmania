@@ -222,12 +222,14 @@
     fx-border-color: -litur3;
     -fx-border-color: darkgreen;
     -fx-alignment: center;
-    -fx-font-size: 16px;
+    fx-font-size: 16px;
+    -fx-font-size: 14px;
 
     -fx-padding: 1 17 1 20;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 95%, 5%;
-    -fx-background-size: 16px, 20px;
+    fx-background-size: 16px, 20px;
+    -fx-background-size: 14px, 18px;
     -fx-background-image: url("icon/arrow270bil.png"), url("icon/user.png");
 }
 

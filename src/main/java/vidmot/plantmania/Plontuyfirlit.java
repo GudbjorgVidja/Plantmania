@@ -15,8 +15,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -40,8 +40,11 @@ public class Plontuyfirlit extends AnchorPane {
     @FXML
     private FlowPane fxFlowPane; //aðgangur í flowpane sem inniheldur spjöldin
 
+    //@FXML
+    //private Label notandiLabel;//label í efra hægra horni með notendanafni
+
     @FXML
-    private Label notandiLabel;//label í efra hægra horni með notendanafni
+    private MenuButton fxNotandi;
 
     @FXML
     private Menu fxSiaMenu, rodunMenu;// flokkunMenu //menuItems á MenuBar, til að stjórna sýnileika og röðun hluta
@@ -277,11 +280,11 @@ public class Plontuyfirlit extends AnchorPane {
     //      ** getterar og setterar **
 
     public void setNotandiLabel(String nafn) {
-        notandiLabel.setText(nafn);
+        fxNotandi.setText(nafn);
     }
 
     public StringProperty getNafnAfLabel() {
-        return notandiLabel.textProperty();
+        return fxNotandi.textProperty();
     }
 
 
@@ -292,7 +295,6 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private void rodunItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
-        //System.out.println("Smellt á " + uppruni.getText());
 
         if (uppruni.getText().equals("heiti A-Ö")) yfirlitComparator = almenntHeitiComparator;
         else if (uppruni.getText().equals("heiti Ö-A")) yfirlitComparator = almenntHeitiComparator.reversed();
@@ -366,7 +368,6 @@ public class Plontuyfirlit extends AnchorPane {
 
     private void skraUtHandler(ActionEvent event) {
 
-
         //plantController = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
         PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
         // todo notaði private aðferð í plantController, en aðferðin er bara notuð fyrir þetta. Færa hana hingað?
@@ -376,7 +377,7 @@ public class Plontuyfirlit extends AnchorPane {
 
         System.out.println("skra ut");
         ViewSwitcher.switchTo(View.UPPHAFSSIDA);
-        
+
 
     }
 
