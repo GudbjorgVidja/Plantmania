@@ -107,7 +107,6 @@ public class Plontuyfirlit extends AnchorPane {
                 Collections.sort(ollSpjold, yfirlitComparator);
             }
         });
-        //eða:  fyrstaHlutBaettVid.addListener((obs, o, n) -> (if (!o && n)  setRodunMenuItems()));
     }
 
     private void listenerarSettir() {//er annars staðar
@@ -133,6 +132,7 @@ public class Plontuyfirlit extends AnchorPane {
 
         Bindings.bindContent(fxFlowPane.getChildren(), filteredSpjold);
         //Bindings.bindContentBidirectional(fxFlowPane.getChildren(), filteredSpjold);//óþarfi, en virkar líka
+        //todo: þarf bidirectional til að hlaða inn aftur? Eða þarf kannski að passa hvernig því er bætt við
 
         ollSpjold.addListener((ListChangeListener<? super Node>) change -> {
             change.next();
@@ -147,20 +147,15 @@ public class Plontuyfirlit extends AnchorPane {
      * setur predicate reglu á báða FilteredList hlutina, miðað við uppfærð skilyrði
      */
     private void uppfaeraPredicateLista() {
-        //sían uppfærð
-        //Predicate<MenuItem> itemPred = smi -> ((CheckMenuItem) smi).isSelected();
         Predicate<MenuItem> itemPred = smi -> (smi instanceof CheckMenuItem && ((CheckMenuItem) smi).isSelected());
-        //selectedSiaItems.setPredicate(itemPred);//valdir hlutir
         selectedSiaItems = new FilteredList<>(siaItems, itemPred);
 
-        //yfirlitið uppfært
         Predicate<Node> pred = plant -> {
             if (plant instanceof PlantaSpjald) {
                 return selectedSiaItems.contains(upprunaMap.get(((PlantaSpjald) plant).getPlanta().getUppruni()));
             }
             return selectedSiaItems.contains(upprunaMap.get(((MinPlantaSpjald) plant).getMinPlanta().getUppruni()));
         };
-        //filteredSpjold = new FilteredList<>(ollSpjold, pred);
         filteredSpjold.setPredicate(pred);
     }
 
@@ -192,39 +187,22 @@ public class Plontuyfirlit extends AnchorPane {
     /**
      * ef þessi aðferð keyrir þá er yfirlitið ekki tómt, og inniheldur PlantaSpjald
      * Vantar fleiri möguleika?
+     * rodunMenu.getItems().add(new MenuItem("sjálfgefið"));
      */
     public void setRodunMenuItems() {
         rodunMenu.getItems().remove(2, 4);
-        //rodunMenu.getItems().add(new MenuItem("sjálfgefið"));
     }
 
     /**
      * kallað á þetta þegar allarPlontur yfirlitið er upphafsstillt. Lesa inn héðan frekar en að gera það úr controller
      */
     public void lesaAllarPlontur() {
-        //lesa inn allar plöntur
         List<Planta> allarPlontur = (new LesaPlontur()).getPlontur();
 
-
-        //gera plöntuspjöld fyrir allar plöntur
         for (Planta p : allarPlontur) {
             PlantaSpjald spjald = new PlantaSpjald(p);
             ollSpjold.add(spjald);//betra að setja í lista og setja inn allt í einu?
         }
-
-        //setja allar inn í yfirlitið
-        /*
-        allarPlontur.addAll((new LesaPlontur()).getPlontur());
-        for (Planta planta : allarPlontur) {
-            fxAllarPlonturYfirlit.baetaVidYfirlit(planta);
-        }
-
-
-                for (Planta planta : plontuListi) {
-            PlantaSpjald spjald = new PlantaSpjald(planta);
-            ollSpjold.add(spjald);
-        }
-         */
     }
 
 
@@ -313,24 +291,11 @@ public class Plontuyfirlit extends AnchorPane {
     private void siaItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
 
-        /*
-        System.out.println("Smellt á " + uppruni.getText());
-        System.out.println("selectedSiaItems.size(): " + selectedSiaItems.size());
-        System.out.println("siaItems.size(): " + siaItems.size());
-        System.out.println();
-         */
-
         uppfaeraPredicateLista();
 
         uppfaeraFyrsta(uppruni);
 
         uppfaeraPredicateLista();
-
-        /*
-        System.out.println("selectedSiaItems.size(): " + selectedSiaItems.size());
-        System.out.println("siaItems.size(): " + siaItems.size());
-        System.out.println();
-         */
     }
 
     /**
@@ -366,9 +331,12 @@ public class Plontuyfirlit extends AnchorPane {
     }
 
 
+    /**
+     * ákvað bara að nota ekki tilviksbreytu, væri það betra?
+     *
+     * @param event smellt á skrá út undir notandi menuButton
+     */
     private void skraUtHandler(ActionEvent event) {
-
-        //plantController = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
         PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
         // todo notaði private aðferð í plantController, en aðferðin er bara notuð fyrir þetta. Færa hana hingað?
         pc.publicVistaUpplysingar();//vistaNotendaupplysingar();
@@ -377,8 +345,6 @@ public class Plontuyfirlit extends AnchorPane {
 
         System.out.println("skra ut");
         ViewSwitcher.switchTo(View.UPPHAFSSIDA);
-
-
     }
 
 
@@ -400,7 +366,6 @@ public class Plontuyfirlit extends AnchorPane {
         }
         return ((MinPlantaSpjald) n1).getMinPlanta().getNickName().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getNickName().toLowerCase());
     };
-
 
     /**
      * Comparator til að raða eftir næsta vökvunardegi

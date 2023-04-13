@@ -1,6 +1,3 @@
-/*
-keyrist ekki af óþörfu
- */
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;
@@ -16,7 +13,6 @@ import vinnsla.plantmania.enums.Vatnsthorf;
 /**
  * plöntuspjald fyrir einhverja plöntu, hlutur af gerð Planta. það er líka til MinPlantaSpjald.
  * PlantaSpjald er fyrir plöntu sem notandi á ekki
- * <p>
  */
 public class PlantaSpjald extends AnchorPane {
     @FXML
@@ -38,17 +34,17 @@ public class PlantaSpjald extends AnchorPane {
         //System.out.println("Plantaspjald tomur smidur");
     }
 
+    /**
+     * Smiðurinn sem er notaður til að gera öll PlantaSpjald
+     *
+     * @param p Planta hlutur
+     */
     public PlantaSpjald(Planta p) {
-        //System.out.println("PlantaSpjald(Planta p) smidur");
-        //keyrist einu sinni fyrir hvert PlantaSpjald, í upphafi keyrslu :)
-        //System.out.println("Plantaspjald smidur");
         planta = p;
         LesaFXML.lesa(this, "planta-view.fxml");
 
-
         //todo er betra að gera þetta allt í einu? og fara þá einu sinni inn í fxSpjald?
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
-        //fxSpjald.setFxFlokkur(planta.getUppruni().toString().toLowerCase(Locale.ROOT));
         fxSpjald.setFxFlokkur(planta.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
 
@@ -74,6 +70,7 @@ public class PlantaSpjald extends AnchorPane {
         }
     }
 
+    //todo gera sérhæfðan klasa fyrir þetta allt, nota í PlantaSpjald og plontugluggi
     private void setjaOpacity() {
         if (planta.getLjosstyrkur().equals(Ljosstyrkur.HALFBEINT)) {
             fxLjosBox.getChildren().get(0).setOpacity(0.3);
@@ -98,15 +95,6 @@ public class PlantaSpjald extends AnchorPane {
 
     }
 
-
-
-    /* ekki viss u, að þetta megi?
-    public PlantaSpjald(List<Planta> allarPlontur){
-        for(Planta p: allarPlontur){
-
-        }
-    }
-     */
 
     public String toString() {
         return planta.getAlmenntNafn();
