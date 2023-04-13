@@ -13,19 +13,23 @@
                 <Pane layoutX="23.0" layoutY="31.0" prefHeight="369.0" prefWidth="206.0"
                       style="-fx-border-color: lightsteelblue;">
                     <children>
-                        <Pane layoutX="32.0" layoutY="51.0" prefHeight="121.0" prefWidth="142.0"
-                              style="-fx-border-color: lightsteelblue;">
-                            <children>
+                        <BorderPane layoutX="32.0" layoutY="51.0" prefHeight="121.0" prefWidth="142.0"
+                                    styleClass="border-pane-rammi" VBox.vgrow="NEVER">
+                            <center>
                                 <ImageView fx:id="fxMynd" fitHeight="114.0" fitWidth="126.0" layoutX="6.0" layoutY="3.0"
                                            pickOnBounds="true" preserveRatio="true"/>
-                            </children>
-                        </Pane>
+
+                            </center>
+                        </BorderPane>
+                        <!-- <Pane layoutX="32.0" layoutY="51.0" prefHeight="121.0" prefWidth="142.0"
+                               style="-fx-border-color: lightsteelblue;">
+                             <children>
+                                 <ImageView fx:id="fxMynd" fitHeight="114.0" fitWidth="126.0" layoutX="6.0" layoutY="3.0"
+                                            pickOnBounds="true" preserveRatio="true"/>
+                             </children>
+                         </Pane> -->
                         <Label fx:id="fxAlmenntNafn" layoutX="20.0" layoutY="175.0" prefHeight="17.0" prefWidth="149.0"
-                               text="Gælunafn plöntunnar">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </Label>
+                               text="Gælunafn plöntunnar"/>
                         <Label fx:id="fxBreytaNafni" layoutX="161.0" layoutY="172.0" prefHeight="25.0"
                                prefWidth="27.0"/>
                         <Label fx:id="fxLatnesktNafn" layoutX="20.0" layoutY="204.0" text="fræðiheiti skáletrað"/>

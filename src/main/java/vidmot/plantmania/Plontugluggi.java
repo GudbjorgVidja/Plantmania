@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -82,6 +83,18 @@ public class Plontugluggi extends Dialog<Void> {
         setjaFxEinkenni();
         setjaFxUppruni();
         setjaFxLjosthorf();
+
+        setStyleClass();
+    }
+
+    private void setStyleClass() {
+        for (Node l : fxHeiti.getChildren()) {
+            if (l instanceof Label) l.getStyleClass().add("rammi-label");
+        }
+
+        for (Node l : fxEinkenni.getChildren()) {
+            if (l instanceof Label) l.getStyleClass().add("rammi-label");
+        }
     }
 
     private void setjaFxLjosthorf() {

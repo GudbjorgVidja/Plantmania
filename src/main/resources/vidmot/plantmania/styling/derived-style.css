@@ -16,11 +16,15 @@
     -litur3: #C8F8D6;
     -litur2: derive(-litur3, 25%);
     -litur1: derive(-litur3, 40%);
-    -litur05: derive(-litur3, 55%);
+    -litur05: derive(-litur3, 50%);
 
-    -fx-base: -litur3;
+    fx-base: -litur3;
+    -fx-base: -litur2;
     -fx-control-inner-background: -litur05;
     -fx-background: -litur05;
+
+    fx-outer-border: forestgreen;
+
 
 }
 
@@ -78,6 +82,7 @@
 
 .rammi-label{
     -fx-border-radius: 20;
+    -fx-border-color: forestgreen;
     fx-border-color: darkgreen;
     -fx-padding: 1 5 1 5;
 }
