@@ -14,10 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
-import vinnsla.plantmania.LesaPlontur;
-import vinnsla.plantmania.MinPlanta;
-import vinnsla.plantmania.Notandi;
-import vinnsla.plantmania.Planta;
+import vinnsla.plantmania.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +38,9 @@ public class PlantController {
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
+    private Notendaupplysingar notendaupplysingar;// = new Notendaupplysingar();//setja listener fyrir þetta/hafa sem ObjectProperty?
+
+
     //TODO: væri ekki hægt að hafa þetta local þar sem þetta er notað? eða hvað
     //bara kallað á tvisvar: til að setja inn í listann og til að setja í yfirlit
     //private ObservableList<Planta> allarPlontur = FXCollections.observableArrayList();//er í vesi, geymi hér
@@ -50,6 +50,8 @@ public class PlantController {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
         skradurNotandi.setValue(upphafController.getSkradurNotandi());
 
+        notendaupplysingar = new Notendaupplysingar(skradurNotandi.get().getMinarPlontur());
+        notendaupplysingar.finnaFyrriOgSidariVokvanirListener(skradurNotandi.get().getMinarPlontur());
         System.out.println(skradurNotandi.get());
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());//af hverju ekki bara upphafsstilling?
 
@@ -63,7 +65,7 @@ public class PlantController {
         fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
 
         birtaNotendaPlontur();
-        skradurNotandi.get().getNotendaupplysingar().finnaFyrriOgSidariVokvanirListener();
+        //notendaupplysingar.finnaFyrriOgSidariVokvanirListener(skradurNotandi.get().getMinarPlontur());
         hladaUpplysingum();
 
         System.out.println(skradurNotandi.get());
@@ -73,13 +75,18 @@ public class PlantController {
     }
 
     private void hladaUpplysingum() {
-        for (MinPlanta m : skradurNotandi.get().getNotendaupplysingar().getMinarPlontur()) {
+        for (MinPlanta m : skradurNotandi.get().getMinarPlontur()) {
             //birtaNotendaPlontur
             fxMinarPlonturYfirlit.baetaVidYfirlit(m);
 
-            //setja listenera á fyrriVokvanir og naestuVokvanir
-            skradurNotandi.get().getNotendaupplysingar().vokvanalistiListener(m, skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir(), m.getVokvanir());
-            skradurNotandi.get().getNotendaupplysingar().vokvanalistiListener(m, skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir(), m.getPlanadarVokvanir());
+            m.sidastaVokvunListener();
+            m.naestaVokvunRegla();
+            m.medaltimiMilliVokvanaListener();
+            //m.reiknaPlanadarVokvanir();//Þetta lætur naestuVokvanir tvítelja allar vökvanir, en útgáfan sem þetta setur inn virðist rétt
+            System.out.println("MinPlanta(Planta planta) smidur");
+
+            //naestaVokvun = (thinnTimiMilliVokvana);
+
         }
     }
 
@@ -124,7 +131,7 @@ public class PlantController {
      * birtir plöntur notanda í yfirliti
      */
     private void birtaNotendaPlontur() {
-        skradurNotandi.get().getNotendaupplysingar().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
+        skradurNotandi.get().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
             change.next();
             if (change.wasAdded()) {
                 for (MinPlanta mp : change.getAddedSubList()) {
@@ -176,8 +183,8 @@ public class PlantController {
      * þegar ýtt er á dag
      */
     public void dagatalsEventFilterar() {
-        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgFyrriVokvanir(), skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir());
-        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgAaetladarVokvanir(), skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgFyrriVokvanir(), notendaupplysingar.getFyrriVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgAaetladarVokvanir(), notendaupplysingar.getNaestuVokvanir());
 
         dagatalTilBakaRegla();
         dagatalAframRegla();
@@ -190,11 +197,11 @@ public class PlantController {
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
 
                 //TODO: ath kannski hvort naestu vokvanir fari ekki örugglega fram í tímann um 3 mánuði en ekki alltaf lengra og lengra
-                System.out.println("fyrri vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir());
-                System.out.println("naestu vokvanir: " + skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir());
+                System.out.println("fyrri vokvanir: " + notendaupplysingar.getFyrriVokvanir());
+                System.out.println("naestu vokvanir: " + notendaupplysingar.getNaestuVokvanir());
 
-                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = skradurNotandi.get().getNotendaupplysingar().getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
-                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = skradurNotandi.get().getNotendaupplysingar().getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
+                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
+                ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
 
                 //TODO: finna leið til að setja dagsetninguna á annað form til að prenta í dialog
                 if (valinDagsetning.isBefore(LocalDate.now()) && !plonturDagsinsLokid.isEmpty()) {
@@ -248,7 +255,7 @@ public class PlantController {
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
             //skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
-            skradurNotandi.get().getNotendaupplysingar().addaPlanta(p);
+            skradurNotandi.get().addaPlanta(p);
         }
     }
 
@@ -280,7 +287,7 @@ public class PlantController {
             });
             for (Notandi n : notendur) {
                 if (n.notendanafnProperty().get().equals(skradurNotandi.get().getNotendanafn())) {
-                    n.setNotendaupplysingar(skradurNotandi.get().getNotendaupplysingar());
+                    n.setMinarPlontur(skradurNotandi.get().getMinarPlontur());
                     objectMapper.writeValue(new File("target/classes/vidmot/plantmania/notendur.json"), notendur);//bætti við
                 }
             }
@@ -297,5 +304,13 @@ public class PlantController {
 
     public void publicVistaUpplysingar() {
         vistaNotendaupplysingar();
+    }
+
+    public Notendaupplysingar getNotendaupplysingar() {
+        return notendaupplysingar;
+    }
+
+    public void setNotendaupplysingar(Notendaupplysingar notendaupplysingar) {
+        this.notendaupplysingar = notendaupplysingar;
     }
 }

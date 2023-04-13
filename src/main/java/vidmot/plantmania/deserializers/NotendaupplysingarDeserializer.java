@@ -21,7 +21,7 @@ import java.time.LocalDate;
  * Custom deserializers should usually not directly extend this class,
  * but instead extend com.fasterxml.jackson.databind.deser.std.StdDeserializer
  */
-public class NotendaupplysingarDeserializer extends JsonDeserializer<Notendaupplysingar> {//StdDeserializer<Notendaupplysingar> {
+class NotendaupplysingarDeserializer extends JsonDeserializer<Notendaupplysingar> {//StdDeserializer<Notendaupplysingar> {
 
     public NotendaupplysingarDeserializer() {
 
@@ -36,13 +36,6 @@ public class NotendaupplysingarDeserializer extends JsonDeserializer<Notendauppl
 
 
         //deserializa minarPlontur
-        JsonNode minarPlonturNodes = node.get("minarPlontur");
-        ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();
-        for (JsonNode minPlantaNode : minarPlonturNodes) {
-            MinPlanta minPlanta = objectMapper.treeToValue(minPlantaNode, MinPlanta.class);
-            minarPlontur.add(minPlanta);
-        }
-        notendaupplysingar.setMinarPlontur(minarPlontur);
 
 
         // Deserializa fyrriVokvanir

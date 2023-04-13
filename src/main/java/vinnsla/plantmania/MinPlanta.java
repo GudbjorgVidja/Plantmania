@@ -126,15 +126,17 @@ public class MinPlanta extends Planta {
      */
     public void naestaVokvunRegla() {
         sidastaVokvun.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
+            if (newValue != null) {//kannski bara ef newValue != null && oldValue == null, til að endurtaka ekki að óþörfu?
                 naestaVokvun.bind(thinnTimiMilliVokvana.subtract(ChronoUnit.DAYS.between(newValue, LocalDate.now())));
-
-                //ef við myndum vilja hafa þetta þannig að það komi aldrei mínustala fyrir daga í síðustu vökvun. Sleppa samt frekar, held ég
-                //naestaVokvun.bind(Bindings.when(thinnTimiMilliVokvana.greaterThanOrEqualTo(ChronoUnit.DAYS.between(sidastaVokvun.get(), LocalDate.now()))).then(thinnTimiMilliVokvana.subtract(ChronoUnit.DAYS.between(sidastaVokvun.get(), LocalDate.now()))).otherwise(0));
             } else {
                 naestaVokvun.unbind();
                 naestaVokvun.set(0);
             }
+        });
+        thinnTimiMilliVokvanaProperty().addListener((observable, oldValue, newValue) -> {
+            naestaVokvunProperty().unbind();
+            setNaestaVokvun(newValue.intValue());
+            naestaVokvunRegla();
         });
     }
 
@@ -262,11 +264,11 @@ public class MinPlanta extends Planta {
                 "planadarVokvanir: " + planadarVokvanir +
                 ", nickName=" + nickName.get() +
                 ", vokvanir=" + vokvanir.toString() +
-                ", notesFraNotanda=" + notesFraNotanda.get() +
+                //", notesFraNotanda=" + notesFraNotanda.get() +
                 ", medaltimiMilliVokvana=" + medaltimiMilliVokvana.get() +
                 ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
                 ", naestaVokvun=" + naestaVokvun.get() +
-                ", planta= " + super.toString() +
+                //", planta= " + super.toString() +
                 '}';
     }
 }
