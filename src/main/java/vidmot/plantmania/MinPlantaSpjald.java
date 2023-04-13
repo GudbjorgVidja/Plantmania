@@ -43,8 +43,7 @@ public class MinPlantaSpjald extends AnchorPane {
         fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.nickNameProperty());
         fxSpjald.setFxFlokkur(minPlantan.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
-
-
+        
         //setja handlera á takkana
         fxVokva.setOnAction(this::vokvaHandler);
         fxFresta.setOnAction(this::frestaHandler);
