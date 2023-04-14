@@ -16,6 +16,7 @@ import vinnsla.plantmania.MinPlanta;
 import java.time.LocalDate;
 
 /**
+ * Höfundur: Sigurbjörg Erla
  * Dialog sem kemur þegar ýtt er á dag í dagatali, til að sjá hvaða plöntur á að vökva/voru vökvaðar þann daginn
  */
 public class VokvanirDagsinsDialog extends Dialog<Void> {

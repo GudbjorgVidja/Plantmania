@@ -12,6 +12,7 @@ import vinnsla.plantmania.MinPlanta;
 import java.time.LocalDate;
 
 /**
+ * Höfundur: Guðbjörg Viðja
  * minPlantaSpjald les inn fxml skrána minplanta-view.fxml. Þessi klasi er controllerinn
  * MinPlantaSpjald inniheldur Spjald hlut með sömu plöntu. Tilheyrandi vinnsluklasi er MinPlanta.java
  */
@@ -43,7 +44,7 @@ public class MinPlantaSpjald extends AnchorPane {
         fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.nickNameProperty());
         fxSpjald.setFxFlokkur(minPlantan.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
-        
+
         //setja handlera á takkana
         fxVokva.setOnAction(this::vokvaHandler);
         fxFresta.setOnAction(this::frestaHandler);

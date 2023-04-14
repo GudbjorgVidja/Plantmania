@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * Höfundur: Sigurbjörg Erla
  * Controller fyrir upphafssíðu/innskráningarsíðu
  */
 public class UpphafController {

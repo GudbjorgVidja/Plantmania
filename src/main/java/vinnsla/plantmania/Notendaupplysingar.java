@@ -10,21 +10,25 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-//athuga hvernig það er greint á milli tveggja eins planta!!! það er nauðsynlegt!
 
 /**
+ * Höfundur: Sigurbjörg Erla
  * vinnsluklasi sem inniheldur upplýsingar um plöntur notanda, hvenær þær hafa verið vökvaðar og áætlaðar vökvanir
  */
-//@JsonDeserialize(using = NotendaupplysingarDeserializer.class)
 public class Notendaupplysingar {
     private ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem hafa verið gerðar fyrir allar plöntur, pör af plöntu og dagsetningu. þarf ekki endilega að vera í skrá? hægt að reikna út þegar forritið er opnað
     private ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir = FXCollections.observableArrayList();//Vaktanlegur listi yfir allar vökvanir sem eru áætlaðar fyrir allar plöntur, pör af plöntu og dagsetningu.ditto
 
     public Notendaupplysingar() {
-        //kallað á þetta fimm sinnum við upphaf keyrslu, af hverju? Vegna lesturs úr skrá og skrifa í skrá
-        System.out.println("Notendaupplysingar smidur");
+
     }
 
+    /**
+     * Vökvunum bætt við listana naestuVokvanir og fyrriVokvanir fyrir allar vökvanir fyrir allar plöntur notanda.
+     * Listenerum bætt við til að uppfæra naestuVokvanir og fyrriVokvanir þegar vökvanir plöntu breytast
+     *
+     * @param minarPlontur - Vaktanlegur listi af MinPlanta, inniheldur allar plöntur notanda
+     */
     public Notendaupplysingar(ObservableList<MinPlanta> minarPlontur) {
         for (MinPlanta m : minarPlontur) {
             for (LocalDate date : m.getPlanadarVokvanir()) {

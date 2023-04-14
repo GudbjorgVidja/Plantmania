@@ -22,7 +22,11 @@ import vinnsla.plantmania.enums.Vatnsthorf;
 
 import java.util.List;
 
-//TODO: bæta kannski við enum fyrir vökvunaraðferð? veit ekki, en eru ekki örfáar basic aðferðir og mælt með mismunandi eftir plöntum?
+/**
+ * Höfundur: Sigurbjörg Erla og Guðbjörg Viðja
+ * Vinnsluklasinn Planta, inniheldur upplýsingar um ákveðna gerð af plöntu sem notandi getur svo bætt við sínar
+ * plöntur sem MinPlanta og breytt henni
+ */
 public class Planta {
     private String latnesktNafn;
     private String almenntNafn; //má breyta í mínPlanta, annars ekki

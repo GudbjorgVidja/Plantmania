@@ -12,6 +12,11 @@ import vinnsla.plantmania.MinPlanta;
 
 import java.time.LocalDate;
 
+/**
+ * Höfundur: Sigurbjörg Erla
+ * Dialog til að sýna allar dagsetningar sem ákveðin planta hefur verið vökvuð, með ListView.
+ * Verður mögulega skipt út fyrir tilvik af Dagatal
+ */
 public class VokvanirPlontunnarDialog extends Dialog<Void> {
     public VokvanirPlontunnarDialog(MinPlanta minPlanta) {
         getDialogPane().setPadding(new Insets(10));
@@ -19,7 +24,6 @@ public class VokvanirPlontunnarDialog extends Dialog<Void> {
 
         ListView<LocalDate> listView = new ListView<>(minPlanta.getVokvanir());
         listView.setMaxHeight(100);
-        //listView.setCellFactory(new PlantaCellFactory());
         Button eyda = new Button("Eyða");
 
         eyda.addEventFilter(MouseEvent.MOUSE_CLICKED, (Event event) -> {

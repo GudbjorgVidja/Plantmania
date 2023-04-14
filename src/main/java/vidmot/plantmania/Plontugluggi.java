@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 /**
+ * Höfundar: Guðbjörg Viðja og Sigurbjörg Erla
  * skoða með að hafa eiginlega accordionPane í skrollanlega partinum. Þyrfti að vera TitledPane hlutir í VBox sem er í
  * ScrollPane, því accordion leyfir bara eitt opið í einu.
  * Nota listener til að setja min stærð eftir því hvort titledPane er opið eða lokað.
@@ -292,7 +293,7 @@ public class Plontugluggi extends Dialog<Void> {
             if (b.getButtonData().equals(ButtonBar.ButtonData.OK_DONE)) return textArea.getText();
             return null;
         });
-        
+
         Optional<String> result = dialogur.showAndWait();
         if (result.isPresent()) {//result vistar breytingar á texta
             System.out.println("utkoma ur dialog: " + result);

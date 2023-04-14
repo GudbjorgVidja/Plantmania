@@ -6,6 +6,7 @@ import javafx.util.Callback;
 import vinnsla.plantmania.MinPlanta;
 
 /**
+ * Höfundur: Sigurbjörg Erla
  * Sérhæfður CellFactory fyrir ListView með MinPlanta hlutum, til að fá réttan texta
  * fengið héðan: https://www.baeldung.com/javafx-listview-display-custom-items
  */

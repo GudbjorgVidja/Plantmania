@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 
 /**
+ * Höfundur: Ebba Þóra Hvannberg, fengið úr öðru verkefni
  * les inn fxml skrána, setur controller og rót og hleður fxmlLoadernum
  */
 public class LesaFXML {

@@ -11,6 +11,7 @@ import vinnsla.plantmania.enums.Ljosstyrkur;
 import vinnsla.plantmania.enums.Vatnsthorf;
 
 /**
+ * Höfundur: Guðbjörg Viðja
  * plöntuspjald fyrir einhverja plöntu, hlutur af gerð Planta. það er líka til MinPlantaSpjald.
  * PlantaSpjald er fyrir plöntu sem notandi á ekki
  */

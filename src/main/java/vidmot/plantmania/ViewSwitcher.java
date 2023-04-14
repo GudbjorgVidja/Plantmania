@@ -13,10 +13,9 @@ import java.util.Map;
  * <p>
  * EÞH - changed to include caching of controllers
  * <p>
- * Breyttum til að vista ekki í cache
+ * Sigurbjörg: Breytti til að vista ekki í cache
  */
 public class ViewSwitcher {
-    //private static final Map<View, Parent> cache = new HashMap<>();
     private static final Map<View, Object> controllers = new HashMap<>();
     private static Scene scene;
 

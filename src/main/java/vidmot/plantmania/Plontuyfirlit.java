@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
+ * Höfundur: Guðbjörg Viðja
  * Sérhæfður klasi fyrir yfirlit yfir hluti, bæði fyrir MinPlantaSpjald og PlantaSpjald hluti. Býður upp á að stjórna
  * sniði, með röðun og síu sem segir til um hvaða hlutir eru sýndir.
  * Það ætti kannksi að hafa líka vinnsluklasa fyrir þetta
