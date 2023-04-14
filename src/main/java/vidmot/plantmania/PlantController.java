@@ -12,7 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 import vinnsla.plantmania.*;
 
@@ -35,6 +37,9 @@ public class PlantController {
     private Plontuyfirlit fxAllarPlonturYfirlit; //yfirlit yfir allar plöntur
     @FXML
     private Dagatal fxDagatal;
+    @FXML
+    private VBox titledPaneBoxid;
+
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
@@ -73,6 +78,22 @@ public class PlantController {
 
         System.out.println(skradurNotandi);
 
+        bindaMaxSizeTitledPane();
+    }
+
+    private void bindaMaxSizeTitledPane() {
+        for (Node node : titledPaneBoxid.getChildren()) {
+            if (node instanceof TitledPane) {
+                ((TitledPane) node).expandedProperty().addListener((obs, o, n) -> {
+                    //if(!n) ((TitledPane) node).setMaxHeight(0);
+                    //if (n) ((TitledPane) node).setPrefHeight();
+                    System.out.println(n);
+                    if (!n) ((TitledPane) node).maxHeightProperty().set(0);
+                    else if (n) ((TitledPane) node).maxHeightProperty().set(((TitledPane) node).getPrefHeight());
+                    //else if (!n) ((TitledPane) node).maxHeightProperty().set(Double.NEGATIVE_INFINITY);
+                });
+            }
+        }
     }
 
     /**
