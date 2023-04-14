@@ -325,3 +325,8 @@
     -fx-background-color: -litur1;
     -fx-border-color: -litur3;
 }
+
+
+.fraedsluflokkur{
+    -fx-font-size: 14;
+}
