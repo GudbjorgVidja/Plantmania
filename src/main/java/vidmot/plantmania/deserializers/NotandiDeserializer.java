@@ -12,9 +12,12 @@ import vinnsla.plantmania.Notandi;
 
 import java.io.IOException;
 
+/**
+ * Custom deserializer fyrir vinnsluklasann Notandi. Hann afkóðar úr json skránni, það þurfti að gera hann
+ * vegna þess að klasinn inniheldur ObservableList.
+ */
 public class NotandiDeserializer extends JsonDeserializer<Notandi> {
     public static void main(String[] args) {
-
     }
 
     public Notandi deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException {
@@ -24,8 +27,7 @@ public class NotandiDeserializer extends JsonDeserializer<Notandi> {
 
         notandi.setLykilord(node.get("lykilord").asText());
         notandi.setNotendanafn(node.get("notendanafn").asText());
-
-
+        
         JsonNode minarPlonturNodes = node.get("minarPlontur");
         ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();
         for (JsonNode minPlantaNode : minarPlonturNodes) {
