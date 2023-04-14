@@ -48,13 +48,18 @@
                             <content>
                                 <VBox fx:id="titledPaneBoxid" prefHeight="411.0" prefWidth="531.0">
                                     <children>
+                                        <TitledPane animated="false" text="Almennar upplýsingar" VBox.vgrow="SOMETIMES">
+                                            <VBox fx:id="almenntBox">
+
+                                            </VBox>
+                                        </TitledPane>
                                         <TitledPane animated="false" prefHeight="194.0" prefWidth="531.0" text="Vökvun"
                                                     VBox.vgrow="SOMETIMES">
                                             <content>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" fx:id="vokvaBox">
                                                     <children>
                                                         <!--<Text strokeType="OUTSIDE" strokeWidth="0.0"
-                                                              text="Ekki er til nein ein besta leið til að vökva allar plöntur, heldur eru ýmsir þættir sem geta haft áhrif. Mestu máli skiptir hvernig planta þetta er og hvaðan hún kemur, en það getur verið gott að líkja eftir náttúrulegu umhverfi hennar. En einnig þarf að taka aðra þætti með í reikninginn, eins og hvernig mold og pott plantan er í, hversu mikið ljós hún fær, rakastig og hita."
+                                                              text=""
                                                               wrappingWidth="512"/> --> <!-- todo hafa textann annars staðar sorry -->
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="512"
                                                               text="Aðferð 1" styleClass="fraedsluflokkur"/>
@@ -81,11 +86,15 @@
                                             </content>
                                         </TitledPane>
                                         <TitledPane animated="false" text="Algeng vandamál" VBox.vgrow="SOMETIMES">
-                                            <VBox fx:id="vandamalVBox">
+                                            <VBox fx:id="vandamalBox">
                                                 <children>
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                                                          text="Ekki er til nein ein besta leið til að vökva allar plöntur, heldur eru ýmsir þættir sem geta haft áhrif. Mestu máli skiptir hvernig planta þetta er og hvaðan hún kemur, en það getur verið gott að líkja eftir náttúrulegu umhverfi hennar. En einnig þarf að taka aðra þætti með í reikninginn, eins og hvernig mold og pott plantan er í, hversu mikið ljós hún fær, rakastig og hita."
-                                                          wrappingWidth="512"/> <!-- todo hafa textann annars staðar sorry -->
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" "
+                                                          wrappingWidth="512"/>
+                                                </children>
+                                                <!--
+                                                <children>
+                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" "
+                                                          wrappingWidth="512"/>
                                                     <Text strokeType="OUTSIDE" strokeWidth="0.0"
                                                           text="Aðferð 1" styleClass="fraedsluflokkur"/>
                                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
@@ -102,32 +111,7 @@
                                                     <Text layoutX="19.0" layoutY="117.0" strokeType="OUTSIDE"
                                                           strokeWidth="0.0" text="Aðferð 3"
                                                           styleClass="fraedsluflokkur"/>
-                                                </children>
-                                            </VBox>
-                                        </TitledPane>
-                                        <TitledPane animated="false" text="Annað" VBox.vgrow="SOMETIMES">
-                                            <VBox fx:id="annadVBox">
-                                                <children>
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                                                          text="Ekki er til nein ein besta leið til að vökva allar plöntur, heldur eru ýmsir þættir sem geta haft áhrif. Mestu máli skiptir hvernig planta þetta er og hvaðan hún kemur, en það getur verið gott að líkja eftir náttúrulegu umhverfi hennar. En einnig þarf að taka aðra þætti með í reikninginn, eins og hvernig mold og pott plantan er í, hversu mikið ljós hún fær, rakastig og hita."
-                                                          wrappingWidth="512"/> <!-- todo hafa textann annars staðar sorry -->
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                                                          text="Aðferð 1" styleClass="fraedsluflokkur"/>
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                          id="vokvun1"/>
-
-                                                    <Text layoutX="19.0" layoutY="98.0" strokeType="OUTSIDE"
-                                                          strokeWidth="0.0" text="Aðferð 2"
-                                                          styleClass="fraedsluflokkur"/>
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                          id="vokvun2"/>
-
-
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
-                                                    <Text layoutX="19.0" layoutY="117.0" strokeType="OUTSIDE"
-                                                          strokeWidth="0.0" text="Aðferð 3"
-                                                          styleClass="fraedsluflokkur"/>
-                                                </children>
+                                                </children> -->
                                             </VBox>
                                         </TitledPane>
                                     </children>

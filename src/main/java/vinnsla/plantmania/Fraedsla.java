@@ -1,5 +1,8 @@
 package vinnsla.plantmania;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Þessi klasi er ekki góður, og verður tekinn út og í staðinn lesið inn úr skrá. Bara til bráðabirgða.
  * todo: laga þetta
@@ -10,18 +13,25 @@ public class Fraedsla {
     private String bottom;
     private String gradual;
 
+    private String almennt1;
+    private String almennt2;
+
+    private List<String> vandamalListi = new ArrayList<>();
+
+    private List<String> almenntListi;
+
     public Fraedsla() {
-        String ath = "Athugið að dagsetningar eru aðeins til að miða við, og ef forritið segir að það eigi að vökva " +
+        almennt1 = "Athugið að dagsetningar eru aðeins til að miða við, og ef forritið segir að það eigi að vökva " +
                 "plöntuna í dag þýðir það einfaldlega að það ætti að fara að athuga með hana. Þetta kemur líka ekki í " +
                 "staðin fyrir að fylgjast með plöntunum sjálfur, þar sem margir þættir hafa áhrif á það hversu oft þarf " +
                 "að vökva sem ekki er hægt að reikna með.\n" +
                 "Það er sérstaklega mikilvægt að fylgjast vel með plöntunni í fyrstu og lagfæra/adjust tímann milli " +
-                "vökvana eftir því sem hentar, og þegar umhverfisaðstæður breytast";
+                "vökvana eftir því sem hentar, og þegar umhverfisaðstæður breytast.\n";
 
-        String ath2 = "Almennt skal vökva oftar á sumrin en á veturna. \nYfirleitt er best að gegnbleyta moldina við " +
+        almennt2 = "Almennt skal vökva oftar á sumrin en á veturna. \nYfirleitt er best að gegnbleyta moldina við " +
                 "vökvun en leyfa henni að þorna vel á milli. Mikilvægt er að planta sitji ekki í vatni, þar sem það " +
                 "getur valdið \"root rot\". Það er í lagi að vökva flestar plöntur neðan frá svo lengi sem moldin er " +
-                "rétt og nógu góð.";
+                "rétt og nógu góð.\n";
 
 
         //Samantekt á nokkrum algengum vövkunaraðferðum:
@@ -57,6 +67,10 @@ public class Fraedsla {
                 "Ýmis vandamál geta líka gefið til kynna að sjúkdómar eða pestir hafi áhrif, en það er ekki hér\n";
 
 
+        String umVandamal = "Hér fyrir neðan eru upplýsingar um nokkur vandamál sem plöntueigandi getur glímt við. Því miður" +
+                " er listinn ekki tæmandi, og stundum geta mismunandi vandamál haft mjög svipuð einkenni, svo erfitt er að" +
+                " dæma um hvað það er.\n";
+
         String solbruni = "Vandamál: Sólbruni/sólbrunnin lauf\n" +
                 "Einkenni: lauf eða aðrir hlutar plöntunnar verða brúnir\n" +
                 "Lausn: Fjarlægja plöntuna úr beinu sólarljósi. Það gæti þurft að fjarlægja einhver lauf eða aðra hluta plöntunnar\n";
@@ -72,9 +86,14 @@ public class Fraedsla {
                 "Einkenni: Gróðurinn verður ljósgrænn og plantan hallast í átt að ljósi, og hækkar oft\n" +
                 "Lausn: Geyma í/við suðurglugga, auka birtu, fá jafnvel ræktunarljós\n";
 
-        String gul = "Vandamál: gulnandi lauf - ofvökvun, lítið ljós, lítill raki, lélegt (drainage)\n" +
+        String gul = "Vandamál: gulnandi lauf - ofvökvun, lítið ljós, lítill raki, lélegt frárennsli\n" +
                 "Einkenni: gulnuð lauf\n" +
-                "Lausn: breyta rútínunni, vökva e.t.v. minna, auka birtu og/eða raka, tæma (drain) pottinn\n";
+                "Lausn: breyta rútínunni, vökva e.t.v. minna, auka birtu og/eða raka, bæta frárennsli við pottinn\n";
+
+        String skordyr = "Skordýr: fer eftir dýrinu, halda sig oft í moldinni eða undir laufunum og geta valdið því að plantan afmyndast að einhverju leiti. Lausnin fer eftir skordýrinu, en meðal annars er hægt að fá sérstök \"pesticide\" fyrir pottaplöntur. Stundum virkar líka að skola plöntuna undir rennandi vatni, og jafnvel með uppþvottalegi eða plöntusápu\n" +
+                "Root rot: ræturnar verða svartar og mjúkar. Plantan verður oft veikluleg. Vökva sjaldnar. í slæmum tilfellum skal umpotta og taka burt þá hluta rótarinnar sem eru skemmdir\n" +
+                "mygla og sveppir: ves, smitandi. Stundum þarf að taka sýkta hluta af plöntunni. Yfirleitt er gott að auka loftflæði og minnka raka í umhverfinu\n" +
+                "Blelltir á laufum (e. leaf spots): svartir, brúnir, gulir eða drappaðir blettir á laufum. Fjarlægja sýkt lauf, auka loftflæði og passa að vökva á daginn svo plantan nái að þorna aðeins fyrir nóttina\n";
 
 
         String annad = "Annað?\n" +
@@ -84,12 +103,16 @@ public class Fraedsla {
                 "Ath að þegar skemmdir hlutar eru fjarlægðir af plöntunni er það yfirleitt til að hún sé ekki að eyða orku í að reyna að laga þá\n" +
                 "er ryk slæmt??";
 
+        String almennt3 = "Ekki er til nein ein besta leið til að vökva allar plöntur, heldur eru ýmsir þættir sem geta haft áhrif. Mestu máli skiptir hvernig planta þetta er og hvaðan hún kemur, en það getur verið gott að líkja eftir náttúrulegu umhverfi hennar. En einnig þarf að taka aðra þætti með í reikninginn, eins og hvernig mold og pott plantan er í, hversu mikið ljós hún fær, rakastig og hita.\n";
 
-        String skordyr = "Skordýr: fer eftir dýrinu, halda sig oft í moldinni eða undir laufunum og geta valdið því að plantan afmyndast að einhverju leiti. Lausnin fer eftir skordýrinu, en meðal annars er hægt að fá sérstök \"pesticide\" fyrir pottaplöntur. Stundum virkar líka að skola plöntuna undir rennandi vatni, og jafnvel með uppþvottalegi eða plöntusápu\n" +
-                "Root rot: ræturnar verða svartar og mjúkar. Plantan verður oft veikluleg. Vökva sjaldnar. í slæmum tilfellum skal umpotta og taka burt þá hluta rótarinnar sem eru skemmdir\n" +
-                "mygla og sveppir: ves, smitandi. Stundum þarf að taka sýkta hluta af plöntunni. Yfirleitt er gott að auka loftflæði og minnka raka í umhverfinu\n" +
-                "Blelltir á laufum (e. leaf spots): svartir, brúnir, gulir eða drappaðir blettir á laufum. Fjarlægja sýkt lauf, auka loftflæði og passa að vökva á daginn svo plantan nái að þorna aðeins fyrir nóttina\n";
 
+        //vandamalListi = new ArrayList<>(List.of(vandamal, solbruni, ofvokvun, brunLauf, teygja, gul, skordyr));
+        System.out.println();
+        List<String> listi = new ArrayList<>(List.of(umVandamal, solbruni, ofvokvun, brunLauf, teygja, gul));//vandamal, skordyr
+        //vandamalListi.addAll(List.of(vandamal, solbruni, ofvokvun, brunLauf, teygja, gul, skordyr));
+        vandamalListi = listi;
+
+        almenntListi = new ArrayList<>(List.of(almennt1, almennt2, almennt3));
     }
 
     public String getMisting() {
@@ -106,5 +129,13 @@ public class Fraedsla {
 
     public String getGradual() {
         return gradual;
+    }
+
+    public List<String> getVandamalListi() {
+        return vandamalListi;
+    }
+
+    public List<String> getAlmenntListi() {
+        return almenntListi;
     }
 }

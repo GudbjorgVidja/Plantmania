@@ -43,7 +43,7 @@ public class PlantController {
     private VBox titledPaneBoxid;
 
     @FXML
-    private VBox vokvaBox, vandamalBox, annadBox;
+    private VBox vokvaBox, vandamalBox, almenntBox;
 
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
@@ -339,16 +339,22 @@ public class PlantController {
                 ((Text) vokvaBox.getChildren().get(i + 1)).setText(efni.get(i / 2));
         }
 
-        /*
-        vokvaBox.getChildren().addAll(
-                new Text("Misting"), new Text(fraedsluklasi.getMisting()),
-                new Text("Garðkanna"), new Text(fraedsluklasi.getGardkanna()),
-                new Text("Bottom watering"), new Text(fraedsluklasi.getBottom()),
-                new Text("Gradual"), new Text(fraedsluklasi.getGradual()));
 
-         */
+        List<String> vandamal = new ArrayList<>(fraedsluklasi.getVandamalListi());
+        if (vandamalBox.getChildren().get(0) instanceof Text)
+            ((Text) vandamalBox.getChildren().get(0)).setText(vandamal.remove(0));
 
+        for (int i = 0; i < vandamal.size(); i++) {
+            Text texti = new Text(vandamal.get(i));
+            texti.setWrappingWidth(512);
+            vandamalBox.getChildren().add(texti);
+        }
 
-        //vokvaBox.getChildren().add(textarnir);
+        List<String> almennt = fraedsluklasi.getAlmenntListi();
+        for (int i = 0; i < almennt.size(); i++) {
+            Text texti = new Text(almennt.get(i));
+            texti.setWrappingWidth(512);
+            almenntBox.getChildren().add(texti);
+        }
     }
 }
