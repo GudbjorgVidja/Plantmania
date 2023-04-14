@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<DialogPane stylesheets="@styling/derived-style.css" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<DialogPane stylesheets="@styling/derived-style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
     <content>
         <AnchorPane prefHeight="400.0" prefWidth="600.0"> <!-- eiginlega allt hér -->
             <children>
-                <Pane layoutX="23.0" layoutY="31.0" prefHeight="369.0" prefWidth="206.0"
-                      style="-fx-border-color: lightsteelblue;">
+                <Pane layoutX="23.0" layoutY="31.0" prefHeight="369.0" prefWidth="206.0" style="-fx-border-color: lightsteelblue;">
                     <children>
-                        <BorderPane layoutX="32.0" layoutY="51.0" prefHeight="121.0" prefWidth="142.0"
-                                    styleClass="border-pane-rammi" VBox.vgrow="NEVER">
+                        <BorderPane layoutX="32.0" layoutY="51.0" prefHeight="121.0" prefWidth="142.0" styleClass="border-pane-rammi" VBox.vgrow="NEVER">
                             <center>
-                                <ImageView fx:id="fxMynd" fitHeight="114.0" fitWidth="126.0" layoutX="6.0" layoutY="3.0"
-                                           pickOnBounds="true" preserveRatio="true"/>
+                                <ImageView fx:id="fxMynd" fitHeight="114.0" fitWidth="126.0" layoutX="6.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
 
                             </center>
                         </BorderPane>
@@ -28,126 +35,114 @@
                                             pickOnBounds="true" preserveRatio="true"/>
                              </children>
                          </Pane> -->
-                        <Label fx:id="fxAlmenntNafn" layoutX="20.0" layoutY="175.0" prefHeight="17.0" prefWidth="149.0"
-                               text="Gælunafn plöntunnar"/>
-                        <Label fx:id="fxBreytaNafni" layoutX="161.0" layoutY="172.0" prefHeight="25.0"
-                               prefWidth="27.0"/>
-                        <Label fx:id="fxLatnesktNafn" layoutX="20.0" layoutY="204.0" text="fræðiheiti skáletrað"/>
-                        <AnchorPane layoutX="16.0" layoutY="252.0" prefHeight="97.0" prefWidth="175.0"
-                                    style="-fx-border-color: lightgray;">
+                        <Label fx:id="fxAlmenntNafn" layoutX="20.0" layoutY="175.0" prefHeight="17.0" prefWidth="149.0" text="Gælunafn plöntunnar" />
+                        <Label fx:id="fxBreytaNafni" layoutX="161.0" layoutY="172.0" prefHeight="25.0" prefWidth="27.0" />
+                        <Label fx:id="fxLatnesktNafn" layoutX="20.0" layoutY="204.0" text="fræðiheiti skáletrað" />
+                        <AnchorPane layoutX="16.0" layoutY="252.0" prefHeight="97.0" prefWidth="175.0" style="-fx-border-color: lightgray;">
                             <children>
-                                <Label layoutX="14.0" layoutY="31.0" text="stats eins og á plöntuspjaldi?"/>
+                                <Label layoutX="9.0" layoutY="16.0" prefHeight="65.0" prefWidth="158.0" text="Hér munu koma upplýsingar eins og á plöntuspjaldi (ljós, vatn og hitastig)" wrapText="true" />
                             </children>
                         </AnchorPane>
-                        <Label fx:id="fxUppruni" layoutX="71.0" layoutY="14.0" text="Uppruni"/>
+                        <Label fx:id="fxUppruni" layoutX="71.0" layoutY="14.0" text="Uppruni" />
                     </children>
                 </Pane>
-                <Separator layoutX="241.0" layoutY="14.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="3.0"/>
+                <Separator layoutX="241.0" layoutY="14.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="3.0" />
                 <ScrollPane hbarPolicy="NEVER" layoutX="253.0" layoutY="14.0" prefHeight="375.0" prefWidth="341.0">
                     <content>
                         <FlowPane alignment="TOP_CENTER" prefHeight="372.0" prefWidth="322.0" vgap="5.0">
                             <children>
                                 <HBox styleClass="titilbox">
                                     <children>
-                                        <Label styleClass="titill-label" text="Fleiri heiti"/>
-                                        <Label/>
+                                        <Label styleClass="titill-label" text="Fleiri heiti" />
+                                        <Label />
                                     </children>
                                     <FlowPane.margin>
-                                        <Insets top="5.0"/>
+                                        <Insets top="5.0" />
                                     </FlowPane.margin>
                                 </HBox>
                                 <FlowPane fx:id="fxHeiti" hgap="5.0" prefHeight="34.0" prefWidth="296.0" vgap="3.0">
                                     <padding>
-                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                     </padding>
                                 </FlowPane>
                                 <HBox styleClass="titilbox">
                                     <children>
-                                        <Label styleClass="titill-label" text="Athugasemdir"/>
-                                        <Button fx:id="fxAthugasemdir" text="breyta nótum"/>
+                                        <Label styleClass="titill-label" text="Athugasemdir" />
+                                        <Button fx:id="fxAthugasemdir" text="breyta nótum" />
                                     </children>
                                     <FlowPane.margin>
-                                        <Insets top="5.0"/>
+                                        <Insets top="5.0" />
                                     </FlowPane.margin>
                                 </HBox>
-                                <Text fx:id="fxNotes" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="295.0"/>
+                                <Text fx:id="fxNotes" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="295.0" />
                                 <HBox styleClass="titilbox">
                                     <children>
-                                        <Label styleClass="titill-label" text="Um plöntuna"/>
-                                        <Label/>
+                                        <Label styleClass="titill-label" text="Um plöntuna" />
+                                        <Label />
                                     </children>
                                     <FlowPane.margin>
-                                        <Insets top="5.0"/>
+                                        <Insets top="5.0" />
                                     </FlowPane.margin>
                                 </HBox>
-                                <Text fx:id="fxUmPlontuna" strokeType="OUTSIDE" strokeWidth="0.0"
-                                      wrappingWidth="295.0"/>
+                                <Text fx:id="fxUmPlontuna" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="295.0" />
                                 <HBox styleClass="titilbox">
                                     <children>
-                                        <Label styleClass="titill-label" text="Vökvun"/>
-                                        <Label fx:id="fxNaestaVokvun" text="næst eftir 2 daga"/>
+                                        <Label styleClass="titill-label" text="Vökvun" />
+                                        <Label fx:id="fxNaestaVokvun" text="næst eftir 2 daga" />
                                     </children>
                                     <FlowPane.margin>
-                                        <Insets top="5.0"/>
+                                        <Insets top="5.0" />
                                     </FlowPane.margin>
                                 </HBox>
                                 <Button fx:id="fxVokvunarsaga" mnemonicParsing="false" text="vökvunarsaga">
                                     <FlowPane.margin>
-                                        <Insets bottom="10.0"/>
+                                        <Insets bottom="10.0" />
                                     </FlowPane.margin>
                                 </Button>
                                 <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="300.0" spacing="10.0">
-                                    <Label text="bæta við vökvun"/>
-                                    <DatePicker fx:id="fxDatePicker"/>
+                                    <Label text="bæta við vökvun" />
+                                    <DatePicker fx:id="fxDatePicker" />
                                 </HBox>
                                 <HBox alignment="CENTER_LEFT" prefWidth="300.0" spacing="10.0">
-                                    <Label fx:id="fxThinnTimi" text="Þinn tími milli vökvana: "/>
-                                    <Button fx:id="fxBreytaTimaMilliVokvana" text="Breyta"/>
+                                    <Label fx:id="fxThinnTimi" text="Þinn tími milli vökvana: " />
+                                    <Button fx:id="fxBreytaTimaMilliVokvana" text="Breyta" />
                                 </HBox>
-                                <Label fx:id="fxMedaltimi" prefHeight="36.0" prefWidth="300.0"
-                                       text="Meðaltími milli vökvana: "/>
+                                <Label fx:id="fxMedaltimi" prefHeight="36.0" prefWidth="300.0" text="Meðaltími milli vökvana: " />
                                 <HBox layoutX="25.0" layoutY="49.0" styleClass="titilbox">
                                     <children>
-                                        <Label styleClass="titill-label" text="Ljósþörf"/>
+                                        <Label styleClass="titill-label" text="Ljósþörf" />
                                     </children>
                                 </HBox>
-                                <Text fx:id="fxLjosthorf" layoutX="25.0" layoutY="96.0" strokeType="OUTSIDE"
-                                      strokeWidth="0.0"
-                                      text="Plantan þarf mikið sólarljós, en varast skal mikið beint sólarljós. "
-                                      wrappingWidth="295.0"/>
+                                <Text fx:id="fxLjosthorf" layoutX="25.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plantan þarf mikið sólarljós, en varast skal mikið beint sólarljós. " wrappingWidth="295.0" />
                                 <HBox layoutX="25.0" layoutY="189.0" styleClass="titilbox">
                                     <children>
-                                        <Label styleClass="titill-label" text="Hitastig"/>
-                                        <Label/>
+                                        <Label styleClass="titill-label" text="Hitastig" />
+                                        <Label />
                                     </children>
                                 </HBox>
-                                <Text fx:id="fxHitastig" layoutX="25.0" layoutY="232.0" strokeType="OUTSIDE"
-                                      strokeWidth="0.0"
-                                      text="Kjörhitastig er 16°C, en plantan þolir allt á milli 4° og 30°."
-                                      wrappingWidth="295.0"/>
+                                <Text fx:id="fxHitastig" layoutX="25.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kjörhitastig er 16°C, en plantan þolir allt á milli 4° og 30°." wrappingWidth="295.0" />
                                 <HBox layoutX="25.0" layoutY="317.0" styleClass="titilbox">
                                     <children>
-                                        <Label styleClass="titill-label" text="Eitrun"/>
-                                        <Label/>
+                                        <Label styleClass="titill-label" text="Eitrun" />
+                                        <Label />
                                     </children>
                                 </HBox>
-                                <Text fx:id="fxEitrun" layoutX="25.0" layoutY="232.0" strokeType="OUTSIDE"
-                                      strokeWidth="0.0" wrappingWidth="295.0"/>
+                                <Text fx:id="fxEitrun" layoutX="25.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="295.0" />
 
                                 <HBox layoutX="25.0" layoutY="317.0" styleClass="titilbox">
                                     <children>
-                                        <Label styleClass="titill-label" text="Einkenni plöntunnar"/>
-                                        <Label/>
+                                        <Label styleClass="titill-label" text="Einkenni plöntunnar" />
+                                        <Label />
                                     </children>
                                 </HBox>
                                 <FlowPane fx:id="fxEinkenni" hgap="5.0" prefHeight="34.0" prefWidth="296.0" vgap="3.0">
                                     <padding>
-                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                     </padding>
                                 </FlowPane>
                             </children>
                             <padding>
-                                <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
+                                <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                             </padding>
                         </FlowPane>
                     </content>
