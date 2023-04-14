@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.*?>
 <?import vidmot.plantmania.Dagatal?>
 <?import vidmot.plantmania.Plontuyfirlit?>
@@ -123,23 +122,6 @@
             </content>
             <graphic>
                 <Label styleClass="tablabell" text="fræðsla"/>
-            </graphic>
-        </Tab>
-        <Tab>
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorpane">
-                    <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dce5ed" height="130.0" layoutX="35.0"
-                                   layoutY="32.0" stroke="BLACK" strokeType="INSIDE" width="136.0"/>
-                        <Button layoutX="76.0" layoutY="418.0" onAction="#skraUt" text="Skrá út"/>
-                        <Text layoutX="53.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notendanafn"/>
-                        <Text layoutX="53.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                              text="fjöldi plantna: x"/>
-                    </children>
-                </AnchorPane>
-            </content>
-            <graphic>
-                <Label styleClass="tablabell" text="notandi"/>
             </graphic>
         </Tab>
     </tabs>
