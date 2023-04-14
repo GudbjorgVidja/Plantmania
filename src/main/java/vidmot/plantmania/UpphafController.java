@@ -97,15 +97,8 @@ public class UpphafController {
      */
     private List<Notandi> lesaUrSkra() {
         List<Notandi> notendur = new ArrayList<>();
-
         ObjectMapper objectMapper = new ObjectMapper();
-
-        //ath að þessar þrjár línur hafa með deserializerinn minn að gera, en það þarf að laga hann!
-        //SimpleModule module = new SimpleModule();
-        //module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-        //objectMapper.registerModule(module);
         objectMapper.findAndRegisterModules();
-
         try {
             notendur = objectMapper.readValue(new File(filename), new TypeReference<>() {
             });
@@ -125,11 +118,7 @@ public class UpphafController {
     private void skrifaISkra(List<Notandi> notendur) {
         System.out.println("skrifa i skra");
         ObjectMapper objectMapper = new ObjectMapper();
-        //SimpleModule module = new SimpleModule();
-        //module.addDeserializer(ObservableList.class, new ObservableListDeserializer());
-        //objectMapper.registerModule(module);
         objectMapper.findAndRegisterModules();
-
         try {
             File file = new File(filename);
             if (file.createNewFile()) {
@@ -142,7 +131,6 @@ public class UpphafController {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
     }
 
     /**
@@ -154,9 +142,7 @@ public class UpphafController {
     public void skraInn(ActionEvent actionEvent) {
         if (ogiltInntak()) {
             setjaSkradanNotanda();
-            hreinsaReiti();
             System.out.println(skradurNotandi.get());
-
             ViewSwitcher.switchTo(View.ADALSIDA);
         } else {
             System.out.println("Notendanafn eða lykilorð rangt");
@@ -178,17 +164,7 @@ public class UpphafController {
             notendur.add(utkoma.get());
             skrifaISkra(notendur);
             skradurNotandi.set(utkoma.get());
-            hreinsaReiti();
             ViewSwitcher.switchTo(View.ADALSIDA);
         }
-    }
-
-    /**
-     * hreinsar reit fyrir notendanafn og lykilorð
-     * ATH: sennilega óþarfi núna!!!
-     */
-    public void hreinsaReiti() {
-        fxNotendanafn.textProperty().set("");
-        fxLykilord.textProperty().set("");
     }
 }
