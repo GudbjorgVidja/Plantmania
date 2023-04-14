@@ -13,7 +13,7 @@ public class PlantApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(PlantApplication.class.getResource("upphaf-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 750, 500);
         ViewSwitcher.setScene(scene);
-        ViewSwitcher.switchTo(View.UPPHAFSSIDA);//það þarf að taka eitthvað út held ég, það loadast tvisvar, en virkar
+        ViewSwitcher.switchTo(View.UPPHAFSSIDA);
         stage.setTitle("Plants in pants!");
         stage.setScene(scene);
         stage.show();

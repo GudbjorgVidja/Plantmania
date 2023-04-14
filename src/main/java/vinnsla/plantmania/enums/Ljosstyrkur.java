@@ -1,6 +1,8 @@
 package vinnsla.plantmania.enums;
 
-//kannski líka skuggaþolin? eða ekki
+/**
+ * Enum fyrir ákjósanlegan ljósstyrk fyrir plöntuna. Bæta kannski við skuggþolin
+ */
 public enum Ljosstyrkur {
     OBEINT("óbeint"),
     HALFBEINT("hálfbeint"),

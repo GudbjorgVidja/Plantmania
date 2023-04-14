@@ -12,18 +12,23 @@ import vinnsla.plantmania.Notandi;
 import java.util.List;
 
 /**
+ * Höfundur: Sigurbjörg Erla
  * Klasi fyrir dialoginn sem kemur þegar notandi gerir nýjan aðgang
  */
 public class NyskraningDialog extends Dialog<Notandi> {
-    private List<Notandi> adgangarISkra;
-    private TextField fxNotendanafn;
-    private PasswordField fxLykilord;
-    private PasswordField fxEndurtekning;
-    private Text fxVilla;
-    private BooleanProperty notandiTil = new SimpleBooleanProperty();
-    private BooleanProperty lykilordRettEndurtekid = new SimpleBooleanProperty();
+    private List<Notandi> adgangarISkra;//listi yfir alla notendur í skránni
+    private TextField fxNotendanafn;//textfield fyrir notendanafn
+    private PasswordField fxLykilord;//passwordField fyrir lykilorð
+    private PasswordField fxEndurtekning;//passwordfield fyrir endurtekningu á lykilorði
+    private Text fxVilla;//text fyrir skilaboð þegar notendanafn er nú þegar í notkun
+    private BooleanProperty notandiTil = new SimpleBooleanProperty();//booleanproperty sem segir til um hvort notendanafn er í notkun
+    private BooleanProperty lykilordRettEndurtekid = new SimpleBooleanProperty();//booleanproperty sem segir til um hvort það standi það sama í báðum lykilorðareitum
+    private ButtonType ILagi = new ButtonType("Í lagi", ButtonBar.ButtonData.OK_DONE);//buttontype fyrir í lagi takkann
+    private ButtonType HaettaVid = new ButtonType("Hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);//buttontype fyrir hætta við takkann
 
     /**
+     * smiður
+     *
      * @param notendur - List<Notandi> listi yfir alla notendur sem eru til í kerfinu
      */
     public NyskraningDialog(List<Notandi> notendur) {
@@ -55,7 +60,7 @@ public class NyskraningDialog extends Dialog<Notandi> {
         g.add(new Label("Endurtaka lykilorð"), 0, 3);
         g.add(fxEndurtekning, 1, 3);
         getDialogPane().setContent(g);
-        getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        getDialogPane().getButtonTypes().addAll(ILagi, HaettaVid);
         getDialogPane().setHeaderText("Nýskráning");
     }
 
@@ -63,9 +68,8 @@ public class NyskraningDialog extends Dialog<Notandi> {
      * gerir reglu til að óvikja í lagi takkann ef reitir eru tómir, notendanafn er ekki laust
      * eða lykilorð ekki rétt endurtekið
      */
-    //TODO: Hafa eitt sameiginlegt BooleanProperty fyrir alla lógíkina
     private void takkaRegla() {
-        getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(fxNotendanafn.textProperty().
+        getDialogPane().lookupButton(ILagi).disableProperty().bind(fxNotendanafn.textProperty().
                 isEmpty().or(fxLykilord.textProperty().isEmpty()).or(fxEndurtekning.textProperty().isEmpty()).
                 or(notandiTil).or(lykilordRettEndurtekid.not()));
     }
@@ -103,7 +107,7 @@ public class NyskraningDialog extends Dialog<Notandi> {
      */
     private void setResultConverter() {
         Callback<ButtonType, Notandi> personResultConverter = param -> {
-            if (param == ButtonType.OK) {
+            if (param == ILagi) {
                 return new Notandi(fxNotendanafn.getText(), fxLykilord.getText());
             } else {
                 return null;

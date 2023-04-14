@@ -13,6 +13,7 @@ import java.util.Collections;
 
 
 /**
+ * Höfundur: Sigurbjörg Erla og Guðbjörgu Viðju
  * MinPlanta erfir frá Planta. Planta inniheldur grunnupplýsingar, en MinPlanta er útgáfa sem notandi á, og MinPlanta
  * inniheldur og geymir upplýsingar um bara þann tiltekna hlut.
  * Klasinn er controller, og les inn viðmót úr skránni minplanta-view.fxml.

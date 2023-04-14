@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 /**
+ * Höfundur: Sigurbjörg Erla
  * Custom deserializer fyrir vinnsluklasann MinPlanta, sem erfir frá Planta. Það þurfti að gera hann til að
  * geta afkóðað ObservableList úr json skrá
  */

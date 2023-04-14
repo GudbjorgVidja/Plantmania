@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Höfundur: Sigurbjörg Erla
  * Sérhæfður klasi fyrir Dagatal. Hefur hnappa en virkni þeirra er útfærð í PlantController eins og er,
  * til að það sé frekar hægt að endurnýta dagatalið
  */
@@ -34,8 +35,7 @@ public class Dagatal extends AnchorPane {
     private GridPane fxGrid;//gridpane sem inniheldur dagana í dagatalinu. Inniheldur labels með vikudögum og Dagur hluti
 
     private final String[] manudir = new String[]{"Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí",
-            "Ágúst", "September", "Október", "Nóvember", "Desember"};
-    ;//fylki af strengjum með mánaðarheitum
+            "Ágúst", "September", "Október", "Nóvember", "Desember"};//óbreytanlegt fylki af strengjum með mánaðarheitum
 
     private LocalDate syndurDagur;//dagurinn sem dagatalið sýnir. Notað til að vita hvaða mánuður er sýndur í augnablikinu
 
@@ -75,21 +75,15 @@ public class Dagatal extends AnchorPane {
 
         for (int i = 7; i < 49; i++) {
             if (fxGrid.getChildren().get(i) instanceof Dagur && !dagalisti.isEmpty() && !((i - 7) < fyrstiDagurManadar.ordinal())) {
-                (fxGrid.getChildren().get(i)).setStyle("-fx-background-color: #85edad;");
                 LocalDate dagurinn = LocalDate.of(syndurDagur.getYear(), syndurDagur.getMonthValue(), dagalisti.get(0));
                 IntegerBinding fjoldiVokvanaLokid = Bindings.size(vokvanirManadarinsLokid.filtered(p -> p.getValue().isEqual(dagurinn)));
                 IntegerBinding fjoldiVokvanaOlokid = Bindings.size(vokvanirManadarinsOlokid.filtered(p -> p.getValue().isEqual(dagurinn)));
-
                 BooleanProperty dagurinnErLidinn = new SimpleBooleanProperty(dagurinn.isBefore(LocalDate.now()));
+
                 ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().styleProperty().bind(Bindings.when(dagurinnErLidinn).then("-fx-text-fill: red").otherwise("-fx-text-fill: black"));
 
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().textProperty().bind(
-                        Bindings.when(fjoldiVokvanaOlokid.isEqualTo(0)).then("")
-                                .otherwise(fjoldiVokvanaOlokid.asString()));
-                ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvana().textProperty().bind(
-                        Bindings.when(fjoldiVokvanaLokid.isEqualTo(0)).then("")
-                                .otherwise(fjoldiVokvanaLokid.asString()));
-                ((Dagur) fxGrid.getChildren().get(i)).getFxDropi().visibleProperty().bind(fjoldiVokvanaLokid.greaterThan(0).or(fjoldiVokvanaOlokid.greaterThan(0)));
+                setjaVirkanDag((Dagur) fxGrid.getChildren().get(i), fjoldiVokvanaLokid, fjoldiVokvanaOlokid);
+
                 ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText(dagalisti.get(0) + "");
 
                 dagalisti.remove(0);
@@ -97,6 +91,18 @@ public class Dagatal extends AnchorPane {
                 setjaOvirkanDag(((Dagur) fxGrid.getChildren().get(i)));
             }
         }
+    }
+
+    private void setjaVirkanDag(Dagur dagur, IntegerBinding fjoldiVokvanaLokid, IntegerBinding fjoldiVokvanaOlokid) {
+        dagur.setStyle("-fx-background-color: #85edad;");
+
+        dagur.getFxFjoldiVokvanaOlokid().textProperty().bind(
+                Bindings.when(fjoldiVokvanaOlokid.isEqualTo(0)).then("")
+                        .otherwise(fjoldiVokvanaOlokid.asString()));
+        dagur.getFxFjoldiVokvana().textProperty().bind(
+                Bindings.when(fjoldiVokvanaLokid.isEqualTo(0)).then("")
+                        .otherwise(fjoldiVokvanaLokid.asString()));
+        dagur.getFxDropi().visibleProperty().bind(fjoldiVokvanaLokid.greaterThan(0).or(fjoldiVokvanaOlokid.greaterThan(0)));
     }
 
     /**

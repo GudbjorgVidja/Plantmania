@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import vinnsla.plantmania.Planta;
 
 /**
+ * Höfundur: Guðbjörg Viðja
  * Sérhæfður klasi, hlutur sem inniheldur mynd af plöntu, almennt heiti hennar, og uppruna. Spjald hlutur er á bæði
  * PlantaSpjald og MinPlantaSpjald.
  */

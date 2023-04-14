@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -26,9 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//TODO: hafa einhvers staðar lista af öllum plöntum, til að hafa auðveldari (og kannski hagkvæmari) aðgang að þeim á keyrslutíma. S: þarf þess? er ekki bara skoðað út frá minPLanta?  G: jú sorry
-
 /**
+ * Höfundar: Guðbjörg Viðja og Sigurbjörg Erla
  * Controller fyrir aðalsenuna. Þar sem við notum TabPane er það sem væri annars í 5 senum eða svo í einni
  * senu, svo það er meira hér en væri annars
  */
@@ -221,7 +222,7 @@ public class PlantController {
                 int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
 
-                //TODO: ath kannski hvort naestu vokvanir fari ekki örugglega fram í tímann um 3 mánuði en ekki alltaf lengra og lengra
+                //TODO: eyða þessu fljótlega
                 System.out.println("fyrri vokvanir: " + notendaupplysingar.getFyrriVokvanir());
                 System.out.println("naestu vokvanir: " + notendaupplysingar.getNaestuVokvanir());
 
@@ -242,13 +243,18 @@ public class PlantController {
                         vokvanirDagsinsDialog.showAndWait();
                     }
                     if (!plonturDagsinsOlokid.isEmpty()) {
-                        VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
-                        vokvanirDagsinsDialog2.showAndWait();
+                        if (valinDagsetning.isBefore(LocalDate.now())) {
+                            VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem hefði átt að vökva " + valinDagsetning);
+                            vokvanirDagsinsDialog2.showAndWait();
+                        } else {
+                            VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
+                            vokvanirDagsinsDialog2.showAndWait();
+                        }
                     }
                 }
 
                 //gerir dropann sýnilegan þegar það er ýtt á dag, taka út seinna
-                //breyta frekar litnum!! og ef það er ýtt aftur er "afvalið"???
+                //breyta frekar litnum!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
                 dagur.getFxDropi().visibleProperty().unbind();
                 dagur.getFxDropi().setVisible(true);
             }
@@ -260,7 +266,6 @@ public class PlantController {
     @FXML
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
-     * todo: bætir þetta plöntu við yfirlit?
      */
     private void hladaOllumPlontum(MouseEvent event) {
         Node node = event.getPickResult().getIntersectedNode();
@@ -269,8 +274,10 @@ public class PlantController {
         }
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
-            //skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
-            skradurNotandi.get().addaPlanta(p);
+            skradurNotandi.get().baetaVidPlontu(p);
+
+            Alert a = new Alert(Alert.AlertType.NONE, "Nýrri plöntu bætt við þínar plöntur", ButtonType.OK);
+            a.showAndWait();
         }
     }
 

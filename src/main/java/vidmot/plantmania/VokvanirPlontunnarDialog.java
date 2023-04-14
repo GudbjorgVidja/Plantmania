@@ -2,16 +2,18 @@ package vidmot.plantmania;
 
 import javafx.event.Event;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import vinnsla.plantmania.MinPlanta;
 
 import java.time.LocalDate;
 
+/**
+ * Höfundur: Sigurbjörg Erla
+ * Dialog til að sýna allar dagsetningar sem ákveðin planta hefur verið vökvuð, með ListView.
+ * Verður mögulega skipt út fyrir tilvik af Dagatal
+ */
 public class VokvanirPlontunnarDialog extends Dialog<Void> {
     public VokvanirPlontunnarDialog(MinPlanta minPlanta) {
         getDialogPane().setPadding(new Insets(10));
@@ -19,7 +21,6 @@ public class VokvanirPlontunnarDialog extends Dialog<Void> {
 
         ListView<LocalDate> listView = new ListView<>(minPlanta.getVokvanir());
         listView.setMaxHeight(100);
-        //listView.setCellFactory(new PlantaCellFactory());
         Button eyda = new Button("Eyða");
 
         eyda.addEventFilter(MouseEvent.MOUSE_CLICKED, (Event event) -> {
@@ -29,6 +30,7 @@ public class VokvanirPlontunnarDialog extends Dialog<Void> {
         });
 
         getDialogPane().setContent(new VBox(listView, eyda));
-        getDialogPane().getButtonTypes().setAll(ButtonType.CLOSE);
+
+        getDialogPane().getButtonTypes().setAll(new ButtonType("Loka", ButtonBar.ButtonData.CANCEL_CLOSE));
     }
 }

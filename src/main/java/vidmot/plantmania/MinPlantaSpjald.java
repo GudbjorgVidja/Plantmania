@@ -12,6 +12,7 @@ import vinnsla.plantmania.MinPlanta;
 import java.time.LocalDate;
 
 /**
+ * Höfundur: Guðbjörg Viðja
  * minPlantaSpjald les inn fxml skrána minplanta-view.fxml. Þessi klasi er controllerinn
  * MinPlantaSpjald inniheldur Spjald hlut með sömu plöntu. Tilheyrandi vinnsluklasi er MinPlanta.java
  */

@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
+ * Höfundur: Sigurbjörg Erla
  * Sérhæfður klasi fyrir hvern dag í dagatali
  */
 public class Dagur extends Pane {

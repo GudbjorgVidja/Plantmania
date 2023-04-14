@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
@@ -16,6 +13,7 @@ import vinnsla.plantmania.MinPlanta;
 import java.time.LocalDate;
 
 /**
+ * Höfundur: Sigurbjörg Erla
  * Dialog sem kemur þegar ýtt er á dag í dagatali, til að sjá hvaða plöntur á að vökva/voru vökvaðar þann daginn
  */
 public class VokvanirDagsinsDialog extends Dialog<Void> {
@@ -43,6 +41,6 @@ public class VokvanirDagsinsDialog extends Dialog<Void> {
         });
 
         getDialogPane().setContent(new VBox(listView, skoda));
-        getDialogPane().getButtonTypes().setAll(ButtonType.CLOSE);
+        getDialogPane().getButtonTypes().setAll(new ButtonType("Loka", ButtonBar.ButtonData.CANCEL_CLOSE));
     }
 }
