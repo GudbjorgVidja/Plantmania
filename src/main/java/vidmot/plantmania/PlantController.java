@@ -122,36 +122,9 @@ public class PlantController {
     private void lesaInnAllarPlontur() {
         List<Planta> lesnarPlontur = (new LesaPlontur()).getPlontur();
         for (Planta p : lesnarPlontur) {
-
             fxAllarPlonturYfirlit.baetaVidYfirlit(p);
-
-            /*loadar nákvæmlega jafn oft og línan fyrir ofan
-            PlantaSpjald spjald = new PlantaSpjald(p);
-            fxAllarPlonturYfirlit.baetaVidYfirlit(spjald);
-
-             */
-
         }
-
-        /* //sleppa alveg allarPlontur listanum
-        allarPlontur.addAll((new LesaPlontur()).getPlontur());
-        for (Planta planta : allarPlontur) {
-            fxAllarPlonturYfirlit.baetaVidYfirlit(planta);
-        }
-         */
     }
-
-    /*private void bindaNotendaPlontur(){
-        fxMinarPlonturYfirlit.getMinarPlonturYfirlit().addListener((ListChangeListener<? super Node>) change -> {
-            change.next();
-            if(change.wasAdded()){
-                List<Node> listi = (List<Node>) change.getAddedSubList();
-                for(Node node: listi){
-                    if(node instanceof MinPlanta)
-                }
-            }
-        });
-    }*/
 
     /**
      * birtir plöntur notanda í yfirliti
@@ -262,7 +235,6 @@ public class PlantController {
     }
 
 
-    //hvað er þetta?
     @FXML
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
