@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Þessi klasi er ekki góður, og verður tekinn út og í staðinn lesið inn úr skrá. Bara til bráðabirgða.
- * todo: laga þetta
+ * Þessi klasi er ekki varanlegur, þetta mun vera lesið inn úr skrá eða eitthvað svoleiðis. Bara til bráðabirgða.
  */
 public class Fraedsla {
     private String misting;
@@ -105,11 +104,7 @@ public class Fraedsla {
 
         String almennt3 = "Ekki er til nein ein besta leið til að vökva allar plöntur, heldur eru ýmsir þættir sem geta haft áhrif. Mestu máli skiptir hvernig planta þetta er og hvaðan hún kemur, en það getur verið gott að líkja eftir náttúrulegu umhverfi hennar. En einnig þarf að taka aðra þætti með í reikninginn, eins og hvernig mold og pott plantan er í, hversu mikið ljós hún fær, rakastig og hita.\n";
 
-
-        //vandamalListi = new ArrayList<>(List.of(vandamal, solbruni, ofvokvun, brunLauf, teygja, gul, skordyr));
-        System.out.println();
         List<String> listi = new ArrayList<>(List.of(umVandamal, solbruni, ofvokvun, brunLauf, teygja, gul));//vandamal, skordyr
-        //vandamalListi.addAll(List.of(vandamal, solbruni, ofvokvun, brunLauf, teygja, gul, skordyr));
         vandamalListi = listi;
 
         almenntListi = new ArrayList<>(List.of(almennt1, almennt2, almennt3));
