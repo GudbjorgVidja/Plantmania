@@ -41,7 +41,6 @@
         <MenuButton fx:id="fxNotandi" layoutX="444.0" layoutY="12.0" mnemonicParsing="false" text="notandi">
             <items>
                 <MenuItem fx:id="fxSkraUt" mnemonicParsing="false" text="skrá út"/>
-                <MenuItem mnemonicParsing="false" text="Action 2"/>
             </items>
         </MenuButton>
     </children>
