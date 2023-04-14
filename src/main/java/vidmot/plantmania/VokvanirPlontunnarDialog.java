@@ -2,10 +2,7 @@ package vidmot.plantmania;
 
 import javafx.event.Event;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import vinnsla.plantmania.MinPlanta;
@@ -33,6 +30,7 @@ public class VokvanirPlontunnarDialog extends Dialog<Void> {
         });
 
         getDialogPane().setContent(new VBox(listView, eyda));
-        getDialogPane().getButtonTypes().setAll(ButtonType.CLOSE);
+
+        getDialogPane().getButtonTypes().setAll(new ButtonType("Loka", ButtonBar.ButtonData.CANCEL_CLOSE));
     }
 }

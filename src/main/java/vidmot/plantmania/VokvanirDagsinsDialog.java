@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
@@ -44,6 +41,6 @@ public class VokvanirDagsinsDialog extends Dialog<Void> {
         });
 
         getDialogPane().setContent(new VBox(listView, skoda));
-        getDialogPane().getButtonTypes().setAll(ButtonType.CLOSE);
+        getDialogPane().getButtonTypes().setAll(new ButtonType("Loka", ButtonBar.ButtonData.CANCEL_CLOSE));
     }
 }

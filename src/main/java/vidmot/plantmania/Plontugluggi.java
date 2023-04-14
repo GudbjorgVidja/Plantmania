@@ -49,7 +49,6 @@ public class Plontugluggi extends Dialog<Void> {
     //private Planta plantan;//ef glugginn er fyrir planta, kemur etv seinna
 
     //ToDo: setja fxEinkenni, fxLjosthorf (styrkur og tími?), fxEitrun, fxUppruni
-    //það segir að þetta komi sem overloaded method, held ég???
     public Plontugluggi() {
         setDialogPane(lesaGlugga());
         ButtonType lokaTakki = new ButtonType("Loka glugga", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -119,6 +118,9 @@ public class Plontugluggi extends Dialog<Void> {
         }
     }
 
+    /**
+     * bindur textann í fxNotes við notesFraNotanda í MinPlanta
+     */
     public void setjaFxNotesBinding() {
         fxNotes.textProperty().bind(minPlantan.notesFraNotandaProperty());
     }
@@ -184,13 +186,22 @@ public class Plontugluggi extends Dialog<Void> {
     /**
      * Handler til að breyta tíma milli vökvana þegar ýtt er á hnappinn, gerir TextInputDialog, setur formatter
      * á hann, óvirkjar ok takkann við réttar aðstæður og uppfærir thinnTimiMilliVokvana í MinPlanta ef við á
+     * ATH hvernig buttonTypes er skipt út
      *
      * @param mouseEvent - atburðurinn
      */
     private void setjaFxBreytaTimaMilliVokvanaEventFilter(MouseEvent mouseEvent) {
         TextInputDialog timiDialog = new TextInputDialog(minPlantan.getAlmennurTimiMilliVokvana() + "");
         geraTextFormatter(timiDialog.getEditor());
-        timiDialog.getDialogPane().lookupButton(ButtonType.OK).disableProperty().bind(timiDialog.getEditor().textProperty().isEmpty());
+        ButtonType iLagi = new ButtonType("Í lagi", ButtonBar.ButtonData.OK_DONE);
+        ButtonType haettaVid = new ButtonType("Hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
+        timiDialog.getDialogPane().getButtonTypes().removeAll(ButtonType.OK, ButtonType.CANCEL);
+        timiDialog.getDialogPane().getButtonTypes().addAll(iLagi, haettaVid);
+
+        timiDialog.setHeaderText("Breyting á þínum tíma milli vökvana");
+        timiDialog.setTitle("");
+
+        timiDialog.getDialogPane().lookupButton(iLagi).disableProperty().bind(timiDialog.getEditor().textProperty().isEmpty());
         Optional<String> svar = timiDialog.showAndWait();
         svar.ifPresent(s -> minPlantan.setThinnTimiMilliVokvana(Integer.parseInt(s)));
     }
@@ -255,6 +266,16 @@ public class Plontugluggi extends Dialog<Void> {
     private void breytaNafniHandler(MouseEvent event) {
         System.out.println("nafni verdur breytt");
         TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getNickName());
+
+        ButtonType iLagi = new ButtonType("vista breytingar", ButtonBar.ButtonData.OK_DONE);
+        ButtonType haettaVid = new ButtonType("hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
+        nafnDialog.getDialogPane().getButtonTypes().removeAll(ButtonType.OK, ButtonType.CANCEL);
+
+        nafnDialog.getDialogPane().getButtonTypes().addAll(iLagi, haettaVid);
+
+        nafnDialog.setHeaderText("Breyting á nafni");
+        nafnDialog.setTitle("");
+
         Optional<String> inntak = nafnDialog.showAndWait();
         if (inntak.isPresent()) {
             minPlantan.setNickName(inntak.get());

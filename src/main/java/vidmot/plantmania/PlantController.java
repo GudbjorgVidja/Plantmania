@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -257,7 +259,6 @@ public class PlantController {
     @FXML
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
-     * todo: bætir þetta plöntu við yfirlit?
      */
     private void hladaOllumPlontum(MouseEvent event) {
         Node node = event.getPickResult().getIntersectedNode();
@@ -266,8 +267,10 @@ public class PlantController {
         }
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
-            //skradurNotandi.get().getNotendaupplysingar().baetaVidPlontu(p);
             skradurNotandi.get().baetaVidPlontu(p);
+
+            Alert a = new Alert(Alert.AlertType.NONE, "Nýrri plöntu bætt við þínar plöntur", ButtonType.OK);
+            a.showAndWait();
         }
     }
 
