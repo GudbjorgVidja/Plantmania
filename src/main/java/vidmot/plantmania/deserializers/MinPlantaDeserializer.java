@@ -17,11 +17,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-
-public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {  //StdDeserializer<MinPlanta> {
-
+/**
+ * Custom deserializer fyrir vinnsluklasann MinPlanta, sem erfir frá Planta. Það þurfti að gera hann til að
+ * geta afkóðað ObservableList úr json skrá
+ */
+public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
     public MinPlantaDeserializer() {
-
     }
 
     @Override
@@ -30,8 +31,7 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {  //StdD
         JsonNode node = objectMapper.readTree(parser);
         MinPlanta minPlanta = new MinPlanta();
 
-
-        //venjuleg gildi
+        //venjuleg gildi (String, StringProperty, int, IntegerProperty)
         minPlanta.setLatnesktNafn(node.get("latnesktNafn").asText());
         minPlanta.setAlmenntNafn(node.get("almenntNafn").asText());
         minPlanta.setMyndaslod(node.get("myndaslod").asText());
@@ -44,51 +44,22 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {  //StdD
         minPlanta.setThinnTimiMilliVokvana(node.get("thinnTimiMilliVokvana").asInt());
         minPlanta.setNaestaVokvun(node.get("naestaVokvun").asInt());
 
-        //og LocalDate (var objectProperty).
+        //LocalDate (var ObjectProperty<LocalDate>).
         Integer[] dagur = objectMapper.treeToValue(node.get("sidastaVokvun"), Integer[].class);
-        minPlanta.setSidastaVokvun(LocalDate.of(dagur[0], dagur[1], dagur[2]));
+        minPlanta.setSidastaVokvun((!node.get("sidastaVokvun").isNull()) ? LocalDate.of(dagur[0], dagur[1], dagur[2]) : null);
 
-
-        //og enum. er þetta rétt?
+        //Enum
         minPlanta.setUppruni(Uppruni.valueOf(node.get("uppruni").asText()));
         minPlanta.setLjosstyrkur(Ljosstyrkur.valueOf(node.get("ljosstyrkur").asText()));
         minPlanta.setEitrun(Eitrun.valueOf(node.get("eitrun").asText()));
         minPlanta.setVatnsthorf(Vatnsthorf.valueOf(node.get("vatnsthorf").asText()));
 
-
-        //og venjulegir listar. hvernig er þetta?
+        //venjulegir listar. hvernig er þetta?
         minPlanta.setOllHeiti(Arrays.asList(objectMapper.treeToValue(node.get("ollHeiti"), String[].class)));
         minPlanta.setEinkenniPlontu(Arrays.asList(objectMapper.treeToValue(node.get("einkenniPlontu"), String[].class)));
         minPlanta.setKjorhitastig(Arrays.asList(objectMapper.treeToValue(node.get("kjorhitastig"), Integer[].class)));
 
-
-        //veit að þetta virkar fyrir venjulega lista!
-        /*JsonNode childNodes1 = node.get("ollHeiti");
-        List<String> children1 = new ArrayList<>();
-        for (JsonNode childNode : childNodes1) {
-            String child = childNode.asText();
-            children1.add(child);
-        }
-        minPlanta.setOllHeiti(children1);
-
-        JsonNode childNodes2 = node.get("einkenniPlontu");
-        List<String> children2 = new ArrayList<>();
-        for (JsonNode childNode : childNodes2) {
-            String child = childNode.asText();
-            children2.add(child);
-        }
-        minPlanta.setEinkenniPlontu(children2);
-
-        JsonNode childNodes3 = node.get("kjorhitastig");
-        List<Integer> children3 = new ArrayList<>();
-        for (JsonNode childNode : childNodes3) {
-            int child = childNode.asInt();
-            children3.add(child);
-        }
-        minPlanta.setKjorhitastig(children3);*/
-
-
-        //observableList fyrir vökvanir. Hef ekki hugmynd
+        //ObservableList fyrir vökvanir
         JsonNode vokvanirNodes = node.get("vokvanir");
         ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();
         for (JsonNode vokvunNode : vokvanirNodes) {
@@ -97,6 +68,7 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {  //StdD
         }
         minPlanta.setVokvanir(vokvanir);
 
+        //ObservableList fyrir planaðar vökvanir
         JsonNode planadarVokvanirNodes = node.get("planadarVokvanir");
         ObservableList<LocalDate> planadarVokvanir = FXCollections.observableArrayList();
         for (JsonNode plonudVokvunNode : planadarVokvanirNodes) {
