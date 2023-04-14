@@ -85,12 +85,10 @@ public class PlantController {
         for (Node node : titledPaneBoxid.getChildren()) {
             if (node instanceof TitledPane) {
                 ((TitledPane) node).expandedProperty().addListener((obs, o, n) -> {
-                    //if(!n) ((TitledPane) node).setMaxHeight(0);
-                    //if (n) ((TitledPane) node).setPrefHeight();
                     System.out.println(n);
                     if (!n) ((TitledPane) node).maxHeightProperty().set(0);
                     else if (n) ((TitledPane) node).maxHeightProperty().set(((TitledPane) node).getPrefHeight());
-                    //else if (!n) ((TitledPane) node).maxHeightProperty().set(Double.NEGATIVE_INFINITY);
+                    //todo: eða nota Double.MAX_VALUE?
                 });
             }
         }
