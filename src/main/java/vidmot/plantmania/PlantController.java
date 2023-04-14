@@ -15,12 +15,14 @@ import javafx.scene.Node;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Pair;
 import vinnsla.plantmania.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,6 +41,9 @@ public class PlantController {
     private Dagatal fxDagatal;
     @FXML
     private VBox titledPaneBoxid;
+
+    @FXML
+    private VBox vokvaBox, vandamalBox, annadBox;
 
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
@@ -79,6 +84,8 @@ public class PlantController {
         System.out.println(skradurNotandi);
 
         bindaMaxSizeTitledPane();
+
+        setjaFraedsla();
     }
 
     private void bindaMaxSizeTitledPane() {
@@ -317,5 +324,31 @@ public class PlantController {
 
     public void setNotendaupplysingar(Notendaupplysingar notendaupplysingar) {
         this.notendaupplysingar = notendaupplysingar;
+    }
+
+
+    private void setjaFraedsla() {
+        Fraedsla fraedsluklasi = new Fraedsla();
+
+        List<String> titlar = new ArrayList<>(List.of("Misting", "Garðkanna", "Bottom watering", "Gradual"));
+        List<String> efni = new ArrayList<>(List.of(fraedsluklasi.getMisting(), fraedsluklasi.getGardkanna(), fraedsluklasi.getBottom(), fraedsluklasi.getGradual()));
+        for (int i = 0; i < vokvaBox.getChildren().size(); i += 2) {
+            if (vokvaBox.getChildren().get(i) instanceof Text)
+                ((Text) vokvaBox.getChildren().get(i)).setText(titlar.get(i / 2));
+            if (vokvaBox.getChildren().get(i + 1) instanceof Text)
+                ((Text) vokvaBox.getChildren().get(i + 1)).setText(efni.get(i / 2));
+        }
+
+        /*
+        vokvaBox.getChildren().addAll(
+                new Text("Misting"), new Text(fraedsluklasi.getMisting()),
+                new Text("Garðkanna"), new Text(fraedsluklasi.getGardkanna()),
+                new Text("Bottom watering"), new Text(fraedsluklasi.getBottom()),
+                new Text("Gradual"), new Text(fraedsluklasi.getGradual()));
+
+         */
+
+
+        //vokvaBox.getChildren().add(textarnir);
     }
 }

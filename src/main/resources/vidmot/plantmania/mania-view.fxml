@@ -51,27 +51,31 @@
                                         <TitledPane animated="false" prefHeight="194.0" prefWidth="531.0" text="Vökvun"
                                                     VBox.vgrow="SOMETIMES">
                                             <content>
-                                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                                <VBox prefHeight="200.0" prefWidth="100.0" fx:id="vokvaBox">
                                                     <children>
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                        <!--<Text strokeType="OUTSIDE" strokeWidth="0.0"
                                                               text="Ekki er til nein ein besta leið til að vökva allar plöntur, heldur eru ýmsir þættir sem geta haft áhrif. Mestu máli skiptir hvernig planta þetta er og hvaðan hún kemur, en það getur verið gott að líkja eftir náttúrulegu umhverfi hennar. En einnig þarf að taka aðra þætti með í reikninginn, eins og hvernig mold og pott plantan er í, hversu mikið ljós hún fær, rakastig og hita."
-                                                              wrappingWidth="512"/> <!-- todo hafa textann annars staðar sorry -->
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                                                              wrappingWidth="512"/> --> <!-- todo hafa textann annars staðar sorry -->
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="512"
                                                               text="Aðferð 1" styleClass="fraedsluflokkur"/>
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                              id="vokvun1"/>
+                                                              wrappingWidth="512"/>
 
                                                         <Text layoutX="19.0" layoutY="98.0" strokeType="OUTSIDE"
-                                                              strokeWidth="0.0" text="Aðferð 2"
+                                                              strokeWidth="0.0" text="Aðferð 2" wrappingWidth="512"
                                                               styleClass="fraedsluflokkur"/>
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                              id="vokvun2"/>
+                                                              wrappingWidth="512"/>
 
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="512"
+                                                              text="Aðferð 3" styleClass="fraedsluflokkur"/>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
+                                                              wrappingWidth="512"/>
 
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
-                                                        <Text layoutX="19.0" layoutY="117.0" strokeType="OUTSIDE"
-                                                              strokeWidth="0.0" text="Aðferð 3"
-                                                              styleClass="fraedsluflokkur"/>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="512"
+                                                              text="Aðferð 4" styleClass="fraedsluflokkur"/>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
+                                                              wrappingWidth="512"/>
                                                     </children>
                                                 </VBox>
                                             </content>
