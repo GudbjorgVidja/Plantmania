@@ -43,6 +43,9 @@ public class MinPlantaSpjald extends AnchorPane {
         fxSpjald.setFxFlokkur(minPlantan.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
 
+
+        takkaRegla();
+
         //setja handlera á takkana
         fxVokva.setOnAction(this::vokvaHandler);
         fxFresta.setOnAction(this::frestaHandler);
@@ -75,6 +78,13 @@ public class MinPlantaSpjald extends AnchorPane {
         }
 
         System.out.println(minPlantan.getVokvanir().toString());//vökvanir prentaðar
+    }
+
+    /**
+     * óvirkjar vökvunartakkann ef það eru jafn margir eða fleiri dagar í næstu vökvun og dagar milli vökvana
+     */
+    private void takkaRegla() {
+        fxVokva.disableProperty().bind(minPlantan.naestaVokvunProperty().greaterThanOrEqualTo(minPlantan.thinnTimiMilliVokvanaProperty()));
     }
 
     public String toString() {
