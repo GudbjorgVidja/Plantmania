@@ -32,10 +32,13 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   nota css
 - taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
 - lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
+- sýna að dagatal er óvirkt meira en þrjá mánuði fram í tímann. Setja kannski annan lit á dagana, og ljósari lit á letur
 
 ### Plöntur sem ætti að bæta við:
 
 - gúmmítré
 - rósir
 - einhverjar mat-/kryddjurtir
+- orkidea
+- pothos
 - 
