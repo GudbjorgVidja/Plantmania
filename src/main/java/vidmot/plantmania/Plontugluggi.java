@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import vinnsla.plantmania.MinPlanta;
 
@@ -89,6 +90,17 @@ public class Plontugluggi extends Dialog<Void> {
 
         setStyleClass();
         fxStats.setMinPlanta(minPlantan);
+        stillaStatsStaerd();
+    }
+
+    private void stillaStatsStaerd() {
+        for (Node n : fxStats.getChildren()) {
+            if (n instanceof VBox) {
+                ((VBox) n).setPrefHeight(100);
+                ((VBox) n).setPrefWidth(60);
+            }
+        }
+
     }
 
     private void setStyleClass() {

@@ -142,15 +142,12 @@
     -fx-fill-width: false;
 }
 
-#fxBoxaHBox{
-    -fx-spacing: 10;
-
-}
 .vboxStats{
     fx-pref-height: 27;
     fx-pref-width: 36;
-    -fx-alignment: bottom-center;
-    -fx-fill-width: false;
+    fx-alignment: bottom-center;
+    -fx-alignment: center;
+    fx-fill-width: false;
     -fx-rotate: 22.5;
 }
 
