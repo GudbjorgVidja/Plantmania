@@ -22,6 +22,7 @@ public class Spjald extends VBox {
     @FXML
     private ImageView fxPlontuMynd;
 
+    //TODO: má eyða þessu, guðbjörg?
     private Planta plant;//Spjald inniheldur í raun Planta hlut en aldrei MinPlanta hlut
 
     public Spjald() {
@@ -33,6 +34,7 @@ public class Spjald extends VBox {
      *
      * @param p Planta, getur verið Planta hlutur innan MinPlanta
      */
+    //TODO: Guðbjörg, má ekki eyða þessu? þetta er aldrei notað
     public Spjald(Planta p) {
         LesaFXML.lesa(this, "spjald-view.fxml");
 
@@ -42,7 +44,6 @@ public class Spjald extends VBox {
         fxAlmenntNafn.setText(p.getAlmenntNafn());
         fxPlontuMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + p.getMyndaslod())));
     }
-
 
     public void setFxFlokkur(String nafn) {
         fxFlokkur.setText(nafn);
@@ -59,5 +60,4 @@ public class Spjald extends VBox {
     public void setFxPlontuMynd(String hlekkur) {
         fxPlontuMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + hlekkur)));
     }
-
 }

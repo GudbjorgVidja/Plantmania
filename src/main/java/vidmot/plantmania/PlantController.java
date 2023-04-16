@@ -49,13 +49,7 @@ public class PlantController {
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
-    private Notendaupplysingar notendaupplysingar;// = new Notendaupplysingar();//setja listener fyrir þetta/hafa sem ObjectProperty?
-
-
-    //TODO: væri ekki hægt að hafa þetta local þar sem þetta er notað? eða hvað
-    //bara kallað á tvisvar: til að setja inn í listann og til að setja í yfirlit
-    //private ObservableList<Planta> allarPlontur = FXCollections.observableArrayList();//er í vesi, geymi hér
-    //ætti frekar kannski að geyma í öðrum klasa, t.d. vinnsluklasa fyrir allarPlonturYfirlit
+    private Notendaupplysingar notendaupplysingar;
 
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
@@ -113,6 +107,7 @@ public class PlantController {
             m.medaltimiMilliVokvanaListener();
             m.reiknaPlanadarVokvanir();
             m.breytingAThinnTimiMilliVokvanaRegla();
+            m.setjaPlanadarVokvanirListenera();
         }
     }
 
@@ -228,8 +223,8 @@ public class PlantController {
 
                 //gerir dropann sýnilegan þegar það er ýtt á dag, taka út seinna
                 //breyta frekar litnum!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
-                dagur.getFxDropi().visibleProperty().unbind();
-                dagur.getFxDropi().setVisible(true);
+                //dagur.getFxDropi().visibleProperty().unbind();
+                //dagur.getFxDropi().setVisible(true);
             }
         });
     }
@@ -269,7 +264,7 @@ public class PlantController {
      * sækir alla notendur sem eru í skránni, finnur þann sem er skráður inn og uppfærir upplýsingar um hann með
      * því að skrifa í skrána. ATH að eins og allt annað tengt json virkar þetta ekki
      */
-    private void vistaNotendaupplysingar() {
+    public void vistaNotendaupplysingar() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
 
@@ -291,10 +286,6 @@ public class PlantController {
     public void setSkradurNotandi(Notandi n) {
         skradurNotandi = (new SimpleObjectProperty<Notandi>(n));
         // skradurNotandi=n;
-    }
-
-    public void publicVistaUpplysingar() {
-        vistaNotendaupplysingar();
     }
 
     public Notendaupplysingar getNotendaupplysingar() {

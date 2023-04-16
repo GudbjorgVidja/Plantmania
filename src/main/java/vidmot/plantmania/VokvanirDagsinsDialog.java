@@ -31,8 +31,8 @@ public class VokvanirDagsinsDialog extends Dialog<Void> {
         listView.setMaxHeight(100);
         listView.setCellFactory(new PlantaCellFactory());
         Button skoda = new Button("Skoða");
-
-        //TODO: breyta svo listview uppfærist þegar plöntunni er breytt í plöntuglugga!! (Nickname og dagsetningar/taka út)
+        skoda.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
+        //TODO: breyta svo listview uppfærist þegar plöntunni er breytt í plöntuglugga!! (Nickname og dagsetningar/taka út ef við á)
         skoda.addEventFilter(MouseEvent.MOUSE_CLICKED, (Event event) -> {
             if (listView.getSelectionModel().getSelectedItem() != null) {
                 Plontugluggi gluggi = new Plontugluggi(listView.getSelectionModel().getSelectedItem());//tekur inn hlutinn sem spjaldið er fyrir

@@ -22,6 +22,7 @@ public class VokvanirPlontunnarDialog extends Dialog<Void> {
         ListView<LocalDate> listView = new ListView<>(minPlanta.getVokvanir());
         listView.setMaxHeight(100);
         Button eyda = new Button("Eyða");
+        eyda.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
 
         eyda.addEventFilter(MouseEvent.MOUSE_CLICKED, (Event event) -> {
             if (listView.getSelectionModel().getSelectedItem() != null) {

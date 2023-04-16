@@ -36,11 +36,13 @@ import java.util.function.Predicate;
  * Sérhæfður klasi fyrir yfirlit yfir hluti, bæði fyrir MinPlantaSpjald og PlantaSpjald hluti. Býður upp á að stjórna
  * sniði, með röðun og síu sem segir til um hvaða hlutir eru sýndir.
  * Það ætti kannksi að hafa líka vinnsluklasa fyrir þetta
+ * Inniheldur flipa fyrir notanda og aðgerðir á hann
  */
 public class Plontuyfirlit extends AnchorPane {
     @FXML
     private FlowPane fxFlowPane; //aðgangur í flowpane sem inniheldur spjöldin
 
+    //TODO: á ekki bara að eyða þessu? ef svo er máttu eyða commentinu mínu með, annars bara eyða commentinu
     //@FXML
     //private Label notandiLabel;//label í efra hægra horni með notendanafni
 
@@ -83,6 +85,7 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private BooleanProperty fyrstaHlutBaettVid = new SimpleBooleanProperty(false);
 
+    //todo: á ekki að hafa þetta local, Guðbjörg? mátt breyta eða eyða commentinu
     private PlantController plantController;//rétt tilvik af plantController
 
     private Comparator<Node> yfirlitComparator;//núverandi comparator
@@ -99,7 +102,6 @@ public class Plontuyfirlit extends AnchorPane {
 
         stillaSiaMenuItems();
 
-
         //PlantaSpjald bætt við yfirlitið
         fyrstaHlutBaettVid.addListener((obs, o, n) -> {
             if (!o && n) {
@@ -110,13 +112,12 @@ public class Plontuyfirlit extends AnchorPane {
         });
     }
 
+    //Todo: viltu þá ekki eyða þessu?
     private void listenerarSettir() {//er annars staðar
         ollSpjold.addListener((ListChangeListener<? super Node>) change -> {
             change.next();
             if (change.wasAdded()) athBaetaVidFlokk((List<Node>) change.getAddedSubList());
         });
-
-
     }
 
     /**
@@ -197,7 +198,7 @@ public class Plontuyfirlit extends AnchorPane {
     /**
      * kallað á þetta þegar allarPlontur yfirlitið er upphafsstillt. Lesa inn héðan frekar en að gera það úr controller
      */
-    public void lesaAllarPlontur() {
+    public void lesaAllarPlontur() {//todo: nota aðferðina eða eyða henni, Guðbjörg?
         List<Planta> allarPlontur = (new LesaPlontur()).getPlontur();
 
         for (Planta p : allarPlontur) {
@@ -232,7 +233,7 @@ public class Plontuyfirlit extends AnchorPane {
         fyrstaHlutBaettVid.set(true);
     }
 
-
+    //Todo: hvað er þetta, Guðbjörg? ef þetta er eitthvað sem væri notað í framtíðinni má segja það í commenti, ananrs eyða?
     public void baetaVidYfirlit(PlantaSpjald ps) {
         ollSpjold.add(ps);
     }
@@ -340,7 +341,7 @@ public class Plontuyfirlit extends AnchorPane {
     private void skraUtHandler(ActionEvent event) {
         PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
         // todo notaði private aðferð í plantController, en aðferðin er bara notuð fyrir þetta. Færa hana hingað?
-        pc.publicVistaUpplysingar();//vistaNotendaupplysingar();
+        pc.vistaNotendaupplysingar();
 
         pc.setSkradurNotandi(null);//skradurNotandi = null;
 
@@ -350,6 +351,7 @@ public class Plontuyfirlit extends AnchorPane {
 
 
     //todo: eiga comparatorar (fyrir neðan) að vera í vinnslu?
+    //TODO: Guðbjörg, er vinnsluskjal fyrir þetta? hvar er þetta núna? má bara eyða þessu?
 
     /* til að raða rétt eftir íslenska stafrófinu
         String stafrof = "A a Á á B b D d Ð ð E e É é F f G g H h I i Í í J j K k L l M m N n O o Ó ó P p R r S s T t U u Ú ú V v X x Y y Ý ý Þ þ Æ æ Ö ö";
@@ -376,4 +378,6 @@ public class Plontuyfirlit extends AnchorPane {
             return Integer.compare(((MinPlantaSpjald) n1).getMinPlanta().getNaestaVokvun().get(), ((MinPlantaSpjald) n2).getMinPlanta().getNaestaVokvun().get());
         }
     };
+    //private Comparator<Node> naestaVokvunComparator = Comparator.comparingInt(n -> ((MinPlantaSpjald) n).getMinPlanta().getNaestaVokvun().get());
+
 }

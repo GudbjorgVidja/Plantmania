@@ -214,9 +214,9 @@ public class Plontugluggi extends Dialog<Void> {
         timiDialog.getDialogPane().getButtonTypes().removeAll(ButtonType.OK, ButtonType.CANCEL);
         timiDialog.getDialogPane().getButtonTypes().addAll(iLagi, haettaVid);
 
-        timiDialog.setHeaderText("Breyting á þínum tíma milli vökvana");
-        timiDialog.setTitle("");
-
+        timiDialog.setHeaderText("Nýr dagafjöldi milli vökvana:");
+        timiDialog.setTitle("Breyting á vökvunum");
+        timiDialog.setGraphic(null);
         timiDialog.getDialogPane().lookupButton(iLagi).disableProperty().bind(timiDialog.getEditor().textProperty().isEmpty());
         Optional<String> svar = timiDialog.showAndWait();
         svar.ifPresent(s -> minPlantan.setThinnTimiMilliVokvana(Integer.parseInt(s)));
@@ -280,7 +280,6 @@ public class Plontugluggi extends Dialog<Void> {
      * @param event smellt á litla merkið við hliðina á nafni plöntu
      */
     private void breytaNafniHandler(MouseEvent event) {
-        System.out.println("nafni verdur breytt");
         TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getNickName());
 
         ButtonType iLagi = new ButtonType("vista breytingar", ButtonBar.ButtonData.OK_DONE);
@@ -289,8 +288,12 @@ public class Plontugluggi extends Dialog<Void> {
 
         nafnDialog.getDialogPane().getButtonTypes().addAll(iLagi, haettaVid);
 
-        nafnDialog.setHeaderText("Breyting á nafni");
-        nafnDialog.setTitle("");
+        nafnDialog.setHeaderText("Sláðu inn nýtt nafn");
+        nafnDialog.setTitle("Breyting á nafni");
+        nafnDialog.setGraphic(null);
+
+        nafnDialog.getDialogPane().lookupButton(iLagi).disableProperty().bind(nafnDialog.getEditor().textProperty().isEmpty());
+
 
         Optional<String> inntak = nafnDialog.showAndWait();
         if (inntak.isPresent()) {
@@ -309,6 +312,13 @@ public class Plontugluggi extends Dialog<Void> {
             System.out.println("Selected date: " + date);
             if (date != null) {
                 minPlantan.baetaVidVokvun(date);
+                if (!date.isAfter(LocalDate.now())) {
+                    Alert a = new Alert(Alert.AlertType.NONE, "Vökvun bætt við", ButtonType.OK);
+                    a.showAndWait();
+                } else {
+                    Alert a = new Alert(Alert.AlertType.NONE, "Ekki hægt að skrá vökvanir fram í tímann", ButtonType.OK);
+                    a.showAndWait();
+                }
             }
         });
     }

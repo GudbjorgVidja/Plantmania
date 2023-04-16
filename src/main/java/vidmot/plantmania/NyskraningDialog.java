@@ -4,6 +4,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -26,6 +28,11 @@ public class NyskraningDialog extends Dialog<Notandi> {
     private ButtonType ILagi = new ButtonType("Í lagi", ButtonBar.ButtonData.OK_DONE);//buttontype fyrir í lagi takkann
     private ButtonType HaettaVid = new ButtonType("Hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);//buttontype fyrir hætta við takkann
 
+    private Image icon = new Image(getClass().getResourceAsStream("styling/icon/check.png"));//mynd af checkmark
+    private ImageView notendaNafnSamthykkt = new ImageView(icon);//imageview með iconi, sést ef notendanafn er gilt
+    private ImageView lykilordSamthykkt = new ImageView(icon);//imageview með iconi, sést ef inntak er gilt
+    private ImageView endurtekningSamthykkt = new ImageView(icon);//imageview með iconi, sést ef lykilorð er rétt endurtekið
+
     /**
      * smiður
      *
@@ -39,8 +46,31 @@ public class NyskraningDialog extends Dialog<Notandi> {
         erNotandiTilListener();
         erLykilordRettRegla();
 
+        setjaValidationIcon();
+        setjaIconBinding();
         fxVilla.textProperty().bind(Bindings.when(notandiTil).then("Vinsamlegast veldu annað notendanafn").otherwise(""));
         setResultConverter();
+    }
+
+    /**
+     * setur stærðina á myndinni í imageview hlutina
+     */
+    private void setjaValidationIcon() {
+        notendaNafnSamthykkt.setFitHeight(20);
+        notendaNafnSamthykkt.setFitWidth(20);
+        lykilordSamthykkt.setFitHeight(20);
+        lykilordSamthykkt.setFitWidth(20);
+        endurtekningSamthykkt.setFitHeight(20);
+        endurtekningSamthykkt.setFitWidth(20);
+    }
+
+    /**
+     * bindur sýnileika á imageview hlutunum við það hvort inntak er gilt
+     */
+    private void setjaIconBinding() {
+        notendaNafnSamthykkt.visibleProperty().bind(notandiTil.not().and(fxNotendanafn.textProperty().isEmpty().not()));
+        lykilordSamthykkt.visibleProperty().bind(fxLykilord.textProperty().isEmpty().not());
+        endurtekningSamthykkt.visibleProperty().bind(lykilordRettEndurtekid.and(fxEndurtekning.textProperty().isEmpty().not()));
     }
 
     /**
@@ -52,13 +82,18 @@ public class NyskraningDialog extends Dialog<Notandi> {
         fxEndurtekning = new PasswordField();
         fxVilla = new Text();
         GridPane g = new GridPane();
+        g.hgapProperty().set(10);
+        g.vgapProperty().set(5);
         g.add(fxVilla, 0, 0, 2, 1);
         g.add(new Label("Notendanafn"), 0, 1);
         g.add(fxNotendanafn, 1, 1);
+        g.add(notendaNafnSamthykkt, 2, 1);
         g.add(new Label("Lykilorð"), 0, 2);
         g.add(fxLykilord, 1, 2);
+        g.add(lykilordSamthykkt, 2, 2);
         g.add(new Label("Endurtaka lykilorð"), 0, 3);
         g.add(fxEndurtekning, 1, 3);
+        g.add(endurtekningSamthykkt, 2, 3);
         getDialogPane().setContent(g);
         getDialogPane().getButtonTypes().addAll(ILagi, HaettaVid);
         getDialogPane().setHeaderText("Nýskráning");
