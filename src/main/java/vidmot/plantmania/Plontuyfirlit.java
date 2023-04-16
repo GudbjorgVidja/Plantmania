@@ -127,14 +127,6 @@ public class Plontuyfirlit extends AnchorPane {
             }
 
         });
-
-
-        //setja listener: þegar ollSpjold.size fer yfir 0: taka engarMinarBakgrunnur af.
-        // kannski betra að nota bool property, eða bara nota baetaVid aðferðina.
-
-        //setja listener á filteredSpjold stærð. Ef 0: setja viðvörun. Annars taka allar af.
-
-
     }
 
     /**
