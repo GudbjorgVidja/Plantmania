@@ -5,14 +5,15 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
 <?import vidmot.plantmania.*?>
-<fx:root prefHeight="439.0" prefWidth="579.0" style="-fx-background-color: #c8fad8;"
-         stylesheets="@styling/derived-style.css"
-         type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <children> <!-- todo gera css fyrir dagatal-->
+<fx:root prefHeight="439.0" prefWidth="579.0"
+         stylesheets="@styling/derived-style.css" styleClass="dagatal-root"
+         type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/16"
+         xmlns:fx="http://javafx.com/fxml/1"> <!--style="-fx-background-color: #c8fad8;"-->
+    <children> <!-- todo gera css fyrir dagatal -->
         <GridPane fx:id="fxGrid" alignment="CENTER" gridLinesVisible="true" layoutX="19.0" layoutY="82.0"
-                  prefHeight="326.0" prefWidth="545.0" style="-fx-background-color: #63e69c ;">
+                  prefHeight="326.0" prefWidth="545.0"> <!-- style="-fx-background-color: #63e69c ;" -->
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -34,65 +35,37 @@
             <children>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Mán">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </Label>
+                        <Label layoutX="24.0" layoutY="15.0" text="Mán" styleClass="vikudagur"/>
                     </children>
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Þri">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </Label>
+                        <Label layoutX="24.0" layoutY="15.0" text="Þri" styleClass="vikudagur"/>
                     </children>
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="26.0" layoutY="16.0" text="Mið">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </Label>
+                        <Label layoutX="26.0" layoutY="16.0" text="Mið" styleClass="vikudagur"/>
                     </children>
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Fim">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </Label>
+                        <Label layoutX="24.0" layoutY="15.0" text="Fim" styleClass="vikudagur"/>
                     </children>
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Fös">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </Label>
+                        <Label layoutX="24.0" layoutY="15.0" text="Fös" styleClass="vikudagur"/>
                     </children>
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Lau">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </Label>
+                        <Label layoutX="24.0" layoutY="15.0" text="Lau" styleClass="vikudagur"/>
                     </children>
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="6" GridPane.rowIndex="0">
                     <children>
-                        <Label layoutX="24.0" layoutY="15.0" text="Sun">
-                            <font>
-                                <Font size="14.0"/>
-                            </font>
-                        </Label>
+                        <Label layoutX="24.0" layoutY="15.0" text="Sun" styleClass="vikudagur"/>
                     </children>
                 </Pane>
                 <Dagur prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1"/>

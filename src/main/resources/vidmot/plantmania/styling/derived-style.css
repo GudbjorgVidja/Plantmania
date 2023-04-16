@@ -226,19 +226,14 @@
     fx-border-color: -litur3;
     -fx-border-color: darkgreen;
     -fx-alignment: center;
-    fx-font-size: 16px;
     -fx-font-size: 14px;
 
-    fx-padding: 1 17 1 20;
     -fx-padding: 0 17 0 20;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 95%, 5%;
-    fx-background-size: 16px, 20px;
     -fx-background-size: 14px, 18px;
     -fx-background-image: url("icon/arrow270bil.png"), url("icon/user.png");
 }
-
-
 
 
 .menu-button{
@@ -329,3 +324,23 @@
 .fraedsluflokkur{
     -fx-font-size: 14;
 }
+
+
+
+/* dagatal */
+
+.dagatal-root{
+    -fx-background-color: #c8fad8;
+}
+
+#fxGrid{
+    -fx-background-color: #63e69c;
+}
+
+.vikudagur{
+    -fx-font-size: 14;
+}
+
+
+
+
