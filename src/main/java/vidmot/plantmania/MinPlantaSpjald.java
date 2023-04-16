@@ -20,7 +20,7 @@ public class MinPlantaSpjald extends AnchorPane {
     @FXML
     private Label fxLabel;//niðurtalning í næstu vökvun
     @FXML
-    private Button fxVokva, fxFresta;
+    private Button fxVokva, fxFresta;//takkar til að vökva plöntu og fresta vökvun
     @FXML
     private Spjald fxSpjald; //mynd, nafn og uppruni
 
@@ -30,6 +30,7 @@ public class MinPlantaSpjald extends AnchorPane {
     private MinPlanta minPlantan;//MinPlanta hluturinn á MinPlantaSpjald hlutnum
 
 
+    //TODO: ég prófaði að kommenta hann út og allt virðist keyra rétt, en hjá þér guðbjörg?
     public MinPlantaSpjald() {//tómur smiður. Athuga hvort hann sé óþarfi
         System.out.println("MinPlantaSpjald tomur smidur");
     }
@@ -68,15 +69,9 @@ public class MinPlantaSpjald extends AnchorPane {
      * @param event smellt á vökva takkann á MinPlantaSpjald hlut
      */
     private void vokvaHandler(ActionEvent event) {
-        if (minPlantan.getNaestaVokvun().get() >= minPlantan.getThinnTimiMilliVokvana()) {
-            //TODO: já, gera takkann óvirkan
-            System.out.println("kannski ekki vokva");//frekar gera takkann óvirkan held ég rite?
-            //todo: setja listener á niðurtalninguna sem gerir takkann óvirkan
-        } else {
-            minPlantan.baetaVidVokvun(LocalDate.now());
-            System.out.println("vokva");
-        }
-
+        minPlantan.baetaVidVokvun(LocalDate.now());
+        //TODO: Ég þarf pentsetningarnar ekki, en þú guðbjörg? mátt eyða þeim ef þú þarft þær ekki heldur
+        System.out.println("vokva");
         System.out.println(minPlantan.getVokvanir().toString());//vökvanir prentaðar
     }
 
@@ -95,10 +90,12 @@ public class MinPlantaSpjald extends AnchorPane {
      * @param event smellt á fresta hnapp
      */
     private void frestaHandler(ActionEvent event) {
+        //TODO: ég þarf prentsetninguna ekki. mátt eyða henni ef þú þarft hana ekki heldur, guðbjörg
         System.out.println("frestar um dag");
         minPlantan.getNaestaVokvun().unbind();
         minPlantan.setNaestaVokvun(minPlantan.getNaestaVokvun().get() + 1);
         minPlantan.naestaVokvunRegla();
+        //TODO: ég þarf þessa ekki heldur
         System.out.println("naestaVokvun: " + minPlantan.getNaestaVokvun().get());
     }
 
@@ -108,10 +105,8 @@ public class MinPlantaSpjald extends AnchorPane {
      * @param event smellt á MinPlantaSpjald
      */
     private void opnaPlontuglugga(MouseEvent event) {
-        //TODO: hafa nickname af öllum plöntum til að það sé ekki hægt að breyta í sama og hjá annarri plöntu?
         System.out.println("Plantan sem ytt var a: " + minPlantan);
         Plontugluggi gluggi = new Plontugluggi(minPlantan);//tekur inn hlutinn sem spjaldið er fyrir
-
         gluggi.showAndWait();
     }
 }
