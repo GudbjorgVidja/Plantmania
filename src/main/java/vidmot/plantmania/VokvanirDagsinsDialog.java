@@ -1,6 +1,7 @@
 package vidmot.plantmania;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.geometry.Insets;
@@ -17,12 +18,21 @@ import java.time.LocalDate;
  * Dialog sem kemur þegar ýtt er á dag í dagatali, til að sjá hvaða plöntur á að vökva/voru vökvaðar þann daginn
  */
 public class VokvanirDagsinsDialog extends Dialog<Void> {
-    public VokvanirDagsinsDialog(ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, String message) {
-        ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();
+    private ObservableList<MinPlanta> minarPlontur = FXCollections.observableArrayList();//plöntur sem á að vökva þennan dag
 
+    public VokvanirDagsinsDialog(ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, String message) {
+        //setur plönturnar sem á að vökva þennan dag í listann
         for (Pair<MinPlanta, LocalDate> par : vokvanir) {
             minarPlontur.add(par.getKey());
         }
+
+        //setur listener á vökvanir (parameterinn) til að reikna minarPlontur upp á nýtt þegar hann breytist
+        vokvanir.addListener((ListChangeListener<Pair<MinPlanta, LocalDate>>) (observable) -> {
+            minarPlontur.clear();
+            for (Pair<MinPlanta, LocalDate> par : vokvanir) {
+                minarPlontur.add(par.getKey());
+            }
+        });
 
         getDialogPane().setPadding(new Insets(10));
         getDialogPane().setHeaderText(message);
