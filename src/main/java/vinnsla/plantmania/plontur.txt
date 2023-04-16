@@ -22,7 +22,7 @@ venus2.png
 lavender.png
 jelly.png
 spot.png
-spiderplant1.png
+spiderplant.png
 
 Monsteran er vinsæl planta, falleg, götótt. Hún tekur sig vel út í stærri plássum, og getur orðið vel stór.
 Fiðlufíkusinn er fallegur, en getur verið nokkuð krefjandi. Ekki endilega mælt með fyrir byrjendur.
