@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import vinnsla.plantmania.Notandi;
@@ -23,6 +24,8 @@ import java.util.Optional;
  * Controller fyrir upphafssíðu/innskráningarsíðu
  */
 public class UpphafController {
+    @FXML
+    private Label fxVilla;
     @FXML
     private PasswordField fxLykilord;
 
@@ -147,6 +150,7 @@ public class UpphafController {
             ViewSwitcher.switchTo(View.ADALSIDA);
         } else {
             System.out.println("Notendanafn eða lykilorð rangt");
+            fxVilla.visibleProperty().set(true);
         }
     }
 
