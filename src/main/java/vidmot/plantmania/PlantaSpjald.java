@@ -2,13 +2,9 @@ package vidmot.plantmania;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import vinnsla.plantmania.Planta;
-import vinnsla.plantmania.enums.Ljosstyrkur;
-import vinnsla.plantmania.enums.Vatnsthorf;
 
 /**
  * Höfundur: Guðbjörg Viðja
@@ -23,10 +19,16 @@ public class PlantaSpjald extends AnchorPane {
     private Spjald fxSpjald;
 
     @FXML
+    private Stats fxStats;
+
+    /*
+    @FXML
     private VBox fxVatnBox, fxLjosBox, fxHitiBox;
 
     @FXML
     private HBox fxBoxaHbox;
+
+     */
 
     private Planta planta;//Planta vinnsluhluturinn, plantan sem spjaldið er fyrir.
 
@@ -42,22 +44,36 @@ public class PlantaSpjald extends AnchorPane {
      */
     public PlantaSpjald(Planta p) {
         planta = p;
+
         LesaFXML.lesa(this, "planta-view.fxml");
 
+        fxStats.setPlanta(planta);
+        stillaStaerd();
         //todo er betra að gera þetta allt í einu? og fara þá einu sinni inn í fxSpjald?
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
         fxSpjald.setFxFlokkur(planta.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
 
-        stillaMyndaStaerd();
+        //stillaMyndaStaerd();
 
-        setjaOpacity();
+        //setjaOpacity();
+
+    }
+
+    private void stillaStaerd() {
+        for (Node n : fxStats.getChildren()) {
+            if (n instanceof VBox) {
+                ((VBox) n).setPrefHeight(27);
+                ((VBox) n).setPrefWidth(36);
+            }
+        }
 
     }
 
     /**
      * stilla stærð mynda hér, og kannski líka sýnileika? (opacity)
      */
+    /*
     private void stillaMyndaStaerd() {
         for (Node v : fxBoxaHbox.getChildren()) {
             if (v instanceof VBox) {
@@ -96,7 +112,7 @@ public class PlantaSpjald extends AnchorPane {
 
     }
 
-
+     */
     public String toString() {
         return planta.getAlmenntNafn();
     }
