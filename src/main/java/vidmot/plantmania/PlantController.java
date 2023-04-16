@@ -228,8 +228,8 @@ public class PlantController {
 
                 //gerir dropann sýnilegan þegar það er ýtt á dag, taka út seinna
                 //breyta frekar litnum!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
-                dagur.getFxDropi().visibleProperty().unbind();
-                dagur.getFxDropi().setVisible(true);
+                //dagur.getFxDropi().visibleProperty().unbind();
+                //dagur.getFxDropi().setVisible(true);
             }
         });
     }

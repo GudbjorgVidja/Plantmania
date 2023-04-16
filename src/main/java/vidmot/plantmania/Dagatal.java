@@ -102,7 +102,7 @@ public class Dagatal extends AnchorPane {
         dagur.getFxFjoldiVokvana().textProperty().bind(
                 Bindings.when(fjoldiVokvanaLokid.isEqualTo(0)).then("")
                         .otherwise(fjoldiVokvanaLokid.asString()));
-        dagur.getFxDropi().visibleProperty().bind(fjoldiVokvanaLokid.greaterThan(0).or(fjoldiVokvanaOlokid.greaterThan(0)));
+        dagur.getFxDropi().visibleProperty().bind(fjoldiVokvanaOlokid.greaterThan(0));
     }
 
     /**
