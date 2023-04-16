@@ -63,6 +63,11 @@ public class MinPlanta extends Planta {
         LocalDate lengdAaetlunar = LocalDate.now().plusMonths(3);
         uppfaeraPlanadarVokvanir(lengdAaetlunar);
 
+        setjaPlanadarVokvanirListenera();
+    }
+
+    public void setjaPlanadarVokvanirListenera() {
+        LocalDate lengdAaetlunar = LocalDate.now().plusMonths(3);
         naestaVokvun.addListener((obs, o, n) -> {
             uppfaeraPlanadarVokvanir(lengdAaetlunar);
         });

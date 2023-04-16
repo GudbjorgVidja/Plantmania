@@ -113,6 +113,7 @@ public class PlantController {
             m.medaltimiMilliVokvanaListener();
             m.reiknaPlanadarVokvanir();
             m.breytingAThinnTimiMilliVokvanaRegla();
+            m.setjaPlanadarVokvanirListenera();
         }
     }
 
