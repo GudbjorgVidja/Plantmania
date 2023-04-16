@@ -20,7 +20,7 @@ snek.png
 sveppi.png
 venus2.png
 lavender.png
-jelly.png
+cactus.png
 spot.png
 spiderplant.png
 
