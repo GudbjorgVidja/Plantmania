@@ -87,27 +87,6 @@
                                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" "
                                                           wrappingWidth="512"/>
                                                 </children>
-                                                <!--
-                                                <children>
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" "
-                                                          wrappingWidth="512"/>
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                                                          text="Aðferð 1" styleClass="fraedsluflokkur"/>
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                          id="vokvun1"/>
-
-                                                    <Text layoutX="19.0" layoutY="98.0" strokeType="OUTSIDE"
-                                                          strokeWidth="0.0" text="Aðferð 2"
-                                                          styleClass="fraedsluflokkur"/>
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                          id="vokvun2"/>
-
-
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"/>
-                                                    <Text layoutX="19.0" layoutY="117.0" strokeType="OUTSIDE"
-                                                          strokeWidth="0.0" text="Aðferð 3"
-                                                          styleClass="fraedsluflokkur"/>
-                                                </children> -->
                                             </VBox>
                                         </TitledPane>
                                     </children>
