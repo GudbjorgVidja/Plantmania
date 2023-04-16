@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,7 +17,4 @@
         </center>
     </BorderPane>
     <Label fx:id="fxAlmenntNafn" prefHeight="9.0" prefWidth="97.0" text="Jelly babe"/>
-    <padding>
-        <Insets top="1.0"/>
-    </padding>
 </fx:root>

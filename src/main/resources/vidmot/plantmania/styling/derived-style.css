@@ -140,6 +140,7 @@
 .spjald-root{
     -fx-alignment: top-center;
     -fx-fill-width: false;
+    -fx-padding: 1 0 0 0;
 }
 
 .vboxStats{
