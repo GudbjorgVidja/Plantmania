@@ -57,9 +57,6 @@
                                             <content>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" fx:id="vokvaBox">
                                                     <children>
-                                                        <!--<Text strokeType="OUTSIDE" strokeWidth="0.0"
-                                                              text=""
-                                                              wrappingWidth="512"/> --> <!-- todo hafa textann annars staðar sorry -->
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="512"
                                                               text="Aðferð 1" styleClass="fraedsluflokkur"/>
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"

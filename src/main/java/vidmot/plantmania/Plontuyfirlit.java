@@ -20,7 +20,6 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import vinnsla.plantmania.LesaPlontur;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Planta;
 import vinnsla.plantmania.enums.Uppruni;
@@ -41,10 +40,6 @@ import java.util.function.Predicate;
 public class Plontuyfirlit extends AnchorPane {
     @FXML
     private FlowPane fxFlowPane; //aðgangur í flowpane sem inniheldur spjöldin
-
-    //TODO: á ekki bara að eyða þessu? ef svo er máttu eyða commentinu mínu með, annars bara eyða commentinu
-    //@FXML
-    //private Label notandiLabel;//label í efra hægra horni með notendanafni
 
     @FXML
     private MenuButton fxNotandi;
@@ -85,16 +80,12 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private BooleanProperty fyrstaHlutBaettVid = new SimpleBooleanProperty(false);
 
-    //todo: á ekki að hafa þetta local, Guðbjörg? mátt breyta eða eyða commentinu
-    private PlantController plantController;//rétt tilvik af plantController
-
     private Comparator<Node> yfirlitComparator;//núverandi comparator
 
 
     public Plontuyfirlit() {
         LesaFXML.lesa(this, "plontuyfirlit.fxml");
         fxSkraUt.setOnAction(this::skraUtHandler);
-        plantController = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
 
         yfirlitComparator = naestaVokvunComparator;
 
@@ -109,14 +100,6 @@ public class Plontuyfirlit extends AnchorPane {
                 yfirlitComparator = almenntHeitiComparator;
                 Collections.sort(ollSpjold, yfirlitComparator);
             }
-        });
-    }
-
-    //Todo: viltu þá ekki eyða þessu?
-    private void listenerarSettir() {//er annars staðar
-        ollSpjold.addListener((ListChangeListener<? super Node>) change -> {
-            change.next();
-            if (change.wasAdded()) athBaetaVidFlokk((List<Node>) change.getAddedSubList());
         });
     }
 
@@ -195,18 +178,6 @@ public class Plontuyfirlit extends AnchorPane {
         rodunMenu.getItems().remove(2, 4);
     }
 
-    /**
-     * kallað á þetta þegar allarPlontur yfirlitið er upphafsstillt. Lesa inn héðan frekar en að gera það úr controller
-     */
-    public void lesaAllarPlontur() {//todo: nota aðferðina eða eyða henni, Guðbjörg?
-        List<Planta> allarPlontur = (new LesaPlontur()).getPlontur();
-
-        for (Planta p : allarPlontur) {
-            PlantaSpjald spjald = new PlantaSpjald(p);
-            ollSpjold.add(spjald);//betra að setja í lista og setja inn allt í einu?
-        }
-    }
-
 
     /**
      * setur handlera á menuItems
@@ -231,18 +202,6 @@ public class Plontuyfirlit extends AnchorPane {
         PlantaSpjald spjald = new PlantaSpjald(planta);
         ollSpjold.add(spjald);
         fyrstaHlutBaettVid.set(true);
-    }
-
-    //Todo: hvað er þetta, Guðbjörg? ef þetta er eitthvað sem væri notað í framtíðinni má segja það í commenti, ananrs eyða?
-    public void baetaVidYfirlit(PlantaSpjald ps) {
-        ollSpjold.add(ps);
-    }
-
-    public void baetaVidYfirlit(ObservableList<Planta> plontuListi) {
-        for (Planta planta : plontuListi) {
-            PlantaSpjald spjald = new PlantaSpjald(planta);
-            ollSpjold.add(spjald);
-        }
     }
 
 
@@ -352,6 +311,7 @@ public class Plontuyfirlit extends AnchorPane {
 
     //todo: eiga comparatorar (fyrir neðan) að vera í vinnslu?
     //TODO: Guðbjörg, er vinnsluskjal fyrir þetta? hvar er þetta núna? má bara eyða þessu?
+    //todo Sigurbjörg, nei ekkert vinnsluskjal til, og þetta er hvergi annars staðar
 
     /* til að raða rétt eftir íslenska stafrófinu
         String stafrof = "A a Á á B b D d Ð ð E e É é F f G g H h I i Í í J j K k L l M m N n O o Ó ó P p R r S s T t U u Ú ú V v X x Y y Ý ý Þ þ Æ æ Ö ö";
