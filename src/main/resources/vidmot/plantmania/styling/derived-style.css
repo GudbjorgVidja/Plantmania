@@ -302,6 +302,25 @@
 
 
 
+.engar-minar-vidvorun{
+    -fx-background-image: url("icon/engarMinarBakgrunnur.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: contain;
+    fx-preserve-ratio: true;
+}
+
+.skoda-sia-vidvorun{
+    -fx-background-image: url("icon/skodaSiurBakgrunnur.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: contain;
+    fx-preserve-ratio: true;
+}
+
+
+
+
 /* plöntugluggi  */
 .fraedsluflokkur{
     -fx-font-size: 14;

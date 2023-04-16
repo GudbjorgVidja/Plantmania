@@ -87,6 +87,7 @@ public class Plontuyfirlit extends AnchorPane {
 
     private Comparator<Node> yfirlitComparator;//núverandi comparator
 
+    private BooleanProperty yfirlitTomt = new SimpleBooleanProperty(true); //ef þetta verður false: engar-minar-vidvorun tekið af
 
     public Plontuyfirlit() {
         LesaFXML.lesa(this, "plontuyfirlit.fxml");
@@ -106,6 +107,24 @@ public class Plontuyfirlit extends AnchorPane {
                 Collections.sort(ollSpjold, yfirlitComparator);
             }
         });
+        tomtYfirlitVidvodun();
+    }
+
+    private void tomtYfirlitVidvodun() {
+        //setja engarMinarBakgrunnur.png
+        fxFlowPane.getStyleClass().add("engar-minar-vidvorun");
+
+        yfirlitTomt.addListener((obs, o, n) -> {
+            if (!n) fxFlowPane.getStyleClass().removeAll("engar-minar-vidvorun");
+        });
+
+
+        //setja listener: þegar ollSpjold.size fer yfir 0: taka engarMinarBakgrunnur af.
+        // kannski betra að nota bool property, eða bara nota baetaVid aðferðina.
+
+        //setja listener á filteredSpjold stærð. Ef 0: setja viðvörun. Annars taka allar af.
+
+
     }
 
     /**
@@ -129,6 +148,7 @@ public class Plontuyfirlit extends AnchorPane {
             if (change.wasAdded()) {
                 athBaetaVidFlokk((List<Node>) change.getAddedSubList());
                 Collections.sort(ollSpjold, yfirlitComparator);
+                yfirlitTomt.set(false); //todo gera hér?
             }
         });
     }
