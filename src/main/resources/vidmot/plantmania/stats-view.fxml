@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<fx:root type="javafx.scene.layout.HBox" fx:id="fxBoxaHbox" alignment="BOTTOM_CENTER" prefHeight="61.0"
+         prefWidth="123.0" stylesheets="@styling/derived-style.css" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <VBox fx:id="fxVatnBox" styleClass="vboxStats">
+            <ImageView styleClass="vatnBox"/>
+            <ImageView styleClass="vatnBox"/>
+            <ImageView styleClass="vatnBox"/>
+        </VBox>
+        <VBox fx:id="fxLjosBox" layoutX="46.0" layoutY="11.0" styleClass="vboxStats">
+            <ImageView styleClass="ljosBox"/>
+            <ImageView styleClass="ljosBox"/>
+            <ImageView styleClass="ljosBox"/>
+        </VBox>
+        <VBox fx:id="fxHitiBox" layoutX="28.0" layoutY="11.0" styleClass="vboxStats">
+            <ImageView styleClass="hitiBox"/>
+            <ImageView styleClass="hitiBox"/>
+            <ImageView styleClass="hitiBox"/>
+        </VBox>
+    </children>
+</fx:root>
