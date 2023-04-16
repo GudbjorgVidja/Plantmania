@@ -1,7 +1,5 @@
 package vidmot.plantmania;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,8 +19,6 @@ import javafx.scene.text.Text;
 import javafx.util.Pair;
 import vinnsla.plantmania.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,26 +56,26 @@ public class PlantController {
         System.out.println(skradurNotandi.get());
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());//af hverju ekki bara upphafsstilling?
 
+        //todo: eyða þessu, guðbjörg
         //fxAllarPlonturYfirlit.lesaAllarPlontur();//loadar fxml oftar
         lesaInnAllarPlontur();
         dagatalsEventFilterar();
 
+        //TODO: annað hvort eyða commenti eða breyta, guðbjörg?
         //binda nafn notanda við label i báðum yfirlitum.
         // Væri gott að hafa í Plontuyfirlit klasanum, en viewSwitcher er leiðinlegur við mig rn
         fxMinarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
         fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
 
         birtaNotendaPlontur();
-        //notendaupplysingar.finnaFyrriOgSidariVokvanirListener(skradurNotandi.get().getMinarPlontur());
         hladaUpplysingum();
 
         System.out.println(skradurNotandi.get());
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
+        //Todo: eyða prentsetningu fljótlega? mátt eyða ef þú ert ekki að nota hana, guðbjörg
         System.out.println(skradurNotandi);
-
         bindaMaxSizeTitledPane();
-
         setjaFraedsla();
     }
 
@@ -89,7 +85,7 @@ public class PlantController {
                 ((TitledPane) node).expandedProperty().addListener((obs, o, n) -> {
                     System.out.println(n);
                     if (!n) ((TitledPane) node).maxHeightProperty().set(0);
-                    else if (n) ((TitledPane) node).maxHeightProperty().set(((TitledPane) node).getPrefHeight());
+                    else ((TitledPane) node).maxHeightProperty().set(((TitledPane) node).getPrefHeight());
                     //todo: eða nota Double.MAX_VALUE?
                 });
             }
@@ -242,50 +238,13 @@ public class PlantController {
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
-
             Alert a = new Alert(Alert.AlertType.NONE, "Nýrri plöntu bætt við þínar plöntur", ButtonType.OK);
             a.showAndWait();
         }
     }
 
-    /**
-     * Atburðahandler. kallar á aðferð til að vista upplýsingar, setur skráðan notanda sem null og fer á upphafssíðu
-     *
-     * @param actionEvent - atburður
-     */
-    public void skraUt(ActionEvent actionEvent) {
-        vistaNotendaupplysingar();
-        skradurNotandi = null;
-        System.out.println("skra ut");
-        ViewSwitcher.switchTo(View.UPPHAFSSIDA);
-    }
-
-    /**
-     * sækir alla notendur sem eru í skránni, finnur þann sem er skráður inn og uppfærir upplýsingar um hann með
-     * því að skrifa í skrána. ATH að eins og allt annað tengt json virkar þetta ekki
-     */
-    public void vistaNotendaupplysingar() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.findAndRegisterModules();
-
-        try {
-            List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
-            });
-            for (Notandi n : notendur) {
-                if (n.notendanafnProperty().get().equals(skradurNotandi.get().getNotendanafn())) {
-                    n.setMinarPlontur(skradurNotandi.get().getMinarPlontur());
-                    objectMapper.writeValue(new File("target/classes/vidmot/plantmania/notendur.json"), notendur);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e.getCause());
-        }
-    }
-
-
-    public void setSkradurNotandi(Notandi n) {
-        skradurNotandi = (new SimpleObjectProperty<Notandi>(n));
-        // skradurNotandi=n;
+    public Notandi getSkradurNotandi() {
+        return skradurNotandi.get();
     }
 
     public Notendaupplysingar getNotendaupplysingar() {

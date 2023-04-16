@@ -3,6 +3,8 @@
  */
 package vidmot.plantmania;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -21,9 +23,12 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import vinnsla.plantmania.MinPlanta;
+import vinnsla.plantmania.Notandi;
 import vinnsla.plantmania.Planta;
 import vinnsla.plantmania.enums.Uppruni;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -299,24 +304,34 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private void skraUtHandler(ActionEvent event) {
         PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
-        // todo notaði private aðferð í plantController, en aðferðin er bara notuð fyrir þetta. Færa hana hingað?
-        pc.vistaNotendaupplysingar();
-
-        pc.setSkradurNotandi(null);//skradurNotandi = null;
-
-        System.out.println("skra ut");
+        vistaNotendaupplysingar(pc.getSkradurNotandi());
         ViewSwitcher.switchTo(View.UPPHAFSSIDA);
     }
 
+    /**
+     * sækir alla notendur sem eru í skránni, finnur þann sem er skráður inn og uppfærir upplýsingar um hann með
+     * því að skrifa í skrána.
+     */
+    public void vistaNotendaupplysingar(Notandi skradurNotandi) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
 
-    //todo: eiga comparatorar (fyrir neðan) að vera í vinnslu?
-    //TODO: Guðbjörg, er vinnsluskjal fyrir þetta? hvar er þetta núna? má bara eyða þessu?
-    //todo Sigurbjörg, nei ekkert vinnsluskjal til, og þetta er hvergi annars staðar
-
-    /* til að raða rétt eftir íslenska stafrófinu
+        try {
+            List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
+            });
+            for (Notandi n : notendur) {
+                if (n.notendanafnProperty().get().equals(skradurNotandi.getNotendanafn())) {
+                    n.setMinarPlontur(skradurNotandi.getMinarPlontur());
+                    objectMapper.writeValue(new File("target/classes/vidmot/plantmania/notendur.json"), notendur);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getCause());
+        }
+    }
+    /* til að raða rétt eftir íslenska stafrófinu. Er ekki í notkun núna en verður bætt við seinna
         String stafrof = "A a Á á B b D d Ð ð E e É é F f G g H h I i Í í J j K k L l M m N n O o Ó ó P p R r S s T t U u Ú ú V v X x Y y Ý ý Þ þ Æ æ Ö ö";
         String[] srof = stafrof.split(" ");
-
      */
 
 
@@ -339,5 +354,4 @@ public class Plontuyfirlit extends AnchorPane {
         }
     };
     //private Comparator<Node> naestaVokvunComparator = Comparator.comparingInt(n -> ((MinPlantaSpjald) n).getMinPlanta().getNaestaVokvun().get());
-
 }

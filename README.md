@@ -14,8 +14,9 @@ Viðbætur sem eiga eftir að koma:
 - Bæta við möguleika á að breyta þema forritsins
 - Gefa betri viðbrögð við aðgerðum notanda, t.d. láta skilaboð birtast þegar notandi endurtekur lykilorð
   ekki rétt við nýskráningu, þegar hann reynir að breyta nafni plöntu í eitthvað sem ekki má eða
-  þegar hann gerir eitthvað annað sem ekki er leyfilegt
+  þegar hann gerir eitthvað annað sem ekki er leyfilegt. Passa að hafa viðbrögð þegar ýtt er á dag á dagatali!
 - Laga hvernig dagsetningar eru birtar
 - Setja einhverja reglu fyrir gild lykilorð
 - Þegar plöntu er bætt við mínar plöntur, ekki hafa dialog heldur kannski popup neðst sem fer eftir smá tíma
 - Ef síur eru stilltar þ.a. engir möguleikar eru sýnilegir í yfirliti, setja þá texta og kannski mynd sem bendir á það
+- Laga comparator til að geta raðað eftir íslenska stafrófinu
