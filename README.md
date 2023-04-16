@@ -5,7 +5,10 @@ Við misreiknuðum stærðina á forritinu rosalega, og náum því ekki að bæ
 keyrir og er nauðsynleg grunnvirkni til staðar, en það er ýmislegt sem við viljum bæta við, breyta og bæta.
 Við ætlum að halda áfram með þetta eftir skil, og klára það á eigin forsendum.
 
-Viðbætur sem eiga eftir að koma:
+Taka skal fram að ekki allar upplýsingarnar eru réttar.
+
+### Viðbætur sem eiga eftir að koma:
+
 - Bæta við fleiri plöntum
 - Breytingar vistast þegar forriti er lokað, ekki bara við útskráningu
 - Flipa með smá leiðbeiningum bætt við, til að útskýra t.d. hvað tákn og tölur á dagatali þýða
