@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="500.0" prefWidth="750.0"
-            xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="vidmot.plantmania.UpphafController" stylesheets="@styling/derived-style.css">
+<AnchorPane prefHeight="500.0" prefWidth="750.0" stylesheets="@styling/derived-style.css"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="vidmot.plantmania.UpphafController">
     <children>
         <Label layoutX="308.0" layoutY="60.0" text="Plantmania">
             <font>
@@ -27,5 +29,11 @@
         <Button layoutX="337.0" layoutY="410.0" mnemonicParsing="false" onAction="#geraNyjanAdgang" text="Nýskráning"/>
         <Label fx:id="fxVilla" layoutX="275.0" layoutY="145.0" prefHeight="18.0" prefWidth="200.0"
                text="Rangt notendanafn eða lykilorð" visible="false"/>
+        <ImageView fitHeight="140.0" fitWidth="165.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@styling/icon/watering-plants.png"/>
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>
