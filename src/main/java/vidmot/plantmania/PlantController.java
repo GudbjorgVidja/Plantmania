@@ -175,54 +175,57 @@ public class PlantController {
     public void dagatalsEventFilterar() {
         Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgFyrriVokvanir(), notendaupplysingar.getFyrriVokvanir());
         Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgAaetladarVokvanir(), notendaupplysingar.getNaestuVokvanir());
-
         dagatalTilBakaRegla();
         dagatalAframRegla();
 
         fxDagatal.getFxGrid().setOnMouseClicked((MouseEvent event) -> {
             Dagur dagur = getValinnDagur(event.getPickResult().getIntersectedNode());
-
             if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
                 int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
-
-                //TODO: eyða þessu fljótlega
-                System.out.println("fyrri vokvanir: " + notendaupplysingar.getFyrriVokvanir());
-                System.out.println("naestu vokvanir: " + notendaupplysingar.getNaestuVokvanir());
-
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
-
-                //TODO: finna leið til að setja dagsetninguna á annað form til að prenta í dialog
-                if (valinDagsetning.isBefore(LocalDate.now()) && !plonturDagsinsLokid.isEmpty()) {
-                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
-                    vokvanirDagsinsDialog.showAndWait();
-                } else if (valinDagsetning.isAfter(LocalDate.now()) && !plonturDagsinsOlokid.isEmpty()) {
-                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
-                    vokvanirDagsinsDialog.showAndWait();
-                } else {
-                    //TODO: finna betri lausn á þessu!! í staðin fyrir að sýna annað svo hitt
-                    if (!plonturDagsinsLokid.isEmpty()) {
-                        VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
-                        vokvanirDagsinsDialog.showAndWait();
-                    }
-                    if (!plonturDagsinsOlokid.isEmpty()) {
-                        if (valinDagsetning.isBefore(LocalDate.now())) {
-                            VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem hefði átt að vökva " + valinDagsetning);
-                            vokvanirDagsinsDialog2.showAndWait();
-                        } else {
-                            VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
-                            vokvanirDagsinsDialog2.showAndWait();
-                        }
-                    }
-                }
-
-                //gerir dropann sýnilegan þegar það er ýtt á dag, taka út seinna
-                //breyta frekar litnum!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
+                
+                synaVokvanirDagsins(valinDagsetning, plonturDagsinsLokid, plonturDagsinsOlokid);
+                //breyta litnum á reit þegar hann er valinn!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
                 //dagur.getFxDropi().visibleProperty().unbind();
                 //dagur.getFxDropi().setVisible(true);
             }
         });
+    }
+
+
+    /**
+     * gerir vokvanirDagsins dialog og sýnir hann ef eitthvað var vökvað á þessum degi, eða er/var planað.
+     * Setur viðfang mismunandi eftir því hvað er á deginum
+     *
+     * @param valinDagsetning      - LocalDate, dagsetning sem er skoðuð
+     * @param plonturDagsinsLokid  - ObservableList<Pair<MinPlanta, LocalDate>>, pör af MinPlanta hlutum sem voru vökvaðar og valinni dagsetningu
+     * @param plonturDagsinsOlokid -ObservableList<Pair<MinPlanta, LocalDate>>, pör af MinPlanta hlutum sem ætti að vökva og valinni dagsetningu
+     */
+    private void synaVokvanirDagsins(LocalDate valinDagsetning, ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid, ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid) {
+        String loknarVokvanir = "Plöntur sem voru vökvaðar " + valinDagsetning;
+        String seinarVokvanir = "Plöntur sem hefði átt að vökva " + valinDagsetning;
+        String oloknarVokvanir = "Plöntur sem ætti að vökva " + valinDagsetning;
+        VokvanirDagsinsDialog vokvanirDagsinsDialog = null;
+        if (!plonturDagsinsLokid.isEmpty() && !plonturDagsinsOlokid.isEmpty()) {
+            if (valinDagsetning.isBefore(LocalDate.now())) {
+                vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, loknarVokvanir, plonturDagsinsOlokid, seinarVokvanir);
+            } else {
+                vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, loknarVokvanir, plonturDagsinsOlokid, oloknarVokvanir);
+            }
+        } else if (!plonturDagsinsLokid.isEmpty()) {
+            vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, loknarVokvanir);
+        } else if (!plonturDagsinsOlokid.isEmpty()) {
+            if (valinDagsetning.isBefore(LocalDate.now())) {
+                vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsOlokid, seinarVokvanir);
+            } else {
+                vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsOlokid, oloknarVokvanir);
+            }
+        }
+        if (vokvanirDagsinsDialog != null) {
+            vokvanirDagsinsDialog.showAndWait();
+        }
     }
 
 
