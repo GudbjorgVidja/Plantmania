@@ -1,9 +1,10 @@
 .root{
-    -graenn1: #F2FFF6;
+/*  -graenn1: #F2FFF6;
     -graenn11: #edfcf2;
     -graenn2: #DDFFE7;
     -graenn3: #C8F8D6;
     -graenn4: darkgreen;
+    */
 
     unfocusedlitur: #cce8d2;
     -unfocusedlitur: #dff0e3;
@@ -104,7 +105,7 @@
 
 .border-pane-rammi{
     -fx-background-color: #ddffe7;
-    -fx-background-image: url("icon/rammi22.png");
+    -fx-background-image: url("icon/rammi.png");
     -fx-background-size: stretch;
     -fx-background-radius: 10;
 }
@@ -338,6 +339,27 @@
 }
 
 .vikudagur{
+    -fx-font-size: 14;
+}
+
+
+
+/* dagur */
+
+#fxManadardagur{
+    -fx-font-size: 16;
+}
+
+#fxFjoldiVokvanaOlokid{
+    -fx-font-size: 14;
+}
+
+#fxDropi{
+    -fx-image: url("icon/water.png");
+}
+
+#fxFjoldiVokvana{
+    -fx-text-fill: #458aea;
     -fx-font-size: 14;
 }
 

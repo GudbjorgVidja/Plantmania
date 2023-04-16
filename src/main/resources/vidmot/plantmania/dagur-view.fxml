@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 <fx:root prefHeight="55.0" prefWidth="73.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/11"
-         xmlns:fx="http://javafx.com/fxml/1">
+         xmlns:fx="http://javafx.com/fxml/1" stylesheets="@styling/derived-style.css">
     <children>
         <Label fx:id="fxManadardagur" layoutX="5.0" layoutY="5.0" prefHeight="24.0" prefWidth="17.0">
-            <font>
+            <!--<font>
                 <Font size="16.0"/>
-            </font>
+            </font> -->
         </Label>
         <Label fx:id="fxFjoldiVokvanaOlokid" layoutX="48.0" layoutY="21.0" prefHeight="20.0" prefWidth="23.0">
-            <font>
+            <!--<font>
                 <Font size="14.0"/>
-            </font>
+            </font>-->
         </Label>
         <ImageView fx:id="fxDropi" fitHeight="30.0" fitWidth="33.0" layoutX="22.0" layoutY="15.0" pickOnBounds="true"
                    preserveRatio="true">
-            <image>
+            <!--<image>
                 <Image url="@styling/icon/water.png"/>
-            </image>
+            </image> -->
         </ImageView>
         <Label fx:id="fxFjoldiVokvana" layoutX="5.0" layoutY="31.0" prefHeight="18.0" prefWidth="17.0"
-               textFill="#458aea">
-            <font>
+        > <!--  textFill="#458aea"-->
+            <!--<font>
                 <Font size="14.0"/>
-            </font>
+            </font> -->
         </Label>
     </children>
 </fx:root>
