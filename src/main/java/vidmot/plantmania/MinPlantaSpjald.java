@@ -70,9 +70,6 @@ public class MinPlantaSpjald extends AnchorPane {
      */
     private void vokvaHandler(ActionEvent event) {
         minPlantan.baetaVidVokvun(LocalDate.now());
-        //TODO: Ég þarf pentsetningarnar ekki, en þú guðbjörg? mátt eyða þeim ef þú þarft þær ekki heldur
-        System.out.println("vokva");
-        System.out.println(minPlantan.getVokvanir().toString());//vökvanir prentaðar
     }
 
     /**
@@ -90,13 +87,9 @@ public class MinPlantaSpjald extends AnchorPane {
      * @param event smellt á fresta hnapp
      */
     private void frestaHandler(ActionEvent event) {
-        //TODO: ég þarf prentsetninguna ekki. mátt eyða henni ef þú þarft hana ekki heldur, guðbjörg
-        System.out.println("frestar um dag");
         minPlantan.getNaestaVokvun().unbind();
         minPlantan.setNaestaVokvun(minPlantan.getNaestaVokvun().get() + 1);
         minPlantan.naestaVokvunRegla();
-        //TODO: ég þarf þessa ekki heldur
-        System.out.println("naestaVokvun: " + minPlantan.getNaestaVokvun().get());
     }
 
     /**

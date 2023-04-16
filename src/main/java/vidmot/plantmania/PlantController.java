@@ -56,25 +56,19 @@ public class PlantController {
         System.out.println(skradurNotandi.get());
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());//af hverju ekki bara upphafsstilling?
 
-        //todo: eyða þessu, guðbjörg
-        //fxAllarPlonturYfirlit.lesaAllarPlontur();//loadar fxml oftar
         lesaInnAllarPlontur();
         dagatalsEventFilterar();
 
-        //TODO: annað hvort eyða commenti eða breyta, guðbjörg?
-        //binda nafn notanda við label i báðum yfirlitum.
-        // Væri gott að hafa í Plontuyfirlit klasanum, en viewSwitcher er leiðinlegur við mig rn
         fxMinarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
         fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
 
         birtaNotendaPlontur();
         hladaUpplysingum();
 
+        //todo sigurbjörg, ertu að nota þessa prentsetningu?
         System.out.println(skradurNotandi.get());
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
-        //Todo: eyða prentsetningu fljótlega? mátt eyða ef þú ert ekki að nota hana, guðbjörg
-        System.out.println(skradurNotandi);
         bindaMaxSizeTitledPane();
         setjaFraedsla();
     }
@@ -86,7 +80,6 @@ public class PlantController {
                     System.out.println(n);
                     if (!n) ((TitledPane) node).maxHeightProperty().set(0);
                     else ((TitledPane) node).maxHeightProperty().set(((TitledPane) node).getPrefHeight());
-                    //todo: eða nota Double.MAX_VALUE?
                 });
             }
         }
@@ -185,7 +178,7 @@ public class PlantController {
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
-                
+
                 synaVokvanirDagsins(valinDagsetning, plonturDagsinsLokid, plonturDagsinsOlokid);
                 //breyta litnum á reit þegar hann er valinn!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
                 //dagur.getFxDropi().visibleProperty().unbind();

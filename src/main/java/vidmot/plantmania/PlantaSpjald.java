@@ -41,7 +41,6 @@ public class PlantaSpjald extends AnchorPane {
 
         fxStats.setPlanta(planta);
         stillaStaerd();
-        //todo er betra að gera þetta allt í einu? og fara þá einu sinni inn í fxSpjald? Sigurbjörg: held þetta sé fínt svona. Eyða commentinu?
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
         fxSpjald.setFxFlokkur(planta.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());

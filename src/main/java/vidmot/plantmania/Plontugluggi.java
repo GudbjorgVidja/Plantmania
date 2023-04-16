@@ -298,7 +298,6 @@ public class Plontugluggi extends Dialog<Void> {
         if (inntak.isPresent()) {
             minPlantan.setNickName(inntak.get());
             System.out.println(inntak);
-            //todo passa að nafn bætist við öll heiti? Sigurbjörg: ég held það sé óþarfi
         }
     }
 
