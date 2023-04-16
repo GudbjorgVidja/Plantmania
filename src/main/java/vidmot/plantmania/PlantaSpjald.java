@@ -69,50 +69,7 @@ public class PlantaSpjald extends AnchorPane {
         }
 
     }
-
-    /**
-     * stilla stærð mynda hér, og kannski líka sýnileika? (opacity)
-     */
-    /*
-    private void stillaMyndaStaerd() {
-        for (Node v : fxBoxaHbox.getChildren()) {
-            if (v instanceof VBox) {
-                for (Node i : ((VBox) v).getChildren()) {
-                    if (i instanceof ImageView) {
-                        ((ImageView) i).setFitHeight(20);
-                        ((ImageView) i).setFitWidth(20);
-                    }
-                }
-            }
-        }
-    }
-
-    //todo gera sérhæfðan klasa fyrir þetta allt, nota í PlantaSpjald og plontugluggi
-    private void setjaOpacity() {
-        if (planta.getLjosstyrkur().equals(Ljosstyrkur.HALFBEINT)) {
-            fxLjosBox.getChildren().get(0).setOpacity(0.3);
-        } else if (planta.getLjosstyrkur().equals(Ljosstyrkur.OBEINT)) {
-            fxLjosBox.getChildren().get(0).setOpacity(0.3);
-            fxLjosBox.getChildren().get(1).setOpacity(0.3);
-        }
-
-        if (planta.getVatnsthorf().equals(Vatnsthorf.MEDAL)) {
-            fxVatnBox.getChildren().get(0).setOpacity(0.3);
-        } else if (planta.getVatnsthorf().equals(Vatnsthorf.LITIL) || planta.getVatnsthorf().equals(Vatnsthorf.MJOG_LITIL)) {
-            fxVatnBox.getChildren().get(0).setOpacity(0.3);
-            fxVatnBox.getChildren().get(1).setOpacity(0.3);
-        }
-
-        if (planta.getKjorhitastig().get(1) < 20) {
-            fxHitiBox.getChildren().get(0).setOpacity(0.3);
-        } else if (planta.getKjorhitastig().get(1) < 15) {
-            fxHitiBox.getChildren().get(0).setOpacity(0.3);
-            fxHitiBox.getChildren().get(1).setOpacity(0.3);
-        }
-
-    }
-
-     */
+    
     public String toString() {
         return planta.getAlmenntNafn();
     }
