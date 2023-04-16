@@ -44,6 +44,9 @@ public class Plontugluggi extends Dialog<Void> {
     @FXML
     private FlowPane fxHeiti, fxEinkenni;
 
+    @FXML
+    private Stats fxStats;
+
     private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
 
     //private Planta plantan;//ef glugginn er fyrir planta, kemur etv seinna
@@ -85,6 +88,7 @@ public class Plontugluggi extends Dialog<Void> {
         setjaFxLjosthorf();
 
         setStyleClass();
+        fxStats.setMinPlanta(minPlantan);
     }
 
     private void setStyleClass() {
