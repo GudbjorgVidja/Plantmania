@@ -111,11 +111,21 @@ public class Plontuyfirlit extends AnchorPane {
     }
 
     private void tomtYfirlitVidvodun() {
-        //setja engarMinarBakgrunnur.png
         fxFlowPane.getStyleClass().add("engar-minar-vidvorun");
 
         yfirlitTomt.addListener((obs, o, n) -> {
             if (!n) fxFlowPane.getStyleClass().removeAll("engar-minar-vidvorun");
+        });
+
+        filteredSpjold.addListener((ListChangeListener<? super Node>) change -> {
+            change.next();
+            if (change.wasRemoved()) {
+                if (filteredSpjold.size() == 0)
+                    fxFlowPane.getStyleClass().add("skoda-sia-vidvorun");//minarPlontur  getur ekki verið tómt
+            } else if (change.wasAdded()) {
+                fxFlowPane.getStyleClass().removeAll("skoda-sia-vidvorun");
+            }
+
         });
 
 
