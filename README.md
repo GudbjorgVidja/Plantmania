@@ -19,3 +19,7 @@ Viðbætur sem eiga eftir að koma:
 - Setja einhverja reglu fyrir gild lykilorð
 - Þegar plöntu er bætt við mínar plöntur, ekki hafa dialog heldur kannski popup neðst sem fer eftir smá tíma
 - Ef síur eru stilltar þ.a. engir möguleikar eru sýnilegir í yfirliti, setja þá texta og kannski mynd sem bendir á það
+- athuga hvort betra sé að hafa graphic á tökkum fyrir myndir eða bakgrunn. Held að background image sé betra, hægt að
+  nota css
+- taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
+- 

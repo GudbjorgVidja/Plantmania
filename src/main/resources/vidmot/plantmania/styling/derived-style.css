@@ -1,5 +1,6 @@
 .root{
-/*  -graenn1: #F2FFF6;
+    /*
+    -graenn1: #F2FFF6;
     -graenn11: #edfcf2;
     -graenn2: #DDFFE7;
     -graenn3: #C8F8D6;
@@ -190,29 +191,6 @@
 
 
 
-.titill-label{
-    -fx-font-size: 16px;
-}
-
-#fxBreytaNafni{
-    -fx-background-image: url("icon/edit.png");
-    -fx-background-size: 20px;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-}
-
-.titilbox{
-    -fx-alignment: center-left;
-    -fx-pref-height: 25;
-    -fx-pref-width: 300;
-    -fx-spacing: 5;
-    -fx-fill-height: false;
-    -fx-padding: 10 0 0 0;
-}
-
-
-
-
 #fxNotandi .arrow{
     -fx-background-color: transparent;
 }
@@ -322,8 +300,31 @@
 }
 
 
+
+
+/* plöntugluggi  */
 .fraedsluflokkur{
     -fx-font-size: 14;
+}
+
+.titill-label{
+    -fx-font-size: 16px;
+}
+
+#fxBreytaNafni{
+    -fx-background-image: url("icon/edit.png");
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.titilbox{
+    -fx-alignment: center-left;
+    -fx-pref-height: 25;
+    -fx-pref-width: 300;
+    -fx-spacing: 5;
+    -fx-fill-height: false;
+    -fx-padding: 10 0 0 0;
 }
 
 
