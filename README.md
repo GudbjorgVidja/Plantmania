@@ -32,3 +32,10 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   nota css
 - taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
 - lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
+
+### Plöntur sem ætti að bæta við:
+
+- gúmmítré
+- rósir
+- einhverjar mat-/kryddjurtir
+- 
