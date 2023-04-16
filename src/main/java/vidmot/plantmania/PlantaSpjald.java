@@ -21,15 +21,6 @@ public class PlantaSpjald extends AnchorPane {
     @FXML
     private Stats fxStats;
 
-    /*
-    @FXML
-    private VBox fxVatnBox, fxLjosBox, fxHitiBox;
-
-    @FXML
-    private HBox fxBoxaHbox;
-
-     */
-
     private Planta planta;//Planta vinnsluhluturinn, plantan sem spjaldið er fyrir.
 
     public PlantaSpjald() {
@@ -53,11 +44,6 @@ public class PlantaSpjald extends AnchorPane {
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
         fxSpjald.setFxFlokkur(planta.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
-
-        //stillaMyndaStaerd();
-
-        //setjaOpacity();
-
     }
 
     private void stillaStaerd() {
@@ -69,7 +55,7 @@ public class PlantaSpjald extends AnchorPane {
         }
 
     }
-    
+
     public String toString() {
         return planta.getAlmenntNafn();
     }
