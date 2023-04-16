@@ -294,12 +294,11 @@ public class Plontugluggi extends Dialog<Void> {
 
         nafnDialog.getDialogPane().lookupButton(iLagi).disableProperty().bind(nafnDialog.getEditor().textProperty().isEmpty());
 
-
         Optional<String> inntak = nafnDialog.showAndWait();
         if (inntak.isPresent()) {
             minPlantan.setNickName(inntak.get());
             System.out.println(inntak);
-            //todo passa að nafn bætist við öll heiti?
+            //todo passa að nafn bætist við öll heiti? Sigurbjörg: ég held það sé óþarfi
         }
     }
 
@@ -355,6 +354,7 @@ public class Plontugluggi extends Dialog<Void> {
      * @param event smellt á vökvunarsaga hnapp
      */
     private void vokvunarsagaHandler(ActionEvent event) {
+        //TODO: sýna líka listview yfir planaðar vökvanir? breyta svo og birta dagatal
         System.out.println("fyrri vokvanir: " + minPlantan.getVokvanir());
         System.out.println("planadar vokvanir: " + minPlantan.getPlanadarVokvanir());
         VokvanirPlontunnarDialog vokvanirPlontunnarDialog = new VokvanirPlontunnarDialog(minPlantan);

@@ -16,13 +16,14 @@ public class PlantaSpjald extends AnchorPane {
     private AnchorPane fxBreytilegtSvaedi;//laga nafn, en er anchorPane sem inniheldur stats, til að geta breytt því og sýnt takka
 
     @FXML
-    private Spjald fxSpjald;
+    private Spjald fxSpjald;//Spjald hlutur, grunnurinn fyrir plöntuspjaldið
 
     @FXML
-    private Stats fxStats;
+    private Stats fxStats;//hlutur af klasanum Stats, sýnir eiginleika plöntunnar með skala
 
     private Planta planta;//Planta vinnsluhluturinn, plantan sem spjaldið er fyrir.
 
+    //Todo: þú segtir að þetta keyrist aldrei, guðbjörg. eyða þá?
     public PlantaSpjald() {
         //keyrist aldrei
         //System.out.println("Plantaspjald tomur smidur");
@@ -40,12 +41,15 @@ public class PlantaSpjald extends AnchorPane {
 
         fxStats.setPlanta(planta);
         stillaStaerd();
-        //todo er betra að gera þetta allt í einu? og fara þá einu sinni inn í fxSpjald?
+        //todo er betra að gera þetta allt í einu? og fara þá einu sinni inn í fxSpjald? Sigurbjörg: held þetta sé fínt svona. Eyða commentinu?
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
         fxSpjald.setFxFlokkur(planta.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
     }
 
+    /**
+     * stillir stærðina á Vboxum með myndum
+     */
     private void stillaStaerd() {
         for (Node n : fxStats.getChildren()) {
             if (n instanceof VBox) {
@@ -53,7 +57,6 @@ public class PlantaSpjald extends AnchorPane {
                 ((VBox) n).setPrefWidth(36);
             }
         }
-
     }
 
     public String toString() {

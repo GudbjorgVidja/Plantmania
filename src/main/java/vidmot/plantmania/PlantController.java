@@ -1,7 +1,5 @@
 package vidmot.plantmania;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,8 +19,6 @@ import javafx.scene.text.Text;
 import javafx.util.Pair;
 import vinnsla.plantmania.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,26 +56,26 @@ public class PlantController {
         System.out.println(skradurNotandi.get());
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());//af hverju ekki bara upphafsstilling?
 
+        //todo: eyða þessu, guðbjörg
         //fxAllarPlonturYfirlit.lesaAllarPlontur();//loadar fxml oftar
         lesaInnAllarPlontur();
         dagatalsEventFilterar();
 
+        //TODO: annað hvort eyða commenti eða breyta, guðbjörg?
         //binda nafn notanda við label i báðum yfirlitum.
         // Væri gott að hafa í Plontuyfirlit klasanum, en viewSwitcher er leiðinlegur við mig rn
         fxMinarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
         fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
 
         birtaNotendaPlontur();
-        //notendaupplysingar.finnaFyrriOgSidariVokvanirListener(skradurNotandi.get().getMinarPlontur());
         hladaUpplysingum();
 
         System.out.println(skradurNotandi.get());
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
+        //Todo: eyða prentsetningu fljótlega? mátt eyða ef þú ert ekki að nota hana, guðbjörg
         System.out.println(skradurNotandi);
-
         bindaMaxSizeTitledPane();
-
         setjaFraedsla();
     }
 
@@ -89,7 +85,7 @@ public class PlantController {
                 ((TitledPane) node).expandedProperty().addListener((obs, o, n) -> {
                     System.out.println(n);
                     if (!n) ((TitledPane) node).maxHeightProperty().set(0);
-                    else if (n) ((TitledPane) node).maxHeightProperty().set(((TitledPane) node).getPrefHeight());
+                    else ((TitledPane) node).maxHeightProperty().set(((TitledPane) node).getPrefHeight());
                     //todo: eða nota Double.MAX_VALUE?
                 });
             }
@@ -179,54 +175,57 @@ public class PlantController {
     public void dagatalsEventFilterar() {
         Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgFyrriVokvanir(), notendaupplysingar.getFyrriVokvanir());
         Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgAaetladarVokvanir(), notendaupplysingar.getNaestuVokvanir());
-
         dagatalTilBakaRegla();
         dagatalAframRegla();
 
         fxDagatal.getFxGrid().setOnMouseClicked((MouseEvent event) -> {
             Dagur dagur = getValinnDagur(event.getPickResult().getIntersectedNode());
-
             if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
                 int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
-
-                //TODO: eyða þessu fljótlega
-                System.out.println("fyrri vokvanir: " + notendaupplysingar.getFyrriVokvanir());
-                System.out.println("naestu vokvanir: " + notendaupplysingar.getNaestuVokvanir());
-
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
-
-                //TODO: finna leið til að setja dagsetninguna á annað form til að prenta í dialog
-                if (valinDagsetning.isBefore(LocalDate.now()) && !plonturDagsinsLokid.isEmpty()) {
-                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
-                    vokvanirDagsinsDialog.showAndWait();
-                } else if (valinDagsetning.isAfter(LocalDate.now()) && !plonturDagsinsOlokid.isEmpty()) {
-                    VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
-                    vokvanirDagsinsDialog.showAndWait();
-                } else {
-                    //TODO: finna betri lausn á þessu!! í staðin fyrir að sýna annað svo hitt
-                    if (!plonturDagsinsLokid.isEmpty()) {
-                        VokvanirDagsinsDialog vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, "Plöntur sem hafa verið vökvaðar " + valinDagsetning);
-                        vokvanirDagsinsDialog.showAndWait();
-                    }
-                    if (!plonturDagsinsOlokid.isEmpty()) {
-                        if (valinDagsetning.isBefore(LocalDate.now())) {
-                            VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem hefði átt að vökva " + valinDagsetning);
-                            vokvanirDagsinsDialog2.showAndWait();
-                        } else {
-                            VokvanirDagsinsDialog vokvanirDagsinsDialog2 = new VokvanirDagsinsDialog(plonturDagsinsOlokid, "Plöntur sem ætti að vökva " + valinDagsetning);
-                            vokvanirDagsinsDialog2.showAndWait();
-                        }
-                    }
-                }
-
-                //gerir dropann sýnilegan þegar það er ýtt á dag, taka út seinna
-                //breyta frekar litnum!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
+                
+                synaVokvanirDagsins(valinDagsetning, plonturDagsinsLokid, plonturDagsinsOlokid);
+                //breyta litnum á reit þegar hann er valinn!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
                 //dagur.getFxDropi().visibleProperty().unbind();
                 //dagur.getFxDropi().setVisible(true);
             }
         });
+    }
+
+
+    /**
+     * gerir vokvanirDagsins dialog og sýnir hann ef eitthvað var vökvað á þessum degi, eða er/var planað.
+     * Setur viðfang mismunandi eftir því hvað er á deginum
+     *
+     * @param valinDagsetning      - LocalDate, dagsetning sem er skoðuð
+     * @param plonturDagsinsLokid  - ObservableList<Pair<MinPlanta, LocalDate>>, pör af MinPlanta hlutum sem voru vökvaðar og valinni dagsetningu
+     * @param plonturDagsinsOlokid -ObservableList<Pair<MinPlanta, LocalDate>>, pör af MinPlanta hlutum sem ætti að vökva og valinni dagsetningu
+     */
+    private void synaVokvanirDagsins(LocalDate valinDagsetning, ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid, ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid) {
+        String loknarVokvanir = "Plöntur sem voru vökvaðar " + valinDagsetning;
+        String seinarVokvanir = "Plöntur sem hefði átt að vökva " + valinDagsetning;
+        String oloknarVokvanir = "Plöntur sem ætti að vökva " + valinDagsetning;
+        VokvanirDagsinsDialog vokvanirDagsinsDialog = null;
+        if (!plonturDagsinsLokid.isEmpty() && !plonturDagsinsOlokid.isEmpty()) {
+            if (valinDagsetning.isBefore(LocalDate.now())) {
+                vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, loknarVokvanir, plonturDagsinsOlokid, seinarVokvanir);
+            } else {
+                vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, loknarVokvanir, plonturDagsinsOlokid, oloknarVokvanir);
+            }
+        } else if (!plonturDagsinsLokid.isEmpty()) {
+            vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsLokid, loknarVokvanir);
+        } else if (!plonturDagsinsOlokid.isEmpty()) {
+            if (valinDagsetning.isBefore(LocalDate.now())) {
+                vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsOlokid, seinarVokvanir);
+            } else {
+                vokvanirDagsinsDialog = new VokvanirDagsinsDialog(plonturDagsinsOlokid, oloknarVokvanir);
+            }
+        }
+        if (vokvanirDagsinsDialog != null) {
+            vokvanirDagsinsDialog.showAndWait();
+        }
     }
 
 
@@ -242,50 +241,13 @@ public class PlantController {
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
-
             Alert a = new Alert(Alert.AlertType.NONE, "Nýrri plöntu bætt við þínar plöntur", ButtonType.OK);
             a.showAndWait();
         }
     }
 
-    /**
-     * Atburðahandler. kallar á aðferð til að vista upplýsingar, setur skráðan notanda sem null og fer á upphafssíðu
-     *
-     * @param actionEvent - atburður
-     */
-    public void skraUt(ActionEvent actionEvent) {
-        vistaNotendaupplysingar();
-        skradurNotandi = null;
-        System.out.println("skra ut");
-        ViewSwitcher.switchTo(View.UPPHAFSSIDA);
-    }
-
-    /**
-     * sækir alla notendur sem eru í skránni, finnur þann sem er skráður inn og uppfærir upplýsingar um hann með
-     * því að skrifa í skrána. ATH að eins og allt annað tengt json virkar þetta ekki
-     */
-    public void vistaNotendaupplysingar() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.findAndRegisterModules();
-
-        try {
-            List<Notandi> notendur = objectMapper.readValue(new File("target/classes/vidmot/plantmania/notendur.json"), new TypeReference<>() {
-            });
-            for (Notandi n : notendur) {
-                if (n.notendanafnProperty().get().equals(skradurNotandi.get().getNotendanafn())) {
-                    n.setMinarPlontur(skradurNotandi.get().getMinarPlontur());
-                    objectMapper.writeValue(new File("target/classes/vidmot/plantmania/notendur.json"), notendur);
-                }
-            }
-        } catch (IOException e) {
-            System.out.println(e.getCause());
-        }
-    }
-
-
-    public void setSkradurNotandi(Notandi n) {
-        skradurNotandi = (new SimpleObjectProperty<Notandi>(n));
-        // skradurNotandi=n;
+    public Notandi getSkradurNotandi() {
+        return skradurNotandi.get();
     }
 
     public Notendaupplysingar getNotendaupplysingar() {
