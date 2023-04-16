@@ -15,7 +15,7 @@
                 <Plontuyfirlit fx:id="fxMinarPlonturYfirlit" prefHeight="458.0" prefWidth="536.0"/>
             </content>
             <graphic>
-                <Label styleClass="tablabell" text="mínar plöntur"/>
+                <Label text="mínar plöntur"/>
             </graphic>
         </Tab>
         <Tab>
@@ -27,7 +27,7 @@
                 </AnchorPane>
             </content>
             <graphic>
-                <Label styleClass="tablabell" text="dagatal"/>
+                <Label text="dagatal"/>
             </graphic>
         </Tab>
         <Tab>
@@ -36,7 +36,7 @@
                                prefWidth="604.0"/>
             </content>
             <graphic>
-                <Label styleClass="tablabell" text="skoða"/>
+                <Label text="skoða"/>
             </graphic>
         </Tab>
         <Tab>
@@ -56,7 +56,7 @@
                                                     VBox.vgrow="SOMETIMES">
                                             <content>
                                                 <VBox prefHeight="200.0" prefWidth="100.0" fx:id="vokvaBox">
-                                                    <children>
+                                                    <children> <!-- todo setja wrapping width í css ef mögulegt -->
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="512"
                                                               text="Aðferð 1" styleClass="fraedsluflokkur"/>
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
@@ -97,7 +97,7 @@
                 </AnchorPane>
             </content>
             <graphic>
-                <Label styleClass="tablabell" text="fræðsla"/>
+                <Label text="fræðsla"/>
             </graphic>
         </Tab>
     </tabs>

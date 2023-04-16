@@ -8,8 +8,9 @@
 <?import javafx.scene.text.*?>
 <?import vidmot.plantmania.*?>
 <fx:root prefHeight="439.0" prefWidth="579.0" style="-fx-background-color: #c8fad8;"
+         stylesheets="@styling/derived-style.css"
          type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
+    <children> <!-- todo gera css fyrir dagatal-->
         <GridPane fx:id="fxGrid" alignment="CENTER" gridLinesVisible="true" layoutX="19.0" layoutY="82.0"
                   prefHeight="326.0" prefWidth="545.0" style="-fx-background-color: #63e69c ;">
             <columnConstraints>

@@ -11,8 +11,7 @@
     <content>
         <AnchorPane prefHeight="400.0" prefWidth="600.0">
             <children>
-                <Pane layoutX="23.0" layoutY="31.0" prefHeight="369.0" prefWidth="206.0"
-                      style="-fx-border-color: lightsteelblue;">
+                <Pane layoutX="23.0" layoutY="31.0" prefHeight="369.0" prefWidth="206.0">
                     <children>
                         <BorderPane layoutX="32.0" layoutY="51.0" prefHeight="121.0" prefWidth="142.0"
                                     styleClass="border-pane-rammi" VBox.vgrow="NEVER">
