@@ -22,4 +22,4 @@ Viðbætur sem eiga eftir að koma:
 - athuga hvort betra sé að hafa graphic á tökkum fyrir myndir eða bakgrunn. Held að background image sé betra, hægt að
   nota css
 - taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
-- 
+- lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
