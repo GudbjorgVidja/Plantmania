@@ -28,11 +28,10 @@ public class NyskraningDialog extends Dialog<Notandi> {
     private ButtonType ILagi = new ButtonType("Í lagi", ButtonBar.ButtonData.OK_DONE);//buttontype fyrir í lagi takkann
     private ButtonType HaettaVid = new ButtonType("Hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);//buttontype fyrir hætta við takkann
 
-
-    private Image icon = new Image(getClass().getResourceAsStream("styling/icon/check.png"));
-    private ImageView notendaNafnSamthykkt = new ImageView(icon);
-    private ImageView lykilordSamthykkt = new ImageView(icon);
-    private ImageView endurtekningSamthykkt = new ImageView(icon);
+    private Image icon = new Image(getClass().getResourceAsStream("styling/icon/check.png"));//mynd af checkmark
+    private ImageView notendaNafnSamthykkt = new ImageView(icon);//imageview með iconi, sést ef notendanafn er gilt
+    private ImageView lykilordSamthykkt = new ImageView(icon);//imageview með iconi, sést ef inntak er gilt
+    private ImageView endurtekningSamthykkt = new ImageView(icon);//imageview með iconi, sést ef lykilorð er rétt endurtekið
 
     /**
      * smiður
@@ -53,6 +52,9 @@ public class NyskraningDialog extends Dialog<Notandi> {
         setResultConverter();
     }
 
+    /**
+     * setur stærðina á myndinni í imageview hlutina
+     */
     private void setjaValidationIcon() {
         notendaNafnSamthykkt.setFitHeight(20);
         notendaNafnSamthykkt.setFitWidth(20);
@@ -62,6 +64,9 @@ public class NyskraningDialog extends Dialog<Notandi> {
         endurtekningSamthykkt.setFitWidth(20);
     }
 
+    /**
+     * bindur sýnileika á imageview hlutunum við það hvort inntak er gilt
+     */
     private void setjaIconBinding() {
         notendaNafnSamthykkt.visibleProperty().bind(notandiTil.not().and(fxNotendanafn.textProperty().isEmpty().not()));
         lykilordSamthykkt.visibleProperty().bind(fxLykilord.textProperty().isEmpty().not());

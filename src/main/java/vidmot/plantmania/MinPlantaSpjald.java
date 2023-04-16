@@ -35,8 +35,6 @@ public class MinPlantaSpjald extends AnchorPane {
     }
 
     public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn sem er notaður
-        System.out.println("MinPlantaSpjald smidur");
-
         LesaFXML.lesa(this, "minplanta-view.fxml");
 
         minPlantan = minPlanta;

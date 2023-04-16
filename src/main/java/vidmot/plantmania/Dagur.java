@@ -11,13 +11,13 @@ import javafx.scene.layout.Pane;
  */
 public class Dagur extends Pane {
     @FXML
-    private Label fxManadardagur;
+    private Label fxManadardagur;//label fyrir númer mánaðardags
     @FXML
-    private Label fxFjoldiVokvana;
+    private Label fxFjoldiVokvana;//label fyrir fjolda vökvana sem er lokið þennan dag
     @FXML
-    private ImageView fxDropi;
+    private ImageView fxDropi;//imageview með mynd af dropa, verður sýnt þá daga sem á að vökva eitthvað
     @FXML
-    private Label fxFjoldiVokvanaOlokid;
+    private Label fxFjoldiVokvanaOlokid;//label fyrir fjölda vökvana sem er ólokið þennan dag
 
     /**
      * Les inn fxml skrá, setur controller og rót og hleður fxmlLoadernum

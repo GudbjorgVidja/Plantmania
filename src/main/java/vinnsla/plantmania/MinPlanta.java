@@ -39,16 +39,11 @@ public class MinPlanta extends Planta {
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
 
-        System.out.println("MinPlanta(Planta planta) smidur");
-
-        //naestaVokvun = (thinnTimiMilliVokvana);
-
         naestaVokvunRegla();
         reiknaPlanadarVokvanir();
     }
 
     public MinPlanta() {
-        System.out.println("MinPlanta() smidur");
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
         naestaVokvunRegla();
@@ -60,33 +55,30 @@ public class MinPlanta extends Planta {
      * og thinnTimiMilliVokvana svo planadarVokvanir uppfærist þegar annað gildið breytist
      */
     public void reiknaPlanadarVokvanir() {
-        LocalDate lengdAaetlunar = LocalDate.now().plusMonths(3);
-        uppfaeraPlanadarVokvanir(lengdAaetlunar);
-
+        uppfaeraPlanadarVokvanir();
         setjaPlanadarVokvanirListenera();
     }
 
     public void setjaPlanadarVokvanirListenera() {
-        LocalDate lengdAaetlunar = LocalDate.now().plusMonths(3);
         naestaVokvun.addListener((obs, o, n) -> {
-            uppfaeraPlanadarVokvanir(lengdAaetlunar);
+            uppfaeraPlanadarVokvanir();
         });
-
+        
         thinnTimiMilliVokvana.addListener((observable, oldValue, newValue) -> {
-            uppfaeraPlanadarVokvanir(lengdAaetlunar);
+            uppfaeraPlanadarVokvanir();
         });
     }
 
     /**
      * Setur planadarVokvanir fyrir plöntuna með réttu millibili ákveðið langt fram í tímann.
      * Tæmir planadarVokvanir svo það reiknast alltaf frá grunni
-     *
-     * @param lengd - LocalDate, þar sem áætlun hættir
      */
-    private void uppfaeraPlanadarVokvanir(LocalDate lengd) {
+    private void uppfaeraPlanadarVokvanir() {
         LocalDate dagur = LocalDate.now().plusDays(naestaVokvun.get());
+        LocalDate lengdAaetlunar = LocalDate.now().plusMonths(3);
+
         planadarVokvanir.clear();
-        for (LocalDate d = dagur; d.isBefore(lengd); d = d.plusDays(thinnTimiMilliVokvana.get())) {
+        for (LocalDate d = dagur; d.isBefore(lengdAaetlunar); d = d.plusDays(thinnTimiMilliVokvana.get())) {
             planadarVokvanir.add(d);
         }
     }
@@ -250,11 +242,6 @@ public class MinPlanta extends Planta {
         return naestaVokvun;
     }
 
-    /**
-     * passa að naestaVokvun sé ekki bundið, a bound value cannot be set
-     *
-     * @param i nýtt gildi
-     */
     public void setNaestaVokvun(int i) {
         naestaVokvun.set(i);
     }

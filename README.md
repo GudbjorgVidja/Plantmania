@@ -1,5 +1,5 @@
 # Plantmania
-Stórt verkefni í viðmótsforritun vorið 2023. Þetta er plöntuforrit sem hjálpar notendum að sjá um plönturnar sínar. 
+Stórt verkefni í viðmótsforritun vorið 2023. Þetta er plöntuforrit sem hjálpar notendum að sjá um plönturnar sínar.
 
 Viðbætur sem eiga eftir að koma:
 - Bæta við fleiri plöntum
@@ -9,6 +9,8 @@ Viðbætur sem eiga eftir að koma:
 - Frekari vinna í Dialogum, t.d. óvirkja takka við ákveðnar aðstæður og laga útlit
 - Bæta við fleiri möguleikum tengda notanda, t.d. að breyta lykilorði og eyða aðgangi
 - Bæta við möguleika á að breyta þema forritsins
-- Gefa betri viðbrögð við aðgerðum notanda, t.d. láta skilaboð birtast þegar notandi endurtekur lykilorð 
-ekki rétt við nýskráningu, þegar hann reynir að breyta nafni plöntu í eitthvað sem ekki má eða 
+- Gefa betri viðbrögð við aðgerðum notanda, t.d. láta skilaboð birtast þegar notandi endurtekur lykilorð
+ekki rétt við nýskráningu, þegar hann reynir að breyta nafni plöntu í eitthvað sem ekki má eða
 þegar hann gerir eitthvað annað sem ekki er leyfilegt
+- Laga hvernig dagsetningar eru birtar
+- Setja einhverja reglu fyrir gild lykilorð

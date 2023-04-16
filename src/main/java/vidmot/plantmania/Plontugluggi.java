@@ -264,7 +264,6 @@ public class Plontugluggi extends Dialog<Void> {
      * @param event smellt á litla merkið við hliðina á nafni plöntu
      */
     private void breytaNafniHandler(MouseEvent event) {
-        System.out.println("nafni verdur breytt");
         TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getNickName());
 
         ButtonType iLagi = new ButtonType("vista breytingar", ButtonBar.ButtonData.OK_DONE);
