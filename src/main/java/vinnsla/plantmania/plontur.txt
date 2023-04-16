@@ -1,4 +1,4 @@
-7
+11
 
 monstera deliciosa, Monstera, swiss cheese plant
 Ficus lyrata, Fiddle Leaf Fig, fiðlufíkus
@@ -7,6 +7,10 @@ Aloe Vera, aloe, brunagel, Aloe V, Medicine Plant, True Aloe, Burn Plant, (commo
 Dracaena trifasciata, snákaplanta, snake plant, indjánafjöður, Saint George's sword, mother-in-law's tongue, viper's bowstring hemp
 sveppur barabeppur, Sveppur, rauðhetta, mushy
 Dionaea Muscipula, Venusargildra, Venus fly trap
+Lavandula, Lavender, lofnarblóm
+kaktus taratattus, spike, nálapúði
+philodendron erubescens, Pink princess. prinsessa
+Chlorophytum comosum, spider plant, veðhlaupari
 
 monstera.png
 fiddleLeafFig.png
@@ -15,6 +19,10 @@ aloe.png
 snek.png
 sveppi.png
 venus2.png
+lavender.png
+jelly.png
+spot.png
+spiderplant1.png
 
 Monsteran er vinsæl planta, falleg, götótt. Hún tekur sig vel út í stærri plássum, og getur orðið vel stór.
 Fiðlufíkusinn er fallegur, en getur verið nokkuð krefjandi. Ekki endilega mælt með fyrir byrjendur.
@@ -23,6 +31,10 @@ Aloe Vera er vinsæl pottaplanta. Hún er oft notuð í snyrtivörur og smyrsl o
 Indjánafjöður lítur út eins og plöntur sem vaxa á hafsbotni í teiknimyndum. Hún hreinsar loftið. Er helst viðkvæm fyrir ofvökvun og frosti. Hún þolir óbeint eða beint ljós
 Sveppurinn dafnar í litlu ljósi, en hann finnst oft á skógarbotni, sérlega þar sem trjákrónan er þétt.
 Venusargildran er kjötætuplanta. Hver planta hefur yfirleitt um fjórar til sjö gildrur, og blómstra hvítum blómum á löngum stilkum af og til
+Lavender er falleg, runnaleg planta sem blómstrar litlum fjólubláum blómum. Ylmur lavender blómanna þykir róandi.
+auchy :(
+bleik og sæt, elskar raka. Verður minna bleik ef hún fær ekki nóg ljós
+Löng, græn blöð. Á enda bladanna vaxa afleggjarar, þannig fjölgar plantan sér. Góð fyrir byrjendur, stofuhiti bara fínn. Upprunalega úr hitabelti, en hefur aðlagast öðrum svæðum
 
 REGNSKOGUR
 REGNSKOGUR
@@ -31,6 +43,10 @@ HITABELTI
 HITABELTI
 SKOGLENDI
 VOTLENDI
+HITABELTI
+EYDIMORK
+REGNSKOGUR
+HITABELTI
 
 HALFBEINT
 HALFBEINT
@@ -38,6 +54,10 @@ HALFBEINT
 HALFBEINT
 BEINT
 OBEINT
+HALFBEINT
+BEINT
+BEINT
+HALFBEINT
 HALFBEINT
 
 NIDURGANGUR_ISH
@@ -47,6 +67,10 @@ SAKLAUS
 ERTING
 MADUR_VERDUR_SKAKKUR
 SAKLAUS
+BARA_FYRIR_DYR
+SAKLAUS
+BARA_FYRIR_DYR
+SAKLAUS
 
 10 22 35
 12 15 32
@@ -55,6 +79,10 @@ SAKLAUS
 5 18 21
 7 12 21
 5 23 35
+5 20 30
+10 20 35
+5 18 30
+7 17 30
 
 LITIL
 MEDAL
@@ -62,6 +90,10 @@ LITIL
 MIKIL
 MEDAL
 MIKIL
+MEDAL
+LITIL
+LITIL
+MEDAL
 MEDAL
 
 15
@@ -71,6 +103,10 @@ MEDAL
 14
 9
 12
+12
+18
+7
+7
 
 8
 6
@@ -79,6 +115,10 @@ MEDAL
 8
 1
 12
+8
+10
+7
+6
 
 stór, græn, götótt, stofustjáss, falleg
 krefjandi, falleg, tré, díva, stór
@@ -86,6 +126,10 @@ hengiplanta, grænar baunir, auðveld
 þykkblöðungur, lækningajurt
 Kúl planta bruh
 viltu ekki bara sleikja körtu
-Ránplanta
+Ránplanta, kjötæta
+Fjólublá, falleg, lúmskt hitaþolin
+Stingur, annars meinlaus
+blettót, bleik
+auðveld, mamma, hengiplanta
 
 

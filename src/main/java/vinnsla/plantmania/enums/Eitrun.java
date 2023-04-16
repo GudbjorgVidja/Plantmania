@@ -19,7 +19,7 @@ public enum Eitrun {
     BARA_FYRIR_HUNDA("Eitruð hundum"),
     BARA_FYRIR_FUGLA("Eitruð fuglum"),
     BARA_FYRIR_DYR("Eitruð flestum dýrum"),
-    MADUR_VERDUR_SKAKKUR("Vímugjafi");
+    MADUR_VERDUR_SKAKKUR("Vímugjafi"); //todo bæta við eitruð fólki og dýrum?
 
     private String eitrunarSkilabod;
 
