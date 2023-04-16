@@ -30,11 +30,6 @@
                         <AnchorPane layoutX="16.0" layoutY="252.0" prefHeight="97.0" prefWidth="175.0"
                                     style="-fx-border-color: lightgray;">
                             <Stats fx:id="fxStats"/>
-                            <!--<children>
-                                <Label layoutX="9.0" layoutY="16.0" prefHeight="65.0" prefWidth="158.0"
-                                       text="Hér munu koma upplýsingar eins og á plöntuspjaldi (ljós, vatn og hitastig)"
-                                       wrapText="true"/>
-                            </children> -->
                         </AnchorPane>
                         <Label fx:id="fxUppruni" layoutX="71.0" layoutY="14.0" text="Uppruni"/>
                     </children>
