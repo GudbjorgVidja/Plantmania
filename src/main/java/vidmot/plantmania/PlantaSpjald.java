@@ -22,12 +22,7 @@ public class PlantaSpjald extends AnchorPane {
     private Stats fxStats;//hlutur af klasanum Stats, sýnir eiginleika plöntunnar með skala
 
     private Planta planta;//Planta vinnsluhluturinn, plantan sem spjaldið er fyrir.
-
-    //Todo: þú segtir að þetta keyrist aldrei, guðbjörg. eyða þá?
-    public PlantaSpjald() {
-        //keyrist aldrei
-        //System.out.println("Plantaspjald tomur smidur");
-    }
+    
 
     /**
      * Smiðurinn sem er notaður til að gera öll PlantaSpjald
@@ -39,7 +34,6 @@ public class PlantaSpjald extends AnchorPane {
 
         LesaFXML.lesa(this, "planta-view.fxml");
 
-        //fxStats.setPlanta(planta);
         fxStats.setStats(planta);
         stillaStaerd();
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
