@@ -44,6 +44,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
         - breyting á nafni
         - vökvunarsaga
         - breyta tíma á milli vökvanna
+    - smellt á dag í dqagatali
 - í plöntuglugga er ekki augljóst að hægt sé að ýta á til að breyta nafni
 - setja dialog til að bæta við vökvun í plöntuglugga, annars ekki augljóst að það sé búið að gerast þegar þú klárar
 
