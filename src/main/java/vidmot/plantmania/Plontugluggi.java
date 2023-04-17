@@ -76,7 +76,7 @@ public class Plontugluggi extends Dialog<Void> {
         fxBreytaTimaMilliVokvana.setOnMouseClicked(this::setjaFxBreytaTimaMilliVokvanaEventFilter);
 
         setjaUpplysingar();
-        
+
         datePickerHandler();
         setNaestaVokvunListener();
         setFxThinnTimi();
@@ -221,6 +221,9 @@ public class Plontugluggi extends Dialog<Void> {
         ButtonType haettaVid = new ButtonType("Hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
         timiDialog.getDialogPane().getButtonTypes().removeAll(ButtonType.OK, ButtonType.CANCEL);
         timiDialog.getDialogPane().getButtonTypes().addAll(iLagi, haettaVid);
+
+        //todo laga takkana
+        //timiDialog.getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
 
         timiDialog.setHeaderText("Nýr dagafjöldi milli vökvana:");
         timiDialog.setTitle("Breyting á vökvunum");
