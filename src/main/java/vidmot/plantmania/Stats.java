@@ -34,7 +34,7 @@ public class Stats extends HBox {
 
 
     /**
-     * stilla stærð mynda hér, og kannski líka sýnileika? (opacity)
+     * Stærð mynda er stillt hér.
      */
     private void stillaMyndaStaerd() {
         for (Node v : fxBoxaHbox.getChildren()) {
@@ -50,6 +50,9 @@ public class Stats extends HBox {
     }
 
 
+    /**
+     * aðferð sem athugar ljósstyrk, vatnsþörf og kjörhitastig plöntu og setur sýnileika mynda í samræmi við það
+     */
     private void seturOpacity() {
         if (ljosstyrkur.equals(Ljosstyrkur.HALFBEINT)) {
             fxLjosBox.getChildren().get(0).setOpacity(OPACITY);
