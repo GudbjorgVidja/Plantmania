@@ -38,7 +38,14 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - breyta nafni á css, og laga uppsetningu
 - laga fræðsluefni ef færi gefst
 - setja stylesheet á dialoga
--
+    - nýskráning dialog
+    - í plöntuglugga
+        - breyta nótum
+        - breyting á nafni
+        - vökvunarsaga
+        - breyta tíma á milli vökvanna
+- í plöntuglugga er ekki augljóst að hægt sé að ýta á til að breyta nafni
+- setja dialog til að bæta við vökvun í plöntuglugga, annars ekki augljóst að það sé búið að gerast þegar þú klárar
 
 ### Plöntur sem ætti að bæta við:
 
