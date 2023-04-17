@@ -36,6 +36,8 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
     - lengd nickname má ekki vera lengri en eitthvað ákveðið
 - setja max lengd á notandanafn
 - breyta nafni á css, og laga uppsetningu
+- laga fræðsluefni ef færi gefst
+-
 
 ### Plöntur sem ætti að bæta við:
 
