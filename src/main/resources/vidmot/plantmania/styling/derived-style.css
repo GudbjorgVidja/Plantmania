@@ -15,20 +15,23 @@
 
     -fx-accent: #30d9b1;
 
+    -fx-default-button: derive(-fx-accent, 5%);
+    fx-default-button: #1ed99b;
+
     -litur3: #C8F8D6;
     -litur2: derive(-litur3, 25%);
     -litur1: derive(-litur3, 40%);
     -litur05: derive(-litur3, 50%);
 
-    fx-base: -litur3;
-    -fx-base: -litur2;
+    -fx-base: -litur3;
+    fx-base: -litur2;
     -fx-control-inner-background: -litur05;
     -fx-background: -litur05;
     fx-background: -litur1;
 
     fx-outer-border: forestgreen;
 
-
+/*
     -fx-body-color: linear-gradient(to bottom,
         ladder(
             -fx-color,
@@ -36,7 +39,8 @@
             derive(-litur3,10%) 80%
         ),
         derive(-litur3,-8%));
-    }
+        */
+}
 
 .date-picker-popup > * > .previous-month,
 .date-picker-popup > * > .next-month {
