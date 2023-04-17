@@ -35,6 +35,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - passa að nafn plöntu geti ekki verið lengra en sést á spjaldi
     - lengd nickname má ekki vera lengri en eitthvað ákveðið
 - setja max lengd á notandanafn
+- breyta nafni á css, og laga uppsetningu
 
 ### Plöntur sem ætti að bæta við:
 

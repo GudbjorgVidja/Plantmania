@@ -184,9 +184,13 @@
     -fx-background-image: url("icon/water.png");
 }
 
-
 .plus-takki{
     -fx-background-image: url("icon/plus.png");
+}
+
+.dagatal-takki{
+    -fx-background-image: url("icon/dagatal.png");
+    -fx-padding: 4 5 4 25;
 }
 
 
@@ -307,7 +311,6 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: contain;
-    fx-preserve-ratio: true;
 }
 
 .skoda-sia-vidvorun{
@@ -315,7 +318,6 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: contain;
-    fx-preserve-ratio: true;
 }
 
 
