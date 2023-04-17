@@ -98,6 +98,8 @@ public class NyskraningDialog extends Dialog<Notandi> {
         getDialogPane().setContent(g);
         getDialogPane().getButtonTypes().addAll(ILagi, HaettaVid);
         getDialogPane().setHeaderText("Nýskráning");
+
+        getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
     }
 
     /**

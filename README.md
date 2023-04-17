@@ -37,6 +37,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - setja max lengd á notandanafn
 - breyta nafni á css, og laga uppsetningu
 - laga fræðsluefni ef færi gefst
+- setja stylesheet á dialoga
 -
 
 ### Plöntur sem ætti að bæta við:
