@@ -75,23 +75,30 @@ public class Plontugluggi extends Dialog<Void> {
         fxVokvunarsaga.setOnAction(this::vokvunarsagaHandler);
         fxBreytaTimaMilliVokvana.setOnMouseClicked(this::setjaFxBreytaTimaMilliVokvanaEventFilter);
 
-        setFxHitasig();
+        setjaUpplysingar();
+        
         datePickerHandler();
         setNaestaVokvunListener();
-        setFxUmPlontuna();
         setFxThinnTimi();
         setjaFxMedaltimi();
-        setjaFxHeiti();
         setjaFxNotesBinding();
+
+        setStyleClass();
+        fxStats.setStats(minPlantan);
+        stillaStatsStaerd();
+    }
+
+    /**
+     * kallar á ýmsar aðferðir sem setja upplýsingar á viðmótshlutum
+     */
+    private void setjaUpplysingar() {
+        setFxHitasig();
+        setFxUmPlontuna();
+        setjaFxHeiti();
         setjaFxEitrun();
         setjaFxEinkenni();
         setjaFxUppruni();
         setjaFxLjosthorf();
-
-        setStyleClass();
-        //fxStats.setMinPlanta(minPlantan);
-        fxStats.setStats(minPlantan);
-        stillaStatsStaerd();
     }
 
     private void stillaStatsStaerd() {
