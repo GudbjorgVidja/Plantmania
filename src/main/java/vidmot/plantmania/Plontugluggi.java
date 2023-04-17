@@ -89,7 +89,8 @@ public class Plontugluggi extends Dialog<Void> {
         setjaFxLjosthorf();
 
         setStyleClass();
-        fxStats.setMinPlanta(minPlantan);
+        //fxStats.setMinPlanta(minPlantan);
+        fxStats.setStats(minPlantan);
         stillaStatsStaerd();
     }
 

@@ -39,7 +39,8 @@ public class PlantaSpjald extends AnchorPane {
 
         LesaFXML.lesa(this, "planta-view.fxml");
 
-        fxStats.setPlanta(planta);
+        //fxStats.setPlanta(planta);
+        fxStats.setStats(planta);
         stillaStaerd();
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
         fxSpjald.setFxFlokkur(planta.getUppruni().getStadur());
