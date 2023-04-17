@@ -21,10 +21,6 @@ public class Stats extends HBox {
     @FXML
     private HBox fxBoxaHbox; //HBox sem inniheldur VBoxin hér að ofan
 
-    private Planta planta;
-
-    private MinPlanta minPlanta;
-
     private final double OPACITY = 0.3;//hvaða opacity er sett á ljósari myndirnar
 
     private Vatnsthorf vatnsthorf;
@@ -34,7 +30,6 @@ public class Stats extends HBox {
     public Stats() {
         LesaFXML.lesa(this, "stats-view.fxml");
         stillaMyndaStaerd();
-        //setjaOpacity();
     }
 
 
@@ -53,68 +48,6 @@ public class Stats extends HBox {
             }
         }
     }
-
-
-    private void setjaOpacity() {
-        if (planta.getLjosstyrkur().equals(Ljosstyrkur.HALFBEINT)) {
-            fxLjosBox.getChildren().get(0).setOpacity(0.3);
-        } else if (planta.getLjosstyrkur().equals(Ljosstyrkur.OBEINT)) {
-            fxLjosBox.getChildren().get(0).setOpacity(0.3);
-            fxLjosBox.getChildren().get(1).setOpacity(0.3);
-        }
-
-        if (planta.getVatnsthorf().equals(Vatnsthorf.MEDAL)) {
-            fxVatnBox.getChildren().get(0).setOpacity(0.3);
-        } else if (planta.getVatnsthorf().equals(Vatnsthorf.LITIL) || planta.getVatnsthorf().equals(Vatnsthorf.MJOG_LITIL)) {
-            fxVatnBox.getChildren().get(0).setOpacity(0.3);
-            fxVatnBox.getChildren().get(1).setOpacity(0.3);
-        }
-
-        if (planta.getKjorhitastig().get(1) < 20) {
-            fxHitiBox.getChildren().get(0).setOpacity(0.3);
-        } else if (planta.getKjorhitastig().get(1) < 15) {
-            fxHitiBox.getChildren().get(0).setOpacity(0.3);
-            fxHitiBox.getChildren().get(1).setOpacity(0.3);
-        }
-
-    }
-
-    private void setOpacity() {
-        if (minPlanta.getLjosstyrkur().equals(Ljosstyrkur.HALFBEINT)) {
-            fxLjosBox.getChildren().get(0).setOpacity(0.3);
-        } else if (minPlanta.getLjosstyrkur().equals(Ljosstyrkur.OBEINT)) {
-            fxLjosBox.getChildren().get(0).setOpacity(0.3);
-            fxLjosBox.getChildren().get(1).setOpacity(0.3);
-        }
-
-        if (minPlanta.getVatnsthorf().equals(Vatnsthorf.MEDAL)) {
-            fxVatnBox.getChildren().get(0).setOpacity(0.3);
-        } else if (minPlanta.getVatnsthorf().equals(Vatnsthorf.LITIL) || minPlanta.getVatnsthorf().equals(Vatnsthorf.MJOG_LITIL)) {
-            fxVatnBox.getChildren().get(0).setOpacity(0.3);
-            fxVatnBox.getChildren().get(1).setOpacity(0.3);
-        }
-
-        if (minPlanta.getKjorhitastig().get(1) < 20) {
-            fxHitiBox.getChildren().get(0).setOpacity(0.3);
-        } else if (minPlanta.getKjorhitastig().get(1) < 15) {
-            fxHitiBox.getChildren().get(0).setOpacity(0.3);
-            fxHitiBox.getChildren().get(1).setOpacity(0.3);
-        }
-
-    }
-
-    /*
-    public void setPlanta(Planta p) {
-        planta = p;
-        setjaOpacity();
-    }
-
-    public void setMinPlanta(MinPlanta mp) {
-        minPlanta = mp;
-        setOpacity();
-    }
-
-     */
 
 
     private void seturOpacity() {
