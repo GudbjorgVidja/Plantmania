@@ -21,12 +21,10 @@ public class PlantApplication extends Application {
 
         stage.setOnCloseRequest((WindowEvent event) -> {
             PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
-            System.out.println("close request");
-            System.out.println(event.getEventType());
             pc.lokaGluggaAdferd();
             stage.close();
         });
-        
+
     }
 
     public static void main(String[] args) {
