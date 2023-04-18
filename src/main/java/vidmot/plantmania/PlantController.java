@@ -50,7 +50,8 @@ public class PlantController {
     private Notendaupplysingar notendaupplysingar;
 
     private Popup popupBanner;
-   
+
+    private Label banner;
 
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
@@ -78,18 +79,32 @@ public class PlantController {
         setjaFraedsla();
 
 
+        //geraPopup();
+
+        //geraBannerLabel();
+    }
+
+    private void geraBannerLabel() {
+        //gera popup bannerinn
+        popupBanner = new Popup();
+        banner = new Label("plöntu bætt við mínar plöntur");
+        banner.getStyleClass().add("banner");
+        banner.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+    }
+
+    private void geraPopup() {
+        //ekki í notkun, nota frekar bara label
         //gera popup bannerinn
         popupBanner = new Popup();
         Label label = new Label("plöntu bætt við mínar plöntur");
         label.getStyleClass().add("banner");
         label.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+        banner = label;
         //System.out.println("label styleclass: " + label.getStyleClass());
         //System.out.println("label stylesheet: " + label.getStylesheets());
         popupBanner.getContent().add(label);
-        //popupBanner.setY(400);
-        //popupBanner.setX(300);
-        //System.out.println("popupbanner y: " + popupBanner.getY());
 
+        //System.out.println("popupbanner y: " + popupBanner.getY());
     }
 
     private void bindaMaxSizeTitledPane() {
@@ -251,31 +266,19 @@ public class PlantController {
             node = node.getParent();
         }
         if (node != null) {
-
-
-
-            /*
-            if (!popupBanner.isShowing()) popupBanner.show(vokvaBox.getScene().getWindow());
-            else {
-                popupBanner.hide();
-                System.out.println("popup banner is hidden");
-            }
-             */
-
-
+            
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
 
-            // hide popup after 3 seconds:
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
-            delay.setOnFinished(e -> popupBanner.hide());
+            delay.setOnFinished(e -> fxAllarPlonturYfirlit.getFxBanner().setVisible(false));
 
-            popupBanner.show(vokvaBox.getScene().getWindow());
-            //System.out.println("popupbanner y: " + popupBanner.getY());
+            fxAllarPlonturYfirlit.getFxBanner().setVisible(true);
+
             delay.play();
+            
 
-
-            /*
+            /* gamli alert dialogurinn
             Alert a = new Alert(Alert.AlertType.NONE, "Nýrri plöntu bætt við þínar plöntur", ButtonType.OK);
             a.showAndWait();
              */

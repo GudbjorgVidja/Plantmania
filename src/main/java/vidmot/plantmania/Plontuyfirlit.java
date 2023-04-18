@@ -16,10 +16,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import vinnsla.plantmania.MinPlanta;
@@ -54,6 +51,9 @@ public class Plontuyfirlit extends AnchorPane {
 
     @FXML
     private MenuItem fxSkraUt;
+
+    @FXML
+    private Label fxBanner;
 
     /**
      * Öll MenuItem undir sía. Inniheldur velja allt, og uppruna gildi plantna (og minnaPlantna) í yfirlitinu
@@ -253,6 +253,9 @@ public class Plontuyfirlit extends AnchorPane {
         return fxNotandi.textProperty();
     }
 
+    public Label getFxBanner() {
+        return fxBanner;
+    }
 
     /**
      * Raðar hlutum í yfirliti eftir því hvað er valið.
