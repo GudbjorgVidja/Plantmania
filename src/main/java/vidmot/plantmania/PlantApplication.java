@@ -21,7 +21,7 @@ public class PlantApplication extends Application {
 
         stage.setOnCloseRequest((WindowEvent event) -> {
             PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
-            pc.lokaGluggaAdferd();
+            if (pc != null) pc.lokaGluggaAdferd();
             stage.close();
         });
 
