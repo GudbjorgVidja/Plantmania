@@ -112,19 +112,13 @@ public class PlantController {
 
     protected void lokaGluggaHandler(WindowEvent event) {
         System.out.println("lokaGluggaHandler");
-        //fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi.get());
-
-        /*
-        PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
-        vistaNotendaupplysingar(pc.getSkradurNotandi());
-        ViewSwitcher.switchTo(View.UPPHAFSSIDA);
-         */
-
-
     }
 
+    /**
+     * kallað á úr application þegar reynt er að loka glugganum
+     */
     protected void lokaGluggaAdferd() {
-        System.out.println("lokaGluggaAdferd");
+        //System.out.println("lokaGluggaAdferd");
         fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi.get());
     }
 

@@ -109,18 +109,7 @@ public class Plontuyfirlit extends AnchorPane {
             }
         });
         tomtYfirlitVidvodun();
-
-
-        /*
-        Stage stage = (Stage) fxBanner.getScene().getWindow();
-        stage.setOnCloseRequest(this::lokaGluggaHandler);
-         */
-
-        /*
-        Window gluggi = fxBanner.getScene().getWindow();
-        gluggi.setOnCloseRequest(this::lokaGluggaHandler);
-
-         */
+        
     }
 
     private void tomtYfirlitVidvodun() {
