@@ -47,6 +47,8 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - setja dialog til að bæta við vökvun í plöntuglugga, annars ekki augljóst að það sé búið að gerast þegar þú klárar
 - skoða með að setja tooltip á takka á MinPlantaSpjald þegar þeir eru óvirkir. Virkar ekki venjulega ef takkarnir eru
   óvirkir, reyna kannski að setja á annan hlut sem inniheldur takkana eða eitthvað
+- Í fræðslunni, lesa inn heila runu, og splitta á * eftir hvaða titledPane það er fyrir. Splitta svo á + til að pikka út
+  titla og gera þá sæta
 
 ### Plöntur sem ætti að bæta við:
 

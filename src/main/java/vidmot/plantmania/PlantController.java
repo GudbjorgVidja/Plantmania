@@ -11,13 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -51,9 +48,6 @@ public class PlantController {
 
     private Notendaupplysingar notendaupplysingar;
 
-    private Popup popupBanner;
-
-    private Label banner;
 
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
@@ -79,33 +73,6 @@ public class PlantController {
 
         bindaMaxSizeTitledPane();
         setjaFraedsla();
-
-
-        //stage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::nafnhandlers);
-
-        //fxDagatal.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::lokaGluggaHandler);
-
-        //fxDagatal.getScene().getWindow(); kastar villu
-
-        /*
-        Window gluggi = fxBanner.getScene().getWindow();
-        gluggi.setOnCloseRequest(this::lokaGluggaHandler);
-
-         */
-
-        //Window gluggi = fxAllarPlonturYfirlit.getScene().getWindow();
-        //Stage gluggi = (Stage) fxAllarPlonturYfirlit.getScene().getWindow();
-        //Stage gluggi = (Stage) fxDagatal.getScene().getWindow();
-        //gluggi.setOnCloseRequest(this::lokaGluggaHandler);
-    }
-
-    private void setjaCloseRequest() {
-        //ná í stage
-        //setja close request á stage
-
-        Stage stage = (Stage) fxAllarPlonturYfirlit.getScene().getWindow();
-
-        //stage.setOnCloseRequest(this::);
 
     }
 
