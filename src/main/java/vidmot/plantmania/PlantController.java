@@ -17,6 +17,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import javafx.util.Pair;
 import vinnsla.plantmania.*;
@@ -79,32 +81,51 @@ public class PlantController {
         setjaFraedsla();
 
 
-        //geraPopup();
+        //stage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::nafnhandlers);
 
-        //geraBannerLabel();
+        //fxDagatal.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::lokaGluggaHandler);
+
+        //fxDagatal.getScene().getWindow(); kastar villu
+
+        /*
+        Window gluggi = fxBanner.getScene().getWindow();
+        gluggi.setOnCloseRequest(this::lokaGluggaHandler);
+
+         */
+
+        //Window gluggi = fxAllarPlonturYfirlit.getScene().getWindow();
+        //Stage gluggi = (Stage) fxAllarPlonturYfirlit.getScene().getWindow();
+        //Stage gluggi = (Stage) fxDagatal.getScene().getWindow();
+        //gluggi.setOnCloseRequest(this::lokaGluggaHandler);
     }
 
-    private void geraBannerLabel() {
-        //gera popup bannerinn
-        popupBanner = new Popup();
-        banner = new Label("plöntu bætt við mínar plöntur");
-        banner.getStyleClass().add("banner");
-        banner.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+    private void setjaCloseRequest() {
+        //ná í stage
+        //setja close request á stage
+
+        Stage stage = (Stage) fxAllarPlonturYfirlit.getScene().getWindow();
+
+        //stage.setOnCloseRequest(this::);
+
     }
 
-    private void geraPopup() {
-        //ekki í notkun, nota frekar bara label
-        //gera popup bannerinn
-        popupBanner = new Popup();
-        Label label = new Label("plöntu bætt við mínar plöntur");
-        label.getStyleClass().add("banner");
-        label.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
-        banner = label;
-        //System.out.println("label styleclass: " + label.getStyleClass());
-        //System.out.println("label stylesheet: " + label.getStylesheets());
-        popupBanner.getContent().add(label);
 
-        //System.out.println("popupbanner y: " + popupBanner.getY());
+    protected void lokaGluggaHandler(WindowEvent event) {
+        System.out.println("lokaGluggaHandler");
+        //fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi.get());
+
+        /*
+        PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
+        vistaNotendaupplysingar(pc.getSkradurNotandi());
+        ViewSwitcher.switchTo(View.UPPHAFSSIDA);
+         */
+
+
+    }
+
+    protected void lokaGluggaAdferd() {
+        System.out.println("lokaGluggaAdferd");
+        fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi.get());
     }
 
     private void bindaMaxSizeTitledPane() {
@@ -266,7 +287,7 @@ public class PlantController {
             node = node.getParent();
         }
         if (node != null) {
-            
+
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
 
@@ -276,7 +297,7 @@ public class PlantController {
             fxAllarPlonturYfirlit.getFxBanner().setVisible(true);
 
             delay.play();
-            
+
 
             /* gamli alert dialogurinn
             Alert a = new Alert(Alert.AlertType.NONE, "Nýrri plöntu bætt við þínar plöntur", ButtonType.OK);
