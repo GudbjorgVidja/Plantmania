@@ -1,5 +1,6 @@
 package vidmot.plantmania;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -10,12 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import vinnsla.plantmania.*;
 
@@ -47,6 +49,9 @@ public class PlantController {
 
     private Notendaupplysingar notendaupplysingar;
 
+    private Popup popupBanner;
+   
+
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
         skradurNotandi.setValue(upphafController.getSkradurNotandi());
@@ -71,6 +76,20 @@ public class PlantController {
 
         bindaMaxSizeTitledPane();
         setjaFraedsla();
+
+
+        //gera popup bannerinn
+        popupBanner = new Popup();
+        Label label = new Label("plöntu bætt við mínar plöntur");
+        label.getStyleClass().add("banner");
+        label.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+        //System.out.println("label styleclass: " + label.getStyleClass());
+        //System.out.println("label stylesheet: " + label.getStylesheets());
+        popupBanner.getContent().add(label);
+        //popupBanner.setY(400);
+        //popupBanner.setX(300);
+        //System.out.println("popupbanner y: " + popupBanner.getY());
+
     }
 
     private void bindaMaxSizeTitledPane() {
@@ -226,18 +245,43 @@ public class PlantController {
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
      */
-    private void hladaOllumPlontum(MouseEvent event) {
+    private void hladaOllumPlontum(MouseEvent event) throws InterruptedException {
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
             node = node.getParent();
         }
         if (node != null) {
+
+
+
+            /*
+            if (!popupBanner.isShowing()) popupBanner.show(vokvaBox.getScene().getWindow());
+            else {
+                popupBanner.hide();
+                System.out.println("popup banner is hidden");
+            }
+             */
+
+
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
+
+            // hide popup after 3 seconds:
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(e -> popupBanner.hide());
+
+            popupBanner.show(vokvaBox.getScene().getWindow());
+            //System.out.println("popupbanner y: " + popupBanner.getY());
+            delay.play();
+
+
+            /*
             Alert a = new Alert(Alert.AlertType.NONE, "Nýrri plöntu bætt við þínar plöntur", ButtonType.OK);
             a.showAndWait();
+             */
         }
     }
+
 
     public Notandi getSkradurNotandi() {
         return skradurNotandi.get();

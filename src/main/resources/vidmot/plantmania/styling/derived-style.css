@@ -325,6 +325,13 @@
 }
 
 
+.banner{
+    -fx-background-color: lightgreen;
+    -fx-padding: 7;
+    -fx-font-size: 16;
+
+}
+
 
 
 /* plöntugluggi  */
