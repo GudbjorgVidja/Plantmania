@@ -21,6 +21,7 @@ public class VokvanirPlontunnarDialog extends Dialog<Void> {
 
         ListView<LocalDate> listView = new ListView<>(minPlanta.getVokvanir());
         listView.setMaxHeight(100);
+        listView.setCellFactory(new DagsetningCellFactory());
         Button eyda = new Button("Eyða");
         eyda.disableProperty().bind(listView.getSelectionModel().selectedItemProperty().isNull());
 

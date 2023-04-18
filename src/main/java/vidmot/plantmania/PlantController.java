@@ -20,6 +20,7 @@ import javafx.util.Pair;
 import vinnsla.plantmania.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -197,9 +198,9 @@ public class PlantController {
      * @param plonturDagsinsOlokid -ObservableList<Pair<MinPlanta, LocalDate>>, pör af MinPlanta hlutum sem ætti að vökva og valinni dagsetningu
      */
     private void synaVokvanirDagsins(LocalDate valinDagsetning, ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid, ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid) {
-        String loknarVokvanir = "Plöntur sem voru vökvaðar " + valinDagsetning;
-        String seinarVokvanir = "Plöntur sem hefði átt að vökva " + valinDagsetning;
-        String oloknarVokvanir = "Plöntur sem ætti að vökva " + valinDagsetning;
+        String loknarVokvanir = "Plöntur sem voru vökvaðar " + valinDagsetning.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String seinarVokvanir = "Plöntur sem hefði átt að vökva " + valinDagsetning.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String oloknarVokvanir = "Plöntur sem ætti að vökva " + valinDagsetning.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         VokvanirDagsinsDialog vokvanirDagsinsDialog = null;
         if (!plonturDagsinsLokid.isEmpty() && !plonturDagsinsOlokid.isEmpty()) {
             if (valinDagsetning.isBefore(LocalDate.now())) {

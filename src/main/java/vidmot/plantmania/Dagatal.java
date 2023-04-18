@@ -81,9 +81,7 @@ public class Dagatal extends AnchorPane {
                 BooleanProperty dagurinnErLidinn = new SimpleBooleanProperty(dagurinn.isBefore(LocalDate.now()));
 
                 ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().styleProperty().bind(Bindings.when(dagurinnErLidinn).then("-fx-text-fill: red").otherwise("-fx-text-fill: black"));
-
                 setjaVirkanDag((Dagur) fxGrid.getChildren().get(i), fjoldiVokvanaLokid, fjoldiVokvanaOlokid);
-
                 ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText(dagalisti.get(0) + "");
 
                 dagalisti.remove(0);
