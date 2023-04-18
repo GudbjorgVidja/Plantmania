@@ -23,7 +23,6 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Laga hvernig dagsetningar (LocalDate) eru birtar
 - Setja einhverja reglu fyrir gild lykilorð
 - Þegar plöntu er bætt við mínar plöntur, ekki hafa dialog heldur kannski popup neðst sem fer eftir smá tíma
-- Ef síur eru stilltar þ.a. engir möguleikar eru sýnilegir í yfirliti, setja þá texta og kannski mynd sem bendir á það
 - Laga comparator til að geta raðað eftir íslenska stafrófinu
 - Birta Dagatal þegar vökvunarsaga plöntu er skoðuð, í staðin fyrir listview
 - Breyta hvernig upplýsingar eru lesnar úr skrá í upphafi. Núna er það úr .txt skrá, og ekki endilega
@@ -33,6 +32,10 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
 - lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
 - sýna að dagatal er óvirkt meira en þrjá mánuði fram í tímann. Setja kannski annan lit á dagana, og ljósari lit á letur
+- passa að nafn plöntu geti ekki verið lengra en sést á spjaldi
+    - lengd nickname má ekki vera lengri en eitthvað ákveðið
+- setja max lengd á notandanafn
+- breyta nafni á css, og laga uppsetningu
 
 ### Plöntur sem ætti að bæta við:
 
@@ -41,4 +44,8 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - einhverjar mat-/kryddjurtir
 - orkidea
 - pothos
-- 
+- þykkblöðungar
+
+### Viðbætur sem hafa verið gerðar
+
+- Ef síur eru stilltar þ.a. engir möguleikar eru sýnilegir í yfirliti, setja þá texta og kannski mynd sem bendir á það

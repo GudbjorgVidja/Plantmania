@@ -29,7 +29,7 @@
         <Button layoutX="337.0" layoutY="410.0" mnemonicParsing="false" onAction="#geraNyjanAdgang" text="Nýskráning"/>
         <Label fx:id="fxVilla" layoutX="275.0" layoutY="145.0" prefHeight="18.0" prefWidth="200.0"
                text="Rangt notendanafn eða lykilorð" visible="false"/>
-        <ImageView fitHeight="140.0" fitWidth="165.0" layoutX="14.0" layoutY="23.0" pickOnBounds="true"
+        <ImageView fitHeight="140.0" fitWidth="165.0" layoutX="40.0" layoutY="40.0" pickOnBounds="true"
                    preserveRatio="true">
             <image>
                 <Image url="@styling/icon/watering-plants.png"/>
