@@ -61,17 +61,13 @@ public class Dagatal extends AnchorPane {
      */
     //TODO: Skipta þessu upp í fleiri aðferðir
     public void geraDagatal(LocalDate dagur) {
-        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsLokid = allarPlonturOgFyrriVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth() && p.getValue().getYear() == syndurDagur.getYear());
-        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsOlokid = allarPlonturOgAaetladarVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth() && p.getValue().getYear() == syndurDagur.getYear());
+        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsLokid = filteraDaga(allarPlonturOgFyrriVokvanir);
+        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsOlokid = filteraDaga(allarPlonturOgAaetladarVokvanir);
 
-        int fjoldiDaga = dagur.getMonth().length(dagur.isLeapYear());
         DayOfWeek fyrstiDagurManadar = LocalDate.of(dagur.getYear(), dagur.getMonthValue(), 1).getDayOfWeek();
         fxDagsetning.setText(manudir[dagur.getMonthValue() - 1] + " - " + dagur.getYear());
 
-        List<Integer> dagalisti = new ArrayList<>();
-        for (int i = 1; i <= fjoldiDaga; i++) {
-            dagalisti.add(i);
-        }
+        List<Integer> dagalisti = geraDagalista(dagur);
 
         for (int i = 7; i < 49; i++) {
             if (fxGrid.getChildren().get(i) instanceof Dagur && !dagalisti.isEmpty() && !((i - 7) < fyrstiDagurManadar.ordinal())) {
@@ -91,7 +87,44 @@ public class Dagatal extends AnchorPane {
         }
     }
 
+    /**
+     * Gerir lista af heiltölum fyrir hvern mánaðardag mánaðarins í dagur
+     *
+     * @param dagur - Localdate, dagsetning í mánuðinum sem á að búa til dagalista fyrir
+     * @return - dagalisti, listi af mánaðardögum
+     */
+    private List<Integer> geraDagalista(LocalDate dagur) {
+        int fjoldiDaga = dagur.getMonth().length(dagur.isLeapYear());
+        List<Integer> dagalisti = new ArrayList<>();
+        for (int i = 1; i <= fjoldiDaga; i++) {
+            dagalisti.add(i);
+        }
+        return dagalisti;
+    }
+
+    /**
+     * filterar lista yfir vökvanir til að fá bara vökvanir fyrir gefinn mánuð
+     *
+     * @param allarPlonturOgVokvanir - ObserableList með pörum af MinPlanta hlutum og LocalDate dagsetningum,
+     *                               fyrir allar vökvanir fyrir allar plöntur, annað hvort loknar eða óloknar
+     * @return Hluti gefins lista fyrir mánuðinn sem er skoðaður
+     */
+    private ObservableList<Pair<MinPlanta, LocalDate>> filteraDaga(ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgVokvanir) {
+        return allarPlonturOgVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth()
+                && p.getValue().getYear() == syndurDagur.getYear());
+    }
+
+
+    /**
+     * setur bindings á gefinn virkan dag til að birta upplýsingar um vökvanir. Setur binding á labela fyrir
+     * fjölda vökvana, lokinna og ólokinna, og fyrir icon
+     *
+     * @param dagur               - Hlutur af klasanum Dagur sem er skoðaður
+     * @param fjoldiVokvanaLokid  - IntegerBinding vaktanlegt gildi fyrir fjölda lokinna vökvana fyrir gefna dagsetningu
+     * @param fjoldiVokvanaOlokid - IntegerBinding vaktanlegt gildi fyrir fjölda planaðra vökvana fyrir gefna dagsetningu
+     */
     private void setjaVirkanDag(Dagur dagur, IntegerBinding fjoldiVokvanaLokid, IntegerBinding fjoldiVokvanaOlokid) {
+        //TODO: Skoða hvort css skráin sjái um þetta
         dagur.setStyle("-fx-background-color: #85edad;");
 
         dagur.getFxFjoldiVokvanaOlokid().textProperty().bind(
@@ -117,8 +150,8 @@ public class Dagatal extends AnchorPane {
         dagur.getFxFjoldiVokvana().setText("");
         dagur.getFxManadardagur().textProperty().unbind();
         dagur.getFxManadardagur().setText("");
+        //TODO: Skoða með tengingu við css skrá
         dagur.setStyle("-fx-background-color: #a9f5c2;");
-
     }
 
     //getterar og setterar

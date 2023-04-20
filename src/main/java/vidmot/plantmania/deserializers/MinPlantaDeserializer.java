@@ -55,7 +55,7 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         minPlanta.setEitrun(Eitrun.valueOf(node.get("eitrun").asText()));
         minPlanta.setVatnsthorf(Vatnsthorf.valueOf(node.get("vatnsthorf").asText()));
 
-        //venjulegir listar. hvernig er þetta?
+        //venjulegir listar
         minPlanta.setOllHeiti(Arrays.asList(objectMapper.treeToValue(node.get("ollHeiti"), String[].class)));
         minPlanta.setEinkenniPlontu(Arrays.asList(objectMapper.treeToValue(node.get("einkenniPlontu"), String[].class)));
         minPlanta.setKjorhitastig(Arrays.asList(objectMapper.treeToValue(node.get("kjorhitastig"), Integer[].class)));
