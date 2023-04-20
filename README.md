@@ -12,14 +12,13 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Bæta við fleiri plöntum
 - Flipa með smá leiðbeiningum bætt við, til að útskýra t.d. hvað tákn og tölur á dagatali þýða
     - hafa það kannski undir notandi menuButton
-- Bæta við möguleika til að eyða plöntu úr þínum plöntum
-- Frekari vinna í Dialogum, t.d. óvirkja takka við ákveðnar aðstæður og laga útlit
+- Bæta við möguleika til að eyða plöntu úr þínum plöntum. Ath að ef það á að gera það úr plöntuglugganum
+  þarf hann að taka inn ObservableList af plöntum notanda
 - Bæta við fleiri möguleikum tengda notanda, t.d. að breyta lykilorði og eyða aðgangi
 - Bæta við möguleika á að breyta þema forritsins
 - Gefa betri viðbrögð við aðgerðum notanda, t.d. láta skilaboð birtast þegar notandi endurtekur lykilorð
   ekki rétt við nýskráningu, þegar hann reynir að breyta nafni plöntu í eitthvað sem ekki má eða
   þegar hann gerir eitthvað annað sem ekki er leyfilegt. Passa að hafa viðbrögð þegar ýtt er á dag á dagatali!
-- Laga hvernig dagsetningar (LocalDate) eru birtar
 - Setja einhverja reglu fyrir gild lykilorð
 - Laga comparator til að geta raðað eftir íslenska stafrófinu
 - Birta Dagatal þegar vökvunarsaga plöntu er skoðuð, í staðin fyrir listview
@@ -66,4 +65,6 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Þegar plöntu er bætt við mínar plöntur, ekki hafa dialog heldur kannski popup neðst sem fer eftir smá tíma
 - lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
 - taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
-- 
+- Laga hvernig dagsetningar (LocalDate) eru birtar
+- Frekari vinna í Dialogum, t.d. óvirkja takka við ákveðnar aðstæður
+-
