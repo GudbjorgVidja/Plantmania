@@ -22,6 +22,8 @@ import javafx.util.Pair;
 import vinnsla.plantmania.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,7 +49,6 @@ public class PlantController {
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
     private Notendaupplysingar notendaupplysingar;
-
 
     public void initialize() {
         upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
@@ -215,9 +216,9 @@ public class PlantController {
      * @param plonturDagsinsOlokid -ObservableList<Pair<MinPlanta, LocalDate>>, pör af MinPlanta hlutum sem ætti að vökva og valinni dagsetningu
      */
     private void synaVokvanirDagsins(LocalDate valinDagsetning, ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid, ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid) {
-        String loknarVokvanir = "Plöntur sem voru vökvaðar " + valinDagsetning;
-        String seinarVokvanir = "Plöntur sem hefði átt að vökva " + valinDagsetning;
-        String oloknarVokvanir = "Plöntur sem ætti að vökva " + valinDagsetning;
+        String loknarVokvanir = "Plöntur sem voru vökvaðar " + valinDagsetning.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String seinarVokvanir = "Plöntur sem hefði átt að vökva " + valinDagsetning.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String oloknarVokvanir = "Plöntur sem ætti að vökva " + valinDagsetning.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         VokvanirDagsinsDialog vokvanirDagsinsDialog = null;
         if (!plonturDagsinsLokid.isEmpty() && !plonturDagsinsOlokid.isEmpty()) {
             if (valinDagsetning.isBefore(LocalDate.now())) {
@@ -250,7 +251,6 @@ public class PlantController {
             node = node.getParent();
         }
         if (node != null) {
-
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
 
@@ -268,7 +268,6 @@ public class PlantController {
              */
         }
     }
-
 
     public Notandi getSkradurNotandi() {
         return skradurNotandi.get();

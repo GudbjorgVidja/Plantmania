@@ -12,10 +12,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.StringConverter;
 import vinnsla.plantmania.MinPlanta;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 /**
@@ -313,10 +315,40 @@ public class Plontugluggi extends Dialog<Void> {
         }
     }
 
+    private void geraPAttern() {
+        String pattern = "dd/MM/yyyy";
+
+        fxDatePicker.setPromptText(pattern.toLowerCase());
+
+        fxDatePicker.setConverter(new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        });
+    }
+
     /**
      * handler fyrir datePicker hlut, bætir við vökvun á plöntuna á valdri dagsetningu
      */
     private void datePickerHandler() {
+        geraPAttern();
+        fxDatePicker.setShowWeekNumbers(false);
         fxDatePicker.setOnAction(t -> {
             LocalDate date = fxDatePicker.getValue();
             System.out.println("Selected date: " + date);
