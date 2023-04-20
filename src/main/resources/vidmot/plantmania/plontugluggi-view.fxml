@@ -149,7 +149,7 @@
             <HBox layoutX="253.0" layoutY="340.0" prefHeight="20.0" prefWidth="341.0" alignment="CENTER"
                   fillHeight="false" mouseTransparent="true">
                 <Label fx:id="fxBanner" styleClass="banner" text="vökvun bætt við"
-                       mouseTransparent="true" visible="false"/> <!-- layoutX="440" layoutY="340" -->
+                       mouseTransparent="true" visible="false"/>
             </HBox>
 
         </AnchorPane>

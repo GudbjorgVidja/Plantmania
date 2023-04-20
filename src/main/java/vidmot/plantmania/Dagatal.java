@@ -122,15 +122,8 @@ public class Dagatal extends AnchorPane {
      * @param fjoldiVokvanaOlokid - IntegerBinding vaktanlegt gildi fyrir fjölda planaðra vökvana fyrir gefna dagsetningu
      */
     private void setjaVirkanDag(Dagur dagur, IntegerBinding fjoldiVokvanaLokid, IntegerBinding fjoldiVokvanaOlokid) {
-        //TODO: Skoða hvort css skráin sjái um þetta
-        dagur.setStyle("-fx-background-color: #85edad;");
-        //dagur.setStyle("-fx-background-color: #85edad;");
         if (dagur.getStyleClass().size() == 0) dagur.getStyleClass().add("fxDagur"); //todo setja í upphafsstillingu
         dagur.setDisable(false);
-        //dagur.getStyleClass().clear();
-        //dagur.getStyleClass().add("virkurDagur");
-        //dagur.getStyleClass().set(0, "virkurDagur");
-
 
         dagur.getFxFjoldiVokvanaOlokid().textProperty().bind(
                 Bindings.when(fjoldiVokvanaOlokid.isEqualTo(0)).then("")
@@ -149,21 +142,15 @@ public class Dagatal extends AnchorPane {
     private void setjaOvirkanDag(Dagur dagur) {
         if (dagur.getStyleClass().size() == 0) dagur.getStyleClass().add("fxDagur");
         dagur.setDisable(true);
-        //dagur.getStyleClass().clear();
-        //dagur.getStyleClass().add("ovirkurDagur");
 
         dagur.getFxFjoldiVokvanaOlokid().textProperty().unbind();
         //dagur.getFxFjoldiVokvanaOlokid().setText("");
         dagur.getFxDropi().visibleProperty().unbind();
-        dagur.getFxDropi().setVisible(false);
+        //dagur.getFxDropi().setVisible(false);
         dagur.getFxFjoldiVokvana().textProperty().unbind();
         //dagur.getFxFjoldiVokvana().setText("");
         dagur.getFxManadardagur().textProperty().unbind();
-        dagur.getFxManadardagur().setText("");
-        //TODO: Skoða með tengingu við css skrá
-        dagur.setStyle("-fx-background-color: #a9f5c2;");
         //dagur.getFxManadardagur().setText("");
-        //dagur.setStyle("-fx-background-color: #a9f5c2;");
     }
 
     //getterar og setterar

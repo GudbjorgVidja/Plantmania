@@ -108,6 +108,9 @@ public class Plontugluggi extends Dialog<Void> {
         setjaFxLjosthorf();
     }
 
+    /**
+     * setur event handlera á viðmótshluti
+     */
     private void setjaEventHandlera() {
         fxBreytaNafni.setOnMouseClicked(this::breytaNafniHandler);
         fxAthugasemdir.setOnAction(this::athugasemdirHandler);

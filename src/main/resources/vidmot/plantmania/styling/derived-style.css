@@ -483,9 +483,8 @@
     fx-background-color: pink;
 }
 
-.fxDagur:disabled .label {
+.fxDagur:disabled > * {
     -fx-opacity: 0;
-    fx-background-color: blue;
 }
 
 .iDag{ /* styleclass til að setja á daginn í dag */
