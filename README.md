@@ -49,6 +49,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - breyta niðurtalingu á minPlantaSpjald, segja í dag frekar en 0 dagar?
 - laga lit á secondary línum í listview
 - laga css betur að dialogum
+- taka út óþarfa prentsetningar
 
 ### komið rite?
 

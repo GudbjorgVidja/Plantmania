@@ -6,7 +6,7 @@ GREIN Athugið að dagsetningar eru aðeins til að miða við, og ef forritið 
 
 TITLEDPANE Almennar upplýsingar
 GREIN Almennt skal vökva oftar á sumrin en á veturna. Yfirleitt er best að gegnbleyta moldina við vökvun en leyfa henni að þorna vel á milli.
-Mikilvægt er að planta sitji ekki í vatni, þar sem það getur valdið \"root rot\". Það er í lagi að vökva flestar plöntur neðan frá svo lengi sem moldin er rétt og nógu góð.
+Mikilvægt er að planta sitji ekki í vatni, þar sem það getur valdið "root rot". Það er í lagi að vökva flestar plöntur neðan frá svo lengi sem moldin er rétt og nógu góð.
 
 GREIN Ekki er til nein ein besta leið til að vökva allar plöntur, heldur eru ýmsir þættir sem geta haft áhrif. Mestu máli skiptir hvernig planta þetta er og hvaðan hún kemur, en það getur verið gott að líkja eftir náttúrulegu umhverfi hennar. En einnig þarf að taka aðra þætti með í reikninginn, eins og hvernig mold og pott plantan er í, hversu mikið ljós hún fær, rakastig og hita.
 
@@ -14,7 +14,7 @@ GREIN Ekki er til nein ein besta leið til að vökva allar plöntur, heldur eru
 
 TITLEDPANE Vökvun
 GREIN TITILL Misting
-GREIN Þessi aðferð felur í sér að spreyja plöntuna með úðabrúsa. Þetta er yfirleitt ekki nóg eitt og sér, heldur er gert samhliða öðrum vökvunaraðferðum. Þetta er yfirleitt gert við plöntur sem koma frá svæðum með miklum raka, t.d. úr \"the tropics\", svo að ef loftið er þurrt getur þetta hjálpað verulega, þó það sé almennt ekki talið vera nauðsyn.
+GREIN Þessi aðferð felur í sér að spreyja plöntuna með úðabrúsa. Þetta er yfirleitt ekki nóg eitt og sér, heldur er gert samhliða öðrum vökvunaraðferðum. Þetta er yfirleitt gert við plöntur sem koma frá svæðum með miklum raka, t.d. úr "the tropics", svo að ef loftið er þurrt getur þetta hjálpað verulega, þó það sé almennt ekki talið vera nauðsyn.
 Varast skal að úða of mikið, en of mikill raki til lengri tíma getur valdið ýmsum vandamálum, s.s. skemmdum á plöntunni, sveppamyndun, og laðað að sér pestir.
 
 GREIN TITILL Með garðkönnu
@@ -24,7 +24,7 @@ GREIN Þetta er ein algengasta og einfaldasta leiðin til að vökva pottaplönt
 
 GREIN TITILL Bottom watering
 GREIN Þessi aðferð felur í sér að setja pottinn í standandi vatn svo plantan nái að sjúga vatnið upp neðan frá. Þetta gengur aðeins fyrir plöntur í pottum með götum. Skilja plöntuna eftir í vatninu í nokkrar klukkustundir, þangað til hún er hætt að draga í sig vatn. Tæma skal ílátið og leyfa umfram vatni að leka af pottunum.
-Svona er hægt að vökva margar plöntur í einu, en getur dreift sjúkdómum og pestum milli planta, svo æskilegt er að gæta þess að allar plönturnar séu heilbrigðar að þessu leiti. Þessi aðferð er sérstaklega góð fyrir þá sem eiga það til að vökva of lítið eða of mikið, þar sem rakinn er \"consistent\".
+Svona er hægt að vökva margar plöntur í einu, en getur dreift sjúkdómum og pestum milli planta, svo æskilegt er að gæta þess að allar plönturnar séu heilbrigðar að þessu leiti. Þessi aðferð er sérstaklega góð fyrir þá sem eiga það til að vökva of lítið eða of mikið, þar sem rakinn er "consistent".
 
 GREIN TITILL Gradual flow
 GREIN Þessi aðferð er sérstaklega hentug fyrir þá sem ferðast mikið eða eru lítið heima. Maður setur vatn í sérstakt ílát sem sem hefur langan stút sem stungið er í moldina og hleypir vatni hægt og rólega niður. Hægt er að kaupa það í búð eða nota plastflösku.
