@@ -378,9 +378,9 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private Comparator<Node> almenntHeitiComparator = (n1, n2) -> { //todo passa íslenska stafrófið
         if (n1 instanceof PlantaSpjald) {
-            return ((PlantaSpjald) n1).getPlanta().getAlmenntNafn().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntNafn().toLowerCase());
+            return ((PlantaSpjald) n1).getPlanta().getAlmenntHeiti().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntHeiti().toLowerCase());
         }
-        return ((MinPlantaSpjald) n1).getMinPlanta().getNickName().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getNickName().toLowerCase());
+        return ((MinPlantaSpjald) n1).getMinPlanta().getGaelunafn().toLowerCase().compareTo(((MinPlantaSpjald) n2).getMinPlanta().getGaelunafn().toLowerCase());
     };
 
     /**

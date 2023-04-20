@@ -43,7 +43,7 @@ public class MinPlantaSpjald extends AnchorPane {
 
         minPlantan = minPlanta;
 
-        fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.nickNameProperty());
+        fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.gaelunafnProperty());
         fxSpjald.setFxFlokkur(minPlantan.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
 
@@ -83,7 +83,7 @@ public class MinPlantaSpjald extends AnchorPane {
     }
 
     public String toString() {
-        return minPlantan.getAlmenntNafn();
+        return minPlantan.getAlmenntHeiti();
     }
 
     /**

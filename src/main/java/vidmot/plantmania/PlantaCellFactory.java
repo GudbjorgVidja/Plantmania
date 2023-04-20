@@ -20,7 +20,7 @@ public class PlantaCellFactory implements Callback<ListView<MinPlanta>, ListCell
                 if (empty || minPlanta == null) {
                     setText(null);
                 } else {
-                    setText(minPlanta.getNickName() + " ");
+                    setText(minPlanta.getGaelunafn() + " ");
                 }
             }
         };

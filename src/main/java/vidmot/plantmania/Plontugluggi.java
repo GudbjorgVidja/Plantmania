@@ -75,9 +75,9 @@ public class Plontugluggi extends Dialog<Void> {
         ButtonType lokaTakki = new ButtonType("Loka glugga", ButtonBar.ButtonData.CANCEL_CLOSE);
         getDialogPane().getButtonTypes().add(lokaTakki);
 
-        fxLatnesktNafn.setText(minPlantan.getLatnesktNafn());
-        fxAlmenntNafn.setText(minPlantan.getNickName());
-        fxAlmenntNafn.textProperty().bind(minPlantan.nickNameProperty());
+        fxLatnesktNafn.setText(minPlantan.getFraediheiti());
+        fxAlmenntNafn.setText(minPlantan.getGaelunafn());
+        fxAlmenntNafn.textProperty().bind(minPlantan.gaelunafnProperty());
         fxMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + minPlantan.getMyndaslod())));
 
         setjaEventHandlera();
@@ -160,7 +160,7 @@ public class Plontugluggi extends Dialog<Void> {
      * bindur textann í fxNotes við notesFraNotanda í MinPlanta
      */
     public void setjaFxNotesBinding() {
-        fxNotes.textProperty().bind(minPlantan.notesFraNotandaProperty());
+        fxNotes.textProperty().bind(minPlantan.athugasemdirProperty());
     }
 
     public void setjaFxHeiti() {
@@ -304,7 +304,7 @@ public class Plontugluggi extends Dialog<Void> {
      * @param event smellt á litla merkið við hliðina á nafni plöntu
      */
     private void breytaNafniHandler(MouseEvent event) {
-        TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getNickName());
+        TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getGaelunafn());
 
         ButtonType iLagi = new ButtonType("vista breytingar", ButtonBar.ButtonData.OK_DONE);
         ButtonType haettaVid = new ButtonType("hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -322,7 +322,7 @@ public class Plontugluggi extends Dialog<Void> {
 
         Optional<String> inntak = nafnDialog.showAndWait();
         if (inntak.isPresent()) {
-            minPlantan.setNickName(inntak.get());
+            minPlantan.setGaelunafn(inntak.get());
             System.out.println(inntak);
         }
     }
@@ -412,7 +412,7 @@ public class Plontugluggi extends Dialog<Void> {
         dialogur.getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
 
 
-        TextArea textArea = new TextArea(minPlantan.getNotesFraNotanda());
+        TextArea textArea = new TextArea(minPlantan.getAthugasemdir());
         dialogur.getDialogPane().setContent(textArea);
         dialogur.setResultConverter(b -> {
             if (b.getButtonData().equals(ButtonBar.ButtonData.OK_DONE)) return textArea.getText();
@@ -422,7 +422,7 @@ public class Plontugluggi extends Dialog<Void> {
         Optional<String> result = dialogur.showAndWait();
         if (result.isPresent()) {//result vistar breytingar á texta
             System.out.println("utkoma ur dialog: " + result);
-            minPlantan.setNotesFraNotanda(result.get());
+            minPlantan.setAthugasemdir(result.get());
         }
     }
 
