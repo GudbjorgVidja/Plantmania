@@ -33,14 +33,14 @@ public class MinPlantaDeserializer extends JsonDeserializer<MinPlanta> {
         MinPlanta minPlanta = new MinPlanta();
 
         //venjuleg gildi (String, StringProperty, int, IntegerProperty)
-        minPlanta.setLatnesktNafn(node.get("latnesktNafn").asText());
-        minPlanta.setAlmenntNafn(node.get("almenntNafn").asText());
+        minPlanta.setFraediheiti(node.get("fraediheiti").asText());
+        minPlanta.setAlmenntHeiti(node.get("almenntHeiti").asText());
         minPlanta.setMyndaslod(node.get("myndaslod").asText());
         minPlanta.setTexti(node.get("texti").asText());
         minPlanta.setAlmennurTimiMilliVokvana(node.get("almennurTimiMilliVokvana").asInt());
         minPlanta.setLjosStundir(node.get("ljosStundir").asInt());
-        minPlanta.setNickName(node.get("nickName").asText());
-        minPlanta.setNotesFraNotanda(node.get("notesFraNotanda").asText());
+        minPlanta.setGaelunafn(node.get("gaelunafn").asText());
+        minPlanta.setAthugasemdir(node.get("athugasemdir").asText());
         minPlanta.setMedaltimiMilliVokvana(node.get("medaltimiMilliVokvana").asInt());
         minPlanta.setThinnTimiMilliVokvana(node.get("thinnTimiMilliVokvana").asInt());
         minPlanta.setNaestaVokvun(node.get("naestaVokvun").asInt());

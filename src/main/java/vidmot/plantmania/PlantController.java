@@ -42,9 +42,11 @@ public class PlantController {
     @FXML
     private VBox titledPaneBoxid;
 
+    //TODO: á að nota þetta, Guðbjörg? Eyða kannski ef ekki
     //@FXML
     //private VBox vokvaBox, vandamalBox, almenntBox;
 
+    //TODO: gera upphafcontroller að local breytu? og þarf skradurNotandi að vera objectProperty?
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
@@ -79,9 +81,6 @@ public class PlantController {
     }
 
 
-    protected void lokaGluggaHandler(WindowEvent event) { //todo viljum við hafa handler frekar en lokaGluggaAdferd?
-        System.out.println("lokaGluggaHandler");
-    }
 
     /**
      * kallað á úr application þegar reynt er að loka glugganum
@@ -183,8 +182,8 @@ public class PlantController {
      * þegar ýtt er á dag
      */
     public void dagatalsEventFilterar() {
-        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgFyrriVokvanir(), notendaupplysingar.getFyrriVokvanir());
-        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgAaetladarVokvanir(), notendaupplysingar.getNaestuVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarLoknarVokvanir(), notendaupplysingar.getFyrriVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarAaetladarVokvanir(), notendaupplysingar.getNaestuVokvanir());
         dagatalTilBakaRegla();
         dagatalAframRegla();
 

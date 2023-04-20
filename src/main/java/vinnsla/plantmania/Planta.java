@@ -28,9 +28,9 @@ import java.util.List;
  * plöntur sem MinPlanta og breytt henni
  */
 public class Planta {
-    private String latnesktNafn;
-    private String almenntNafn; //má breyta í mínPlanta, annars ekki
-    private List<String> ollHeiti;//inniheldur líka almenntNafn
+    private String fraediheiti;
+    private String almenntHeiti;
+    private List<String> ollHeiti;//inniheldur líka almenntHeiti
     private String myndaslod;
     private String texti;
     private Uppruni uppruni;
@@ -43,8 +43,8 @@ public class Planta {
     private List<String> einkenniPlontu;//t.d. ákveðin lauf... má sleppa
 
     public Planta(List<String> ollHeiti, String myndaslod, String texti, Uppruni uppruni, Ljosstyrkur ljosstyrkur, Eitrun eitrun, List<Integer> kjorhitastig, Vatnsthorf vatnsthorf, int almennurTimiMilliVokvana, int ljosStundir, List<String> einkenniPlontu) {
-        this.latnesktNafn = ollHeiti.get(0);
-        this.almenntNafn = ollHeiti.get(1);
+        this.fraediheiti = ollHeiti.get(0);
+        this.almenntHeiti = ollHeiti.get(1);
         this.ollHeiti = ollHeiti;
         this.myndaslod = myndaslod;
         this.texti = texti;
@@ -59,8 +59,8 @@ public class Planta {
     }
 
     public Planta(Planta planta) {
-        this.latnesktNafn = planta.latnesktNafn; //eða hafa bara latnesktNafn=ollHeiti.get(0)
-        this.almenntNafn = planta.almenntNafn; // eða almenntNafn=ollHeiti.get(1)
+        this.fraediheiti = planta.fraediheiti; //eða hafa bara fraediheiti=ollHeiti.get(0)
+        this.almenntHeiti = planta.almenntHeiti; // eða almenntHeiti=ollHeiti.get(1)
         this.ollHeiti = planta.ollHeiti;
         this.myndaslod = planta.myndaslod;
         this.texti = planta.texti;
@@ -78,20 +78,20 @@ public class Planta {
 
     }
 
-    public String getLatnesktNafn() {
-        return latnesktNafn;
+    public String getFraediheiti() {
+        return fraediheiti;
     }
 
-    public void setLatnesktNafn(String latnesktNafn) {
-        this.latnesktNafn = latnesktNafn;
+    public void setFraediheiti(String fraediheiti) {
+        this.fraediheiti = fraediheiti;
     }
 
-    public String getAlmenntNafn() {
-        return almenntNafn;
+    public String getAlmenntHeiti() {
+        return almenntHeiti;
     }
 
-    public void setAlmenntNafn(String almenntNafn) {
-        this.almenntNafn = almenntNafn;
+    public void setAlmenntHeiti(String almenntHeiti) {
+        this.almenntHeiti = almenntHeiti;
     }
 
     public List<String> getOllHeiti() {
@@ -184,8 +184,8 @@ public class Planta {
 
     public String toString() {
         return "Planta{" +
-                "latnesktNafn='" + latnesktNafn + '\'' +
-                ", almenntNafn='" + almenntNafn + '\'' +
+                "fraediheiti='" + fraediheiti + '\'' +
+                ", almenntHeiti='" + almenntHeiti + '\'' +
                 ", ollHeiti=" + ollHeiti +
                 ", myndaslod='" + myndaslod + '\'' +
                 ", texti='" + texti + '\'' +

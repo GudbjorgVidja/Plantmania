@@ -22,7 +22,7 @@ public class PlantaSpjald extends AnchorPane {
     private Stats fxStats;//hlutur af klasanum Stats, sýnir eiginleika plöntunnar með skala
 
     private Planta planta;//Planta vinnsluhluturinn, plantan sem spjaldið er fyrir.
-    
+
 
     /**
      * Smiðurinn sem er notaður til að gera öll PlantaSpjald
@@ -36,7 +36,7 @@ public class PlantaSpjald extends AnchorPane {
 
         fxStats.setStats(planta);
         stillaStaerd();
-        fxSpjald.setFxAlmenntNafn(planta.getAlmenntNafn());
+        fxSpjald.setFxAlmenntNafn(planta.getAlmenntHeiti());
         fxSpjald.setFxFlokkur(planta.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
     }
@@ -54,7 +54,7 @@ public class PlantaSpjald extends AnchorPane {
     }
 
     public String toString() {
-        return planta.getAlmenntNafn();
+        return planta.getAlmenntHeiti();
     }
 
     public Planta getPlanta() {

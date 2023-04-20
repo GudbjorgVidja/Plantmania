@@ -56,7 +56,7 @@ public class Notandi {
      */
     private MinPlanta finnaNickname(MinPlanta minPlanta) {
         for (MinPlanta min : minarPlontur) {
-            if (min.getNickName().equals(minPlanta.getNickName())) {
+            if (min.getGaelunafn().equals(minPlanta.getGaelunafn())) {
                 minPlanta = finnaNickname(minPlanta, 1);
             }
         }
@@ -73,13 +73,13 @@ public class Notandi {
      * @return kallar endurkvæmt á sjálft sig þar til það skilar MinPlanta plöntu með næsta lausa nickname
      */
     private MinPlanta finnaNickname(MinPlanta minPlanta, int gildi) {
-        String nyttNickname = minPlanta.getNickName() + gildi;
+        String nyttNickname = minPlanta.getGaelunafn() + gildi;
         for (MinPlanta min : minarPlontur) {
-            if (min.getNickName().equals(nyttNickname)) {
+            if (min.getGaelunafn().equals(nyttNickname)) {
                 return finnaNickname(minPlanta, gildi + 1);
             }
         }
-        minPlanta.setNickName(nyttNickname);
+        minPlanta.setGaelunafn(nyttNickname);
         return minPlanta;
     }
 

@@ -22,9 +22,9 @@ import java.util.Collections;
  */
 @JsonDeserialize(using = MinPlantaDeserializer.class)
 public class MinPlanta extends Planta {
-    private StringProperty nickName = new SimpleStringProperty();//gælunafn plöntunnar, vaktanlegt
+    private StringProperty gaelunafn = new SimpleStringProperty();//gælunafn plöntunnar, vaktanlegt
     private ObservableList<LocalDate> vokvanir = FXCollections.observableArrayList();//vaktanlegur listi yfir allar dagsetningar sem plantan hefur verið vökvuð á
-    private StringProperty notesFraNotanda = new SimpleStringProperty("");//athugasemdir sem notandi skrifar niður fyrir plöntuna, vaktanlegt
+    private StringProperty athugasemdir = new SimpleStringProperty("");//athugasemdir sem notandi skrifar niður fyrir plöntuna, vaktanlegt
     private IntegerProperty medaltimiMilliVokvana = new SimpleIntegerProperty();//vaktanlegt gildi fyrir meðaltíma milli vökvana
     private IntegerProperty thinnTimiMilliVokvana = new SimpleIntegerProperty();//vaktanlegt gildi fyrir tíma sem notandi vill hafa milli vökvana
     private ObjectProperty<LocalDate> sidastaVokvun = new SimpleObjectProperty<>();//vaktanlegt gildi fyrir dagsetningu síðustu vökvunar
@@ -34,7 +34,7 @@ public class MinPlanta extends Planta {
 
     public MinPlanta(Planta planta) {
         super(planta);
-        this.nickName.set(planta.getOllHeiti().get(1));
+        this.gaelunafn.set(planta.getOllHeiti().get(1));
         this.thinnTimiMilliVokvana.set(planta.getAlmennurTimiMilliVokvana());
         sidastaVokvunListener();
         medaltimiMilliVokvanaListener();
@@ -170,16 +170,16 @@ public class MinPlanta extends Planta {
     }
 
     //getterar og setterar
-    public String getNickName() {
-        return nickName.get();
+    public String getGaelunafn() {
+        return gaelunafn.get();
     }
 
-    public StringProperty nickNameProperty() {
-        return nickName;
+    public StringProperty gaelunafnProperty() {
+        return gaelunafn;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName.set(nickName);
+    public void setGaelunafn(String gaelunafn) {
+        this.gaelunafn.set(gaelunafn);
     }
 
     public ObservableList<LocalDate> getVokvanir() {
@@ -190,16 +190,16 @@ public class MinPlanta extends Planta {
         this.vokvanir = vokvanir;
     }
 
-    public String getNotesFraNotanda() {
-        return notesFraNotanda.get();
+    public String getAthugasemdir() {
+        return athugasemdir.get();
     }
 
-    public StringProperty notesFraNotandaProperty() {
-        return notesFraNotanda;
+    public StringProperty athugasemdirProperty() {
+        return athugasemdir;
     }
 
-    public void setNotesFraNotanda(String notesFraNotanda) {
-        this.notesFraNotanda.set(notesFraNotanda);
+    public void setAthugasemdir(String athugasemdir) {
+        this.athugasemdir.set(athugasemdir);
     }
 
     public int getMedaltimiMilliVokvana() {
@@ -261,9 +261,9 @@ public class MinPlanta extends Planta {
 
     public String toString() {
         return "MinPlanta{" +
-                "nickName=" + nickName.get() +
+                "gaelunafn=" + gaelunafn.get() +
                 ", vokvanir=" + vokvanir +
-                ", notesFraNotanda=" + notesFraNotanda.get() +
+                ", athugasemdir=" + athugasemdir.get() +
                 ", medaltimiMilliVokvana=" + medaltimiMilliVokvana.get() +
                 ", thinnTimiMilliVokvana=" + thinnTimiMilliVokvana.get() +
                 ", sidastaVokvun=" + sidastaVokvun.get() +

@@ -12,7 +12,8 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Bæta við fleiri plöntum
 - Flipa með smá leiðbeiningum bætt við, til að útskýra t.d. hvað tákn og tölur á dagatali þýða
     - hafa það kannski undir notandi menuButton
-- Bæta við möguleika til að eyða plöntu úr þínum plöntum
+- Bæta við möguleika til að eyða plöntu úr þínum plöntum. Ath að ef það á að gera það úr plöntuglugganum
+  þarf hann að taka inn ObservableList af plöntum notanda
 - Bæta við fleiri möguleikum tengda notanda, t.d. að breyta lykilorði og eyða aðgangi
 - Bæta við möguleika á að breyta þema forritsins
 - Gefa betri viðbrögð við aðgerðum notanda, t.d. láta skilaboð birtast þegar notandi endurtekur lykilorð
@@ -23,7 +24,6 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Birta Dagatal þegar vökvunarsaga plöntu er skoðuð, í staðin fyrir listview
 - Breyta hvernig upplýsingar eru lesnar úr skrá í upphafi. Núna er það úr .txt skrá, og ekki endilega
   skilvirkasta leiðin
-- sýna að dagatal er óvirkt meira en þrjá mánuði fram í tímann. Setja kannski annan lit á dagana, og ljósari lit á letur
 - passa að nafn plöntu geti ekki verið lengra en sést á spjaldi
     - lengd nickname má ekki vera lengri en eitthvað ákveðið
 - setja max lengd á notandanafn
@@ -31,11 +31,10 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - laga fræðsluefni ef færi gefst
 - skoða með að setja tooltip á takka á MinPlantaSpjald þegar þeir eru óvirkir. Virkar ekki venjulega ef takkarnir eru
   óvirkir, reyna kannski að setja á annan hlut sem inniheldur takkana eða eitthvað
-- Endurnefna almenntNafn sem almenntHeiti
-- Endurnefna latnesktNafn sem fraediHeiti
 - Mögulegarf breytingar á dagatal og dag:
     - setja lítið hak fyrir framan loknar vökvanir
-    - setja annað útlit á þann part dagatalsins sem ekki er notaður (þ.e. of langt fram í tímann)
+    - setja annað útlit á þann part dagatalsins sem ekki er notaður (þ.e. of langt fram í tímann),
+      Setja kannski annan lit á dagana, og ljósari lit á letur
     - stækka letur á ártali og mánuð
     - stafla labelum fyrir loknar og óloknar vökvanir
     - gera styleclass sem er settur á daginn í dag
@@ -77,7 +76,12 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Þegar plöntu er bætt við mínar plöntur, ekki hafa dialog heldur kannski popup neðst sem fer eftir smá tíma
 - lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
 - taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
+- Laga hvernig dagsetningar (LocalDate) eru birtar
+- Frekari vinna í Dialogum, t.d. óvirkja takka við ákveðnar aðstæður
 - niðurtalning vökvana núllstillist við útskráningu!!!
+- Endurnefna latnesktNafn sem fraediheiti
+- Endurnefna almenntNafn sem almenntHeiti
+-
 - Finna hvaða styleclass eru á dagatal
 - setja dialog til að bæta við vökvun í plöntuglugga, annars ekki augljóst að það sé búið að gerast þegar þú klárar
 - í plöntuglugga er ekki augljóst að hægt sé að ýta á til að breyta nafni
@@ -90,3 +94,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
         - breyta tíma á milli vökvanna
     - smellt á dag í dqagatali
 - 
+
+- sýna að dagatal er óvirkt meira en þrjá mánuði fram í tímann. Setja kannski annan lit á dagana, og ljósari lit á letur
+- athuga hvort betra sé að hafa graphic á tökkum fyrir myndir eða bakgrunn. Held að background image sé betra, hægt að
+  nota css
