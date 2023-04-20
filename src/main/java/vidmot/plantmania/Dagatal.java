@@ -16,6 +16,7 @@ import vinnsla.plantmania.MinPlanta;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class Dagatal extends AnchorPane {
     private final String[] manudir = new String[]{"Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí",
             "Ágúst", "September", "Október", "Nóvember", "Desember"};//óbreytanlegt fylki af strengjum með mánaðarheitum
 
-    private LocalDate syndurDagur;//dagurinn sem dagatalið sýnir. Notað til að vita hvaða mánuður er sýndur í augnablikinu
+    private YearMonth syndurManudur;//dagurinn sem dagatalið sýnir. Notað til að vita hvaða mánuður er sýndur í augnablikinu
 
     //listi af pörum sem gefa dagsetningu og plöntu sem var vökvuð þá. inniheldur öll skipti sem einhver planta hefur verið vökvuð
     private ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgFyrriVokvanir = FXCollections.observableArrayList();
@@ -48,34 +49,31 @@ public class Dagatal extends AnchorPane {
     //smiðurinn, les fxml, gerir fyrsta mánuðinn, sem er núverandi mánuður
     public Dagatal() {
         LesaFXML.lesa(this, "dagatal-view.fxml");
-        syndurDagur = LocalDate.now();
-        geraDagatal(LocalDate.now());
+        syndurManudur = YearMonth.now();
+        geraDagatal();
     }
 
     /**
      * setur upp dagatal fyrir mánuðinn sem inniheldur umbeðinn dag. Setur mánaðardaga rétt upp miðað við vikudaga
      * og setur upp og tekur af bindings fyrir viðmótshluti innan hvers dags (mánaðardagur og fjöldi vökvana labelar
      * og dropi ImageView ) eftir því sem við á.
-     *
-     * @param dagur - LocalDate, dagur í mánuðinum sem á að sýna
      */
-    //TODO: Skipta þessu upp í fleiri aðferðir
-    public void geraDagatal(LocalDate dagur) {
+    public void geraDagatal() {
         ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsLokid = filteraDaga(allarPlonturOgFyrriVokvanir);
         ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsOlokid = filteraDaga(allarPlonturOgAaetladarVokvanir);
 
-        DayOfWeek fyrstiDagurManadar = LocalDate.of(dagur.getYear(), dagur.getMonthValue(), 1).getDayOfWeek();
-        fxDagsetning.setText(manudir[dagur.getMonthValue() - 1] + " - " + dagur.getYear());
+        DayOfWeek fyrstiDagurManadar = syndurManudur.atDay(1).getDayOfWeek();
+        fxDagsetning.setText(manudir[syndurManudur.getMonthValue() - 1] + " - " + syndurManudur.getYear());
 
-        List<Integer> dagalisti = geraDagalista(dagur);
+        List<Integer> dagalisti = geraDagalista(syndurManudur);
 
         for (int i = 7; i < 49; i++) {
             if (fxGrid.getChildren().get(i) instanceof Dagur && !dagalisti.isEmpty() && !((i - 7) < fyrstiDagurManadar.ordinal())) {
-                LocalDate dagurinn = LocalDate.of(syndurDagur.getYear(), syndurDagur.getMonthValue(), dagalisti.get(0));
-                IntegerBinding fjoldiVokvanaLokid = Bindings.size(vokvanirManadarinsLokid.filtered(p -> p.getValue().isEqual(dagurinn)));
-                IntegerBinding fjoldiVokvanaOlokid = Bindings.size(vokvanirManadarinsOlokid.filtered(p -> p.getValue().isEqual(dagurinn)));
-                BooleanProperty dagurinnErLidinn = new SimpleBooleanProperty(dagurinn.isBefore(LocalDate.now()));
-
+                LocalDate dagur = syndurManudur.atDay(dagalisti.get(0));
+                IntegerBinding fjoldiVokvanaLokid = Bindings.size(vokvanirManadarinsLokid.filtered(p -> p.getValue().isEqual(dagur)));
+                IntegerBinding fjoldiVokvanaOlokid = Bindings.size(vokvanirManadarinsOlokid.filtered(p -> p.getValue().isEqual(dagur)));
+                BooleanProperty dagurinnErLidinn = new SimpleBooleanProperty(dagur.isBefore(LocalDate.now()));
+                
                 ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().styleProperty().bind(Bindings.when(dagurinnErLidinn).then("-fx-text-fill: red").otherwise("-fx-text-fill: black"));
                 setjaVirkanDag((Dagur) fxGrid.getChildren().get(i), fjoldiVokvanaLokid, fjoldiVokvanaOlokid);
                 ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText(dagalisti.get(0) + "");
@@ -90,11 +88,11 @@ public class Dagatal extends AnchorPane {
     /**
      * Gerir lista af heiltölum fyrir hvern mánaðardag mánaðarins í dagur
      *
-     * @param dagur - Localdate, dagsetning í mánuðinum sem á að búa til dagalista fyrir
+     * @param yearMonth - Localdate, dagsetning í mánuðinum sem á að búa til dagalista fyrir
      * @return - dagalisti, listi af mánaðardögum
      */
-    private List<Integer> geraDagalista(LocalDate dagur) {
-        int fjoldiDaga = dagur.getMonth().length(dagur.isLeapYear());
+    private List<Integer> geraDagalista(YearMonth yearMonth) {
+        int fjoldiDaga = yearMonth.getMonth().length(yearMonth.isLeapYear());
         List<Integer> dagalisti = new ArrayList<>();
         for (int i = 1; i <= fjoldiDaga; i++) {
             dagalisti.add(i);
@@ -110,8 +108,8 @@ public class Dagatal extends AnchorPane {
      * @return Hluti gefins lista fyrir mánuðinn sem er skoðaður
      */
     private ObservableList<Pair<MinPlanta, LocalDate>> filteraDaga(ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgVokvanir) {
-        return allarPlonturOgVokvanir.filtered(p -> p.getValue().getMonth() == syndurDagur.getMonth()
-                && p.getValue().getYear() == syndurDagur.getYear());
+        return allarPlonturOgVokvanir.filtered(p -> p.getValue().getMonth() == syndurManudur.getMonth()
+                && p.getValue().getYear() == syndurManudur.getYear());
     }
 
 
@@ -155,12 +153,12 @@ public class Dagatal extends AnchorPane {
     }
 
     //getterar og setterar
-    public LocalDate getSyndurDagur() {
-        return syndurDagur;
+    public YearMonth getSyndurManudur() {
+        return syndurManudur;
     }
 
-    public void setSyndurDagur(LocalDate syndurDagur) {
-        this.syndurDagur = syndurDagur;
+    public void setSyndurManudur(YearMonth syndurManudur) {
+        this.syndurManudur = syndurManudur;
     }
 
     public Button getFxTilBaka() {
