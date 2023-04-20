@@ -149,8 +149,8 @@ public class PlantController {
      */
     public void dagatalTilBakaRegla() {
         fxDagatal.getFxTilBaka().addEventFilter(ActionEvent.ACTION, (Event event) -> {
-            fxDagatal.setSyndurDagur(fxDagatal.getSyndurDagur().minusMonths(1));
-            fxDagatal.geraDagatal(fxDagatal.getSyndurDagur());
+            fxDagatal.setSyndurManudur(fxDagatal.getSyndurManudur().minusMonths(1));
+            fxDagatal.geraDagatal();
         });
     }
 
@@ -159,8 +159,8 @@ public class PlantController {
      */
     public void dagatalAframRegla() {
         fxDagatal.getFxAfram().addEventFilter(ActionEvent.ACTION, (Event event) -> {
-            fxDagatal.setSyndurDagur(fxDagatal.getSyndurDagur().plusMonths(1));
-            fxDagatal.geraDagatal(fxDagatal.getSyndurDagur());
+            fxDagatal.setSyndurManudur(fxDagatal.getSyndurManudur().plusMonths(1));
+            fxDagatal.geraDagatal();
         });
     }
 
@@ -194,7 +194,7 @@ public class PlantController {
             Dagur dagur = getValinnDagur(event.getPickResult().getIntersectedNode());
             if (dagur != null && !dagur.getFxManadardagur().getText().equals("")) {
                 int manadardagur = Integer.parseInt(dagur.getFxManadardagur().getText());
-                LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurDagur().getYear(), fxDagatal.getSyndurDagur().getMonthValue(), manadardagur);
+                LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurManudur().getYear(), fxDagatal.getSyndurManudur().getMonthValue(), manadardagur);
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
 

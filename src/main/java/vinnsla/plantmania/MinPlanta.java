@@ -63,7 +63,7 @@ public class MinPlanta extends Planta {
         naestaVokvun.addListener((obs, o, n) -> {
             uppfaeraPlanadarVokvanir();
         });
-        
+
         thinnTimiMilliVokvana.addListener((observable, oldValue, newValue) -> {
             uppfaeraPlanadarVokvanir();
         });
@@ -238,8 +238,8 @@ public class MinPlanta extends Planta {
         this.sidastaVokvun.set(sidastaVokvun);
     }
 
-    public IntegerProperty getNaestaVokvun() {
-        return naestaVokvun;
+    public int getNaestaVokvun() {
+        return naestaVokvun.get();
     }
 
     public void setNaestaVokvun(int i) {

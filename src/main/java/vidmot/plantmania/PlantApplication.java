@@ -8,6 +8,10 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
+/**
+ * Application fyrir forritið. Hleður fxml loadernum og setur senuna. Keyrir forritið. Setur
+ * eventhandler til að vista gögn í json skrá þegar glugga er lokað
+ */
 public class PlantApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {

@@ -22,7 +22,7 @@ public class DagsetningCellFactory implements Callback<ListView<LocalDate>, List
                 if (empty || localDate == null) {
                     setText(null);
                 } else {
-                    setText(localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " ");
+                    setText(localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 }
             }
         };

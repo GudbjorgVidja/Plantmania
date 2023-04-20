@@ -269,11 +269,11 @@ public class Plontugluggi extends Dialog<Void> {
      */
     private void naestaVokvunTexti(int naestaV) {
         if (naestaV == 1) {
-            fxNaestaVokvun.setText("næst eftir " + minPlantan.getNaestaVokvun().get() + " dag");
+            fxNaestaVokvun.setText("næst eftir " + minPlantan.naestaVokvunProperty().get() + " dag");
         } else if (naestaV == 0) {
             fxNaestaVokvun.setText("næst í dag");
         } else {
-            fxNaestaVokvun.setText("næst eftir " + minPlantan.getNaestaVokvun().get() + " daga");
+            fxNaestaVokvun.setText("næst eftir " + minPlantan.naestaVokvunProperty().get() + " daga");
         }
     }
 
@@ -281,8 +281,8 @@ public class Plontugluggi extends Dialog<Void> {
      * upphafsstillir label fyrir næstu vökvun og setur listener sem uppfærir hann
      */
     private void setNaestaVokvunListener() {
-        naestaVokvunTexti(minPlantan.getNaestaVokvun().get());
-        minPlantan.getNaestaVokvun().addListener((observable, oldValue, newValue) -> {
+        naestaVokvunTexti(minPlantan.naestaVokvunProperty().get());
+        minPlantan.naestaVokvunProperty().addListener((observable, oldValue, newValue) -> {
             naestaVokvunTexti(newValue.intValue());
         });
     }

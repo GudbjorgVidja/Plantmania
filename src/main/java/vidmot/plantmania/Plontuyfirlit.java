@@ -387,7 +387,7 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private Comparator<Node> naestaVokvunComparator = new Comparator<Node>() {
         public int compare(Node n1, Node n2) {
-            return Integer.compare(((MinPlantaSpjald) n1).getMinPlanta().getNaestaVokvun().get(), ((MinPlantaSpjald) n2).getMinPlanta().getNaestaVokvun().get());
+            return Integer.compare(((MinPlantaSpjald) n1).getMinPlanta().naestaVokvunProperty().get(), ((MinPlantaSpjald) n2).getMinPlanta().naestaVokvunProperty().get());
         }
     };
     //private Comparator<Node> naestaVokvunComparator = Comparator.comparingInt(n -> ((MinPlantaSpjald) n).getMinPlanta().getNaestaVokvun().get());
