@@ -73,14 +73,13 @@ public class PlantController {
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
         bindaMaxSizeTitledPane();
-        //setjaFraedsla();
 
         geraTitledPanes();
 
     }
 
 
-    protected void lokaGluggaHandler(WindowEvent event) {
+    protected void lokaGluggaHandler(WindowEvent event) { //todo viljum við hafa handler frekar en lokaGluggaAdferd?
         System.out.println("lokaGluggaHandler");
     }
 
@@ -88,7 +87,6 @@ public class PlantController {
      * kallað á úr application þegar reynt er að loka glugganum
      */
     protected void lokaGluggaAdferd() {
-        //System.out.println("lokaGluggaAdferd");
         fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi.get());
     }
 
@@ -254,7 +252,7 @@ public class PlantController {
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
      */
-    private void hladaOllumPlontum(MouseEvent event) throws InterruptedException { //todo endurnefna?
+    private void hladaOllumPlontum(MouseEvent event) { //todo endurnefna?
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
             node = node.getParent();
@@ -262,22 +260,7 @@ public class PlantController {
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
-
             birtaBanner(fxAllarPlonturYfirlit.getFxBanner());
-            /*
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
-            delay.setOnFinished(e -> fxAllarPlonturYfirlit.getFxBanner().setVisible(false));
-
-            fxAllarPlonturYfirlit.getFxBanner().setVisible(true);
-
-            delay.play();
-             */
-
-
-            /* gamli alert dialogurinn
-            Alert a = new Alert(Alert.AlertType.NONE, "Nýrri plöntu bætt við þínar plöntur", ButtonType.OK);
-            a.showAndWait();
-             */
         }
     }
 
@@ -289,9 +272,7 @@ public class PlantController {
     private void birtaBanner(Label banner) {
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(e -> banner.setVisible(false));
-
         banner.setVisible(true);
-
         delay.play();
     }
 

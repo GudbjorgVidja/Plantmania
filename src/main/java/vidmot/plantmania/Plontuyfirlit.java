@@ -16,7 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.stage.WindowEvent;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Notandi;
 import vinnsla.plantmania.Planta;
@@ -120,7 +119,7 @@ public class Plontuyfirlit extends AnchorPane {
             change.next();
             if (change.wasRemoved()) {
                 if (filteredSpjold.size() == 0)
-                    fxFlowPane.getStyleClass().add("skoda-sia-vidvorun");//minarPlontur  getur ekki verið tómt
+                    fxFlowPane.getStyleClass().add("skoda-sia-vidvorun");
             } else if (change.wasAdded()) {
                 fxFlowPane.getStyleClass().removeAll("skoda-sia-vidvorun");
             }
@@ -136,7 +135,7 @@ public class Plontuyfirlit extends AnchorPane {
         siaItems = fxSiaMenu.getItems();
         ((CheckMenuItem) fxSiaMenu.getItems().get(0)).setSelected(true);
 
-        selectedSiaItems = new FilteredList<>(siaItems); //inniheldur valda CheckMenuItems (sem MenuItems)
+        selectedSiaItems = new FilteredList<>(siaItems);
 
         uppfaeraPredicateLista();
 
@@ -197,8 +196,6 @@ public class Plontuyfirlit extends AnchorPane {
 
     /**
      * ef þessi aðferð keyrir þá er yfirlitið ekki tómt, og inniheldur PlantaSpjald
-     * Vantar fleiri möguleika?
-     * rodunMenu.getItems().add(new MenuItem("sjálfgefið"));
      */
     public void setRodunMenuItems() {
         rodunMenu.getItems().remove(2, 4);
@@ -296,8 +293,6 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private void uppfaeraFyrsta(MenuItem uppruni) {
         if (uppruni.equals(siaItems.get(0))) {
-            System.out.println("smella a fyrsta :)");
-
             if (((CheckMenuItem) uppruni).isSelected()) {//fundið að verið var að velja fyrsta
                 System.out.println("fyrsta er nu valid");
                 for (MenuItem item : siaItems) {
@@ -306,7 +301,6 @@ public class Plontuyfirlit extends AnchorPane {
                     }
                 }
             } else if (!((CheckMenuItem) uppruni).isSelected()) {//fundið að verið var að afvelja fyrsta
-                System.out.println("fyrsta er ekki lengur valid");
                 for (MenuItem item : siaItems) {
                     if (item instanceof CheckMenuItem && ((CheckMenuItem) item).isSelected()) {
                         ((CheckMenuItem) item).setSelected(false);
@@ -327,19 +321,6 @@ public class Plontuyfirlit extends AnchorPane {
      * @param event smellt á skrá út undir notandi menuButton
      */
     private void skraUtHandler(ActionEvent event) {
-        PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
-        vistaNotendaupplysingar(pc.getSkradurNotandi());
-        ViewSwitcher.switchTo(View.UPPHAFSSIDA);
-    }
-
-    private void setjaCloseRequest() {
-        //ná í stage
-        //setja close request á stage
-
-
-    }
-
-    private void lokaGluggaHandler(WindowEvent event) {
         PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
         vistaNotendaupplysingar(pc.getSkradurNotandi());
         ViewSwitcher.switchTo(View.UPPHAFSSIDA);
@@ -390,5 +371,4 @@ public class Plontuyfirlit extends AnchorPane {
             return Integer.compare(((MinPlantaSpjald) n1).getMinPlanta().naestaVokvunProperty().get(), ((MinPlantaSpjald) n2).getMinPlanta().naestaVokvunProperty().get());
         }
     };
-    //private Comparator<Node> naestaVokvunComparator = Comparator.comparingInt(n -> ((MinPlantaSpjald) n).getMinPlanta().getNaestaVokvun().get());
 }
