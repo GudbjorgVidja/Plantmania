@@ -224,6 +224,8 @@ public class Plontugluggi extends Dialog<Void> {
         timiDialog.getDialogPane().getButtonTypes().removeAll(ButtonType.OK, ButtonType.CANCEL);
         timiDialog.getDialogPane().getButtonTypes().addAll(iLagi, haettaVid);
 
+        timiDialog.getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+
         timiDialog.setHeaderText("Nýr dagafjöldi milli vökvana:");
         timiDialog.setTitle("Breyting á vökvunum");
         timiDialog.setGraphic(null);
@@ -302,6 +304,8 @@ public class Plontugluggi extends Dialog<Void> {
         nafnDialog.setTitle("Breyting á nafni");
         nafnDialog.setGraphic(null);
 
+        nafnDialog.getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+
         nafnDialog.getDialogPane().lookupButton(iLagi).disableProperty().bind(nafnDialog.getEditor().textProperty().isEmpty());
 
         Optional<String> inntak = nafnDialog.showAndWait();
@@ -372,6 +376,10 @@ public class Plontugluggi extends Dialog<Void> {
         ButtonType haettaVid = new ButtonType("hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
         Dialog<String> dialogur = new Dialog<>();
         dialogur.getDialogPane().getButtonTypes().addAll(vista, haettaVid);
+
+        dialogur.getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+
+
         TextArea textArea = new TextArea(minPlantan.getNotesFraNotanda());
         dialogur.getDialogPane().setContent(textArea);
         dialogur.setResultConverter(b -> {

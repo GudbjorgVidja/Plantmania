@@ -46,5 +46,7 @@
                 <MenuItem fx:id="fxSkraUt" mnemonicParsing="false" text="skrá út"/>
             </items>
         </MenuButton>
+        <Label fx:id="fxBanner" styleClass="banner" text="plöntu bætt við mínar plöntur" layoutX="170" layoutY="420"
+               mouseTransparent="true" visible="false"/>
     </children>
 </fx:root>

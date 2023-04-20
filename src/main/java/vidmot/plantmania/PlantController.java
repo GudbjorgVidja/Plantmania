@@ -1,5 +1,7 @@
 package vidmot.plantmania;
 
+import edu.princeton.cs.algs4.In;
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -10,12 +12,12 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import vinnsla.plantmania.*;
 
@@ -40,8 +42,8 @@ public class PlantController {
     @FXML
     private VBox titledPaneBoxid;
 
-    @FXML
-    private VBox vokvaBox, vandamalBox, almenntBox;
+    //@FXML
+    //private VBox vokvaBox, vandamalBox, almenntBox;
 
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
@@ -71,7 +73,23 @@ public class PlantController {
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
         bindaMaxSizeTitledPane();
-        setjaFraedsla();
+        //setjaFraedsla();
+
+        geraTitledPanes();
+
+    }
+
+
+    protected void lokaGluggaHandler(WindowEvent event) {
+        System.out.println("lokaGluggaHandler");
+    }
+
+    /**
+     * kallað á úr application þegar reynt er að loka glugganum
+     */
+    protected void lokaGluggaAdferd() {
+        //System.out.println("lokaGluggaAdferd");
+        fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi.get());
     }
 
     private void bindaMaxSizeTitledPane() {
@@ -227,7 +245,7 @@ public class PlantController {
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
      */
-    private void hladaOllumPlontum(MouseEvent event) {
+    private void hladaOllumPlontum(MouseEvent event) throws InterruptedException {
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
             node = node.getParent();
@@ -235,8 +253,19 @@ public class PlantController {
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(e -> fxAllarPlonturYfirlit.getFxBanner().setVisible(false));
+
+            fxAllarPlonturYfirlit.getFxBanner().setVisible(true);
+
+            delay.play();
+
+
+            /* gamli alert dialogurinn
             Alert a = new Alert(Alert.AlertType.NONE, "Nýrri plöntu bætt við þínar plöntur", ButtonType.OK);
             a.showAndWait();
+             */
         }
     }
 
@@ -253,6 +282,7 @@ public class PlantController {
     }
 
 
+    /*
     private void setjaFraedsla() {
         Fraedsla fraedsluklasi = new Fraedsla();
 
@@ -282,5 +312,50 @@ public class PlantController {
             texti.setWrappingWidth(512);
             almenntBox.getChildren().add(texti);
         }
+    }
+
+     */
+
+    private void geraTitledPanes() {
+        In inn = new In("src/main/java/vinnsla/plantmania/nyfraedsla.txt");
+        String alltSkjalid = inn.readAll();
+
+        String[] paneskipting = splittaIFylki(alltSkjalid, "TITLEDPANE ");
+        for (String s : paneskipting) {
+            TitledPane tp = new TitledPane();
+            VBox vbox = new VBox();
+
+            String[] malsgreinar = splittaIFylki(s, "GREIN ");
+            tp.setText(malsgreinar[0].trim());
+
+            for (int i = 1; i < malsgreinar.length; i++) {
+                Text texti;
+                if (malsgreinar[i].startsWith("TITILL")) {
+                    malsgreinar[i] = malsgreinar[i].replaceFirst("TITILL ", "");
+                    texti = new Text(malsgreinar[i].strip());
+                    texti.getStyleClass().add("titill");
+                } else texti = new Text(malsgreinar[i].strip());
+
+                texti.setWrappingWidth(512);
+                vbox.getChildren().add(texti);
+            }
+
+            tp.setContent(vbox);
+            titledPaneBoxid.getChildren().add(tp);
+
+            vbox.getStyleClass().add("titledpanebox");
+            vbox.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+
+            bindaMaxSizeTitledPane();
+        }
+
+    }
+
+
+    private String[] splittaIFylki(String runa, String splitter) {
+        if (runa.startsWith(splitter)) {
+            runa = runa.replaceFirst(splitter, "");
+        }
+        return runa.split(splitter);
     }
 }

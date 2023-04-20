@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -17,6 +18,13 @@ public class PlantApplication extends Application {
         stage.setTitle("Plants in pants!");
         stage.setScene(scene);
         stage.show();
+
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
+            if (pc != null) pc.lokaGluggaAdferd();
+            stage.close();
+        });
+
     }
 
     public static void main(String[] args) {

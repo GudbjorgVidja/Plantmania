@@ -1,6 +1,3 @@
-/*
- *  todo setja mynd/texta ef yfirlitið er tómt: úbbs, engar plöntur hér. Athugaðu síurnar og reyndu aftur!
- */
 package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -16,12 +13,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.WindowEvent;
 import vinnsla.plantmania.MinPlanta;
 import vinnsla.plantmania.Notandi;
 import vinnsla.plantmania.Planta;
@@ -54,6 +49,9 @@ public class Plontuyfirlit extends AnchorPane {
 
     @FXML
     private MenuItem fxSkraUt;
+
+    @FXML
+    private Label fxBanner;
 
     /**
      * Öll MenuItem undir sía. Inniheldur velja allt, og uppruna gildi plantna (og minnaPlantna) í yfirlitinu
@@ -108,6 +106,7 @@ public class Plontuyfirlit extends AnchorPane {
             }
         });
         tomtYfirlitVidvodun();
+
     }
 
     private void tomtYfirlitVidvodun() {
@@ -253,6 +252,9 @@ public class Plontuyfirlit extends AnchorPane {
         return fxNotandi.textProperty();
     }
 
+    public Label getFxBanner() {
+        return fxBanner;
+    }
 
     /**
      * Raðar hlutum í yfirliti eftir því hvað er valið.
@@ -325,6 +327,19 @@ public class Plontuyfirlit extends AnchorPane {
      * @param event smellt á skrá út undir notandi menuButton
      */
     private void skraUtHandler(ActionEvent event) {
+        PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
+        vistaNotendaupplysingar(pc.getSkradurNotandi());
+        ViewSwitcher.switchTo(View.UPPHAFSSIDA);
+    }
+
+    private void setjaCloseRequest() {
+        //ná í stage
+        //setja close request á stage
+
+
+    }
+
+    private void lokaGluggaHandler(WindowEvent event) {
         PlantController pc = (PlantController) ViewSwitcher.lookup(View.ADALSIDA);
         vistaNotendaupplysingar(pc.getSkradurNotandi());
         ViewSwitcher.switchTo(View.UPPHAFSSIDA);

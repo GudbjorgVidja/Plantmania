@@ -30,10 +30,13 @@ public class MinPlantaSpjald extends AnchorPane {
     private MinPlanta minPlantan;//MinPlanta hluturinn á MinPlantaSpjald hlutnum
 
 
-    //TODO: ég prófaði að kommenta hann út og allt virðist keyra rétt, en hjá þér guðbjörg?
+    /*
+    //TODO: ég prófaði að kommenta hann út og allt virðist keyra rétt, en hjá þér guðbjörg? G: jupp, taka út?
     public MinPlantaSpjald() {//tómur smiður. Athuga hvort hann sé óþarfi
         System.out.println("MinPlantaSpjald tomur smidur");
     }
+
+     */
 
     public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn sem er notaður
         LesaFXML.lesa(this, "minplanta-view.fxml");
