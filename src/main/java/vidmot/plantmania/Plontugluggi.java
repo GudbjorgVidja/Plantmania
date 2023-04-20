@@ -1,5 +1,6 @@
 package vidmot.plantmania;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
 import vinnsla.plantmania.MinPlanta;
 
@@ -50,6 +52,12 @@ public class Plontugluggi extends Dialog<Void> {
     @FXML
     private Stats fxStats;
 
+    @FXML
+    private Label fxBanner;
+
+    @FXML
+    private ScrollPane fxScrollPane;//todo taka út? hægt að finna aðra leið
+
     private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
 
     //private Planta plantan;//ef glugginn er fyrir planta, kemur etv seinna
@@ -72,10 +80,7 @@ public class Plontugluggi extends Dialog<Void> {
         fxAlmenntNafn.textProperty().bind(minPlantan.nickNameProperty());
         fxMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + minPlantan.getMyndaslod())));
 
-        fxBreytaNafni.setOnMouseClicked(this::breytaNafniHandler);
-        fxAthugasemdir.setOnAction(this::athugasemdirHandler);
-        fxVokvunarsaga.setOnAction(this::vokvunarsagaHandler);
-        fxBreytaTimaMilliVokvana.setOnMouseClicked(this::setjaFxBreytaTimaMilliVokvanaEventFilter);
+        setjaEventHandlera();
 
         setjaUpplysingar();
 
@@ -101,6 +106,13 @@ public class Plontugluggi extends Dialog<Void> {
         setjaFxEinkenni();
         setjaFxUppruni();
         setjaFxLjosthorf();
+    }
+
+    private void setjaEventHandlera() {
+        fxBreytaNafni.setOnMouseClicked(this::breytaNafniHandler);
+        fxAthugasemdir.setOnAction(this::athugasemdirHandler);
+        fxVokvunarsaga.setOnAction(this::vokvunarsagaHandler);
+        fxBreytaTimaMilliVokvana.setOnMouseClicked(this::setjaFxBreytaTimaMilliVokvanaEventFilter);
     }
 
     private void stillaStatsStaerd() {
@@ -355,14 +367,34 @@ public class Plontugluggi extends Dialog<Void> {
             if (date != null) {
                 minPlantan.baetaVidVokvun(date);
                 if (!date.isAfter(LocalDate.now())) {
+                    fxBanner.setText("vökvun bætt við");
+                    birtaBanner(fxBanner);
+                    /*
                     Alert a = new Alert(Alert.AlertType.NONE, "Vökvun bætt við", ButtonType.OK);
                     a.showAndWait();
+                     */
                 } else {
+                    fxBanner.setText("Ekki hægt að skrá vökvanir fram í tímann");
+                    birtaBanner(fxBanner);
+                    /*
                     Alert a = new Alert(Alert.AlertType.NONE, "Ekki hægt að skrá vökvanir fram í tímann", ButtonType.OK);
                     a.showAndWait();
+                     */
                 }
             }
         });
+    }
+
+    /**
+     * Birtir banner með upplýsingum í smá tíma. Copied úr plantController
+     *
+     * @param banner label með styleclass banner
+     */
+    private void birtaBanner(Label banner) {
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(e -> banner.setVisible(false));
+        banner.setVisible(true);
+        delay.play();
     }
 
     /**

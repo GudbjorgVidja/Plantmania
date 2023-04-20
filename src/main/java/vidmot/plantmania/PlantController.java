@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -199,7 +200,20 @@ public class PlantController {
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurManudur().getYear(), fxDagatal.getSyndurManudur().getMonthValue(), manadardagur);
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
+
+                dagur.getStyleClass().add("valinnDagur"); //einn möguleiki til að setja valinn stíl
                 synaVokvanirDagsins(valinDagsetning, plonturDagsinsLokid, plonturDagsinsOlokid);
+                dagur.getStyleClass().remove("valinnDagur");
+
+                //breyta litnum á reit þegar hann er valinn!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
+                //dagur.getFxDropi().visibleProperty().unbind();
+                //dagur.getFxDropi().setVisible(true);
+
+                /*
+                //todo svona eitthvað? velur með því að ýta og afvelur með því að ýta aftur
+                if (dagur.getStyleClass().contains("valinnDagur")) dagur.getStyleClass().removeAll("valinnDagur");
+                else dagur.getStyleClass().add("valinnDagur");
+                 */
             }
         });
     }
@@ -243,7 +257,7 @@ public class PlantController {
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
      */
-    private void hladaOllumPlontum(MouseEvent event) throws InterruptedException {
+    private void hladaOllumPlontum(MouseEvent event) throws InterruptedException { //todo endurnefna?
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
             node = node.getParent();
@@ -252,12 +266,15 @@ public class PlantController {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
 
+            birtaBanner(fxAllarPlonturYfirlit.getFxBanner());
+            /*
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(e -> fxAllarPlonturYfirlit.getFxBanner().setVisible(false));
 
             fxAllarPlonturYfirlit.getFxBanner().setVisible(true);
 
             delay.play();
+             */
 
 
             /* gamli alert dialogurinn
@@ -265,6 +282,20 @@ public class PlantController {
             a.showAndWait();
              */
         }
+    }
+
+    /**
+     * Birtir banner með upplýsingum í smá tíma.
+     *
+     * @param banner label með styleclass banner
+     */
+    private void birtaBanner(Label banner) {
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(e -> banner.setVisible(false));
+
+        banner.setVisible(true);
+
+        delay.play();
     }
 
     public Notandi getSkradurNotandi() {
