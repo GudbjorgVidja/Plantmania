@@ -26,7 +26,6 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   skilvirkasta leiðin
 - athuga hvort betra sé að hafa graphic á tökkum fyrir myndir eða bakgrunn. Held að background image sé betra, hægt að
   nota css
-- sýna að dagatal er óvirkt meira en þrjá mánuði fram í tímann. Setja kannski annan lit á dagana, og ljósari lit á letur
 - passa að nafn plöntu geti ekki verið lengra en sést á spjaldi
     - lengd nickname má ekki vera lengri en eitthvað ákveðið
 - setja max lengd á notandanafn
@@ -46,12 +45,11 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   óvirkir, reyna kannski að setja á annan hlut sem inniheldur takkana eða eitthvað
 - Í fræðslunni, lesa inn heila runu, og splitta á * eftir hvaða titledPane það er fyrir. Splitta svo á + til að pikka út
   titla og gera þá sæta
-- Endurnefna almenntNafn sem almenntHeiti
-- Endurnefna latnesktNafn sem fraediHeiti
 - Finna hvaða styleclass eru á dagatal
 - Mögulegarf breytingar á dagatal og dag:
     - setja lítið hak fyrir framan loknar vökvanir
-    - setja annað útlit á þann part dagatalsins sem ekki er notaður (þ.e. of langt fram í tímann)
+    - setja annað útlit á þann part dagatalsins sem ekki er notaður (þ.e. of langt fram í tímann),
+      Setja kannski annan lit á dagana, og ljósari lit á letur
     - stækka letur á ártali og mánuð
     - stafla labelum fyrir loknar og óloknar vökvanir
     - gera styleclass sem er settur á daginn í dag
@@ -81,4 +79,6 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Laga hvernig dagsetningar (LocalDate) eru birtar
 - Frekari vinna í Dialogum, t.d. óvirkja takka við ákveðnar aðstæður
 - niðurtalning vökvana núllstillist við útskráningu!!!
+- Endurnefna latnesktNafn sem fraediheiti
+- Endurnefna almenntNafn sem almenntHeiti
 -

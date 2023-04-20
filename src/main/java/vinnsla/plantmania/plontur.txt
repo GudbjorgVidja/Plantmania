@@ -3,13 +3,13 @@
 monstera deliciosa, Monstera, swiss cheese plant
 Ficus lyrata, Fiddle Leaf Fig, fiðlufíkus
 Curio rowleyanus, String of Pearls, String of Beads
-Aloe Vera, aloe, brunagel, Aloe V, Medicine Plant, True Aloe, Burn Plant, (common). — Aloe V, Aloe barbadensis (botanical/scientific).
+Aloe Vera, aloe, brunagel, Aloe V, Medicine Plant, True Aloe, Burn Plant, Aloe barbadensis
 Dracaena trifasciata, snákaplanta, snake plant, indjánafjöður, Saint George's sword, mother-in-law's tongue, viper's bowstring hemp
 sveppur barabeppur, Sveppur, rauðhetta, mushy
 Dionaea Muscipula, Venusargildra, Venus fly trap
 Lavandula, Lavender, lofnarblóm
 kaktus taratattus, spike, nálapúði
-philodendron erubescens, Pink princess. prinsessa
+philodendron erubescens, Pink princess, prinsessa
 Chlorophytum comosum, spider plant, veðhlaupari
 
 monstera.png
