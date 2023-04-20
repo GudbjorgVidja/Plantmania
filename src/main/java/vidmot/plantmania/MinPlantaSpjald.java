@@ -52,7 +52,7 @@ public class MinPlantaSpjald extends AnchorPane {
         fxFresta.setOnAction(this::frestaHandler);
         rot.setOnMouseClicked(this::opnaPlontuglugga);
 
-        fxLabel.textProperty().bind(minPlantan.getNaestaVokvun().asString().concat(new SimpleStringProperty(" dagar")));
+        fxLabel.textProperty().bind(minPlantan.naestaVokvunProperty().asString().concat(new SimpleStringProperty(" dagar")));
     }
 
     public Spjald getFxSpjald() {
@@ -87,8 +87,8 @@ public class MinPlantaSpjald extends AnchorPane {
      * @param event smellt á fresta hnapp
      */
     private void frestaHandler(ActionEvent event) {
-        minPlantan.getNaestaVokvun().unbind();
-        minPlantan.setNaestaVokvun(minPlantan.getNaestaVokvun().get() + 1);
+        minPlantan.naestaVokvunProperty().unbind();
+        minPlantan.setNaestaVokvun(minPlantan.naestaVokvunProperty().get() + 1);
         minPlantan.naestaVokvunRegla();
     }
 
