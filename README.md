@@ -47,6 +47,8 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   óvirkir, reyna kannski að setja á annan hlut sem inniheldur takkana eða eitthvað
 - Í fræðslunni, lesa inn heila runu, og splitta á * eftir hvaða titledPane það er fyrir. Splitta svo á + til að pikka út
   titla og gera þá sæta
+- Endurnefna almenntNafn sem almenntHeiti
+- Endurnefna latnesktNafn sem fraediHeiti
 
 ### Plöntur sem ætti að bæta við:
 

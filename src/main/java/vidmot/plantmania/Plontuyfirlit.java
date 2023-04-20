@@ -1,6 +1,3 @@
-/*
- *  todo setja mynd/texta ef yfirlitið er tómt: úbbs, engar plöntur hér. Athugaðu síurnar og reyndu aftur!
- */
 package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -109,7 +106,7 @@ public class Plontuyfirlit extends AnchorPane {
             }
         });
         tomtYfirlitVidvodun();
-        
+
     }
 
     private void tomtYfirlitVidvodun() {
