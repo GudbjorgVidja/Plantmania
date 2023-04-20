@@ -1,5 +1,6 @@
 package vidmot.plantmania;
 
+import edu.princeton.cs.algs4.In;
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -21,7 +22,6 @@ import javafx.util.Pair;
 import vinnsla.plantmania.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,8 +40,8 @@ public class PlantController {
     @FXML
     private VBox titledPaneBoxid;
 
-    @FXML
-    private VBox vokvaBox, vandamalBox, almenntBox;
+    //@FXML
+    //private VBox vokvaBox, vandamalBox, almenntBox;
 
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
@@ -72,7 +72,9 @@ public class PlantController {
         Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
 
         bindaMaxSizeTitledPane();
-        setjaFraedsla();
+        //setjaFraedsla();
+
+        geraTitledPanes();
 
     }
 
@@ -281,6 +283,7 @@ public class PlantController {
     }
 
 
+    /*
     private void setjaFraedsla() {
         Fraedsla fraedsluklasi = new Fraedsla();
 
@@ -310,5 +313,125 @@ public class PlantController {
             texti.setWrappingWidth(512);
             almenntBox.getChildren().add(texti);
         }
+    }
+
+     */
+
+    private void geraTitledPanes() {
+        //TitledPane pane = new TitledPane("nytt pane");
+
+        In inn = new In("src/main/java/vinnsla/plantmania/nyfraedsla.txt");
+        String alltSkjalid = inn.readAll();
+
+        /*    virkar r+ett
+        Text texti1 = new Text("smá texti");
+        Text texti2 = new Text("Smá meira til að lesa");
+        Text texti3 = new Text("enn annar textinn");
+
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(texti1, texti2, texti3);
+
+        TitledPane tp = new TitledPane();
+        tp.setContent(vbox);
+        titledPaneBoxid.getChildren().add(tp);
+        bindaMaxSizeTitledPane();
+        */
+
+        String[] paneskipting = splittaIFylki(alltSkjalid, "TITLEDPANE ");
+        for (String s : paneskipting) {
+            TitledPane tp = new TitledPane();
+            VBox vbox = new VBox();
+
+            String[] malsgreinar = splittaIFylki(s, "GREIN ");
+            tp.setText(malsgreinar[0].trim());
+
+            for (int i = 1; i < malsgreinar.length; i++) {
+                Text texti;
+                if (malsgreinar[i].startsWith("TITILL")) {
+                    malsgreinar[i] = malsgreinar[i].replaceFirst("TITILL ", "");
+                    texti = new Text(malsgreinar[i].strip());
+                    texti.getStyleClass().add("titill");
+                } else texti = new Text(malsgreinar[i].strip());
+
+                texti.setWrappingWidth(512);
+                vbox.getChildren().add(texti);
+            }
+
+
+            /*
+            Text texti = new Text(s);
+            texti.setWrappingWidth(512);
+            vbox.getChildren().add(texti);
+             */
+
+            tp.setContent(vbox);
+            titledPaneBoxid.getChildren().add(tp);
+
+            vbox.getStyleClass().add("titledpanebox");
+            vbox.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+
+            bindaMaxSizeTitledPane();
+        }
+
+        /*
+        //titledPaneBoxid
+
+        String[] paneskipting = splittaIFylki(alltSkjalid, "TITLEDPANE ");
+        TitledPane[] flipafylki = new TitledPane[paneskipting.length];
+        int paneteljari = 0;
+
+        for (String s : paneskipting) {
+            //gera TitledPane fyrir hvern streng
+            //TitledPane tp = new TitledPane();
+            VBox vbox = new VBox();
+
+            String[] efnisgreinar = new String[0];
+
+            if (s.contains("GREIN ")) efnisgreinar = splittaIFylki(s, "GREIN ");
+
+            for (String grein : efnisgreinar) {
+                Text upplTexti;
+                if (grein.startsWith("TITILL ")) {
+                    grein = grein.replace("TITILL ", "");
+                    upplTexti = new Text(grein);
+                    upplTexti.getStyleClass().add("fraedsluflokkur");
+                    //todo passa að stylesheet sé á
+                } else upplTexti = new Text(grein);
+
+                upplTexti.setWrappingWidth(512);
+                vbox.getChildren().add(upplTexti);
+
+                System.out.println("upplTexti: " + upplTexti.getText());
+            }
+
+
+            TitledPane tp = new TitledPane();
+            tp.setContent(vbox);
+
+            TitledPane top = new TitledPane("titill", vbox);
+            titledPaneBoxid.getChildren().add(top);
+            flipafylki[paneteljari] = tp;
+
+            paneteljari++;
+
+        }
+
+        titledPaneBoxid.getChildren().addAll(flipafylki);
+        bindaMaxSizeTitledPane();
+
+         */
+
+    }
+
+
+    private String[] splittaIFylki(String runa, String splitter) {
+        if (runa.startsWith(splitter)) {
+            runa = runa.replaceFirst(splitter, "");
+        }
+        return runa.split(splitter);
+        /*
+        String[] fylki = runa.split(splitter);
+        return fylki;
+         */
     }
 }

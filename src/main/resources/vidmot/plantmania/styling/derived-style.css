@@ -339,6 +339,15 @@
     -fx-font-size: 14;
 }
 
+.titill{
+    -fx-font-size: 14;
+}
+
+.titledpanebox{
+    fx-vgap: 10;
+    -fx-spacing: 15;
+}
+
 .titill-label{
     -fx-font-size: 16px;
 }
