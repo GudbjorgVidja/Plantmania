@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -262,12 +263,15 @@ public class PlantController {
             Planta p = ((PlantaSpjald) node).getPlanta();
             skradurNotandi.get().baetaVidPlontu(p);
 
+            birtaBanner(fxAllarPlonturYfirlit.getFxBanner());
+            /*
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(e -> fxAllarPlonturYfirlit.getFxBanner().setVisible(false));
 
             fxAllarPlonturYfirlit.getFxBanner().setVisible(true);
 
             delay.play();
+             */
 
 
             /* gamli alert dialogurinn
@@ -275,6 +279,20 @@ public class PlantController {
             a.showAndWait();
              */
         }
+    }
+
+    /**
+     * Birtir banner með upplýsingum í smá tíma.
+     *
+     * @param banner label með styleclass banner
+     */
+    private void birtaBanner(Label banner) {
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(e -> banner.setVisible(false));
+
+        banner.setVisible(true);
+
+        delay.play();
     }
 
     public Notandi getSkradurNotandi() {
