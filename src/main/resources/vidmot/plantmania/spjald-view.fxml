@@ -16,5 +16,5 @@
             </ImageView>
         </center>
     </BorderPane>
-    <Label fx:id="fxAlmenntNafn" prefHeight="9.0" prefWidth="97.0" text="Jelly babe"/>
+    <Label fx:id="fxAlmenntNafn" prefHeight="9.0" text="Jelly babe"/> <!--prefWidth="97.0"-->
 </fx:root>
