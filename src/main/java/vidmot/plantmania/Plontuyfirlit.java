@@ -174,6 +174,7 @@ public class Plontuyfirlit extends AnchorPane {
     /**
      * Kallað er á aðferðina þegar nýjir hlutir bætast við yfirlitið, þ.e. PlantaSpjald eða MinPlantaSpjald.
      * Ef uppruni viðbótarinnar er ekki undir sía, þá er honum bætt við.
+     * TODO: skoða nafn aðferðarinnar!!
      *
      * @param nodes nýjar viðbætur við yfirilit
      */

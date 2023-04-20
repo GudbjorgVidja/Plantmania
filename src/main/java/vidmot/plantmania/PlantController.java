@@ -41,9 +41,11 @@ public class PlantController {
     @FXML
     private VBox titledPaneBoxid;
 
+    //TODO: á að nota þetta, Guðbjörg? Eyða kannski ef ekki
     //@FXML
     //private VBox vokvaBox, vandamalBox, almenntBox;
 
+    //TODO: gera upphafcontroller að local breytu? og þarf skradurNotandi að vera objectProperty?
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
 
@@ -79,6 +81,7 @@ public class PlantController {
     }
 
 
+    //TODO: eyða?
     protected void lokaGluggaHandler(WindowEvent event) {
         System.out.println("lokaGluggaHandler");
     }
@@ -184,8 +187,8 @@ public class PlantController {
      * þegar ýtt er á dag
      */
     public void dagatalsEventFilterar() {
-        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgFyrriVokvanir(), notendaupplysingar.getFyrriVokvanir());
-        Bindings.bindContentBidirectional(fxDagatal.getAllarPlonturOgAaetladarVokvanir(), notendaupplysingar.getNaestuVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarLoknarVokvanir(), notendaupplysingar.getFyrriVokvanir());
+        Bindings.bindContentBidirectional(fxDagatal.getAllarAaetladarVokvanir(), notendaupplysingar.getNaestuVokvanir());
         dagatalTilBakaRegla();
         dagatalAframRegla();
 
@@ -196,11 +199,7 @@ public class PlantController {
                 LocalDate valinDagsetning = LocalDate.of(fxDagatal.getSyndurManudur().getYear(), fxDagatal.getSyndurManudur().getMonthValue(), manadardagur);
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
-
                 synaVokvanirDagsins(valinDagsetning, plonturDagsinsLokid, plonturDagsinsOlokid);
-                //breyta litnum á reit þegar hann er valinn!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
-                //dagur.getFxDropi().visibleProperty().unbind();
-                //dagur.getFxDropi().setVisible(true);
             }
         });
     }

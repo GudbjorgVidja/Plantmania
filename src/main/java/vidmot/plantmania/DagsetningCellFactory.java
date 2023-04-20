@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  * fengið héðan: https://www.baeldung.com/javafx-listview-display-custom-items
  */
 public class DagsetningCellFactory implements Callback<ListView<LocalDate>, ListCell<LocalDate>> {
-
+    @Override
     public ListCell<LocalDate> call(ListView<LocalDate> localDateListView) {
         return new ListCell<LocalDate>() {
             @Override

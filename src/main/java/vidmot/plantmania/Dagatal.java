@@ -35,16 +35,16 @@ public class Dagatal extends AnchorPane {
     @FXML
     private GridPane fxGrid;//gridpane sem inniheldur dagana í dagatalinu. Inniheldur labels með vikudögum og Dagur hluti
 
-    private final String[] manudir = new String[]{"Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí",
+    private final String[] MANADARHEITI = new String[]{"Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí",
             "Ágúst", "September", "Október", "Nóvember", "Desember"};//óbreytanlegt fylki af strengjum með mánaðarheitum
 
-    private YearMonth syndurManudur;//dagurinn sem dagatalið sýnir. Notað til að vita hvaða mánuður er sýndur í augnablikinu
+    private YearMonth syndurManudur;//nánuðurinn sem dagatalið sýnir
 
     //listi af pörum sem gefa dagsetningu og plöntu sem var vökvuð þá. inniheldur öll skipti sem einhver planta hefur verið vökvuð
-    private ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgFyrriVokvanir = FXCollections.observableArrayList();
+    private ObservableList<Pair<MinPlanta, LocalDate>> allarLoknarVokvanir = FXCollections.observableArrayList();
 
     //listi af pörum sem gefa dagsetningu og plöntu sem ætti að vökva þá. inniheldur þrjá mánuði fram í tímann
-    private ObservableList<Pair<MinPlanta, LocalDate>> allarPlonturOgAaetladarVokvanir = FXCollections.observableArrayList();
+    private ObservableList<Pair<MinPlanta, LocalDate>> allarAaetladarVokvanir = FXCollections.observableArrayList();
 
     //smiðurinn, les fxml, gerir fyrsta mánuðinn, sem er núverandi mánuður
     public Dagatal() {
@@ -59,11 +59,11 @@ public class Dagatal extends AnchorPane {
      * og dropi ImageView ) eftir því sem við á.
      */
     public void geraDagatal() {
-        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsLokid = filteraDaga(allarPlonturOgFyrriVokvanir);
-        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsOlokid = filteraDaga(allarPlonturOgAaetladarVokvanir);
+        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsLokid = filteraDaga(allarLoknarVokvanir);
+        ObservableList<Pair<MinPlanta, LocalDate>> vokvanirManadarinsOlokid = filteraDaga(allarAaetladarVokvanir);
 
         DayOfWeek fyrstiDagurManadar = syndurManudur.atDay(1).getDayOfWeek();
-        fxDagsetning.setText(manudir[syndurManudur.getMonthValue() - 1] + " - " + syndurManudur.getYear());
+        fxDagsetning.setText(MANADARHEITI[syndurManudur.getMonthValue() - 1] + " - " + syndurManudur.getYear());
 
         List<Integer> dagalisti = geraDagalista(syndurManudur);
 
@@ -73,7 +73,7 @@ public class Dagatal extends AnchorPane {
                 IntegerBinding fjoldiVokvanaLokid = Bindings.size(vokvanirManadarinsLokid.filtered(p -> p.getValue().isEqual(dagur)));
                 IntegerBinding fjoldiVokvanaOlokid = Bindings.size(vokvanirManadarinsOlokid.filtered(p -> p.getValue().isEqual(dagur)));
                 BooleanProperty dagurinnErLidinn = new SimpleBooleanProperty(dagur.isBefore(LocalDate.now()));
-                
+
                 ((Dagur) fxGrid.getChildren().get(i)).getFxFjoldiVokvanaOlokid().styleProperty().bind(Bindings.when(dagurinnErLidinn).then("-fx-text-fill: red").otherwise("-fx-text-fill: black"));
                 setjaVirkanDag((Dagur) fxGrid.getChildren().get(i), fjoldiVokvanaLokid, fjoldiVokvanaOlokid);
                 ((Dagur) fxGrid.getChildren().get(i)).getFxManadardagur().setText(dagalisti.get(0) + "");
@@ -173,11 +173,11 @@ public class Dagatal extends AnchorPane {
         return fxGrid;
     }
 
-    public ObservableList<Pair<MinPlanta, LocalDate>> getAllarPlonturOgFyrriVokvanir() {
-        return allarPlonturOgFyrriVokvanir;
+    public ObservableList<Pair<MinPlanta, LocalDate>> getAllarLoknarVokvanir() {
+        return allarLoknarVokvanir;
     }
 
-    public ObservableList<Pair<MinPlanta, LocalDate>> getAllarPlonturOgAaetladarVokvanir() {
-        return allarPlonturOgAaetladarVokvanir;
+    public ObservableList<Pair<MinPlanta, LocalDate>> getAllarAaetladarVokvanir() {
+        return allarAaetladarVokvanir;
     }
 }
