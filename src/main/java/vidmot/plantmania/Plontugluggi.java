@@ -32,13 +32,13 @@ import java.util.Optional;
  */
 public class Plontugluggi extends Dialog<Void> {
     @FXML
-    private Label fxBreytaNafni, fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi, fxMedaltimi, fxUppruni;
+    private Label fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi, fxMedaltimi, fxUppruni;
 
     @FXML
     private ImageView fxMynd;
 
     @FXML
-    private Button fxAthugasemdir, fxVokvunarsaga, fxBreytaTimaMilliVokvana;
+    private Button fxAthugasemdir, fxVokvunarsaga, fxBreytaTimaMilliVokvana, fxBreytaNafni;
 
     @FXML
     private Text fxHitastig, fxUmPlontuna, fxEitrun, fxNotes, fxLjosthorf;
@@ -112,7 +112,8 @@ public class Plontugluggi extends Dialog<Void> {
      * setur event handlera á viðmótshluti
      */
     private void setjaEventHandlera() {
-        fxBreytaNafni.setOnMouseClicked(this::breytaNafniHandler);
+        //fxBreytaNafni.setOnMouseClicked(this::breytaNafniHandler);
+        fxBreytaNafni.setOnAction(this::breytaNafniHandler);
         fxAthugasemdir.setOnAction(this::athugasemdirHandler);
         fxVokvunarsaga.setOnAction(this::vokvunarsagaHandler);
         fxBreytaTimaMilliVokvana.setOnMouseClicked(this::setjaFxBreytaTimaMilliVokvanaEventFilter);
@@ -306,7 +307,7 @@ public class Plontugluggi extends Dialog<Void> {
      *
      * @param event smellt á litla merkið við hliðina á nafni plöntu
      */
-    private void breytaNafniHandler(MouseEvent event) {
+    private void breytaNafniHandler(ActionEvent event) { //var mouseEvent
         TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getNickName());
 
         ButtonType iLagi = new ButtonType("vista breytingar", ButtonBar.ButtonData.OK_DONE);

@@ -23,8 +23,12 @@
                         </BorderPane>
                         <Label fx:id="fxAlmenntNafn" layoutX="20.0" layoutY="175.0" prefHeight="17.0" prefWidth="149.0"
                                text="Gælunafn plöntunnar"/>
-                        <Label fx:id="fxBreytaNafni" layoutX="161.0" layoutY="172.0" prefHeight="25.0"
-                               prefWidth="27.0"/>
+                        <!--<Label fx:id="fxBreytaNafni" layoutX="161.0" layoutY="172.0" prefHeight="25.0"
+                               prefWidth="27.0"/> -->
+                        <Button fx:id="fxBreytaNafni" layoutX="161.0" layoutY="172.0" prefHeight="25.0"
+                                prefWidth="25.0">
+
+                        </Button>
                         <Label fx:id="fxLatnesktNafn" layoutX="20.0" layoutY="204.0" text="fræðiheiti skáletrað"/>
                         <AnchorPane layoutX="16.0" layoutY="252.0" prefHeight="97.0" prefWidth="175.0"
                                     style="-fx-border-color: lightgray;">
