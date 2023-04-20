@@ -27,8 +27,6 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   skilvirkasta leiðin
 - athuga hvort betra sé að hafa graphic á tökkum fyrir myndir eða bakgrunn. Held að background image sé betra, hægt að
   nota css
-- taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
-- lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
 - sýna að dagatal er óvirkt meira en þrjá mánuði fram í tímann. Setja kannski annan lit á dagana, og ljósari lit á letur
 - passa að nafn plöntu geti ekki verið lengra en sést á spjaldi
     - lengd nickname má ekki vera lengri en eitthvað ákveðið
@@ -64,3 +62,6 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Ef síur eru stilltar þ.a. engir möguleikar eru sýnilegir í yfirliti, setja þá texta og kannski mynd sem bendir á það
 - Breytingar vistast þegar forriti er lokað, ekki bara við útskráningu
 - Þegar plöntu er bætt við mínar plöntur, ekki hafa dialog heldur kannski popup neðst sem fer eftir smá tíma
+- lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
+- taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
+- 
