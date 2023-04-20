@@ -48,6 +48,7 @@
     -fx-background: -unfocusedlitur;
 }
 
+/* rótin fyrir plantaSpjald og MinPlantaSpjald */
 #rot{
     -fx-pref-height: 200;
     -fx-pref-width: 150;
@@ -74,13 +75,6 @@
     -fx-border-radius: 20;
 }
 
-.button:pressed{
-    fx-background-color: -litur2;
-}
-.button:hover{
-    fx-border-color: forestgreen;
-}
-
 
 .label{
     -fx-background-radius: 20;
@@ -90,25 +84,22 @@
 .label-filled{
     -fx-background-color: -litur3;
     -fx-background-radius: 20;
-    fx-border-color: -litur3;
-    fx-border-radius: 20;
 }
 
 .rammi-label{
     -fx-border-radius: 20;
     -fx-border-color: forestgreen;
-    fx-border-color: darkgreen;
     -fx-padding: 1 5 1 5;
 }
 
 
-.anchorpane{
+.anchorpane{ /* AnchorPane í tab í TabPane*/
     -fx-background-color: -litur1;
     -fx-border-color: green;
 }
 
 
-.border-pane-rammi{
+.border-pane-rammi{ /* parent fyrir imageView af plöntumynd*/
     -fx-background-color: #ddffe7;
     -fx-background-image: url("icon/rammi.png");
     -fx-background-size: stretch;
@@ -120,7 +111,6 @@
     -fx-font-size: 14;
     -fx-alignment: center;
     -fx-text-alignment: center;
-
     -fx-padding: 0;
 }
 
@@ -132,14 +122,13 @@
 }
 
 
-.graphic-hlutur{
+.graphic-hlutur{ /* label og takkar sem innihalda litla mynd auk texta */
     -fx-padding: 4 3 4 20;
     -fx-background-size: 16px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 10%;
     -fx-alignment: center;
     -fx-background-radius: 20;
-    fx-background-color: -litur3;
 }
 
 
@@ -150,8 +139,6 @@
 }
 
 .vboxStats{
-    fx-pref-height: 27;
-    fx-pref-width: 36;
     fx-alignment: bottom-center;
     -fx-alignment: center;
     fx-fill-width: false;
@@ -159,21 +146,19 @@
 }
 
 
-.vboxStats .image-view{
+.vboxStats .image-view{ /* mynd fyrir stats, hiti, sól og vatn */
     -fx-rotate: -22.5;
     -fx-preserve-ratio: true;
 }
 
 
-
+/* imageview hlutir fyrir stats*/
 .vatnBox{
     -fx-image: url("icon/water.png");
 }
-
 .ljosBox{
     -fx-image: url("icon/sol.png");
 }
-
 .hitiBox{
     -fx-image: url("icon/temperature.png");
 }
@@ -210,7 +195,6 @@
     fx-background-color: -litur2;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
-    fx-border-color: -litur3;
     -fx-border-color: darkgreen;
     -fx-alignment: center;
     -fx-font-size: 14px;
@@ -234,20 +218,17 @@
     -fx-background-image: url("icon/arrow270bil.png");
     -fx-padding: 1 17 1 3;
 
-    fx-background-color: #c8f8e6;
     -fx-background-color: -litur3;
 
     -fx-alignment: center;
 }
 
 
-.menu-item{
+.menu-item{ /* todo setja útlit á menuItems?*/
     fx-background-color: blue;
 }
-
 .menu-item .label{
     fx-background-color: pink;
-    fx-clear: true;
 }
 
 .menu-bar{
@@ -309,19 +290,18 @@
 
 
 
-
-.engar-minar-vidvorun{
-    -fx-background-image: url("icon/engarMinarBakgrunnur.png");
+.engar-minar-vidvorun, .skoda-sia-vidvorun{
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: contain;
 }
 
+.engar-minar-vidvorun{
+    -fx-background-image: url("icon/engarMinarBakgrunnur.png");
+}
+
 .skoda-sia-vidvorun{
     -fx-background-image: url("icon/skodaSiurBakgrunnur.png");
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
-    -fx-background-size: contain;
 }
 
 
@@ -380,24 +360,7 @@
 
 #fxGrid{ /* gridpane með dagatalinu, litur á vikudögum (efstu línu) */
     -fx-background-color: #63e69c;
-    fx-grid-lines-visible: true;
     -fx-alignment: center;
-    fx-background-color: powderblue;
-
-    fx-border-color: blue;
-    fx-border-style: solid solid none solid;
-    fx-border-width: 5;
-
-
-    fx-background-color: steelblue, lightsteelblue;
-    fx-background-insets: 1;
-    fx-spacing: 5;
-    fx-hgap: 5;
-    fx-vgap: 5;
-}
-
-#fxGrid > * {
-    fx-border-color: forestgreen;
 }
 
 .grid > * {
@@ -408,12 +371,9 @@
 .vikudagur{
     -fx-font-size: 14;
     -fx-text-fill: darkgreen;
-    fx-background-color: thistle;
 }
 
 .vikudagurPane{
-    fx-background-color: lightpink;
-    fx-border-color: blue;
     -fx-border-width: 1 1 3 1;
 }
 
@@ -473,14 +433,11 @@
 .fxDagur{ /* virkur dagur */
     -fx-background-color: #85edad;
     -fx-border-color: forestgreen;
-
-    fx-border-style: solid solid solid solid;
     -fx-border-width: 1;
 }
 
 .fxDagur:disabled{
     -fx-background-color: #a9f5c2;
-    fx-background-color: pink;
 }
 
 .fxDagur:disabled > * {
@@ -496,7 +453,7 @@
 }
 
 .valinnDagur{ /* styleclass til að setja á valinn dag*/
-    -fx-background-color: lightgreen;
+    -fx-background-color: palegreen;
 }
 
 
