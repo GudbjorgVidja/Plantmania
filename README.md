@@ -49,6 +49,19 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   titla og gera þá sæta
 - Endurnefna almenntNafn sem almenntHeiti
 - Endurnefna latnesktNafn sem fraediHeiti
+- Finna hvaða styleclass eru á dagatal
+- Mögulegarf breytingar á dagatal og dag:
+    - setja lítið hak fyrir framan loknar vökvanir
+    - setja annað útlit á þann part dagatalsins sem ekki er notaður (þ.e. of langt fram í tímann)
+    - stækka letur á ártali og mánuð
+    - stafla labelum fyrir loknar og óloknar vökvanir
+    - gera styleclass sem er settur á daginn í dag
+    - styleclass á valinn dag
+- Binda stöðu dialoga miðað við aðalsenuna? Ef þú færir gluggann á annan skjá þá koma dialogar samt á þeim fyrsta.
+- breyta leturgerð
+- samhæfa leturstærðir, ekki hafa of margar mismunandi sýnilegar í einu
+- hvað gerist ef tvær mismunadi keyrlsur eru í gangi á sama tíma fyrir sama aðgang?
+- endurnefna plontuyfirlit sem yfirlit, því það getur innihaldið planta eða minPlanta
 
 ### Plöntur sem ætti að bæta við:
 
@@ -66,4 +79,5 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Þegar plöntu er bætt við mínar plöntur, ekki hafa dialog heldur kannski popup neðst sem fer eftir smá tíma
 - lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
 - taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
+- niðurtalning vökvana núllstillist við útskráningu!!!
 - 

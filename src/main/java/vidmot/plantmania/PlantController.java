@@ -23,7 +23,6 @@ import vinnsla.plantmania.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -198,10 +197,19 @@ public class PlantController {
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
 
+                dagur.getStyleClass().add("valinnDagur"); //einn möguleiki til að setja valinn stíl
                 synaVokvanirDagsins(valinDagsetning, plonturDagsinsLokid, plonturDagsinsOlokid);
+                dagur.getStyleClass().remove("valinnDagur");
+
                 //breyta litnum á reit þegar hann er valinn!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
                 //dagur.getFxDropi().visibleProperty().unbind();
                 //dagur.getFxDropi().setVisible(true);
+
+                /*
+                //todo svona eitthvað? velur með því að ýta og afvelur með því að ýta aftur
+                if (dagur.getStyleClass().contains("valinnDagur")) dagur.getStyleClass().removeAll("valinnDagur");
+                else dagur.getStyleClass().add("valinnDagur");
+                 */
             }
         });
     }
@@ -245,7 +253,7 @@ public class PlantController {
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
      */
-    private void hladaOllumPlontum(MouseEvent event) throws InterruptedException {
+    private void hladaOllumPlontum(MouseEvent event) throws InterruptedException { //todo endurnefna?
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
             node = node.getParent();

@@ -37,6 +37,7 @@ public class Dagatal extends AnchorPane {
     private final String[] manudir = new String[]{"Janúar", "Febrúar", "Mars", "Apríl", "Maí", "Júní", "Júlí",
             "Ágúst", "September", "Október", "Nóvember", "Desember"};//óbreytanlegt fylki af strengjum með mánaðarheitum
 
+    //todo sigurbjörg, getur þú útskýrt aðeins betur?
     private LocalDate syndurDagur;//dagurinn sem dagatalið sýnir. Notað til að vita hvaða mánuður er sýndur í augnablikinu
 
     //listi af pörum sem gefa dagsetningu og plöntu sem var vökvuð þá. inniheldur öll skipti sem einhver planta hefur verið vökvuð
@@ -91,8 +92,22 @@ public class Dagatal extends AnchorPane {
         }
     }
 
+    /**
+     * todo hvað nákvæmlega gerir þetta?
+     * Setur útlit á þá daga sem eru hluti af mánuðinum
+     *
+     * @param dagur
+     * @param fjoldiVokvanaLokid
+     * @param fjoldiVokvanaOlokid
+     */
     private void setjaVirkanDag(Dagur dagur, IntegerBinding fjoldiVokvanaLokid, IntegerBinding fjoldiVokvanaOlokid) {
-        dagur.setStyle("-fx-background-color: #85edad;");
+        //dagur.setStyle("-fx-background-color: #85edad;");
+        if (dagur.getStyleClass().size() == 0) dagur.getStyleClass().add("fxDagur"); //todo setja í upphafsstillingu
+        dagur.setDisable(false);
+        //dagur.getStyleClass().clear();
+        //dagur.getStyleClass().add("virkurDagur");
+        //dagur.getStyleClass().set(0, "virkurDagur");
+
 
         dagur.getFxFjoldiVokvanaOlokid().textProperty().bind(
                 Bindings.when(fjoldiVokvanaOlokid.isEqualTo(0)).then("")
@@ -109,16 +124,20 @@ public class Dagatal extends AnchorPane {
      * @param dagur - Dagur, tómur
      */
     private void setjaOvirkanDag(Dagur dagur) {
+        if (dagur.getStyleClass().size() == 0) dagur.getStyleClass().add("fxDagur");
+        dagur.setDisable(true);
+        //dagur.getStyleClass().clear();
+        //dagur.getStyleClass().add("ovirkurDagur");
+
         dagur.getFxFjoldiVokvanaOlokid().textProperty().unbind();
-        dagur.getFxFjoldiVokvanaOlokid().setText("");
+        //dagur.getFxFjoldiVokvanaOlokid().setText("");
         dagur.getFxDropi().visibleProperty().unbind();
         dagur.getFxDropi().setVisible(false);
         dagur.getFxFjoldiVokvana().textProperty().unbind();
-        dagur.getFxFjoldiVokvana().setText("");
+        //dagur.getFxFjoldiVokvana().setText("");
         dagur.getFxManadardagur().textProperty().unbind();
-        dagur.getFxManadardagur().setText("");
-        dagur.setStyle("-fx-background-color: #a9f5c2;");
-
+        //dagur.getFxManadardagur().setText("");
+        //dagur.setStyle("-fx-background-color: #a9f5c2;");
     }
 
     //getterar og setterar

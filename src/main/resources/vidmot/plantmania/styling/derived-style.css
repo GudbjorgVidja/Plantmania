@@ -372,27 +372,91 @@
 
 /* dagatal */
 
-.dagatal-root{
+.dagatal-root{ /* rótin, fyrir utan gridpane */
     -fx-background-color: #c8fad8;
+    fx-background-color: lightpink;
+
 }
 
-#fxGrid{
+#fxGrid{ /* gridpane með dagatalinu, litur á vikudögum (efstu línu) */
     -fx-background-color: #63e69c;
+    fx-grid-lines-visible: true;
+    -fx-alignment: center;
+    fx-background-color: powderblue;
+
+    fx-border-color: blue;
+    fx-border-style: solid solid none solid;
+    fx-border-width: 5;
+
+
+    fx-background-color: steelblue, lightsteelblue;
+    fx-background-insets: 1;
+    fx-spacing: 5;
+    fx-hgap: 5;
+    fx-vgap: 5;
 }
+
+#fxGrid > * {
+    fx-border-color: forestgreen;
+}
+
+.grid > * {
+    -fx-border-color: forestgreen;
+}
+
 
 .vikudagur{
     -fx-font-size: 14;
+    -fx-text-fill: darkgreen;
+    fx-background-color: thistle;
+}
+
+.vikudagurPane{
+    fx-background-color: lightpink;
+    fx-border-color: blue;
+    -fx-border-width: 1 1 3 1;
+}
+
+
+#fxAfram, #fxTilBaka{ /* fxAfram og fxTilBaka */
+    -fx-background-size: 25;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-height: 40;
+    -fx-pref-width: 40;
+    fx-alignment: center;
+}
+
+#fxAfram{
+    -fx-background-image: url("icon/arrow0.png");
+}
+
+#fxTilBaka{
+    -fx-background-image: url("icon/arrow180.png");
+}
+
+#fxDagsetning{ /* label með ártali og mánuð */
+    -fx-font-size: 14;
+    fx-background-color: plum;
 }
 
 
 
 /* dagur */
 
-#fxManadardagur{
+#fxManadardagur{ /* label í efra vinstra horni */
     -fx-font-size: 16;
 }
 
 #fxFjoldiVokvanaOlokid{
+    /*
+    -fx-background-position: left;
+    -fx-background-size: 10;
+    -fx-padding: 0 0 0 10;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image: url("icon/check.png");
+    */
+
     -fx-font-size: 14;
 }
 
@@ -403,6 +467,37 @@
 #fxFjoldiVokvana{
     -fx-text-fill: #458aea;
     -fx-font-size: 14;
+}
+
+
+.fxDagur{ /* virkur dagur */
+    -fx-background-color: #85edad;
+    -fx-border-color: forestgreen;
+
+    fx-border-style: solid solid solid solid;
+    -fx-border-width: 1;
+}
+
+.fxDagur:disabled{
+    -fx-background-color: #a9f5c2;
+    fx-background-color: pink;
+}
+
+.fxDagur:disabled .label {
+    -fx-opacity: 0;
+    fx-background-color: blue;
+}
+
+.iDag{ /* styleclass til að setja á daginn í dag */
+    -fx-background-color: plum;
+}
+
+.fxDagur:pressed{
+    -fx-background-color: lightgreen;
+}
+
+.valinnDagur{ /* styleclass til að setja á valinn dag*/
+    -fx-background-color: lightblue;
 }
 
 
