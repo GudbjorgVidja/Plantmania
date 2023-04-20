@@ -27,6 +27,7 @@ public class VokvanirDagsinsDialog extends Dialog<Void> {
     private ObservableList<MinPlanta> minarPlontur2 = FXCollections.observableArrayList();//plöntur sem á að vökva þennan dag
     private BooleanProperty ekkertValid = new SimpleBooleanProperty(true);
 
+    //todo er þessi smiður líka að gera eitthvað?
     public VokvanirDagsinsDialog(ObservableList<Pair<MinPlanta, LocalDate>> vokvanir, String message, ObservableList<Pair<MinPlanta, LocalDate>> vokvanir2, String message2) {
         minarPlontur2 = geraLista(vokvanir2);
         minarPlontur = geraLista(vokvanir);
@@ -77,6 +78,8 @@ public class VokvanirDagsinsDialog extends Dialog<Void> {
 
         getDialogPane().setContent(new VBox(listView, skoda));
         getDialogPane().getButtonTypes().setAll(new ButtonType("Loka", ButtonBar.ButtonData.CANCEL_CLOSE));
+
+        getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
     }
 
 

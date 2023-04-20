@@ -308,40 +308,6 @@ public class PlantController {
     }
 
 
-    /*
-    private void setjaFraedsla() {
-        Fraedsla fraedsluklasi = new Fraedsla();
-
-        List<String> titlar = new ArrayList<>(List.of("Misting", "Garðkanna", "Bottom watering", "Gradual"));
-        List<String> efni = new ArrayList<>(List.of(fraedsluklasi.getMisting(), fraedsluklasi.getGardkanna(), fraedsluklasi.getBottom(), fraedsluklasi.getGradual()));
-        for (int i = 0; i < vokvaBox.getChildren().size(); i += 2) {
-            if (vokvaBox.getChildren().get(i) instanceof Text)
-                ((Text) vokvaBox.getChildren().get(i)).setText(titlar.get(i / 2));
-            if (vokvaBox.getChildren().get(i + 1) instanceof Text)
-                ((Text) vokvaBox.getChildren().get(i + 1)).setText(efni.get(i / 2));
-        }
-
-
-        List<String> vandamal = new ArrayList<>(fraedsluklasi.getVandamalListi());
-        if (vandamalBox.getChildren().get(0) instanceof Text)
-            ((Text) vandamalBox.getChildren().get(0)).setText(vandamal.remove(0));
-
-        for (int i = 0; i < vandamal.size(); i++) {
-            Text texti = new Text(vandamal.get(i));
-            texti.setWrappingWidth(512);
-            vandamalBox.getChildren().add(texti);
-        }
-
-        List<String> almennt = fraedsluklasi.getAlmenntListi();
-        for (int i = 0; i < almennt.size(); i++) {
-            Text texti = new Text(almennt.get(i));
-            texti.setWrappingWidth(512);
-            almenntBox.getChildren().add(texti);
-        }
-    }
-
-     */
-
     private void geraTitledPanes() {
         In inn = new In("src/main/java/vinnsla/plantmania/nyfraedsla.txt");
         String alltSkjalid = inn.readAll();

@@ -41,15 +41,12 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
         - vökvunarsaga
         - breyta tíma á milli vökvanna
     - smellt á dag í dqagatali
-- í plöntuglugga er ekki augljóst að hægt sé að ýta á til að breyta nafni
-- setja dialog til að bæta við vökvun í plöntuglugga, annars ekki augljóst að það sé búið að gerast þegar þú klárar
 - skoða með að setja tooltip á takka á MinPlantaSpjald þegar þeir eru óvirkir. Virkar ekki venjulega ef takkarnir eru
   óvirkir, reyna kannski að setja á annan hlut sem inniheldur takkana eða eitthvað
 - Í fræðslunni, lesa inn heila runu, og splitta á * eftir hvaða titledPane það er fyrir. Splitta svo á + til að pikka út
   titla og gera þá sæta
 - Endurnefna almenntNafn sem almenntHeiti
 - Endurnefna latnesktNafn sem fraediHeiti
-- Finna hvaða styleclass eru á dagatal
 - Mögulegarf breytingar á dagatal og dag:
     - setja lítið hak fyrir framan loknar vökvanir
     - setja annað útlit á þann part dagatalsins sem ekki er notaður (þ.e. of langt fram í tímann)
@@ -62,6 +59,8 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - samhæfa leturstærðir, ekki hafa of margar mismunandi sýnilegar í einu
 - hvað gerist ef tvær mismunadi keyrlsur eru í gangi á sama tíma fyrir sama aðgang?
 - endurnefna plontuyfirlit sem yfirlit, því það getur innihaldið planta eða minPlanta
+- segir á minPlantaSpjald að það sé 1 dagar í næstu vökvun
+- breyta niðurtalingu á minPlantaSpjald, segja í dag frekar en 0 dagar?
 
 ### Plöntur sem ætti að bæta við:
 
@@ -80,4 +79,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - lesa inn fræðsluefnið, núna inniheldur Fraedsla.java strengi
 - taka kannski út myndirnar perlur.png og venus.png, ef perlur2.png og venus2.png eru samþykktar
 - niðurtalning vökvana núllstillist við útskráningu!!!
-- 
+- Finna hvaða styleclass eru á dagatal
+- setja dialog til að bæta við vökvun í plöntuglugga, annars ekki augljóst að það sé búið að gerast þegar þú klárar
+- í plöntuglugga er ekki augljóst að hægt sé að ýta á til að breyta nafni
+

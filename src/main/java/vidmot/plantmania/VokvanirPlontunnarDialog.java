@@ -32,6 +32,7 @@ public class VokvanirPlontunnarDialog extends Dialog<Void> {
         });
 
         getDialogPane().setContent(new VBox(listView, eyda));
+        getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
 
         getDialogPane().getButtonTypes().setAll(new ButtonType("Loka", ButtonBar.ButtonData.CANCEL_CLOSE));
     }
