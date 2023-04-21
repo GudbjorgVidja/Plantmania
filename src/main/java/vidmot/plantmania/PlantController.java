@@ -71,7 +71,7 @@ public class PlantController {
         fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi);
     }
 
-    //todo: HVað er þetta??
+    //todo: HVað er þetta?? og prentsetning??
     private void bindaMaxSizeTitledPane() {
         for (Node node : titledPaneBoxid.getChildren()) {
             if (node instanceof TitledPane) {
@@ -255,7 +255,7 @@ public class PlantController {
      * gerir titledPanes í fræðsluflipanum. Les efnið inn úr skrá
      */
     private void geraTitledPanes() {
-        In inn = new In("src/main/java/vinnsla/plantmania/nyfraedsla.txt");
+        In inn = new In("src/main/java/vinnsla/plantmania/fraedsla.txt");
         String alltSkjalid = inn.readAll();
         String[] paneskipting = splittaIFylki(alltSkjalid, "TITLEDPANE ");
 
