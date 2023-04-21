@@ -55,9 +55,6 @@ public class Plontugluggi extends Dialog<Void> {
     @FXML
     private Label fxBanner;
 
-    @FXML
-    private ScrollPane fxScrollPane;//todo taka út? hægt að finna aðra leið
-
     private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
 
     //private Planta plantan;//ef glugginn er fyrir planta, kemur etv seinna
