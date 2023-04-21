@@ -23,43 +23,19 @@ public class MinPlantaSpjald extends AnchorPane {
     private Button fxVokva, fxFresta;//takkar til að vökva plöntu og fresta vökvun
     @FXML
     private Spjald fxSpjald; //mynd, nafn og uppruni
-
     @FXML
     private AnchorPane rot;//Grunnspjaldið
 
     private MinPlanta minPlantan;//MinPlanta hluturinn á MinPlantaSpjald hlutnum
 
 
-    /*
-    //TODO: ég prófaði að kommenta hann út og allt virðist keyra rétt, en hjá þér guðbjörg? G: jupp, taka út?
-    public MinPlantaSpjald() {//tómur smiður. Athuga hvort hann sé óþarfi
-        System.out.println("MinPlantaSpjald tomur smidur");
-    }
-
-     */
-
     public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn sem er notaður
         LesaFXML.lesa(this, "minplanta-view.fxml");
-
         minPlantan = minPlanta;
-
-        fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.gaelunafnProperty());
-        fxSpjald.setFxFlokkur(minPlantan.getUppruni().getStadur());
-        fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
-
-
-        takkaRegla();
-
-        //setja handlera á takkana
-        fxVokva.setOnAction(this::vokvaHandler);
-        fxFresta.setOnAction(this::frestaHandler);
-        rot.setOnMouseClicked(this::opnaPlontuglugga);
-
+        geraUtlitSpjalds();
         fxLabel.textProperty().bind(minPlantan.naestaVokvunProperty().asString().concat(new SimpleStringProperty(" dagar")));
-    }
-
-    public Spjald getFxSpjald() {
-        return fxSpjald;
+        takkaRegla();
+        setjaHandleraATakka();
     }
 
     public MinPlanta getMinPlanta() {
@@ -67,7 +43,25 @@ public class MinPlantaSpjald extends AnchorPane {
     }
 
     /**
-     * kannski passa að ekki sé hægt að vökva þegar tími í næstu vökvun er meira en thinnTimiMilliVokvanna?
+     * setur nafn plöntu, uppruna hennar og mynd á spjaldið
+     */
+    private void geraUtlitSpjalds() {
+        fxSpjald.getFxAlmenntNafn().textProperty().bind(minPlantan.gaelunafnProperty());
+        fxSpjald.setFxFlokkur(minPlantan.getUppruni().getStadur());
+        fxSpjald.setFxPlontuMynd(minPlantan.getMyndaslod());
+    }
+
+    /**
+     * setur eventhandlera á vökva og fresta takkana, og á spjaldið sjálft
+     */
+    private void setjaHandleraATakka() {
+        fxVokva.setOnAction(this::vokvaHandler);
+        fxFresta.setOnAction(this::frestaHandler);
+        rot.setOnMouseClicked(this::opnaPlontuglugga);
+    }
+
+    /**
+     * Skráir nýja vökvun á plöntuna fyrir daginn í dag
      *
      * @param event smellt á vökva takkann á MinPlantaSpjald hlut
      */
@@ -82,11 +76,9 @@ public class MinPlantaSpjald extends AnchorPane {
         fxVokva.disableProperty().bind(minPlantan.naestaVokvunProperty().greaterThanOrEqualTo(minPlantan.thinnTimiMilliVokvanaProperty()));
     }
 
-    public String toString() {
-        return minPlantan.getAlmenntHeiti();
-    }
-
     /**
+     * Frestar næstu vökvun um einn dag
+     *
      * @param event smellt á fresta hnapp
      */
     private void frestaHandler(ActionEvent event) {
@@ -96,13 +88,16 @@ public class MinPlantaSpjald extends AnchorPane {
     }
 
     /**
-     * Plöntugluggi opnast, með upplýsingum um MinPlanta hlutinn.
+     * Opnar plöntuglugga með upplýsingum um MinPlanta hlutinn.
      *
      * @param event smellt á MinPlantaSpjald
      */
     private void opnaPlontuglugga(MouseEvent event) {
-        System.out.println("Plantan sem ytt var a: " + minPlantan);
-        Plontugluggi gluggi = new Plontugluggi(minPlantan);//tekur inn hlutinn sem spjaldið er fyrir
+        Plontugluggi gluggi = new Plontugluggi(minPlantan);
         gluggi.showAndWait();
+    }
+
+    public String toString() {
+        return minPlantan.getAlmenntHeiti();
     }
 }

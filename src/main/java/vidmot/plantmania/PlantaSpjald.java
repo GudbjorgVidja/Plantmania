@@ -31,11 +31,16 @@ public class PlantaSpjald extends AnchorPane {
      */
     public PlantaSpjald(Planta p) {
         planta = p;
-
         LesaFXML.lesa(this, "planta-view.fxml");
-
-        fxStats.setStats(planta);
         stillaStaerd();
+        setjaUtlitSpjalds();
+    }
+
+    /**
+     * setur stats, almennt nafn, uppruna og mynd af plöntu á spjaldið
+     */
+    private void setjaUtlitSpjalds() {
+        fxStats.setStats(planta);
         fxSpjald.setFxAlmenntNafn(planta.getAlmenntHeiti());
         fxSpjald.setFxFlokkur(planta.getUppruni().getStadur());
         fxSpjald.setFxPlontuMynd(planta.getMyndaslod());
@@ -53,11 +58,11 @@ public class PlantaSpjald extends AnchorPane {
         }
     }
 
-    public String toString() {
-        return planta.getAlmenntHeiti();
-    }
-
     public Planta getPlanta() {
         return planta;
+    }
+
+    public String toString() {
+        return planta.getAlmenntHeiti();
     }
 }

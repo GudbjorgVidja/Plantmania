@@ -1,4 +1,5 @@
 /**
+ * todo: er þetta ekki bara gott, Guðbjörg?
  * todo: væri kannski betra að gera Spjald með MinPlanta hlut, frekar en bara Planta?
  */
 package vidmot.plantmania;
@@ -16,15 +17,16 @@ import javafx.scene.layout.VBox;
  */
 public class Spjald extends VBox {
     @FXML
-    private Label fxFlokkur, fxAlmenntNafn;
-
+    private Label fxFlokkur;//label með uppruna plöntu
     @FXML
-    private ImageView fxPlontuMynd;
-    
+    private Label fxAlmenntNafn;//label með almennu heiti plöntu
+    @FXML
+    private ImageView fxPlontuMynd;//ImageView með mynd af plöntunni
+
+
     public Spjald() {
         LesaFXML.lesa(this, "spjald-view.fxml");
     }
-
 
     public void setFxFlokkur(String nafn) {
         fxFlokkur.setText(nafn);

@@ -16,22 +16,22 @@ import vinnsla.plantmania.enums.Vatnsthorf;
  */
 public class Stats extends HBox {
     @FXML
-    private VBox fxVatnBox, fxLjosBox, fxHitiBox; //VBox sem innihalda imageView hluti
+    private VBox fxVatnBox, fxLjosBox, fxHitiBox; //VBox sem innihalda imageView hluti, skali fyrir vatns-, ljós- og hitaþörf
 
     @FXML
     private HBox fxBoxaHbox; //HBox sem inniheldur VBoxin hér að ofan
 
     private final double OPACITY = 0.3;//hvaða opacity er sett á ljósari myndirnar
 
-    private Vatnsthorf vatnsthorf;
-    private Ljosstyrkur ljosstyrkur;
-    private int kjorhitastig;
+    private Vatnsthorf vatnsthorf;//enum gildi fyrir vatnsþörf plöntunnar
+    private Ljosstyrkur ljosstyrkur;//enum gildi fyrir ljósstyrk plöntunnar
+    private int kjorhitastig;//int gildi fyrir kjörhitastig plöntunnar
+
 
     public Stats() {
         LesaFXML.lesa(this, "stats-view.fxml");
         stillaMyndaStaerd();
     }
-
 
     /**
      * Stærð mynda er stillt hér.
@@ -48,7 +48,6 @@ public class Stats extends HBox {
             }
         }
     }
-
 
     /**
      * aðferð sem athugar ljósstyrk, vatnsþörf og kjörhitastig plöntu og setur sýnileika mynda í samræmi við það
@@ -74,15 +73,9 @@ public class Stats extends HBox {
         if (kjorhitastig <= 20) {
             fxHitiBox.getChildren().get(0).setOpacity(OPACITY);
         }
-
-        /*else if (kjorhitastig < 15) {
-            fxHitiBox.getChildren().get(0).setOpacity(0.3);
-            fxHitiBox.getChildren().get(1).setOpacity(0.3);
-        }
-         */
-
     }
 
+    //setter fyrir stats fyrir hlut af klasanum Planta
     public void setStats(Planta p) {
         vatnsthorf = p.getVatnsthorf();
         ljosstyrkur = p.getLjosstyrkur();
@@ -96,5 +89,4 @@ public class Stats extends HBox {
         kjorhitastig = mp.getKjorhitastig().get(1);
         seturOpacity();
     }
-
 }
