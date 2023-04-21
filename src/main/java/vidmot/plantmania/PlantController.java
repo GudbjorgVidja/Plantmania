@@ -37,7 +37,7 @@ public class PlantController {
     @FXML
     private Dagatal fxDagatal;//tilvik af Dagatalinu
     @FXML
-    private VBox titledPaneBoxid;//TODO: ATH ÞETTA
+    private VBox titledPaneBoxid;//VBox sem inniheldur titledPane fyrir fræðsluefni
 
     private Notandi skradurNotandi = new Notandi();//Sá notandi sem er skráður inn
 
@@ -219,13 +219,10 @@ public class PlantController {
         }
     }
 
-
-    //TODO: af hverju fxml dæmið? eyða?
-    @FXML
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
      */
-    private void hladaOllumPlontum(MouseEvent event) { //todo endurnefna, saekjaPlontu() td
+    public void saekjaPlontu(MouseEvent event) {
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
             node = node.getParent();
