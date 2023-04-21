@@ -41,45 +41,33 @@ public class Plontuyfirlit extends AnchorPane {
     private FlowPane fxFlowPane; //aðgangur í flowpane sem inniheldur spjöldin
 
     @FXML
-    private MenuButton fxNotandi;
+    private MenuButton fxNotandi;//menubutton með virkni á notanda
 
     @FXML
     private Menu fxSiaMenu, rodunMenu;// flokkunMenu //menuItems á MenuBar, til að stjórna sýnileika og röðun hluta
 
     @FXML
-    private MenuItem fxSkraUt;
+    private MenuItem fxSkraUt;//útskráningarreitur
 
     @FXML
-    private Label fxBanner;
+    private Label fxBanner;//label þar sem viðbrögð við aðgerðum notenda birtast
 
-    /**
-     * Öll MenuItem undir sía. Inniheldur velja allt, og uppruna gildi plantna (og minnaPlantna) í yfirlitinu
-     */
+    //Öll MenuItem undir sía. Inniheldur velja allt, og uppruna gildi plantna (og minnaPlantna) í yfirlitinu
     private ObservableList<MenuItem> siaItems = FXCollections.observableArrayList();
 
-    /**
-     * Öll MenuItem sem hakað er við undir sía
-     */
+    //Öll MenuItem sem hakað er við undir sía
     private FilteredList<MenuItem> selectedSiaItems;
 
-    /**
-     * Tengir saman enum Uppruna gildi og CheckMenuItem fyrir gildið
-     */
+    //Tengir saman enum Uppruna gildi og CheckMenuItem fyrir gildið
     private HashMap<Uppruni, MenuItem> upprunaMap = new HashMap<>();
 
-    /**
-     * Öll spjöld yfirlitsins, falin og sýnileg.
-     */
+    //Öll spjöld yfirlitsins, falin og sýnileg.
     private ObservableList<Node> ollSpjold = FXCollections.observableArrayList();
 
-    /**
-     * Sýnileg spjöld í yfirlitinu að hverju sinni.
-     */
+    //Sýnileg spjöld í yfirlitinu að hverju sinni
     private FilteredList<Node> filteredSpjold = new FilteredList<>(ollSpjold);
 
-    /**
-     * Fylgist með þegar PlantaSpjald hlutur er fyrst settur inn, til að vita hvort röðunarmöguleikar séu réttir
-     */
+    //Fylgist með þegar PlantaSpjald hlutur er fyrst settur inn, til að vita hvort röðunarmöguleikar séu réttir
     private BooleanProperty fyrstaHlutBaettVid = new SimpleBooleanProperty(false);
 
     private Comparator<Node> yfirlitComparator;//núverandi comparator sem raðað er eftir
@@ -96,7 +84,15 @@ public class Plontuyfirlit extends AnchorPane {
 
         stillaSiaMenuItems();
 
-        //PlantaSpjald bætt við yfirlitið
+        plontuBaettVidListener();
+        tomtYfirlitVidvodun();
+    }
+
+    /**
+     * PlantaSpjald hlut bætt við yfirlitið
+     * todo: hver er munurinn á þessu og hlutBaettVidYfirlit???
+     */
+    private void plontuBaettVidListener() {
         fyrstaHlutBaettVid.addListener((obs, o, n) -> {
             if (!o && n) {
                 setRodunMenuItems();
@@ -104,10 +100,11 @@ public class Plontuyfirlit extends AnchorPane {
                 Collections.sort(ollSpjold, yfirlitComparator);
             }
         });
-        tomtYfirlitVidvodun();
-
     }
 
+    /**
+     * Viðvörun sem kemur þegar yfirlit er tómt, eða ekkert til fyrir gefna síu
+     */
     private void tomtYfirlitVidvodun() {
         fxFlowPane.getStyleClass().add("engar-minar-vidvorun");
 
@@ -123,7 +120,6 @@ public class Plontuyfirlit extends AnchorPane {
             } else if (change.wasAdded()) {
                 fxFlowPane.getStyleClass().removeAll("skoda-sia-vidvorun");
             }
-
         });
     }
 
@@ -134,21 +130,16 @@ public class Plontuyfirlit extends AnchorPane {
     private void stillaSiaMenuItems() {
         siaItems = fxSiaMenu.getItems();
         ((CheckMenuItem) fxSiaMenu.getItems().get(0)).setSelected(true);
-
         selectedSiaItems = new FilteredList<>(siaItems);
-
         uppfaeraPredicateLista();
-
         Bindings.bindContent(fxFlowPane.getChildren(), filteredSpjold);
-        //Bindings.bindContentBidirectional(fxFlowPane.getChildren(), filteredSpjold);//óþarfi, en virkar líka
-        //todo: þarf bidirectional til að hlaða inn aftur? Eða þarf kannski að passa hvernig því er bætt við
 
         ollSpjold.addListener((ListChangeListener<? super Node>) change -> {
             change.next();
             if (change.wasAdded()) {
-                athBaetaVidFlokk((List<Node>) change.getAddedSubList());
+                hlutBaettVidYfirlit((List<Node>) change.getAddedSubList());
                 Collections.sort(ollSpjold, yfirlitComparator);
-                yfirlitTomt.set(false); //todo gera hér?
+                yfirlitTomt.set(false);
             }
         });
     }
@@ -173,11 +164,10 @@ public class Plontuyfirlit extends AnchorPane {
     /**
      * Kallað er á aðferðina þegar nýjir hlutir bætast við yfirlitið, þ.e. PlantaSpjald eða MinPlantaSpjald.
      * Ef uppruni viðbótarinnar er ekki undir sía, þá er honum bætt við.
-     * TODO: skoða nafn aðferðarinnar!!
      *
      * @param nodes nýjar viðbætur við yfirilit
      */
-    private void athBaetaVidFlokk(List<Node> nodes) {
+    private void hlutBaettVidYfirlit(List<Node> nodes) {
         for (Node node : nodes) {
             Uppruni nyrUppruni = null;
             if (node instanceof MinPlantaSpjald) nyrUppruni = ((MinPlantaSpjald) node).getMinPlanta().getUppruni();
@@ -197,6 +187,7 @@ public class Plontuyfirlit extends AnchorPane {
 
     /**
      * ef þessi aðferð keyrir þá er yfirlitið ekki tómt, og inniheldur PlantaSpjald
+     * TODO: lýsa betur?
      */
     public void setRodunMenuItems() {
         rodunMenu.getItems().remove(2, 4);
@@ -210,7 +201,6 @@ public class Plontuyfirlit extends AnchorPane {
         for (MenuItem item : rodunMenu.getItems()) {
             item.setOnAction(this::rodunItemHandler);
         }
-
         for (MenuItem item : fxSiaMenu.getItems()) {
             item.setOnAction(this::siaItemHandler);
         }
@@ -278,11 +268,8 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private void siaItemHandler(ActionEvent event) {
         MenuItem uppruni = (MenuItem) event.getSource();
-
         uppfaeraPredicateLista();
-
         uppfaeraFyrsta(uppruni);
-
         uppfaeraPredicateLista();
     }
 
@@ -317,7 +304,7 @@ public class Plontuyfirlit extends AnchorPane {
 
 
     /**
-     * ákvað bara að nota ekki tilviksbreytu, væri það betra?
+     * skráður notandi sóttur úr PlantController og upplýsingar um hann vistaðar, svo skipt yfir á upphafssenu
      *
      * @param event smellt á skrá út undir notandi menuButton
      */
@@ -348,6 +335,7 @@ public class Plontuyfirlit extends AnchorPane {
             System.out.println(e.getCause());
         }
     }
+
     /* til að raða rétt eftir íslenska stafrófinu. Er ekki í notkun núna en verður bætt við seinna
         String stafrof = "A a Á á B b D d Ð ð E e É é F f G g H h I i Í í J j K k L l M m N n O o Ó ó P p R r S s T t U u Ú ú V v X x Y y Ý ý Þ þ Æ æ Ö ö";
         String[] srof = stafrof.split(" ");
@@ -355,9 +343,9 @@ public class Plontuyfirlit extends AnchorPane {
 
 
     /**
-     * Comparator til að raða eftir almennu heiti.
+     * Comparator til að raða eftir almennu heiti. Á eftir að bæta við virkni fyrir íslenska stafrófið
      */
-    private Comparator<Node> almenntHeitiComparator = (n1, n2) -> { //todo passa íslenska stafrófið
+    private Comparator<Node> almenntHeitiComparator = (n1, n2) -> {
         if (n1 instanceof PlantaSpjald) {
             return ((PlantaSpjald) n1).getPlanta().getAlmenntHeiti().toLowerCase().compareTo(((PlantaSpjald) n2).getPlanta().getAlmenntHeiti().toLowerCase());
         }

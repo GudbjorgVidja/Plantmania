@@ -9,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -24,42 +23,36 @@ import java.util.Optional;
 
 /**
  * Höfundar: Guðbjörg Viðja og Sigurbjörg Erla
- * skoða með að hafa eiginlega accordionPane í skrollanlega partinum. Þyrfti að vera TitledPane hlutir í VBox sem er í
- * ScrollPane, því accordion leyfir bara eitt opið í einu.
- * Nota listener til að setja min stærð eftir því hvort titledPane er opið eða lokað.
- * <p>
- * Byrja að gera þetta bara fyrir minPlanta hlut. Einhver virkni komin
+ * Gluggi með nánari upplýsingar um MinPlanta hlut þar sem hægt er að skoða hann og gera breytingar
  */
 public class Plontugluggi extends Dialog<Void> {
     @FXML
-    private Label fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi, fxMedaltimi, fxUppruni;
+    private Label fxLatnesktNafn, fxAlmenntNafn, fxNaestaVokvun, fxThinnTimi, fxMedaltimi, fxUppruni;//label með ýmsum grunnupplýsingum
 
     @FXML
-    private ImageView fxMynd;
+    private ImageView fxMynd;//imageview með mynd af plöntunni
 
     @FXML
-    private Button fxAthugasemdir, fxVokvunarsaga, fxBreytaTimaMilliVokvana, fxBreytaNafni;
+    private Button fxAthugasemdir, fxVokvunarsaga, fxBreytaTimaMilliVokvana, fxBreytaNafni;//hnappar til að gera breytingar á plöntunni
 
     @FXML
-    private Text fxHitastig, fxUmPlontuna, fxEitrun, fxNotes, fxLjosthorf;
+    private Text fxHitastig, fxUmPlontuna, fxEitrun, fxNotes, fxLjosthorf;//svæði fyrir ýmsa texta með upplýsingum
 
     @FXML
-    private DatePicker fxDatePicker;
+    private DatePicker fxDatePicker;//datepicker til að bæta við vökvun aftur í tímann
 
     @FXML
-    private FlowPane fxHeiti, fxEinkenni;
+    private FlowPane fxHeiti, fxEinkenni;//flowpane með öllum heitum; flowpane með öllum einkennum plöntunnar
 
     @FXML
-    private Stats fxStats;
+    private Stats fxStats;//hlutur af klasanum stats, með gildin fyrir þessa plöntu
 
     @FXML
-    private Label fxBanner;
+    private Label fxBanner;//label sem birtist með skilaboðum þegar notandi reynir að bæta við vökvun
 
-    private MinPlanta minPlantan;//ef glugginn er fyrir MinPlanta
+    private MinPlanta minPlantan;//MinPlanta hluturinn sem glugginn er fyrir
 
-    //private Planta plantan;//ef glugginn er fyrir planta, kemur etv seinna
 
-    //ToDo: setja fxEinkenni, fxLjosthorf (styrkur og tími?), fxEitrun, fxUppruni
     public Plontugluggi() {
         setDialogPane(lesaGlugga());
         ButtonType lokaTakki = new ButtonType("Loka glugga", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -72,30 +65,31 @@ public class Plontugluggi extends Dialog<Void> {
         ButtonType lokaTakki = new ButtonType("Loka glugga", ButtonBar.ButtonData.CANCEL_CLOSE);
         getDialogPane().getButtonTypes().add(lokaTakki);
 
-        fxLatnesktNafn.setText(minPlantan.getFraediheiti());
-        fxAlmenntNafn.setText(minPlantan.getGaelunafn());
-        fxAlmenntNafn.textProperty().bind(minPlantan.gaelunafnProperty());
-        fxMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + minPlantan.getMyndaslod())));
-
         setjaEventHandlera();
-
         setjaUpplysingar();
-
-        datePickerHandler();
-        setNaestaVokvunListener();
-        setFxThinnTimi();
-        setjaFxMedaltimi();
-        setjaFxNotesBinding();
-
+        setjaYmsaListeneraOgBindings();
         setStyleClass();
-        fxStats.setStats(minPlantan);
         stillaStatsStaerd();
     }
 
     /**
-     * kallar á ýmsar aðferðir sem setja upplýsingar á viðmótshlutum
+     * upphafsstillir og setur listenera og bindings á ýmsa viðmótshluti
+     */
+    private void setjaYmsaListeneraOgBindings() {
+        fxAlmenntNafn.textProperty().bind(minPlantan.gaelunafnProperty());
+        setNaestaVokvunListener();
+        setFxThinnTimi();
+        setjaFxMedaltimi();
+        setjaFxNotesBinding();
+    }
+
+    /**
+     * kallar á ýmsar aðferðir sem setja upplýsingar á viðmótshlutum, og upphafsstillir labela án aðferða
      */
     private void setjaUpplysingar() {
+        fxLatnesktNafn.setText(minPlantan.getFraediheiti());
+        fxAlmenntNafn.setText(minPlantan.getGaelunafn());
+        fxMynd.setImage(new Image(getClass().getResourceAsStream("styling/plants/" + minPlantan.getMyndaslod())));
         setFxHitasig();
         setFxUmPlontuna();
         setjaFxHeiti();
@@ -103,19 +97,23 @@ public class Plontugluggi extends Dialog<Void> {
         setjaFxEinkenni();
         setjaFxUppruni();
         setjaFxLjosthorf();
+        fxStats.setStats(minPlantan);
     }
 
     /**
      * setur event handlera á viðmótshluti
      */
     private void setjaEventHandlera() {
-        //fxBreytaNafni.setOnMouseClicked(this::breytaNafniHandler);
         fxBreytaNafni.setOnAction(this::breytaNafniHandler);
         fxAthugasemdir.setOnAction(this::athugasemdirHandler);
         fxVokvunarsaga.setOnAction(this::vokvunarsagaHandler);
-        fxBreytaTimaMilliVokvana.setOnMouseClicked(this::setjaFxBreytaTimaMilliVokvanaEventFilter);
+        fxBreytaTimaMilliVokvana.setOnAction(this::setjaFxBreytaTimaMilliVokvanaEventFilter);
+        datePickerHandler();
     }
 
+    /**
+     * stillir stærðina á Stats vboxunum
+     */
     private void stillaStatsStaerd() {
         for (Node n : fxStats.getChildren()) {
             if (n instanceof VBox) {
@@ -123,21 +121,23 @@ public class Plontugluggi extends Dialog<Void> {
                 ((VBox) n).setPrefWidth(60);
             }
         }
-
     }
 
+    /**
+     * setur stílklklasa á labela í fxHeiti og fxEinkenni
+     */
     private void setStyleClass() {
         for (Node l : fxHeiti.getChildren()) {
             if (l instanceof Label) l.getStyleClass().add("rammi-label");
         }
-
         for (Node l : fxEinkenni.getChildren()) {
             if (l instanceof Label) l.getStyleClass().add("rammi-label");
         }
     }
 
     private void setjaFxLjosthorf() {
-        fxLjosthorf.setText("Best er fyrir plöntuna að fá " + minPlantan.getLjosstyrkur().getStyrkur() + " sólarljós í um " + minPlantan.getLjosStundir() + " tíma á dag");
+        fxLjosthorf.setText("Best er fyrir plöntuna að fá " + minPlantan.getLjosstyrkur().getStyrkur() +
+                " sólarljós í um " + minPlantan.getLjosStundir() + " tíma á dag");
 
     }
 
@@ -176,8 +176,8 @@ public class Plontugluggi extends Dialog<Void> {
      * setur bindingu fyrir label með meðaltíma milli vökvana. ATH: það segir alltaf dagar í fleirtölu
      */
     public void setjaFxMedaltimi() {
-        fxMedaltimi.textProperty().bind(Bindings.concat("Meðaltími milli vökvana: ").concat(minPlantan.medaltimiMilliVokvanaProperty()).concat(" dagar"));
-        //hafa bindingu/listener hér
+        fxMedaltimi.textProperty().bind(Bindings.concat("Meðaltími milli vökvana: ")
+                .concat(minPlantan.medaltimiMilliVokvanaProperty()).concat(" dagar"));
     }
 
     /**
@@ -194,8 +194,6 @@ public class Plontugluggi extends Dialog<Void> {
     /**
      * gerir text formatter sem settur er á TextField svo það sé aðeins hægt að slá inn tölur,
      * og hún getur ekki byrjað á 0
-     * ATH: láta skilaboðin birast einhvers staðar í viðmótinu þegar villa er gripin
-     * ATH: á að takmarka lengd tölu til að koma í veg fyrir misnotkun??
      *
      * @param textField - Textfield reiturinn
      */
@@ -225,11 +223,10 @@ public class Plontugluggi extends Dialog<Void> {
     /**
      * Handler til að breyta tíma milli vökvana þegar ýtt er á hnappinn, gerir TextInputDialog, setur formatter
      * á hann, óvirkjar ok takkann við réttar aðstæður og uppfærir thinnTimiMilliVokvana í MinPlanta ef við á
-     * ATH hvernig buttonTypes er skipt út
      *
-     * @param mouseEvent - atburðurinn
+     * @param event - atburðurinn
      */
-    private void setjaFxBreytaTimaMilliVokvanaEventFilter(MouseEvent mouseEvent) {
+    private void setjaFxBreytaTimaMilliVokvanaEventFilter(ActionEvent event) {
         TextInputDialog timiDialog = new TextInputDialog(minPlantan.getAlmennurTimiMilliVokvana() + "");
         geraTextFormatter(timiDialog.getEditor());
         ButtonType iLagi = new ButtonType("Í lagi", ButtonBar.ButtonData.OK_DONE);
@@ -288,11 +285,15 @@ public class Plontugluggi extends Dialog<Void> {
         });
     }
 
+    /**
+     * gerir fxmlloader fyrir gluggann, setur controller, hleður dialogpane með fxmlLoader og skilar honum
+     *
+     * @return dialogpane sem er hlaðið með fxmlloadernum
+     */
     private DialogPane lesaGlugga() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(View.GLUGGI.getFileName()));
         try {
             fxmlLoader.setController(this);
-            //fxmlLoader.setRoot(this);
             return fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
@@ -300,17 +301,16 @@ public class Plontugluggi extends Dialog<Void> {
     }
 
     /**
-     * Breytir nickname fyrir MinPlanta hlut
+     * Kallar á dialog sem breytir nickname fyrir MinPlanta hlut
      *
      * @param event smellt á litla merkið við hliðina á nafni plöntu
      */
-    private void breytaNafniHandler(ActionEvent event) { //var mouseEvent
+    private void breytaNafniHandler(ActionEvent event) {
         TextInputDialog nafnDialog = new TextInputDialog(minPlantan.getGaelunafn());
 
         ButtonType iLagi = new ButtonType("vista breytingar", ButtonBar.ButtonData.OK_DONE);
         ButtonType haettaVid = new ButtonType("hætta við", ButtonBar.ButtonData.CANCEL_CLOSE);
         nafnDialog.getDialogPane().getButtonTypes().removeAll(ButtonType.OK, ButtonType.CANCEL);
-
         nafnDialog.getDialogPane().getButtonTypes().addAll(iLagi, haettaVid);
 
         nafnDialog.setHeaderText("Sláðu inn nýtt nafn");
@@ -318,7 +318,6 @@ public class Plontugluggi extends Dialog<Void> {
         nafnDialog.setGraphic(null);
 
         nafnDialog.getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
-
         nafnDialog.getDialogPane().lookupButton(iLagi).disableProperty().bind(nafnDialog.getEditor().textProperty().isEmpty());
 
         Optional<String> inntak = nafnDialog.showAndWait();
@@ -328,12 +327,15 @@ public class Plontugluggi extends Dialog<Void> {
         }
     }
 
-    private void geraPAttern() {
+    /**
+     * gerir form/mynstur fyrir LocalDate dagsetningu á DatePicker hlut með dateTimeFormatter. Grunnur af
+     * Oracle API, DatePicker
+     */
+    private void geraPattern() {
         String pattern = "dd/MM/yyyy";
-
         fxDatePicker.setPromptText(pattern.toLowerCase());
 
-        fxDatePicker.setConverter(new StringConverter<LocalDate>() {
+        fxDatePicker.setConverter(new StringConverter<>() {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
 
             @Override
@@ -357,30 +359,21 @@ public class Plontugluggi extends Dialog<Void> {
     }
 
     /**
-     * handler fyrir datePicker hlut, bætir við vökvun á plöntuna á valdri dagsetningu
+     * handler fyrir datePicker hlut, bætir við vökvun á plöntuna á valdri dagsetningu (ekki í framtíðinni)
      */
     private void datePickerHandler() {
-        geraPAttern();
+        geraPattern();
         fxDatePicker.setShowWeekNumbers(false);
         fxDatePicker.setOnAction(t -> {
             LocalDate date = fxDatePicker.getValue();
-            System.out.println("Selected date: " + date);
             if (date != null) {
                 minPlantan.baetaVidVokvun(date);
                 if (!date.isAfter(LocalDate.now())) {
                     fxBanner.setText("vökvun bætt við");
                     birtaBanner(fxBanner);
-                    /*
-                    Alert a = new Alert(Alert.AlertType.NONE, "Vökvun bætt við", ButtonType.OK);
-                    a.showAndWait();
-                     */
                 } else {
                     fxBanner.setText("Ekki hægt að skrá vökvanir fram í tímann");
                     birtaBanner(fxBanner);
-                    /*
-                    Alert a = new Alert(Alert.AlertType.NONE, "Ekki hægt að skrá vökvanir fram í tímann", ButtonType.OK);
-                    a.showAndWait();
-                     */
                 }
             }
         });
@@ -412,7 +405,6 @@ public class Plontugluggi extends Dialog<Void> {
 
         dialogur.getDialogPane().getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
 
-
         TextArea textArea = new TextArea(minPlantan.getAthugasemdir());
         dialogur.getDialogPane().setContent(textArea);
         dialogur.setResultConverter(b -> {
@@ -421,24 +413,16 @@ public class Plontugluggi extends Dialog<Void> {
         });
 
         Optional<String> result = dialogur.showAndWait();
-        if (result.isPresent()) {//result vistar breytingar á texta
-            System.out.println("utkoma ur dialog: " + result);
-            minPlantan.setAthugasemdir(result.get());
-        }
+        result.ifPresent(s -> minPlantan.setAthugasemdir(s));
     }
 
     /**
-     * prentar fyrri vökvanir og planaðar vökvanir fyrir plöntuna. Opnar dialog með listview yfir vökvunardagsetningar
-     * fyrir plöntuna. Hægt að eyða út fyrri vökvun
+     * Opnar dialog með listview yfir vökvunardagsetningar plöntunnar
      *
      * @param event smellt á vökvunarsaga hnapp
      */
     private void vokvunarsagaHandler(ActionEvent event) {
-        //TODO: sýna líka listview yfir planaðar vökvanir? breyta svo og birta dagatal
-        System.out.println("fyrri vokvanir: " + minPlantan.getVokvanir());
-        System.out.println("planadar vokvanir: " + minPlantan.getPlanadarVokvanir());
         VokvanirPlontunnarDialog vokvanirPlontunnarDialog = new VokvanirPlontunnarDialog(minPlantan);
         vokvanirPlontunnarDialog.showAndWait();
     }
-
 }
