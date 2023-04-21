@@ -14,17 +14,9 @@
                styleClass="vokva-label, graphic-hlutur" text="-0 dagar"/>
         <HBox alignment="CENTER" spacing="10">
             <Button fx:id="fxVokva" layoutX="7.0" layoutY="158.0" mnemonicParsing="false"
-                    styleClass="vokva-takki, graphic-hlutur" text="vökva">
-                <!--<tooltip> vesen með tooltip að ekki er hægt að setja það á disabled hluti
-                    <Tooltip text="Ekki er hægt að vökva þegar tími í næstu vökvun er jafn tíma milli vökvanna"/>
-                </tooltip>-->
-            </Button>
+                    styleClass="vokva-takki, graphic-hlutur" text="vökva"/>
             <Button fx:id="fxFresta" layoutX="68.0" layoutY="158.0" mnemonicParsing="false"
-                    styleClass="plus-takki, graphic-hlutur" text="fresta">
-                <!--<tooltip>
-                    <Tooltip text="Ekki er hægt að fresta þegar tími í næstu vökvun er jafn tíma á milli vökvanna"/>
-                </tooltip>-->
-            </Button>
+                    styleClass="plus-takki, graphic-hlutur" text="fresta"/>
         </HBox>
     </VBox>
 </fx:root>

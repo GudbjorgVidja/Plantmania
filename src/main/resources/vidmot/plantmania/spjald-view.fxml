@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <fx:root prefHeight="125.0" prefWidth="100.0"
@@ -11,10 +10,8 @@
     <BorderPane prefHeight="80.0" prefWidth="80.0" styleClass="border-pane-rammi" VBox.vgrow="NEVER">
         <center>
             <ImageView fx:id="fxPlontuMynd" fitHeight="80" fitWidth="69.0" layoutX="6.0" pickOnBounds="true"
-                       preserveRatio="true" BorderPane.alignment="CENTER">
-                <Image url="@styling/plants/jelly.png"/> <!-- taka út -->
-            </ImageView>
+                       preserveRatio="true" BorderPane.alignment="CENTER"/>
         </center>
     </BorderPane>
-    <Label fx:id="fxAlmenntNafn" prefHeight="9.0" text="Jelly babe"/> <!--prefWidth="97.0"-->
+    <Label fx:id="fxAlmenntNafn" prefHeight="9.0"/>
 </fx:root>

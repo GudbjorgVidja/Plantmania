@@ -4,8 +4,7 @@
 <?import javafx.scene.layout.*?>
 <fx:root type="javafx.scene.layout.HBox" fx:id="fxBoxaHbox" alignment="BOTTOM_CENTER"
          stylesheets="@styling/derived-style.css" xmlns="http://javafx.com/javafx"
-         xmlns:fx="http://javafx.com/fxml"> <!-- prefHeight="61.0"
-         prefWidth="123.0" -->
+         xmlns:fx="http://javafx.com/fxml">
     <children>
         <VBox fx:id="fxVatnBox" styleClass="vboxStats">
             <ImageView styleClass="vatnBox"/>
