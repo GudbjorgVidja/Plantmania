@@ -1,7 +1,3 @@
-/**
- * todo: er þetta ekki bara gott, Guðbjörg?
- * todo: væri kannski betra að gera Spjald með MinPlanta hlut, frekar en bara Planta?
- */
 package vidmot.plantmania;
 
 import javafx.fxml.FXML;

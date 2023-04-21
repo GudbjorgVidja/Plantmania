@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class DagsetningCellFactory implements Callback<ListView<LocalDate>, ListCell<LocalDate>> {
     @Override
     public ListCell<LocalDate> call(ListView<LocalDate> localDateListView) {
-        return new ListCell<LocalDate>() {
+        return new ListCell<>() {
             @Override
             public void updateItem(LocalDate localDate, boolean empty) {
                 super.updateItem(localDate, empty);

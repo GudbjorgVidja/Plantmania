@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -50,7 +51,19 @@ public class Dagatal extends AnchorPane {
     public Dagatal() {
         LesaFXML.lesa(this, "dagatal-view.fxml");
         syndurManudur = YearMonth.now();
+        setjaStyleClassADaga();
         geraDagatal();
+    }
+
+    /**
+     * setur stílklasann fxDagur á öll börn af klasanum Dagur í Gridpane
+     */
+    private void setjaStyleClassADaga() {
+        for (Node n : fxGrid.getChildren()) {
+            if (n instanceof Dagur) {
+                n.getStyleClass().add("fxDagur");
+            }
+        }
     }
 
     /**
@@ -64,7 +77,6 @@ public class Dagatal extends AnchorPane {
 
         DayOfWeek fyrstiDagurManadar = syndurManudur.atDay(1).getDayOfWeek();
         fxDagsetning.setText(MANADARHEITI[syndurManudur.getMonthValue() - 1] + " - " + syndurManudur.getYear());
-
         List<Integer> dagalisti = geraDagalista(syndurManudur);
 
         for (int i = 7; i < 49; i++) {
@@ -122,9 +134,7 @@ public class Dagatal extends AnchorPane {
      * @param fjoldiVokvanaOlokid - IntegerBinding vaktanlegt gildi fyrir fjölda planaðra vökvana fyrir gefna dagsetningu
      */
     private void setjaVirkanDag(Dagur dagur, IntegerBinding fjoldiVokvanaLokid, IntegerBinding fjoldiVokvanaOlokid) {
-        if (dagur.getStyleClass().size() == 0) dagur.getStyleClass().add("fxDagur"); //todo setja í upphafsstillingu
         dagur.setDisable(false);
-
         dagur.getFxFjoldiVokvanaOlokid().textProperty().bind(
                 Bindings.when(fjoldiVokvanaOlokid.isEqualTo(0)).then("")
                         .otherwise(fjoldiVokvanaOlokid.asString()));
@@ -140,17 +150,11 @@ public class Dagatal extends AnchorPane {
      * @param dagur - Dagur, tómur
      */
     private void setjaOvirkanDag(Dagur dagur) {
-        if (dagur.getStyleClass().size() == 0) dagur.getStyleClass().add("fxDagur");
         dagur.setDisable(true);
-
         dagur.getFxFjoldiVokvanaOlokid().textProperty().unbind();
-        //dagur.getFxFjoldiVokvanaOlokid().setText("");
         dagur.getFxDropi().visibleProperty().unbind();
-        //dagur.getFxDropi().setVisible(false);
         dagur.getFxFjoldiVokvana().textProperty().unbind();
-        //dagur.getFxFjoldiVokvana().setText("");
         dagur.getFxManadardagur().textProperty().unbind();
-        //dagur.getFxManadardagur().setText("");
     }
 
     //getterar og setterar
