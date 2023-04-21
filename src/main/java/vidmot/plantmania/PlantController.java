@@ -3,8 +3,6 @@ package vidmot.plantmania;
 import edu.princeton.cs.algs4.In;
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -41,46 +39,34 @@ public class PlantController {
     @FXML
     private VBox titledPaneBoxid;
 
-    //TODO: gera upphafcontroller að local breytu? og þarf skradurNotandi að vera objectProperty?
-    private UpphafController upphafController;
-    private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
+    //TODO: þarf skradurNotandi að vera objectProperty?
+
+    private Notandi skradurNotandi = new Notandi();
 
     private Notendaupplysingar notendaupplysingar;
 
     public void initialize() {
-        upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
-        skradurNotandi.setValue(upphafController.getSkradurNotandi());
-
-        notendaupplysingar = new Notendaupplysingar(skradurNotandi.get().getMinarPlontur());
-        notendaupplysingar.finnaFyrriOgSidariVokvanirListener(skradurNotandi.get().getMinarPlontur());
-        System.out.println(skradurNotandi.get());
-        Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());//af hverju ekki bara upphafsstilling?
+        UpphafController upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
+        skradurNotandi = upphafController.getSkradurNotandi();
+        notendaupplysingar = new Notendaupplysingar(skradurNotandi.getMinarPlontur());
+        notendaupplysingar.finnaFyrriOgSidariVokvanirListener(skradurNotandi.getMinarPlontur());
 
         lesaInnAllarPlontur();
         dagatalsEventFilterar();
-
-        fxMinarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
-        fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.get().getNotendanafn()));
+        fxMinarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.getNotendanafn()));
+        fxAllarPlonturYfirlit.getNafnAfLabel().bind(new SimpleStringProperty(skradurNotandi.getNotendanafn()));
 
         birtaNotendaPlontur();
         hladaUpplysingum();
-
-        //todo sigurbjörg, ertu að nota þessa prentsetningu?
-        System.out.println(skradurNotandi.get());
-        Bindings.bindBidirectional(skradurNotandi, upphafController.skradurNotandiProperty());
-
         bindaMaxSizeTitledPane();
-
         geraTitledPanes();
-
     }
-
 
     /**
      * kallað á úr application þegar reynt er að loka glugganum
      */
     protected void lokaGluggaAdferd() {
-        fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi.get());
+        fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi);
     }
 
     private void bindaMaxSizeTitledPane() {
@@ -99,7 +85,7 @@ public class PlantController {
      * birtir plöntur notandans sem voru í skránni og setur listenera á MinPlanta hlutina
      */
     private void hladaUpplysingum() {
-        for (MinPlanta m : skradurNotandi.get().getMinarPlontur()) {
+        for (MinPlanta m : skradurNotandi.getMinarPlontur()) {
             fxMinarPlonturYfirlit.baetaVidYfirlit(m);
             m.sidastaVokvunListener();
             m.naestaVokvunRegla();
@@ -124,7 +110,7 @@ public class PlantController {
      * birtir plöntur notanda í yfirliti
      */
     private void birtaNotendaPlontur() {
-        skradurNotandi.get().getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
+        skradurNotandi.getMinarPlontur().addListener((ListChangeListener<? super MinPlanta>) change -> {
             change.next();
             if (change.wasAdded()) {
                 for (MinPlanta mp : change.getAddedSubList()) {
@@ -192,13 +178,6 @@ public class PlantController {
                 dagur.getStyleClass().add("valinnDagur");
                 synaVokvanirDagsins(valinDagsetning, plonturDagsinsLokid, plonturDagsinsOlokid);
                 dagur.getStyleClass().remove("valinnDagur");
-
-
-                //todo Sigurbjörg ertu að nota þetta?
-                //breyta litnum á reit þegar hann er valinn!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
-                //dagur.getFxDropi().visibleProperty().unbind();
-                //dagur.getFxDropi().setVisible(true);
-
             }
         });
     }
@@ -238,6 +217,7 @@ public class PlantController {
     }
 
 
+    //TODO: af hverju fxml dæmið? eyða?
     @FXML
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
@@ -249,7 +229,7 @@ public class PlantController {
         }
         if (node != null) {
             Planta p = ((PlantaSpjald) node).getPlanta();
-            skradurNotandi.get().baetaVidPlontu(p);
+            skradurNotandi.baetaVidPlontu(p);
             birtaBanner(fxAllarPlonturYfirlit.getFxBanner());
         }
     }
@@ -267,15 +247,7 @@ public class PlantController {
     }
 
     public Notandi getSkradurNotandi() {
-        return skradurNotandi.get();
-    }
-
-    public Notendaupplysingar getNotendaupplysingar() {
-        return notendaupplysingar;
-    }
-
-    public void setNotendaupplysingar(Notendaupplysingar notendaupplysingar) {
-        this.notendaupplysingar = notendaupplysingar;
+        return skradurNotandi;
     }
 
 
