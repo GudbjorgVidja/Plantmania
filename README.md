@@ -63,6 +63,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - Breyta hvernig upplýsingar eru lesnar úr skrá í upphafi. Núna er það úr .txt skrá, og ekki endilega
   skilvirkasta leiðin
 - hvað gerist ef tvær mismunadi keyrlsur eru í gangi á sama tíma fyrir sama aðgang?
+- kannski seinna gera möguleika að geta ýtt á dag og hakað við allar plöntur sem þú vilt "vökva" þann daginn
 
 ### Plöntur sem ætti að bæta við:
 

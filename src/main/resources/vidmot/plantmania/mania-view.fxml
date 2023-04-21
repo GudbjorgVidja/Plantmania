@@ -46,50 +46,7 @@
                         <ScrollPane layoutX="31.0" layoutY="50.0" prefHeight="415.0" prefWidth="543.0"
                                     hbarPolicy="NEVER">
                             <content>
-                                <VBox fx:id="titledPaneBoxid" prefHeight="411.0" prefWidth="531.0">
-                                    <!-- <children>
-                                        <TitledPane animated="false" text="Almennar upplýsingar" VBox.vgrow="SOMETIMES">
-                                            <VBox fx:id="almenntBox" styleClass="titled-vbox"/>
-                                        </TitledPane>
-                                        <TitledPane animated="false" prefHeight="194.0" prefWidth="531.0" text="Vökvun"
-                                                    VBox.vgrow="SOMETIMES">
-                                            <content>
-                                                <VBox prefHeight="200.0" prefWidth="100.0" fx:id="vokvaBox">
-                                                    <children>
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="512"
-                                                              text="Aðferð 1" styleClass="fraedsluflokkur"/>
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                              wrappingWidth="512"/>
-
-                                                        <Text layoutX="19.0" layoutY="98.0" strokeType="OUTSIDE"
-                                                              strokeWidth="0.0" text="Aðferð 2" wrappingWidth="512"
-                                                              styleClass="fraedsluflokkur"/>
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                              wrappingWidth="512"/>
-
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="512"
-                                                              text="Aðferð 3" styleClass="fraedsluflokkur"/>
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                              wrappingWidth="512"/>
-
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="512"
-                                                              text="Aðferð 4" styleClass="fraedsluflokkur"/>
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text"
-                                                              wrappingWidth="512"/>
-                                                    </children>
-                                                </VBox>
-                                            </content>
-                                        </TitledPane>
-                                        <TitledPane animated="false" text="Algeng vandamál" VBox.vgrow="SOMETIMES">
-                                            <VBox fx:id="vandamalBox">
-                                                <children>
-                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" "
-                                                          wrappingWidth="512"/>
-                                                </children>
-                                            </VBox>
-                                        </TitledPane>
-                                    </children> -->
-                                </VBox>
+                                <VBox fx:id="titledPaneBoxid" prefHeight="411.0" prefWidth="531.0"/>
                             </content>
                         </ScrollPane>
                     </children>

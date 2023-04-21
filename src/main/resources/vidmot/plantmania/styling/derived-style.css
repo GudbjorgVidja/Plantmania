@@ -27,20 +27,9 @@
     -fx-base: -litur3;
     fx-base: -litur2;
     -fx-control-inner-background: -litur05;
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background,-2%);
     -fx-background: -litur05;
     fx-background: -litur1;
-
-    fx-outer-border: forestgreen;
-
-/*
-    -fx-body-color: linear-gradient(to bottom,
-        ladder(
-            -fx-color,
-            derive(-litur3,8%) 75%,
-            derive(-litur3,10%) 80%
-        ),
-        derive(-litur3,-8%));
-        */
 }
 
 .date-picker-popup > * > .previous-month,
