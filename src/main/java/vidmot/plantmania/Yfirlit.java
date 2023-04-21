@@ -68,7 +68,7 @@ public class Yfirlit extends AnchorPane {
     private FilteredList<Node> filteredSpjold = new FilteredList<>(ollSpjold);
 
     //Fylgist með þegar PlantaSpjald hlutur er fyrst settur inn, til að vita hvort röðunarmöguleikar séu réttir
-    private BooleanProperty fyrstaHlutBaettVid = new SimpleBooleanProperty(false);
+    private BooleanProperty erPlantaSpjaldYfirlit = new SimpleBooleanProperty(false);
 
     private Comparator<Node> yfirlitComparator;//núverandi comparator sem raðað er eftir
 
@@ -89,11 +89,11 @@ public class Yfirlit extends AnchorPane {
     }
 
     /**
-     * PlantaSpjald hlut bætt við yfirlitið
-     * todo: hver er munurinn á þessu og hlutBaettVidYfirlit???
+     * Hlustar eftir hvort PlantaSpjald sé bætt við, sem þýðir að yfirlitið inniheldur bara PlantaSpjald hluti. Ef
+     * erPlantaSpjaldYfirlit hefur gildið false þá inniheldur yfirlitið bara MinPlantaSpjald hluti.
      */
     private void plontuBaettVidListener() {
-        fyrstaHlutBaettVid.addListener((obs, o, n) -> {
+        erPlantaSpjaldYfirlit.addListener((obs, o, n) -> {
             if (!o && n) {
                 setRodunMenuItems();
                 yfirlitComparator = almenntHeitiComparator;
@@ -163,7 +163,8 @@ public class Yfirlit extends AnchorPane {
 
     /**
      * Kallað er á aðferðina þegar nýjir hlutir bætast við yfirlitið, þ.e. PlantaSpjald eða MinPlantaSpjald.
-     * Ef uppruni viðbótarinnar er ekki undir sía, þá er honum bætt við.
+     * Ef uppruni viðbótarinnar er ekki undir sía, þá er honum bætt við. Ef flokkur nýja hlutarins er ekki til staðar
+     * undir sía, þ.e. plantan er sú fyrsta af þeim flokki, þá er gerður nýr checkMenuItem undir sia fyrir nýja upprunann.
      *
      * @param nodes nýjar viðbætur við yfirilit
      */
@@ -187,7 +188,7 @@ public class Yfirlit extends AnchorPane {
 
     /**
      * ef þessi aðferð keyrir þá er yfirlitið ekki tómt, og inniheldur PlantaSpjald
-     * TODO: lýsa betur?
+     * Aðferðin tekur út seinustu tvö MenuItems undir sía, sem eiga við um MinPlantaSpjald en ekki plantaSpjald
      */
     public void setRodunMenuItems() {
         rodunMenu.getItems().remove(2, 4);
@@ -215,7 +216,7 @@ public class Yfirlit extends AnchorPane {
     public void baetaVidYfirlit(Planta planta) {
         PlantaSpjald spjald = new PlantaSpjald(planta);
         ollSpjold.add(spjald);
-        fyrstaHlutBaettVid.set(true);
+        erPlantaSpjaldYfirlit.set(true);
     }
 
 
