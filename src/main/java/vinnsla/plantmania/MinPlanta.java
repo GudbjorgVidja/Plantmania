@@ -59,6 +59,9 @@ public class MinPlanta extends Planta {
         setjaPlanadarVokvanirListenera();
     }
 
+    /**
+     * setur listenera á naestaVokvun og thinnTimiMilliVokvana til að uppfæra planaðar vökvanir
+     */
     public void setjaPlanadarVokvanirListenera() {
         naestaVokvun.addListener((obs, o, n) -> {
             uppfaeraPlanadarVokvanir();
@@ -84,7 +87,7 @@ public class MinPlanta extends Planta {
     }
 
     /**
-     * ath nafnið. Setur listener á vokvanir og uppfærir sidastaVokvun
+     * Setur listener á vokvanir og uppfærir sidastaVokvun
      */
     public void sidastaVokvunListener() {
         vokvanir.addListener((ListChangeListener<LocalDate>) (observable) -> {
@@ -98,8 +101,6 @@ public class MinPlanta extends Planta {
 
     /**
      * setur listener á vokvanir til að uppfæra medaltimiMilliVokvana þegar vökvun er tekin út eða bætt við
-     * S: skoða með að þurfa ekki að reikna frá grunni í hvert skipti?
-     * G: á ekki bara að setja teljara á frestun eða eitthvað? og þegar ýtt á vökva þá er teljarinn sóttur?
      */
     public void medaltimiMilliVokvanaListener() {
         vokvanir.addListener((ListChangeListener<LocalDate>) (observable) -> {
@@ -120,11 +121,10 @@ public class MinPlanta extends Planta {
      * ath hvað gerist milli daga (localDate.now() breytist!)
      * setur listener á sidastaVokvun, ef hún breytist þá er sett binding á naestaVokvun, eða bindingin tekin af og
      * naestaVokvun sett sem 0
-     * ATH: tekur þetta bara þessa bindingu af, eða hefur það áhrif á fleiri!?!?!
      */
     public void naestaVokvunRegla() {
         sidastaVokvun.addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {//kannski bara ef newValue != null && oldValue == null, til að endurtaka ekki að óþörfu?
+            if (newValue != null) {
                 naestaVokvun.bind(thinnTimiMilliVokvana.subtract(ChronoUnit.DAYS.between(newValue, LocalDate.now())));
             } else {
                 naestaVokvun.unbind();
@@ -249,7 +249,6 @@ public class MinPlanta extends Planta {
     public ObservableList<LocalDate> getPlanadarVokvanir() {
         return planadarVokvanir;
     }
-
 
     public void setPlanadarVokvanir(ObservableList<LocalDate> planadarVokvanir) {
         this.planadarVokvanir = planadarVokvanir;

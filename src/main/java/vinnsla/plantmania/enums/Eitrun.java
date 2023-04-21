@@ -1,7 +1,5 @@
 /**
  * enum fyrir það hvort plantan er eitruð eður ei.
- * mjög gott, en væri kannski hægt að lengja einhver skilaboðanna og birta beint í plöntuglugganum?
- * TIL_MANNELDIS gæti verið eitthvað eins og "*plantan* er æt, og er víða notuð til manneldis"
  */
 package vinnsla.plantmania.enums;
 
@@ -19,9 +17,9 @@ public enum Eitrun {
     BARA_FYRIR_HUNDA("Eitruð hundum"),
     BARA_FYRIR_FUGLA("Eitruð fuglum"),
     BARA_FYRIR_DYR("Eitruð flestum dýrum"),
-    MADUR_VERDUR_SKAKKUR("Vímugjafi"); //todo bæta við eitruð fólki og dýrum?
+    MADUR_VERDUR_SKAKKUR("Vímugjafi");
 
-    private String eitrunarSkilabod;
+    private String eitrunarSkilabod;//strengur með textaskilaboðum fyrir gefið gildi
 
     Eitrun(String eitrunarSkilabod) {
         this.eitrunarSkilabod = eitrunarSkilabod;

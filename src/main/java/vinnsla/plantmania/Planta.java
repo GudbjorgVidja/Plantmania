@@ -28,19 +28,19 @@ import java.util.List;
  * plöntur sem MinPlanta og breytt henni
  */
 public class Planta {
-    private String fraediheiti;
-    private String almenntHeiti;
-    private List<String> ollHeiti;//inniheldur líka almenntHeiti
-    private String myndaslod;
-    private String texti;
-    private Uppruni uppruni;
-    private Ljosstyrkur ljosstyrkur;
-    private Eitrun eitrun;
-    private List<Integer> kjorhitastig;
-    private Vatnsthorf vatnsthorf;
-    private int almennurTimiMilliVokvana;
+    private String fraediheiti;//fræðiheiti plöntunnar
+    private String almenntHeiti;//almennt heiti sem plantan er þekkt undir
+    private List<String> ollHeiti;//listi yfir ýmis heiti plöntunnar, m.a. almennt heiti og fræðiheiti
+    private String myndaslod;//Strengur með slóð á mynd af plöntunni
+    private String texti;//Strengur með almennum texta um plöntuna
+    private Uppruni uppruni;//enum fyrir uppruna plöntunnar
+    private Ljosstyrkur ljosstyrkur;//enum fyrir ljósstyrk sem plantan þolir best
+    private Eitrun eitrun;//enum fyrir það hvort/hversu eitruð plantan er
+    private List<Integer> kjorhitastig;//listi með lægsta hita, kjörhita og hæsta hita sem plantan þolir
+    private Vatnsthorf vatnsthorf;//enum fyrir vatnsþörf
+    private int almennurTimiMilliVokvana;//fjöldi daga sem er almennt á milli vökvana
     private int ljosStundir;//fjöldi klukkustunda af sólarljósi á dag
-    private List<String> einkenniPlontu;//t.d. ákveðin lauf... má sleppa
+    private List<String> einkenniPlontu;//Listi af strengjum með einkenni plöntunnar
 
     public Planta(List<String> ollHeiti, String myndaslod, String texti, Uppruni uppruni, Ljosstyrkur ljosstyrkur, Eitrun eitrun, List<Integer> kjorhitastig, Vatnsthorf vatnsthorf, int almennurTimiMilliVokvana, int ljosStundir, List<String> einkenniPlontu) {
         this.fraediheiti = ollHeiti.get(0);
@@ -51,7 +51,7 @@ public class Planta {
         this.uppruni = uppruni;
         this.ljosstyrkur = ljosstyrkur;
         this.eitrun = eitrun;
-        this.kjorhitastig = kjorhitastig;//hafa 3 gildi, min, kjör og max í fylki
+        this.kjorhitastig = kjorhitastig;
         this.vatnsthorf = vatnsthorf;
         this.almennurTimiMilliVokvana = almennurTimiMilliVokvana;
         this.ljosStundir = ljosStundir;
@@ -59,15 +59,15 @@ public class Planta {
     }
 
     public Planta(Planta planta) {
-        this.fraediheiti = planta.fraediheiti; //eða hafa bara fraediheiti=ollHeiti.get(0)
-        this.almenntHeiti = planta.almenntHeiti; // eða almenntHeiti=ollHeiti.get(1)
+        this.fraediheiti = planta.fraediheiti;
+        this.almenntHeiti = planta.almenntHeiti;
         this.ollHeiti = planta.ollHeiti;
         this.myndaslod = planta.myndaslod;
         this.texti = planta.texti;
         this.uppruni = planta.uppruni;
         this.ljosstyrkur = planta.ljosstyrkur;
         this.eitrun = planta.eitrun;
-        this.kjorhitastig = planta.kjorhitastig;//hafa 3 gildi, min, kjör og max í fylki
+        this.kjorhitastig = planta.kjorhitastig;
         this.vatnsthorf = planta.vatnsthorf;
         this.almennurTimiMilliVokvana = planta.almennurTimiMilliVokvana;
         this.ljosStundir = planta.ljosStundir;

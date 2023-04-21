@@ -1,7 +1,5 @@
 /**
  * enum fyrir uppruna plöntu.
- * sniðugt væri að hafa hér staðinn sem streng auk myndarinnar, t.d. EYDIMORK("mynd.png", "eyðimörk").
- * Gæti líka verið stuttur texti sem birtist í plöntuglugganum.
  */
 package vinnsla.plantmania.enums;
 
@@ -19,7 +17,7 @@ public enum Uppruni {
     VOTLENDI("votlendi");
 
 
-    private String stadur;
+    private String stadur;//strengur með upprunastað
 
     Uppruni(String stadur) {
         this.stadur = stadur;

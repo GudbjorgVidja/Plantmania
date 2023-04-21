@@ -1,14 +1,14 @@
 package vinnsla.plantmania.enums;
 
 /**
- * Enum fyrir ákjósanlegan ljósstyrk fyrir plöntuna. Bæta kannski við skuggþolin
+ * Enum fyrir ákjósanlegan ljósstyrk fyrir plöntuna.
  */
 public enum Ljosstyrkur {
     OBEINT("óbeint"),
     HALFBEINT("hálfbeint"),
     BEINT("beint");
 
-    private String styrkur;
+    private String styrkur;//strengur með gildinu
 
     Ljosstyrkur(String styrkur) {
         this.styrkur = styrkur;
