@@ -27,6 +27,7 @@ import java.time.LocalDate;
  */
 public class VokvanirDagsinsDialog extends Dialog<Void> {
     private BooleanProperty ekkertValid = new SimpleBooleanProperty(true);
+    //vaktanlegt BooleanProperty sem segir til um hvort einhver planta úr listview er valin
 
     /**
      * smiður fyrir VokvanirDagsinsDialog þegar það þarf tvö ListView

@@ -83,6 +83,7 @@ public class Stats extends HBox {
         seturOpacity();
     }
 
+    //setter fyrir stats fyrir hlut af klasanum MinPlanta
     public void setStats(MinPlanta mp) {
         vatnsthorf = mp.getVatnsthorf();
         ljosstyrkur = mp.getLjosstyrkur();

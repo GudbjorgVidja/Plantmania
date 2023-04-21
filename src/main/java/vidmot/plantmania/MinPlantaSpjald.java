@@ -30,7 +30,7 @@ public class MinPlantaSpjald extends AnchorPane {
     private MinPlanta minPlantan;//MinPlanta hluturinn á MinPlantaSpjald hlutnum
 
 
-    public MinPlantaSpjald(MinPlanta minPlanta) {//smiðurinn sem er notaður
+    public MinPlantaSpjald(MinPlanta minPlanta) {
         LesaFXML.lesa(this, "minplanta-view.fxml");
         minPlantan = minPlanta;
         geraUtlitSpjalds();

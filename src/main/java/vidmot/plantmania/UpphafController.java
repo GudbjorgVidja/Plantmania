@@ -141,7 +141,6 @@ public class UpphafController {
             System.out.println(skradurNotandi);
             ViewSwitcher.switchTo(View.ADALSIDA);
         } else {
-            System.out.println("Notendanafn eða lykilorð rangt");
             fxVilla.visibleProperty().set(true);
         }
     }

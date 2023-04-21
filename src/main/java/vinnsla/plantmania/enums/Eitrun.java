@@ -1,8 +1,8 @@
+package vinnsla.plantmania.enums;
+
 /**
  * enum fyrir það hvort plantan er eitruð eður ei.
  */
-package vinnsla.plantmania.enums;
-
 public enum Eitrun {
     TIL_MANNELDIS("Til manneldis"),
     SAKLAUS("Alveg skaðlaus"),

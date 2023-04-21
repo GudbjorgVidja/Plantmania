@@ -1,6 +1,5 @@
 package vinnsla.plantmania.enums;
 
-
 /**
  * enum fyrir vatnsþörf plöntu.
  */

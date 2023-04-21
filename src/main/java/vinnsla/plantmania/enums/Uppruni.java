@@ -1,9 +1,8 @@
+package vinnsla.plantmania.enums;
+
 /**
  * enum fyrir uppruna plöntu.
  */
-package vinnsla.plantmania.enums;
-
-
 public enum Uppruni {
     EYDIMORK("eyðimörk"),
     REGNSKOGUR("regnskógur"),
