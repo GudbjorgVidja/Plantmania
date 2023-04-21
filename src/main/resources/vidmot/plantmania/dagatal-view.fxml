@@ -6,7 +6,7 @@
 <?import vidmot.plantmania.*?>
 <fx:root prefHeight="439.0" prefWidth="579.0"
          stylesheets="@styling/derived-style.css" styleClass="dagatal-root"
-         type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/16"
+         type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/11"
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane fx:id="fxGrid" layoutX="19.0" layoutY="82.0" prefHeight="326.0" prefWidth="545.0" styleClass="grid">

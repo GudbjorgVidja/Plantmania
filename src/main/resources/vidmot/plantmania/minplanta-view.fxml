@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import vidmot.plantmania.Spjald?>
 <fx:root fx:id="rot" stylesheets="@styling/derived-style.css" type="javafx.scene.layout.AnchorPane"
-         xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+         xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <Pane layoutX="25" prefHeight="125.0" prefWidth="100.0">
         <Spjald fx:id="fxSpjald"/>
     </Pane>

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <fx:root minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="650.0" styleClass="anchorpane"
          stylesheets="@styling/derived-style.css" type="javafx.scene.layout.AnchorPane"
-         xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+         xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <MenuBar fx:id="fxMenuBar" layoutX="50.0" layoutY="21.0" prefHeight="29.0"
                  prefWidth="180.0">
