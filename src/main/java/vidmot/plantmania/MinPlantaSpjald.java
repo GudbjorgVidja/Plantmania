@@ -1,5 +1,6 @@
 package vidmot.plantmania;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,7 +56,14 @@ public class MinPlantaSpjald extends AnchorPane {
         fxFresta.setOnAction(this::frestaHandler);
         rot.setOnMouseClicked(this::opnaPlontuglugga);
 
-        fxLabel.textProperty().bind(minPlantan.naestaVokvunProperty().asString().concat(new SimpleStringProperty(" dagar")));
+        setjaFxLabelTextProperty();
+    }
+
+    private void setjaFxLabelTextProperty() {
+        fxLabel.textProperty().bind(minPlantan.naestaVokvunProperty().asString().concat(new SimpleStringProperty(" dag")).concat(Bindings.when(minPlantan.naestaVokvunProperty().asString().isEqualTo("1")).then("ur").otherwise("ar")));
+        
+        //gamla
+        //fxLabel.textProperty().bind(minPlantan.naestaVokvunProperty().asString().concat(new SimpleStringProperty(" dagar")));
     }
 
     public Spjald getFxSpjald() {
