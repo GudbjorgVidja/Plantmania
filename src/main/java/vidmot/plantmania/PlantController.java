@@ -31,9 +31,9 @@ import java.util.List;
  */
 public class PlantController {
     @FXML
-    private Plontuyfirlit fxMinarPlonturYfirlit; //mínar plöntur yfirlitið.
+    private Yfirlit fxMinarPlonturYfirlit; //mínar plöntur yfirlitið.
     @FXML
-    private Plontuyfirlit fxAllarPlonturYfirlit; //yfirlit yfir allar plöntur
+    private Yfirlit fxAllarPlonturYfirlit; //yfirlit yfir allar plöntur
     @FXML
     private Dagatal fxDagatal;//tilvik af Dagatalinu
     @FXML
@@ -70,13 +70,14 @@ public class PlantController {
     protected void lokaGluggaAdferd() {
         fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi);
     }
-
-    //todo: HVað er þetta?? og prentsetning??
+    
+    /**
+     * Setur listener á titledpane hlutina með fræðsluefninu til að breyta stærðinni þegar þeir eru sýndir/faldir
+     */
     private void bindaMaxSizeTitledPane() {
         for (Node node : titledPaneBoxid.getChildren()) {
             if (node instanceof TitledPane) {
                 ((TitledPane) node).expandedProperty().addListener((obs, o, n) -> {
-                    System.out.println(n);
                     if (!n) ((TitledPane) node).maxHeightProperty().set(0);
                     else ((TitledPane) node).maxHeightProperty().set(((TitledPane) node).getPrefHeight());
                 });

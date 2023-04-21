@@ -36,7 +36,7 @@ import java.util.function.Predicate;
  * Það ætti kannksi að hafa líka vinnsluklasa fyrir þetta
  * Inniheldur flipa fyrir notanda og aðgerðir á hann
  */
-public class Plontuyfirlit extends AnchorPane {
+public class Yfirlit extends AnchorPane {
     @FXML
     private FlowPane fxFlowPane; //aðgangur í flowpane sem inniheldur spjöldin
 
@@ -74,7 +74,7 @@ public class Plontuyfirlit extends AnchorPane {
 
     private BooleanProperty yfirlitTomt = new SimpleBooleanProperty(true); //ef þetta verður false: engar-minar-vidvorun tekið af
 
-    public Plontuyfirlit() {
+    public Yfirlit() {
         LesaFXML.lesa(this, "plontuyfirlit.fxml");
         fxSkraUt.setOnAction(this::skraUtHandler);
 

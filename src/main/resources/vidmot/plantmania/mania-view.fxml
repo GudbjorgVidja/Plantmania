@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import vidmot.plantmania.Dagatal?>
-<?import vidmot.plantmania.Plontuyfirlit?>
+<?import vidmot.plantmania.Yfirlit?>
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
          prefWidth="750.0" rotateGraphic="true" side="LEFT" stylesheets="@styling/derived-style.css"
          tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
@@ -12,7 +12,7 @@
     <tabs>
         <Tab>
             <content>
-                <Plontuyfirlit fx:id="fxMinarPlonturYfirlit" prefHeight="458.0" prefWidth="536.0"/>
+                <Yfirlit fx:id="fxMinarPlonturYfirlit" prefHeight="458.0" prefWidth="536.0"/>
             </content>
             <graphic>
                 <Label text="mínar plöntur"/>
@@ -32,11 +32,11 @@
         </Tab>
         <Tab>
             <content>
-                <Plontuyfirlit fx:id="fxAllarPlonturYfirlit" onMouseClicked="#saekjaPlontu" prefHeight="458.0"
-                               prefWidth="604.0"/>
+                <Yfirlit fx:id="fxAllarPlonturYfirlit" onMouseClicked="#saekjaPlontu" prefHeight="458.0"
+                         prefWidth="604.0"/>
             </content>
             <graphic>
-                <Label text="skoða"/>
+                <Label text="allar plöntur"/>
             </graphic>
         </Tab>
         <Tab>

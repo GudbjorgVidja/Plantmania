@@ -7,13 +7,10 @@ Við ætlum að halda áfram með þetta eftir skil, og klára það á eigin fo
 
 Taka skal fram að ekki allar upplýsingarnar eru réttar.
 
+Við ákváðum að taka listann hér á eftir ekki út, heldur leyfa honum að vera þó hann sé ekki
+til að fara yfir, heldur bara fyrir okkur
+
 ### Viðbætur sem eiga eftir að koma:
-
-#### Fyrir skil
-
-- taka út óþarfa prentsetningar
-- nota flipanafn sem er meira lýsandi en skoða
-- endurnefna plontuyfirlit sem yfirlit, því það getur innihaldið planta eða minPlanta
 
 #### viðmót og css
 
@@ -64,8 +61,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   skilvirkasta leiðin
 - hvað gerist ef tvær mismunadi keyrlsur eru í gangi á sama tíma fyrir sama aðgang?
 - kannski seinna gera möguleika að geta ýtt á dag og hakað við allar plöntur sem þú vilt "vökva" þann daginn
-- <!-- todo mætti setja öll pane og Dagur children inn í dagatal annars staðar en í fxml með for lykku. líka flott svona -->
-- <!-- mouseEvent í mania-view mætti vera í plontuyfirlit-view -->
+
 
 ### Plöntur sem ætti að bæta við:
 
@@ -88,7 +84,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - niðurtalning vökvana núllstillist við útskráningu!!!
 - Endurnefna latnesktNafn sem fraediheiti
 - Endurnefna almenntNafn sem almenntHeiti
--
+
 - Finna hvaða styleclass eru á dagatal
 - setja dialog til að bæta við vökvun í plöntuglugga, annars ekki augljóst að það sé búið að gerast þegar þú klárar
 - í plöntuglugga er ekki augljóst að hægt sé að ýta á til að breyta nafni
@@ -100,7 +96,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
         - vökvunarsaga
         - breyta tíma á milli vökvanna
     - smellt á dag í dqagatali
--
+
 
 - sýna að dagatal er óvirkt meira en þrjá mánuði fram í tímann. Setja kannski annan lit á dagana, og ljósari lit á letur
 - athuga hvort betra sé að hafa graphic á tökkum fyrir myndir eða bakgrunn. Held að background image sé betra, hægt að
@@ -112,7 +108,9 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   nota css
 - Í fræðslunni, lesa inn heila runu, og splitta á * eftir hvaða titledPane það er fyrir. Splitta svo á + til að pikka út
   titla og gera þá sæta
-
+- taka út óþarfa prentsetningar
+- nota flipanafn sem er meira lýsandi en skoða
+- endurnefna plontuyfirlit sem yfirlit, því það getur innihaldið planta eða minPlanta
 
 
 
