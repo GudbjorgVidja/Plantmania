@@ -49,6 +49,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
 - laga lit á secondary línum í listview
 - laga css betur að dialogum
 - taka út óþarfa prentsetningar
+- nota flipanafn sem er meira lýsandi en skoða
 
 ### komið rite?
 
@@ -93,7 +94,7 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
         - vökvunarsaga
         - breyta tíma á milli vökvanna
     - smellt á dag í dqagatali
-- 
+-
 
 - sýna að dagatal er óvirkt meira en þrjá mánuði fram í tímann. Setja kannski annan lit á dagana, og ljósari lit á letur
 - athuga hvort betra sé að hafa graphic á tökkum fyrir myndir eða bakgrunn. Held að background image sé betra, hægt að

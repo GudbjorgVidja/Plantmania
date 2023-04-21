@@ -82,7 +82,7 @@ public class Plontuyfirlit extends AnchorPane {
      */
     private BooleanProperty fyrstaHlutBaettVid = new SimpleBooleanProperty(false);
 
-    private Comparator<Node> yfirlitComparator;//núverandi comparator
+    private Comparator<Node> yfirlitComparator;//núverandi comparator sem raðað er eftir
 
     private BooleanProperty yfirlitTomt = new SimpleBooleanProperty(true); //ef þetta verður false: engar-minar-vidvorun tekið af
 

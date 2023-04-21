@@ -15,7 +15,8 @@
 
     -fx-accent: #30d9b1;
 
-    -fx-default-button: derive(-fx-accent, 5%);
+    fx-default-button: derive(-fx-accent, 5%);
+    -fx-default-button: derive(-fx-accent, 15%);
     fx-default-button: #1ed99b;
 
     -litur3: #C8F8D6;
