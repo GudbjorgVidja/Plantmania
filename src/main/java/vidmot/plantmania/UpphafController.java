@@ -2,8 +2,6 @@ package vidmot.plantmania;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,19 +23,17 @@ import java.util.Optional;
  */
 public class UpphafController {
     @FXML
-    private Label fxVilla;
+    private Label fxVilla;//label fyrir villuskilaboð sem birtast ef rangt notendanafn eða lykilorð er slegið inn
     @FXML
-    private PasswordField fxLykilord;
-
+    private PasswordField fxLykilord;//Lykilorðareitur fyrir lykilorð notandans
     @FXML
-    private TextField fxNotendanafn;
-
+    private TextField fxNotendanafn;//Textfield fyrir notendanafn
     @FXML
-    private Button fxInnskraning;
+    private Button fxInnskraning;//innskráningarhnappur
 
-    private final String filename = "target/classes/vidmot/plantmania/notendur.json";
+    private final String filename = "target/classes/vidmot/plantmania/notendur.json";//slóð á json skrá
 
-    private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
+    private Notandi skradurNotandi = new Notandi();
 
 
     /**
@@ -55,10 +51,6 @@ public class UpphafController {
     }
 
     public Notandi getSkradurNotandi() {
-        return skradurNotandi.get();
-    }
-
-    public ObjectProperty<Notandi> skradurNotandiProperty() {
         return skradurNotandi;
     }
 
@@ -71,7 +63,7 @@ public class UpphafController {
         for (Notandi n : notendur) {
             if (n.notendanafnProperty().get().equals(fxNotendanafn.textProperty().get())) {
                 if (n.lykilordProperty().get().equals(fxLykilord.textProperty().get())) {
-                    skradurNotandi.set(n);
+                    skradurNotandi = n;
                 }
             }
         }
@@ -146,7 +138,7 @@ public class UpphafController {
     public void skraInn(ActionEvent actionEvent) {
         if (ogiltInntak()) {
             setjaSkradanNotanda();
-            System.out.println(skradurNotandi.get());
+            System.out.println(skradurNotandi);
             ViewSwitcher.switchTo(View.ADALSIDA);
         } else {
             System.out.println("Notendanafn eða lykilorð rangt");
@@ -168,7 +160,7 @@ public class UpphafController {
         if (utkoma.isPresent()) {
             notendur.add(utkoma.get());
             skrifaISkra(notendur);
-            skradurNotandi.set(utkoma.get());
+            skradurNotandi = utkoma.get();
             ViewSwitcher.switchTo(View.ADALSIDA);
         }
     }
