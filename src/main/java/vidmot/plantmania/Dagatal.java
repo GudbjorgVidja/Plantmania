@@ -143,6 +143,8 @@ public class Dagatal extends AnchorPane {
         if (dagur.getStyleClass().size() == 0) dagur.getStyleClass().add("fxDagur");
         dagur.setDisable(true);
 
+
+        //todo Sigurbjörg, ég commentaði út línurnar hér að neðan og setti í staðinn transparent hluti á disabled dag y/n
         dagur.getFxFjoldiVokvanaOlokid().textProperty().unbind();
         //dagur.getFxFjoldiVokvanaOlokid().setText("");
         dagur.getFxDropi().visibleProperty().unbind();

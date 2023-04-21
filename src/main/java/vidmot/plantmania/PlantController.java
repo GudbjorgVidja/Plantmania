@@ -41,10 +41,6 @@ public class PlantController {
     @FXML
     private VBox titledPaneBoxid;
 
-    //TODO: á að nota þetta, Guðbjörg? Eyða kannski ef ekki
-    //@FXML
-    //private VBox vokvaBox, vandamalBox, almenntBox;
-
     //TODO: gera upphafcontroller að local breytu? og þarf skradurNotandi að vera objectProperty?
     private UpphafController upphafController;
     private ObjectProperty<Notandi> skradurNotandi = new SimpleObjectProperty<>();
@@ -193,19 +189,16 @@ public class PlantController {
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
 
-                dagur.getStyleClass().add("valinnDagur"); //einn möguleiki til að setja valinn stíl
+                dagur.getStyleClass().add("valinnDagur");
                 synaVokvanirDagsins(valinDagsetning, plonturDagsinsLokid, plonturDagsinsOlokid);
                 dagur.getStyleClass().remove("valinnDagur");
 
+
+                //todo Sigurbjörg ertu að nota þetta?
                 //breyta litnum á reit þegar hann er valinn!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
                 //dagur.getFxDropi().visibleProperty().unbind();
                 //dagur.getFxDropi().setVisible(true);
 
-                /*
-                //todo svona eitthvað? velur með því að ýta og afvelur með því að ýta aftur
-                if (dagur.getStyleClass().contains("valinnDagur")) dagur.getStyleClass().removeAll("valinnDagur");
-                else dagur.getStyleClass().add("valinnDagur");
-                 */
             }
         });
     }
@@ -288,18 +281,22 @@ public class PlantController {
 
     /**
      * gerir titledPanes í fræðsluflipanum. Les efnið inn úr skrá
+     * //todo skipta meira upp í aðferðir? Hafa kannski aðferð til að gera TitledPane hlutina?
      */
     private void geraTitledPanes() {
         In inn = new In("src/main/java/vinnsla/plantmania/nyfraedsla.txt");
         String alltSkjalid = inn.readAll();
 
         String[] paneskipting = splittaIFylki(alltSkjalid, "TITLEDPANE ");
+
+
         for (String s : paneskipting) {
             TitledPane tp = new TitledPane();
-            VBox vbox = new VBox();
 
             String[] malsgreinar = splittaIFylki(s, "GREIN ");
             tp.setText(malsgreinar[0].trim());
+
+            VBox vbox = new VBox();
 
             Text[] textar = geraTexta(malsgreinar);
             for (Text t : textar) {
@@ -307,12 +304,17 @@ public class PlantController {
             }
 
             tp.setContent(vbox);
-            titledPaneBoxid.getChildren().add(tp);
+
             vbox.getStyleClass().add("titledpanebox");
             vbox.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
 
+            titledPaneBoxid.getChildren().add(tp);
             bindaMaxSizeTitledPane();
         }
+    }
+
+    private void setjaVBox() {
+        VBox vbox = new VBox();
 
     }
 
