@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <children> <!-- todo mætti setja öll pane og Dagur children annars staðar, með for lykku. líka flott svona -->
+            <children>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0"
                       styleClass="vikudagurPane">
                     <children>

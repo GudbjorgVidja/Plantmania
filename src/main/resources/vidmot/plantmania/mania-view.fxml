@@ -33,7 +33,7 @@
         <Tab>
             <content>
                 <Plontuyfirlit fx:id="fxAllarPlonturYfirlit" onMouseClicked="#hladaOllumPlontum" prefHeight="458.0"
-                               prefWidth="604.0"/> <!-- todo hafa þetta mouseEvent annars staðar? þá í yfirlit. -->
+                               prefWidth="604.0"/>
             </content>
             <graphic>
                 <Label text="skoða"/>

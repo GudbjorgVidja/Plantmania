@@ -12,7 +12,6 @@
         </Pane>
         <AnchorPane fx:id="fxBreytilegtSvaedi" layoutX="13.0" layoutY="125.0" prefHeight="61.0" prefWidth="123.0">
             <Stats fx:id="fxStats" prefHeight="61" prefWidth="123"/>
-
         </AnchorPane>
     </children>
 </fx:root>

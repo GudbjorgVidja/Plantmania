@@ -64,6 +64,8 @@ Taka skal fram að ekki allar upplýsingarnar eru réttar.
   skilvirkasta leiðin
 - hvað gerist ef tvær mismunadi keyrlsur eru í gangi á sama tíma fyrir sama aðgang?
 - kannski seinna gera möguleika að geta ýtt á dag og hakað við allar plöntur sem þú vilt "vökva" þann daginn
+- <!-- todo mætti setja öll pane og Dagur children inn í dagatal annars staðar en í fxml með for lykku. líka flott svona -->
+- <!-- mouseEvent í mania-view mætti vera í plontuyfirlit-view -->
 
 ### Plöntur sem ætti að bæta við:
 
