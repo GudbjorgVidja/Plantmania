@@ -56,7 +56,6 @@ public class NyskraningDialog extends Dialog<Notandi> {
      * setur stærðina á myndinni í imageview hlutina
      */
     private void setjaValidationIcon() {
-
         notendaNafnSamthykkt.setFitHeight(15);
         notendaNafnSamthykkt.setFitWidth(15);
         lykilordSamthykkt.setFitHeight(15);
