@@ -5,18 +5,18 @@ import java.util.List;
 
 /**
  * Þessi klasi er ekki varanlegur, þetta mun vera lesið inn úr skrá eða eitthvað svoleiðis. Bara til bráðabirgða.
+ * TODO: er hann í notkun núna eða má eyða?
  */
 public class Fraedsla {
-    private String misting;
-    private String gardkanna;
-    private String bottom;
-    private String gradual;
+    private String misting;//Strengur með vökvunaraðferðinni misting
+    private String gardkanna;//strengur með vökvunaraðferðinni vökvun með garðkönnu
+    private String bottom;//strengur með vökvunaraðferðinni bottom watering
+    private String gradual;//strengur með vökvunaraðferðinni gradual watering
 
-    private String almennt1;
-    private String almennt2;
+    private String almennt1;//Strengur með almennum fræðslutexta
+    private String almennt2;//annar strengur með almennum fræðslutexta
 
-    private List<String> vandamalListi = new ArrayList<>();
-
+    private List<String> vandamalListi = new ArrayList<>();//
     private List<String> almenntListi;
 
     public Fraedsla() {

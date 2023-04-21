@@ -2,6 +2,7 @@ package vinnsla.plantmania;
 
 import edu.princeton.cs.algs4.In;
 
+//TODO: er þetta notað/á að nota þetta, guðbjörg?
 public class FraedslaLestur {
 
 
