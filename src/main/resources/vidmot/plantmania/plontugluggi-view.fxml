@@ -38,8 +38,7 @@
                     </children>
                 </Pane>
                 <Separator layoutX="241.0" layoutY="14.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="3.0"/>
-                <ScrollPane hbarPolicy="NEVER" layoutX="253.0" layoutY="14.0" prefHeight="375.0" prefWidth="341.0"
-                            fx:id="fxScrollPane">
+                <ScrollPane hbarPolicy="NEVER" layoutX="253.0" layoutY="14.0" prefHeight="375.0" prefWidth="341.0">
                     <content>
                         <FlowPane alignment="TOP_CENTER" prefHeight="372.0" prefWidth="322.0" vgap="5.0">
                             <children>

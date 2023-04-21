@@ -1,5 +1,6 @@
 package vidmot.plantmania;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,10 +39,6 @@ public class MinPlantaSpjald extends AnchorPane {
         setjaHandleraATakka();
     }
 
-    public MinPlanta getMinPlanta() {
-        return minPlantan;
-    }
-
     /**
      * setur nafn plöntu, uppruna hennar og mynd á spjaldið
      */
@@ -58,6 +55,20 @@ public class MinPlantaSpjald extends AnchorPane {
         fxVokva.setOnAction(this::vokvaHandler);
         fxFresta.setOnAction(this::frestaHandler);
         rot.setOnMouseClicked(this::opnaPlontuglugga);
+
+        setjaFxLabelTextProperty();
+    }
+
+    private void setjaFxLabelTextProperty() {
+        fxLabel.textProperty().bind(minPlantan.naestaVokvunProperty().asString().concat(new SimpleStringProperty(" dag")).concat(Bindings.when(minPlantan.naestaVokvunProperty().asString().isEqualTo("1")).then("ur").otherwise("ar")));
+    }
+
+    public Spjald getFxSpjald() {
+        return fxSpjald;
+    }
+
+    public MinPlanta getMinPlanta() {
+        return minPlantan;
     }
 
     /**

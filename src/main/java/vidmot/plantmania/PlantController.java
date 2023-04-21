@@ -64,7 +64,6 @@ public class PlantController {
         geraTitledPanes();
     }
 
-
     /**
      * kallað á úr application þegar reynt er að loka glugganum
      */
@@ -226,7 +225,7 @@ public class PlantController {
     /**
      * Nær í Planta hlut sem ýtt var á í yfirlitinu yfir allar plöntur
      */
-    private void hladaOllumPlontum(MouseEvent event) { //todo endurnefna?
+    private void hladaOllumPlontum(MouseEvent event) { //todo endurnefna, saekjaPlontu() td
         Node node = event.getPickResult().getIntersectedNode();
         while (node != null && !(node instanceof PlantaSpjald)) {
             node = node.getParent();
@@ -255,41 +254,80 @@ public class PlantController {
     }
 
 
-    //TODO: skjala þetta, Guðbjörg
+    /**
+     * gerir titledPanes í fræðsluflipanum. Les efnið inn úr skrá
+     */
     private void geraTitledPanes() {
         In inn = new In("src/main/java/vinnsla/plantmania/nyfraedsla.txt");
         String alltSkjalid = inn.readAll();
-
         String[] paneskipting = splittaIFylki(alltSkjalid, "TITLEDPANE ");
+
         for (String s : paneskipting) {
             TitledPane tp = new TitledPane();
-            VBox vbox = new VBox();
 
             String[] malsgreinar = splittaIFylki(s, "GREIN ");
             tp.setText(malsgreinar[0].trim());
 
-            for (int i = 1; i < malsgreinar.length; i++) {
-                Text texti;
-                if (malsgreinar[i].startsWith("TITILL")) {
-                    malsgreinar[i] = malsgreinar[i].replaceFirst("TITILL ", "");
-                    texti = new Text(malsgreinar[i].strip());
-                    texti.getStyleClass().add("titill");
-                } else texti = new Text(malsgreinar[i].strip());
+            VBox vbox = new VBox();
 
-                texti.setWrappingWidth(512);
-                vbox.getChildren().add(texti);
+            Text[] textar = geraTexta(malsgreinar);
+            for (Text t : textar) {
+                if (t != null) vbox.getChildren().add(t);
             }
 
             tp.setContent(vbox);
-            titledPaneBoxid.getChildren().add(tp);
+
             vbox.getStyleClass().add("titledpanebox");
             vbox.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
+
+            titledPaneBoxid.getChildren().add(tp);
             bindaMaxSizeTitledPane();
         }
     }
 
+    /**
+     * Aðferðin tekur inn fylki af strengjum og gerir úr hverjum streng texta fyrir efnisgrein. Ef strengurinn byrjar á
+     * TITILL þá er styleclass sett á textann.
+     *
+     * @param malsgreinar strengjafylki
+     * @return malsgreinar nema umbreytt yfir í texta
+     */
+    private Text[] geraTexta(String[] malsgreinar) {
+        Text[] textar = new Text[malsgreinar.length];
+        for (int i = 1; i < malsgreinar.length; i++) {
+            Text texti;
+            if (malsgreinar[i].startsWith("TITILL")) {
+                malsgreinar[i] = malsgreinar[i].replaceFirst("TITILL ", "");
+                texti = new Text(malsgreinar[i].strip());
+                texti.getStyleClass().add("titill");
+            } else texti = new Text(malsgreinar[i].strip());
+            texti.setWrappingWidth(512);
+            textar[naestaLausaSaeti(textar)] = texti;
+        }
+        return textar;
+    }
 
-    //TODO: skjala þetta, guðbjörg
+    /**
+     * Finnur fyrsta lausa sætið í fylkinu, ef fylki er fullt þá skilast -1
+     *
+     * @param fylki Text fylki
+     * @return index fyrsta null sætis
+     */
+    private int naestaLausaSaeti(Text[] fylki) {
+        for (int i = 0; i < fylki.length; i++) {
+            if (fylki[i] == null) return i;
+        }
+        return -1;
+    }
+
+
+    /**
+     * Tekur inn streng og splittar í fylki hvar sem splitter kemur fyrir
+     *
+     * @param runa     Strengur, hlutar aðskildir með splitter
+     * @param splitter Strengur, skiptir runa niður
+     * @return runan skipt upp í fylki eftir splitter
+     */
     private String[] splittaIFylki(String runa, String splitter) {
         if (runa.startsWith(splitter)) {
             runa = runa.replaceFirst(splitter, "");
