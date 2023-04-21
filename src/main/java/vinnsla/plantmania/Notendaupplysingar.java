@@ -61,7 +61,6 @@ public class Notendaupplysingar {
                 }
             }
             fyrriVokvanir.sort(Comparator.comparing((Pair::getValue)));
-            // naestuVokvanir.sort(Comparator.comparing((Pair::getValue)));
         });
     }
 
@@ -93,23 +92,13 @@ public class Notendaupplysingar {
         });
     }
 
-
     public ObservableList<Pair<MinPlanta, LocalDate>> getFyrriVokvanir() {
         return fyrriVokvanir;
-    }
-
-    public void setFyrriVokvanir(ObservableList<Pair<MinPlanta, LocalDate>> fyrriVokvanir) {
-        this.fyrriVokvanir = fyrriVokvanir;
     }
 
     public ObservableList<Pair<MinPlanta, LocalDate>> getNaestuVokvanir() {
         return naestuVokvanir;
     }
-
-    public void setNaestuVokvanir(ObservableList<Pair<MinPlanta, LocalDate>> naestuVokvanir) {
-        this.naestuVokvanir = naestuVokvanir;
-    }
-
 
     public String toString() {
         return "Notendaupplysingar{" +

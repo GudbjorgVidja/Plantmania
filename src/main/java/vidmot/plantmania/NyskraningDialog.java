@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Höfundur: Sigurbjörg Erla
- * Klasi fyrir dialoginn sem kemur þegar notandi gerir nýjan aðgang
+ * Klasi fyrir dialoginn sem kemur þegar notandi gerir nýjan aðgang. Skilar optional Notanda
  */
 public class NyskraningDialog extends Dialog<Notandi> {
     private List<Notandi> adgangarISkra;//listi yfir alla notendur í skránni

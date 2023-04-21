@@ -35,20 +35,18 @@ public class PlantController {
     @FXML
     private Plontuyfirlit fxAllarPlonturYfirlit; //yfirlit yfir allar plöntur
     @FXML
-    private Dagatal fxDagatal;
+    private Dagatal fxDagatal;//tilvik af Dagatalinu
     @FXML
-    private VBox titledPaneBoxid;
+    private VBox titledPaneBoxid;//TODO: ATH ÞETTA
 
-    //TODO: á að nota þetta, Guðbjörg? Eyða kannski ef ekki
-    //@FXML
-    //private VBox vokvaBox, vandamalBox, almenntBox;
+    private Notandi skradurNotandi = new Notandi();//Sá notandi sem er skráður inn
 
-    //TODO: þarf skradurNotandi að vera objectProperty?
+    private Notendaupplysingar notendaupplysingar;//Vövkunarupplýsingar fyrir þann notanda sem er skráður inn
 
-    private Notandi skradurNotandi = new Notandi();
-
-    private Notendaupplysingar notendaupplysingar;
-
+    /**
+     * Initialize, keyrir sjálfkrafa. Gerir tilvik af UpphafController og stillir skráðan notanda og upplýsingar um hann.
+     * Les inn plöntur úr skrá og setur event filtera á Dagatalið. Birtir plöntur notanda o.fl.
+     */
     public void initialize() {
         UpphafController upphafController = (UpphafController) ViewSwitcher.lookup(View.UPPHAFSSIDA);
         skradurNotandi = upphafController.getSkradurNotandi();
@@ -74,6 +72,7 @@ public class PlantController {
         fxAllarPlonturYfirlit.vistaNotendaupplysingar(skradurNotandi);
     }
 
+    //todo: HVað er þetta??
     private void bindaMaxSizeTitledPane() {
         for (Node node : titledPaneBoxid.getChildren()) {
             if (node instanceof TitledPane) {
@@ -180,20 +179,9 @@ public class PlantController {
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsLokid = notendaupplysingar.getFyrriVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
                 ObservableList<Pair<MinPlanta, LocalDate>> plonturDagsinsOlokid = notendaupplysingar.getNaestuVokvanir().filtered(p -> p.getValue().isEqual(valinDagsetning));
 
-                dagur.getStyleClass().add("valinnDagur"); //einn möguleiki til að setja valinn stíl
+                dagur.getStyleClass().add("valinnDagur");
                 synaVokvanirDagsins(valinDagsetning, plonturDagsinsLokid, plonturDagsinsOlokid);
                 dagur.getStyleClass().remove("valinnDagur");
-
-                //TODO: Ertu ekki búin að útfæra þetta, Guðbjörg? má eyða restinni?
-                //breyta litnum á reit þegar hann er valinn!! og ef það er ýtt aftur er "afvalið"??? hafa selection dæmi með style?
-                //dagur.getFxDropi().visibleProperty().unbind();
-                //dagur.getFxDropi().setVisible(true);
-
-                /*
-                //todo svona eitthvað? velur með því að ýta og afvelur með því að ýta aftur
-                if (dagur.getStyleClass().contains("valinnDagur")) dagur.getStyleClass().removeAll("valinnDagur");
-                else dagur.getStyleClass().add("valinnDagur");
-                 */
             }
         });
     }
@@ -267,6 +255,7 @@ public class PlantController {
     }
 
 
+    //TODO: skjala þetta, Guðbjörg
     private void geraTitledPanes() {
         In inn = new In("src/main/java/vinnsla/plantmania/nyfraedsla.txt");
         String alltSkjalid = inn.readAll();
@@ -293,15 +282,14 @@ public class PlantController {
 
             tp.setContent(vbox);
             titledPaneBoxid.getChildren().add(tp);
-
             vbox.getStyleClass().add("titledpanebox");
             vbox.getStylesheets().add(getClass().getResource("styling/derived-style.css").toExternalForm());
-
             bindaMaxSizeTitledPane();
         }
     }
 
 
+    //TODO: skjala þetta, guðbjörg
     private String[] splittaIFylki(String runa, String splitter) {
         if (runa.startsWith(splitter)) {
             runa = runa.replaceFirst(splitter, "");
